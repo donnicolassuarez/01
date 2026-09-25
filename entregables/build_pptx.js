@@ -217,7 +217,13 @@ titleSlide({
 // Slide 2 — ¿Qué es la OMS?
 {
   const s = contentSlide({ kicker: "Organismo especializado de la ONU", title: "¿Qué es la OMS?", accent: OMS_PRIMARY, n: 2, footText: "OMS en Bolivia" });
-  imageCover(s, path.join(IMG_OMS, "OMS_S2_que-es-la-oms_sede-ginebra.jpg"), 7.6, 1.55, 5.2, 4.6);
+  imageCover(s, path.join(IMG_OMS, "OMS_S2_que-es-la-oms_sede-ginebra.jpg"), 7.6, 1.55, 5.2, 3.75);
+  s.addText("Sede en Ginebra, Suiza", { x: 7.6, y: 5.32, w: 5.2, h: 0.22, fontFace: FONT_BODY, fontSize: 9, italic: true, color: MUTED, isTextBox: true, margin: 0 });
+  s.addImage({ path: path.join(IMG_OMS, "OMS_EXTRA_paho_logo.png"), x: 8.5, y: 5.65, w: 2.4, h: 2.4 * (618/1793) });
+  s.addText("PAHO/OPS — oficina regional de la OMS para las Américas: un ejemplo de gobernanza multinivel", {
+    x: 7.6, y: 6.55, w: 5.2, h: 0.4, fontFace: FONT_BODY, fontSize: 9.5, italic: true, color: MUTED,
+    align: "center", isTextBox: true, margin: 0,
+  });
   bulletBox(s, [
     [{ text: "Constitución firmada en 1946; entró en vigor el ", bold: false }, { text: "7 de abril de 1948", bold: true }],
     [{ text: "Organismo especializado de las Naciones Unidas", bold: false }],
@@ -263,9 +269,10 @@ titleSlide({
   const s = contentSlide({ kicker: "Presencia y contexto", title: "La OMS en Bolivia", accent: OMS_PRIMARY, n: 4, footText: "OMS en Bolivia" });
   imageCover(s, path.join(IMG_OMS, "OMS_S4_oms-en-bolivia_skyline-lapaz.jpg"), 0.6, 1.55, 12.13, 2.55);
   s.addText("La Paz, sede de la oficina de PAHO en Bolivia", {
-    x: 0.6, y: 4.14, w: 12.13, h: 0.3, fontFace: FONT_BODY, fontSize: 10, italic: true, color: MUTED,
+    x: 0.6, y: 4.14, w: 8.5, h: 0.3, fontFace: FONT_BODY, fontSize: 10, italic: true, color: MUTED,
     align: "left", isTextBox: true, margin: 0,
   });
+  s.addImage({ path: path.join(IMG_OMS, "OMS_EXTRA_ministerio-salud-bolivia_logo.png"), x: 10.9, y: 4.08, w: 1.5, h: 1.5 * (217/547) });
 
   const colW = 5.9;
   s.addText("Principales desafíos de salud", { x: 0.6, y: 4.6, w: colW, h: 0.35, fontFace: FONT_HEAD, fontSize: 15, bold: true, color: OMS_ALERT, isTextBox: true, margin: 0 });
@@ -420,6 +427,14 @@ titleSlide({
   ], { x: 0.6, y: 5.6, w: 6.6, h: 0.8, fontFace: FONT_BODY, fontSize: 13, isTextBox: true, margin: 0, align: "left", valign: "top" });
 
   s.addImage({ path: path.join(IMG_UN, "UNESCO_S2_que-es-unesco_logo.png"), x: 8.1, y: 2.6, w: 4.6, h: 4.6 * (410/1591) });
+
+  s.addText([
+    { text: "Su instrumento característico: ", options: { bold: true, color: UN_PRIMARY, fontSize: 11.5 } },
+    { text: "convenciones internacionales, como la de 1972 sobre Patrimonio Mundial, ratificada por Bolivia.", options: { color: TEXT, fontSize: 11.5 } },
+  ], { x: 8.1, y: 3.85, w: 4.6, h: 0.55, isTextBox: true, margin: 0, align: "left", valign: "top" });
+
+  imageCover(s, path.join(IMG_UN, "UNESCO_EXTRA_sede-paris.jpg"), 8.6, 4.55, 3.0, 1.99);
+  s.addText("Sede de UNESCO, París", { x: 8.6, y: 6.57, w: 3.0, h: 0.22, fontFace: FONT_BODY, fontSize: 9, italic: true, color: MUTED, align: "center", isTextBox: true, margin: 0 });
 }
 
 // Slide 10 — ¿Qué hace UNESCO?
@@ -437,10 +452,10 @@ titleSlide({
     y += 1.15;
   });
 
-  s.addImage({ path: path.join(IMG_UN, "UNESCO_S3_que-hace-unesco_emblema-patrimonio-mundial.png"), x: 8.9, y: 2.0, w: 3.8, h: 3.8 });
-  s.addText("Oficina de Programas UNESCO en La Paz coordina educación, patrimonio y comunicación", {
-    x: 8.6, y: 5.95, w: 4.3, h: 0.7, fontFace: FONT_BODY, fontSize: 11, italic: true, color: MUTED,
-    align: "center", isTextBox: true, margin: 0,
+  s.addImage({ path: path.join(IMG_UN, "UNESCO_S3_que-hace-unesco_emblema-patrimonio-mundial.png"), x: 9.15, y: 2.0, w: 3.3, h: 3.3 });
+  s.addText("Oficina de Programas UNESCO en La Paz coordina educación, patrimonio y comunicación. UNESCO desde la gestión pública: el reconocimiento internacional no genera presupuesto por sí solo — la conservación depende de la administración pública nacional.", {
+    x: 8.6, y: 5.55, w: 4.3, h: 1.45, fontFace: FONT_BODY, fontSize: 10.5, italic: true, color: MUTED,
+    align: "center", isTextBox: true, margin: 0, valign: "top",
   });
 }
 
