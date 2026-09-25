@@ -83,92 +83,103 @@
 
 ---
 
-## DIAPOSITIVA 5: CASO DE ESTUDIO - TUBERCULOSIS EN BOLIVIA (PARTE 1)
+## DIAPOSITIVA 5: CASO 1 - TUBERCULOSIS EN BOLIVIA
 
 **Título:**
-# Tuberculosis en Bolivia: El Desafío
+# Caso 1: Tuberculosis en Bolivia
 
-**¿Por qué es importante este caso?**
+**¿Por qué es importante?**
 
 Bolivia tiene **una de las tasas más altas de TB en América Latina:**
 - 100-120 casos por cada 100,000 habitantes
 - Promedio latinoamericano: solo 32 casos/100,000
 - **Esto significa: Bolivia tiene 3-4 veces más TB que el promedio**
 
-**¿Quiénes están más afectados?**
-- Personas en pobreza
-- Poblaciones mineras
-- Personas con VIH
-- Comunidades indígenas
+**La Estrategia OMS - DOTS:**
+- Medicamentos gratuitos y supervisados
+- 6 meses de tratamiento
+- Laboratorios de diagnóstico moderno
 
-**La Estrategia OMS:**
-La OMS implementó **DOTS** (Tratamiento Acortado Supervisado):
-- Medicamentos gratuitos y de calidad
-- Trabajadores de salud supervisan que tomes tu medicina
-- Laboratorios equipados para diagnóstico
-- Duración: 6 meses de tratamiento
+**Resultados 2010-2024:**
+```
+Tasa de Curación:      75% → 85%  ✅
+Diagnóstico Temprano:  60% → 90%  ✅
+Mortalidad:            8 → 4 por 100k  ✅
+Acceso a Medicamentos: 70% → 95%  ✅
+```
+
+**Impacto:**
+- Más de 2,500 centros de salud capacitados
+- Decenas de miles de vidas salvadas
 
 ---
 
-## DIAPOSITIVA 6: CASO DE ESTUDIO - TUBERCULOSIS EN BOLIVIA (PARTE 2)
+## DIAPOSITIVA 6: CASO 2 - VACUNACIÓN E INMUNIZACIÓN EN BOLIVIA
 
 **Título:**
-# Tuberculosis en Bolivia: Los Resultados
+# Caso 2: Vacunación en Bolivia—Un Éxito
 
-**GRÁFICO (incluir datos 2010 vs 2024):**
+**¿Por qué es importante?**
 
-```
-RESULTADOS 2010-2024
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Antes de 1990: Cobertura de vacunación < 50%, miles de muertes anuales
+Hoy: Cobertura de 92%, enfermedades casi erradicadas
 
-Tasa de Curación
-2010: 75%  ────────────
-2024: 85%  ─────────────  ✅ +10%
+**Logros Extraordinarios:**
+- 🎯 Poliomielitis: **30+ años sin un caso**
+- 📊 Sarampión: De 5,000 casos en 1999 a casi cero hoy
+- 💪 Cobertura DPT: 70% (2000) → 92% (2024)
+- 👶 Mortalidad infantil: 65 → 30 por 1,000 nacidos vivos
 
-Cobertura de Diagnóstico
-2010: 60%  ────────
-2024: 90%  ────────────  ✅ +30%
+**Estrategia OMS:**
+- Calendario de vacunación nacional
+- Campañas puerta a puerta en zonas remotas
+- Cadena de frío moderna
+- Educación contra desinformación
 
-Mortalidad por TB
-2010: 8 muertes/100k  ─────────
-2024: 4 muertes/100k  ────  ✅ -50%
+**Vidas Salvadas:**
+> Aproximadamente **500,000 niños más viven hoy**  
+> gracias a los programas de vacunación
 
-Acceso a Medicamentos
-2010: 70%  ────────
-2024: 95%  ──────────────  ✅ +25%
-```
+**Ejemplo Real (2000-2002):**
+- Brote de sarampión en La Paz: 5,000 infectados, 150 muertes
+- Campaña de vacunación masiva: Casos bajaron a casi cero
+- Resultado: Generación de niños protegida permanentemente
 
-**Lo que significa:**
-- Más gente se cura (85% vs 75%)
-- Detectamos más casos temprano (90% vs 60%)
-- Mueren menos personas (mitad de muertes)
-- Medicamentos disponibles en 95% de centros de salud
-
-**Pero aún hay desafíos:**
-- ❌ TB resistente a medicamentos (3% de casos)
-- ❌ Gente que abandona tratamiento
-- ❌ Zonas rurales difíciles de alcanzar
+**Desafíos Aún Hoy:**
+- ❌ Zonas remotas: cobertura 60-70% (vs. 95% en ciudades)
+- ❌ Desinformación en redes sociales
+- ❌ Dependencia de donantes internacionales (60% del presupuesto)
 
 ---
 
-## DIAPOSITIVA 7: CONCLUSIÓN Y REFLEXIÓN
+## DIAPOSITIVA 7: CONCLUSIÓN—DOS HISTORIAS DE ÉXITO
 
 **Título:**
-# La OMS en Bolivia: Conclusión
+# La OMS en Bolivia: Dos Casos de Éxito
 
-**¿Qué logramos juntos?**
+**¿Qué logró la OMS en Bolivia?**
 
-La OMS y Bolivia trabajaron para que:
-- ✅ Más personas se curen de tuberculosis
-- ✅ Menos niños mueran por enfermedades prevenibles
-- ✅ Se vacune a más población
-- ✅ Se fortalezca el sistema de salud nacional
+**Tuberculosis:**
+- De 3-4 veces el promedio latinoamericano → a tasas decrecientes
+- 85% de curación, 50% menos muertes
+- Pero: TB resistente y acceso rural siguen siendo desafíos
 
-**¿Por qué importa?**
+**Vacunación:**
+- De < 50% cobertura → a 92% de cobertura nacional
+- Erradicamos poliomielitis (30+ años sin casos)
+- 500,000 niños más viven hoy gracias a vacunas
+- Pero: Desigualdad rural-urbana y desinformación persisten
 
-Cuando la OMS ayuda a controlar enfermedades en Bolivia, no solo salvan vidas bolivianas, sino que previenen que esas enfermedades se propaguen a otros países.
+**¿Por qué importan estos casos?**
 
-**La salud es un derecho humano** 🏥
+✅ Muestran que **es posible cambiar** cuando hay voluntad política y cooperación
+✅ Demuestran el poder de la **prevención y tratamiento** coordinados
+✅ Prueban que la **salud es un derecho** que se puede garantizar
+
+**Mensaje Final:**
+
+> La OMS y Bolivia trabajan juntas por una nación más saludable.  
+> Aún hay mucho por hacer, pero hemos demostrado que **sí es posible.**
 
 ---
 
@@ -176,8 +187,15 @@ Cuando la OMS ayuda a controlar enfermedades en Bolivia, no solo salvan vidas bo
 
 *Tiempo total: 8-10 minutos*
 
-Abre con: "¿Sabían que Bolivia tiene 3 veces más tuberculosis que el promedio latinoamericano?"
+**Guión de apertura:**
+"¿Sabían que hace 30 años, la poliomielitis paralizaba a niños en Bolivia? Hoy es historia. ¿Cómo pasó? A través de la OMS y programas como DOTS y vacunación masiva."
 
-Cierra con: "Gracias a la OMS y al trabajo de miles de trabajadores de salud, hemos reducido muertes a la mitad. Pero aún hay mucho por hacer."
+**Énfasis clave:**
+- TB: Tratamiento directo supervisado funciona
+- Vacunación: La prevención es más efectiva que el tratamiento
 
-Transición: "Ahora mi compañero les hablará sobre cómo UNESCO protege nuestra cultura..."
+**Cierre:**
+"Gracias a la OMS y miles de trabajadores de salud, Bolivia ha reducido muertes a la mitad en TB y casi ha erradicado enfermedades prevenibles. Pero aún hay trabajo por hacer, especialmente en zonas rurales. La salud es un derecho de todos los bolivianos."
+
+**Transición a UNESCO:**
+"Mientras la OMS cuida nuestra salud física, ahora mi compañero les mostrará cómo UNESCO protege nuestra identidad cultural y patrimonio..."

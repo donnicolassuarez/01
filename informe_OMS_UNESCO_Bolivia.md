@@ -38,7 +38,7 @@ La OMS desarrolla cuatro funciones estratégicas:
 
 En América, la OMS opera a través de la Organización Panamericana de la Salud (PAHO), que tiene una presencia directa en Bolivia con oficinas en La Paz y una red de cooperantes técnicos.
 
-### 1.3 Caso de Estudio: Control de la Tuberculosis en Bolivia
+### 1.3 Caso 1: Control de la Tuberculosis en Bolivia
 
 **La Realidad Epidemiológica:**
 
@@ -72,6 +72,55 @@ A pesar de los avances, quedan desafíos importantes:
 2. **Tuberculosis Resistente**: Aproximadamente 3% de los casos nuevos de TB son resistentes a múltiples fármacos (MDR-TB), complicando el tratamiento
 3. **Comorbilidad VIH-TB**: La coinfección sigue siendo un reto, especialmente en La Paz y Santa Cruz
 4. **Adherencia al Tratamiento**: El tratamiento requiere 6 meses de medicación supervisada, y algunos pacientes abandonan el tratamiento
+
+### 1.4 Caso 2: Programas de Vacunación e Inmunización en Bolivia
+
+**La Realidad Epidemiológica:**
+
+Antes de 1990, Bolivia tenía tasas muy bajas de cobertura de vacunación (inferior a 50%), lo que resultaba en brotes periódicos de enfermedades prevenibles como sarampión, poliomielitis y difteria. La falta de vacunación causaba miles de muertes anuales, especialmente en niños menores de 5 años.
+
+**La Intervención de la OMS:**
+
+La OMS, trabajando a través de PAHO y el Ministerio de Salud de Bolivia, implementó:
+
+- **Calendario de Vacunación Nacional**: Estandarización de vacunas para todas las edades
+- **Campañas Masivas de Inmunización**: Vacunación puerta a puerta en zonas remotas
+- **Capacitación de Personal**: Entrenamiento de trabajadores de salud en técnicas de vacunación segura
+- **Vigilancia Epidemiológica**: Sistema para detectar brotes rápidamente
+- **Cadena de Frío**: Inversión en refrigeración para preservar vacunas
+- **Información Pública**: Programas de educación contra la desinformación sobre vacunas
+
+Estos esfuerzos fueron reforzados durante la pandemia COVID-19 (2020-2023), cuando Bolivia vacunó a millones de personas.
+
+**Resultados Alcanzados:**
+
+Entre 2000 y 2024, se lograron avances extraordinarios:
+
+- **Cobertura DPT (Difteria-Polio-Tétanos)**: Aumentó de 70% en 2000 a 92% en 2024
+- **Cobertura de Sarampión**: Subió de 60% a 95% (reducción casi total de casos)
+- **Poliomielitis**: Bolivia hace más de 30 años que **no registra casos**
+- **Mortalidad Infantil Prevenible**: Bajó de 65 por cada 1,000 nacidos vivos en 2000 a 30 por 1,000 en 2024
+- **Vidas Salvadas**: Aproximadamente 500,000 niños más viven hoy gracias a las vacunas
+
+**Ejemplo Concreto:**
+En 1999, hubo un brote de sarampión en La Paz que infectó a 5,000 niños y causó 150 muertes. Tras la campaña de vacunación masiva de 2000-2002, los casos bajaron a cifras cercanas a cero. En 2023, cuando circuló una variante de COVID-19, Bolivia logró vacunar a 8 millones de personas en 6 meses gracias a la infraestructura establecida.
+
+**Desafíos Persistentes:**
+
+Aunque los logros son significativos, quedan desafíos:
+
+1. **Zonas de Difícil Acceso**: Comunidades en el Chocó y amazonia boliviana aún tienen coberturas bajas (60-70%)
+2. **Desinformación**: Grupos anti-vacunas circulan información falsa especialmente en redes sociales
+3. **Desigualdad Regional**: Ciudades grandes (La Paz, Santa Cruz) tienen 95% de cobertura, mientras zonas rurales tienen 70-75%
+4. **Financiamiento**: Bolivia depende de donantes internacionales para 60% de su presupuesto de vacunas
+
+**Impacto Económico:**
+
+Más allá de salud, la vacunación tiene impacto económico:
+- Menos niños enfermos = más asistencia escolar
+- Menos hospitalizaciones = menos gasto en salud
+- Fuerza laboral más productiva
+- Se estima que por cada dólar invertido en vacunas, se ahorran $10 en costos médicos
 
 ---
 
