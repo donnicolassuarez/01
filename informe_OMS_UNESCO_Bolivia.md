@@ -14,6 +14,8 @@ Bolivia enfrenta desafíos significativos en materia de salud pública, educaci�
 
 Este informe examina cómo la OMS y UNESCO contribuyen al desarrollo de Bolivia, mediante casos de estudio específicos que ilustran su impacto en el país. Presenta un panorama de cómo estas organizaciones, a través de programas coordinados y asistencia técnica, trabajan para mejorar la salud, la educación y la preservación de la identidad cultural boliviana.
 
+Ambos organismos comparten, además, una misma lógica de origen que las ciencias políticas han estudiado bajo el nombre de **funcionalismo** (David Mitrany, *A Working Peace System*, 1943): la idea de que la cooperación internacional se construye de forma más estable a través de organismos técnicos, especializados en un problema concreto —salud, educación, cultura— y deliberadamente apartados de la disputa política directa entre Estados. La OMS y UNESCO son ejemplos clásicos de esta arquitectura institucional: agencias especializadas de Naciones Unidas que canalizan la cooperación por la vía técnica antes que por la vía diplomática. Sin embargo, esta lógica funcionalista tiene un límite que interesa particularmente a la gestión pública: una norma o recomendación internacional solo se traduce en resultados si el Estado receptor cuenta con capacidad administrativa para implementarla. Como se verá en los casos de estudio, tanto la estrategia DOTS contra la tuberculosis como la conservación de Tiwanaku dependen, en última instancia, de la burocracia boliviana —el Ministerio de Salud y el Ministerio de Culturas, respectivamente— y no solo de la cooperación internacional en sí misma.
+
 ---
 
 ## I. ORGANIZACIÓN MUNDIAL DE LA SALUD (OMS)
@@ -23,6 +25,8 @@ Este informe examina cómo la OMS y UNESCO contribuyen al desarrollo de Bolivia,
 La Organización Mundial de la Salud es un organismo especializado de las Naciones Unidas cuya constitución fue firmada en 1946 y entró en vigor el 7 de abril de 1948, fecha que hoy se celebra como el Día Mundial de la Salud. Su sede se encuentra en Ginebra, Suiza. La OMS define la salud como "un estado de bienestar físico, mental y social completo, no sólo la ausencia de enfermedad o dolencia" (Constitución de la OMS, 1946).
 
 La OMS es la autoridad directriz de la salud en el sistema de las Naciones Unidas. Nació del reconocimiento post-Segunda Guerra Mundial de que la salud es un derecho fundamental y que su alcance global requiere cooperación internacional coordinada.
+
+Institucionalmente, la OMS se estructura en tres niveles que conviene distinguir porque explican cómo llega su influencia hasta Bolivia: la Asamblea Mundial de la Salud (donde los 194 Estados miembros fijan políticas y presupuesto), la Secretaría con sede en Ginebra (que produce normas técnicas y evidencia), y seis oficinas regionales —entre ellas la Organización Panamericana de la Salud (PAHO/OPS), que es la oficina regional para las Américas y el punto de contacto directo con el Ministerio de Salud boliviano. Esta estructura de tres niveles es, en sí misma, un ejemplo de **gobernanza multinivel**: las decisiones normativas se toman en Ginebra, pero su implementación efectiva depende de instancias regionales y, finalmente, de la administración pública de cada país.
 
 ### 1.2 Funciones Principales de la OMS
 
@@ -37,6 +41,8 @@ La OMS desarrolla cuatro funciones estratégicas:
 **Investigación y Evidencia**: Promueve investigación científica sobre salud y difunde información basada en evidencia para mejorar prácticas sanitarias.
 
 En América, la OMS opera a través de la Organización Panamericana de la Salud (PAHO), que tiene una presencia directa en Bolivia con oficinas en La Paz y una red de cooperantes técnicos.
+
+**La OMS desde la gestión pública:** de estas cuatro funciones, la función normativa es la que mejor ilustra la relación entre organismo internacional y administración pública nacional. La OMS no tiene poder coercitivo sobre los Estados —no puede obligar a Bolivia a adoptar una norma sanitaria—, por lo que su influencia real depende de un proceso que la ciencia política llama **difusión de políticas públicas** (*policy diffusion*): una recomendación técnica producida en Ginebra se convierte en política de salud boliviana solo si el Ministerio de Salud la incorpora a su normativa interna, asigna presupuesto y construye la capacidad de implementación en el territorio —desde el nivel central hasta el trabajador de salud en un municipio rural. El caso de la tuberculosis, desarrollado más abajo, es un ejemplo directo de este proceso: la estrategia DOTS es una recomendación de la OMS desde los años 90, pero su efectividad en Bolivia depende enteramente de la red pública de salud que la ejecuta.
 
 ### 1.3 Caso 1: Control de la Tuberculosis en Bolivia
 
@@ -146,6 +152,8 @@ UNESCO fue fundada en 1945 como un organismo especializado de las Naciones Unida
 
 UNESCO trabaja en cuatro áreas estratégicas: educación para todos, ciencias naturales, ciencias sociales y humanas, cultura, e información y comunicación.
 
+A diferencia de la OMS, cuyo poder normativo es principalmente técnico-sanitario, el instrumento característico de UNESCO son las **convenciones internacionales**: tratados que los Estados miembros ratifican voluntariamente y que, una vez ratificados, generan obligaciones jurídicas internas. La Convención sobre la Protección del Patrimonio Mundial, Cultural y Natural (1972) —bajo la cual Bolivia inscribió Tiwanaku y sus otros sitios— es el ejemplo más relevante para este informe. Este mecanismo ilustra otra vertiente del funcionalismo: UNESCO no administra directamente el patrimonio de ningún país, solo lo reconoce y supervisa; la protección efectiva queda, de nuevo, en manos de la administración pública nacional.
+
 ### 2.2 Funciones Principales de UNESCO
 
 **Educación de Calidad**: Promueve acceso equitativo a educación de calidad para todos, con énfasis en grupos marginalizados. Trabaja en educación primaria, secundaria, técnica y superior.
@@ -157,6 +165,8 @@ UNESCO trabaja en cuatro áreas estratégicas: educación para todos, ciencias n
 **Ciencia y Tecnología**: Promueve la investigación científica y el acceso a tecnología para el desarrollo sostenible.
 
 En Bolivia, UNESCO cuenta con una oficina de programas en La Paz que coordina iniciativas en educación, patrimonio cultural y comunicación.
+
+**UNESCO desde la gestión pública:** la función de "Patrimonio Cultural" es la que mejor expone la brecha entre el reconocimiento internacional y la capacidad estatal de sostenerlo en el tiempo. Que UNESCO inscriba un sitio en su lista no genera, por sí solo, presupuesto ni personal técnico: ambos deben provenir del Estado boliviano. Esto convierte la conservación patrimonial en un problema típico de **implementación de políticas públicas**: existe una norma internacional (la Convención de 1972) y un compromiso formal del Estado, pero el resultado real depende de variables administrativas ordinarias —continuidad presupuestaria, capacidad técnica del Ministerio de Culturas, coordinación entre el nivel central y los gobiernos locales— que no dependen de UNESCO en absoluto. El caso de Tiwanaku, desarrollado más abajo, permite observar esta brecha con datos concretos.
 
 **Tabla 4. Sitios bolivianos en la Lista de Patrimonio Mundial de UNESCO**
 
@@ -294,6 +304,10 @@ La colaboración entre organismos internacionales y gobiernos locales es fundame
 ---
 
 ## REFERENCIAS
+
+Mitrany, D. (1943). *A Working Peace System: An Argument for the Functional Development of International Organization*. Royal Institute of International Affairs.
+
+UNESCO. (1972). *Convención sobre la Protección del Patrimonio Mundial, Cultural y Natural*. https://whc.unesco.org/en/conventiontext/
 
 Banco Mundial. (2024). *Incidence of tuberculosis (per 100,000 people) - Bolivia*. World Development Indicators. https://data.worldbank.org/indicator/SH.TBS.INCD?locations=BO
 
