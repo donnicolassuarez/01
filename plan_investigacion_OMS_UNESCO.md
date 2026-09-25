@@ -19,292 +19,146 @@
 
 ---
 
-## 2. ESTRUCTURA DEL INFORME ESCRITO
+## 2. ESTRUCTURA DEL INFORME ESCRITO (10 páginas máximo)
 
-### Portada
+### Portada (½ página)
 - Título: "La OMS y UNESCO: Impacto en Bolivia"
 - Autores, institución, fecha
-- Logo de OMS y UNESCO
 
-### Índice
-- Numeración clara para referencias cruzadas
+### I. INTRODUCCIÓN (1 página)
+- ¿Qué son OMS y UNESCO?
+- Por qué importan en Bolivia
+- Estructura del trabajo
 
-### I. INTRODUCCIÓN (2-3 páginas)
-- Contexto global de organismos internacionales
-- Importancia de OMS y UNESCO
-- Relevancia para Bolivia
+### II. ORGANIZACIÓN MUNDIAL DE LA SALUD - OMS (3 páginas)
 
-### II. ORGANIZACIÓN MUNDIAL DE LA SALUD (OMS) (8-10 páginas)
+#### 2.1 ¿Qué es y qué hace? (1 página)
+- Fundación: 1948, sede Ginebra
+- Función principal: regular, vigilar y asistir en salud global
+- Presencia en Bolivia a través de PAHO
 
-#### 2.1 Conceptos Fundamentales
-- Definición y fundación (1948)
-- Sede en Ginebra
-- Estructura organizacional
-- Principios rectores
+#### 2.2 Caso de Estudio: Tuberculosis en Bolivia (2 páginas)
+- **La realidad**: Bolivia tiene alta tasa de TB (100-120 casos/100k hab)
+- **La intervención OMS**: Estrategia DOTS (tratamiento supervisado)
+- **Los resultados**: Datos de curación y reducción de casos
+- **El desafío**: Acceso en zonas rurales, resistencia a medicamentos
 
-#### 2.2 Funciones Principales
-- Función normativa (normas sanitarias internacionales)
-- Función de vigilancia (enfermedades, epidemias)
-- Asistencia técnica
-- Investigación y evidencia
+### III. ORGANIZACIÓN DE NACIONES UNIDAS PARA LA CIENCIA Y LA CULTURA - UNESCO (3 páginas)
 
-#### 2.3 Programas Estratégicos
-- Cobertura sanitaria universal
-- Enfermedades transmisibles
-- Enfermedades no transmisibles
-- Salud mental
-- Emergencias sanitarias
+#### 3.1 ¿Qué es y qué hace? (1 página)
+- Fundación: 1945, sede París
+- Lema: "La paz nace de las mentes"
+- Funciones: Educación, patrimonio cultural, libertad de expresión
 
-#### 2.4 OMS en Bolivia
-- Presencia y oficina regional
-- Programas activos
-- Convenios y acuerdos
+#### 3.2 Caso de Estudio: Tiwanaku - Patrimonio Mundial (1 página)
+- **El sitio**: Civilización preincaica, importancia histórica
+- **El reconocimiento**: Inscrito UNESCO en 2000
+- **La conservación**: Trabajos de restauración y desafíos
+- **El impacto**: Turismo y economía local
 
-#### 2.5 Casos de Estudio: Bolivia
-**Caso 1: Control de la Tuberculosis**
-- Situación epidemiológica en Bolivia
-- Programas conjuntos OMS-Ministerio de Salud
-- Resultados y avances (2010-2024)
-- Desafíos actuales
+#### 3.3 Caso de Estudio: Carnaval de Oruro - Patrimonio Inmaterial (1 página)
+- **La celebración**: Danzas tradicionales, sincretismo cultural
+- **El reconocimiento**: Patrimonio Inmaterial de la Humanidad (2001)
+- **La preservación**: Transmisión generacional y presión del turismo
+- **El significado**: Identidad cultural boliviana
 
-**Caso 2: Vacunación y Inmunización**
-- Cobertura de vacunas en Bolivia
-- Campañas de inmunización
-- Respuesta a COVID-19
-- Programas de erradicación
+### IV. CONCLUSIÓN: OMS Y UNESCO EN BOLIVIA (2 páginas)
+- Impacto complementario en desarrollo
+- Logros alcanzados
+- Desafíos pendientes
+- Perspectiva futura
 
-**Caso 3: Malaria en zonas endémicas**
-- Prevalencia en regiones específicas
-- Estrategias de control
-- Resultados epidemiológicos
-- Participación comunitaria
-
-### III. ORGANIZACIÓN DE NACIONES UNIDAS PARA LA CIENCIA Y LA CULTURA (UNESCO) (8-10 páginas)
-
-#### 3.1 Conceptos Fundamentales
-- Definición y fundación (1945)
-- Sede en París
-- Estructura organizacional
-- Principios rectores ("La paz nace de las mentes")
-
-#### 3.2 Funciones Principales
-- Educación de calidad
-- Protección del patrimonio cultural
-- Libertad de expresión
-- Acceso a la información
-- Ciencia y tecnología
-
-#### 3.3 Programas Estratégicos
-- UNESCO 2030 Agenda
-- Ciudades del Patrimonio Mundial
-- Educación para el Desarrollo Sostenible
-- Empoderamiento de mujeres
-- Inclusión digital
-
-#### 3.4 UNESCO en Bolivia
-- Presencia institucional
-- Programas activos
-- Convenios y acuerdos
-- Patrimonio Mundial declarado
-
-#### 3.5 Casos de Estudio: Bolivia
-**Caso 1: Patrimonio Cultural - Tiwanaku**
-- Importancia arqueológica
-- Reconocimiento como Patrimonio Mundial (2000)
-- Trabajo de restauración y conservación
-- Impacto turístico y económico
-- Desafíos de preservación
-
-**Caso 2: Patrimonio Cultural - Misiones Jesuíticas**
-- Las seis misiones en Bolivia
-- Reconocimiento como Patrimonio Mundial (1990)
-- Programas de conservación
-- Impacto comunitario
-- Rescate cultural
-
-**Caso 3: Educación - Proyecto de Alfabetización**
-- Programas de educación para adultos
-- Participación de comunidades indígenas
-- Impacto en género y equidad
-- Resultados medibles
-- Sostenibilidad
-
-**Caso 4: Patrimonio Inmaterial**
-- Carnaval de Oruro (Patrimonio Inmaterial de la Humanidad)
-- Música y danzas tradicionales
-- Preservación de tradiciones
-- Impacto cultural y económico
-
-### IV. COMPARATIVA: OMS VS UNESCO (3-4 páginas)
-- Similitudes en estructura y funcionamiento
-- Diferencias en mandatos
-- Complementariedad en acciones
-- Sinergia posible en Bolivia
-
-### V. IMPACTO EN DESARROLLO DE BOLIVIA (4-5 páginas)
-- Indicadores de salud (OMS)
-- Indicadores educativos y culturales (UNESCO)
-- Contribución a ODSs
-- Limitaciones y desafíos
-- Recomendaciones
-
-### VI. CONCLUSIONES (2-3 páginas)
-- Síntesis de hallazgos
-- Reflexiones finales
-- Perspectivas futuras
-
-### VII. REFERENCIAS BIBLIOGRÁFICAS
-- Ordenadas alfabéticamente
-- Formato APA
-
-### VIII. ANEXOS (Opcional)
-- Tablas de datos
-- Mapas
-- Fotos
-- Documentos adicionales
+### Referencias (½ página)
+- Mínimo 5-8 fuentes clave
+- Formato APA básico
 
 ---
 
-## 3. ESTRUCTURA DE DIAPOSITIVAS
+## 3. ESTRUCTURA DE DIAPOSITIVAS (7 por persona, ~8-10 minutos)
 
-### PRESENTACIÓN 1: OMS (20-25 diapositivas)
+### PRESENTACIÓN 1: OMS (7 diapositivas)
 
 **Diapositiva 1:** Portada
-- Título: "Organización Mundial de la Salud"
-- Subtítulo: "Impacto en Bolivia"
-- Autores y fecha
+- Título: "Organización Mundial de la Salud (OMS)"
+- Subtítulo: "¿Cómo cuida la salud en Bolivia?"
+- Autores
 
-**Diapositivas 2-3:** Introducción
-- ¿Qué es la OMS?
-- Por qué es importante
+**Diapositiva 2:** ¿Qué es la OMS?
+- Fundada en 1948 (post-guerra)
+- Organismo de la ONU para salud global
+- "Salud es bienestar físico, mental y social"
 
-**Diapositiva 4:** Historia
-- Fundación 1948
-- Contexto post-guerra
-- Evolución hasta hoy
+**Diapositiva 3:** ¿Qué hace la OMS?
+- Establece normas de salud internacional
+- Vigilancia de enfermedades y epidemias
+- Asistencia técnica a países
+- Respuesta a emergencias sanitarias
 
-**Diapositiva 5:** Estructura Organizacional
-- Diagrama de funcionamiento
-- Regiones (Américas incluye Bolivia)
-- Órganos principales
+**Diapositiva 4:** OMS en Bolivia
+- Presencia a través de PAHO (Oficina Panamericana)
+- Principales desafíos: TB, malaria, VIH
+- Programas de vacunación y prevención
 
-**Diapositiva 6:** Definición de Salud (OMS)
-- "Bienestar físico, mental y social"
-- Contexto global
+**Diapositiva 5:** Caso: Tuberculosis en Bolivia
+- **El problema**: Bolivia tiene una de las tasas más altas de TB (100-120 casos/100,000 hab)
+- **La solución OMS**: Estrategia DOTS (medicinas supervisadas, gratis)
+- **Los resultados**: Aumento de casos curados, reducción de muertes
+- *Gráfico de tendencia (2010-2024)*
 
-**Diapositivas 7-11:** Funciones Principales
-- Normatización
-- Vigilancia epidemiológica
-- Asistencia técnica
-- Investigación
-- Emergencias sanitarias
+**Diapositiva 6:** Desafíos y Logros
+- ✅ Logro: Aumento de cobertura de vacunación
+- ❌ Desafío: Acceso a zonas rurales
+- ❌ Desafío: Tuberculosis resistente a medicamentos
 
-**Diapositivas 12-14:** OMS en Bolivia - Contexto
-- Datos de salud en Bolivia
-- Principales desafíos sanitarios
-- Presencia de la OMS
-
-**Diapositivas 15-17:** Caso 1 - Tuberculosis
-- Epidemiología en Bolivia
-- Programas de control
-- Resultados
-- Gráficos comparativos
-
-**Diapositivas 18-20:** Caso 2 - Vacunación
-- Coberturas de vacunas
-- Campañas exitosas
-- Desafíos pendientes
-
-**Diapositiva 21:** Caso 3 - Malaria
-- Mapa de zonas endémicas
-- Casos y mortalidad
-- Intervenciones
-
-**Diapositivas 22-23:** Desafíos Actuales
-- COVID-19
-- Enfermedades crónicas
-- Acceso a medicamentos
-
-**Diapositiva 24:** Logros y Perspectivas
-- Lo alcanzado
-- Lo que falta
-
-**Diapositiva 25:** Conclusiones y Preguntas
+**Diapositiva 7:** Conclusión
+- La OMS y Bolivia trabajan juntos por más salud
+- Queda mucho por hacer
+- Preguntas
 
 ---
 
-### PRESENTACIÓN 2: UNESCO (20-25 diapositivas)
+### PRESENTACIÓN 2: UNESCO (7 diapositivas)
 
 **Diapositiva 1:** Portada
 - Título: "UNESCO"
-- Subtítulo: "Cultura, Educación y Patrimonio en Bolivia"
-- Autores y fecha
+- Subtítulo: "Protegiendo la cultura y educación en Bolivia"
+- Autores
 
-**Diapositivas 2-3:** Introducción
-- ¿Qué es UNESCO?
+**Diapositiva 2:** ¿Qué es UNESCO?
+- Fundada en 1945 (post-guerra)
+- Organismo de la ONU para educación, ciencia y cultura
 - Lema: "La paz nace de las mentes"
 
-**Diapositiva 4:** Historia
-- Fundación 1945
-- Contexto post-guerra
-- Evolución
+**Diapositiva 3:** ¿Qué hace UNESCO?
+- Promueve educación de calidad
+- Protege patrimonio cultural mundial
+- Defiende libertad de expresión
+- Impulsa ciencia y tecnología
 
-**Diapositiva 5:** Estructura Organizacional
-- Órganos principales
-- Oficinas regionales
-- Programas de acción
+**Diapositiva 4:** UNESCO en Bolivia
+- 7 sitios Patrimonio Mundial (Tiwanaku, 6 Misiones, Sucre)
+- Patrimonio Inmaterial: Carnaval de Oruro
+- Programas de educación y alfabetización
 
-**Diapositiva 6:** Misión y Visión
-- Pilares de UNESCO
-- Objetivos de desarrollo
+**Diapositiva 5:** Caso 1: Tiwanaku - Patrimonio de la Humanidad
+- Civilización preincaica (1500 a.C. - 950 d.C.)
+- Inscrito UNESCO en 2000 (criterios: valor universal)
+- Monumentos: Templo Kalasasaya, Puerta del Sol
+- Trabajos de restauración continua
+- *Foto del sitio*
 
-**Diapositivas 7-11:** Funciones Principales
-- Educación de calidad
-- Patrimonio cultural (material e inmaterial)
-- Libertad de expresión
-- Ciencia y tecnología
-- Inclusión social
+**Diapositiva 6:** Caso 2: Carnaval de Oruro - Patrimonio Inmaterial
+- Patrimonio Inmaterial de la Humanidad (2001)
+- Danzas tradicionales: Diablada, Morenada, Tinku
+- Sincretismo cultural (andino + cristianismo)
+- Desafío: transmisión generacional vs. turismo
+- *Fotos de danzas tradicionales*
 
-**Diapositivas 12-13:** UNESCO en Bolivia
-- Presencia institucional
-- Sitios Patrimonio Mundial
-- Programas activos
-
-**Diapositivas 14-16:** Caso 1 - Tiwanaku
-- Importancia histórica
-- Fotografías del sitio
-- Reconocimiento mundial (2000)
-- Trabajo de conservación
-- Datos de visitantes y impacto económico
-
-**Diapositivas 17-19:** Caso 2 - Misiones Jesuíticas
-- Mapa de las seis misiones
-- Arquitectura y arte
-- Programas de restauración
-- Impacto en comunidades
-
-**Diapositiva 20:** Caso 3 - Carnaval de Oruro
-- Patrimonio Inmaterial de la Humanidad
-- Fotos y videos cortos
-- Significado cultural
-- Participación y preservación
-
-**Diapositiva 21:** Caso 4 - Educación y Patrimonio Inmaterial
-- Programas educativos
-- Transmisión intergeneracional
-- Ejemplos de prácticas
-
-**Diapositiva 22:** Desafíos
-- Presupuesto limitado
-- Presiones del turismo
-- Cambio climático
-- Pérdida de tradiciones
-
-**Diapositiva 23:** Logros y Perspectivas
-
-**Diapositiva 24:** Recomendaciones
-
-**Diapositiva 25:** Conclusiones y Preguntas
+**Diapositiva 7:** Conclusión
+- UNESCO preserva la historia y cultura de Bolivia
+- Impacto en identidad y turismo
+- Desafío: conservar tradiciones vivas
+- Preguntas
 
 ---
 
@@ -518,63 +372,68 @@
 
 ---
 
-## 8. CRONOGRAMA DE TRABAJO (Aproximado)
+## 8. CRONOGRAMA DE TRABAJO (2-3 semanas)
 
-### Semana 1-2: Investigación
-- Recopilación de datos
-- Lectura de fuentes primarias
-- Búsqueda de casos de estudio
+### Semana 1: Investigación y Redacción
+- **Lunes-Miércoles**: Cada presentador investiga su tema (OMS o UNESCO)
+  - Búsqueda en sitios web oficiales
+  - Lectura de informes clave
+  - Recopilación de datos sobre Bolivia
+- **Jueves-Viernes**: Redacción conjunta del informe (10 páginas)
+  - Introductor: 1 página (quien quiera)
+  - OMS: presentador 1 escribe 3 páginas
+  - UNESCO: presentador 2 escribe 3 páginas
+  - Conclusión: 2 páginas (colaborativo)
 
-### Semana 3: Redacción del Informe
-- Escribir capítulos
-- Compilar gráficos y datos
-- Revisar referencias
-
-### Semana 4: Preparación de Diapositivas
-- Crear presentaciones
-- Incluir imágenes y gráficos
-- Revisar contenido
-
-### Última semana: Ensayo y Ajustes
-- Práctica de presentación
-- Sincronización entre dos presentadores
-- Ajustes finales
-
----
-
-## 9. CONSEJOS PARA LA PRESENTACIÓN
-
-### Estructura:
-- Tiempo: 20-30 minutos total (10-15 min por presentador)
-- Incluir datos visuales
-- Contar historias con los casos de estudio
-- Usar ejemplos concretos
-
-### Elementos de Impacto:
-- Abre con una pregunta provocadora
-- Usa fotografías del patrimonio
-- Incluye testimonios o quotes
-- Cierra con reflexiones sobre el futuro
-
-### Efectividad:
-- Domina el contenido
-- Mira a la audiencia
-- Habla con claridad
-- Transición suave entre presentadores
-- Abre para preguntas
+### Semana 2: Diapositivas y Práctica
+- **Lunes-Martes**: Creación de diapositivas (7 por persona)
+  - Incluir gráficos simples y fotos
+  - Texto legible (máximo 5 líneas por diapositiva)
+- **Miércoles**: Ensayo individual (5 minutos cada uno)
+  - Revisar fluidez
+  - Cronometrar tiempo
+- **Jueves**: Ensayo conjunto (10 minutos)
+  - Transición entre presentadores
+  - Coordinación de preguntas
+- **Viernes**: Presentación final
 
 ---
 
-## 10. MATERIALES DE APOYO A PREPARAR
+## 9. CONSEJOS CLAVE PARA LA PRESENTACIÓN (8-10 minutos por persona)
 
-- [ ] Mapa de Bolivia con ubicaciones de sitios Patrimonio
-- [ ] Tabla comparativa OMS-UNESCO
-- [ ] Gráficos de tendencias de TB
-- [ ] Fotos de Tiwanaku y Misiones
-- [ ] Infografía del Carnaval de Oruro
-- [ ] Datos epidemiológicos actualizados
-- [ ] Bibliografía completa
-- [ ] Handouts para la audiencia (resumen de 2 páginas)
+### Antes de empezar:
+- ✅ Domina el contenido (evita leer mucho de las diapositivas)
+- ✅ Practica 2-3 veces en voz alta
+- ✅ Cronometra para no exceder 10 minutos
+
+### Durante la presentación:
+- ✅ Habla con claridad y ritmo pausado
+- ✅ Mira a la audiencia (compañeros y docente)
+- ✅ Usa las diapositivas como apoyo, no como guión
+- ✅ Señala gráficos y fotos mientras hablas
+- ✅ Transición suave: "Ahora mi compañero hablará de..."
+
+### Estructura de cada presentación:
+1. **Diapositiva 1-2** (1 min): Presentación + concepto básico
+2. **Diapositiva 3-4** (2 min): Funciones y presencia en Bolivia
+3. **Diapositiva 5-6** (5 min): Casos de estudio (lo más importante)
+4. **Diapositiva 7** (1 min): Conclusión y preguntas
+
+### Elementos de impacto:
+- Abre con una pregunta: "¿Sabían que Bolivia tiene..."
+- Usa números concretos (100-120 casos de TB)
+- Menciona un logro: "Gracias a la OMS, se curaron X casos"
+- Cierra diciendo: "Esto muestra que..."
+
+---
+
+## 10. MATERIALES A PREPARAR (Mínimo)
+
+- [ ] **Informe**: 10 páginas con introducción, dos temas, conclusión, referencias
+- [ ] **Diapositivas OMS**: 7 slides con gráfico de TB y datos de Bolivia
+- [ ] **Diapositivas UNESCO**: 7 slides con fotos de Tiwanaku y Carnaval
+- [ ] **Bibliografía**: Mínimo 5-8 fuentes confiables (WHO.int, UNESCO.org, PAHO)
+- [ ] **Nota de investigación**: 1 página con fuentes consultadas
 
 ---
 
