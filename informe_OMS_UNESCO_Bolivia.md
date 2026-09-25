@@ -44,6 +44,14 @@ En América, la OMS opera a través de la Organización Panamericana de la Salud
 
 Bolivia enfrenta una de las cargas más altas de tuberculosis (TB) de la región. Según cifras del Banco Mundial basadas en el Informe Mundial de Tuberculosis de la OMS, la incidencia en Bolivia fue de 105 casos por cada 100,000 habitantes en 2023, frente a un promedio de 31.4 casos por 100,000 en la Región de las Américas en 2022 (WHO Global TB Report). Esto significa que Bolivia registra una incidencia aproximadamente 3.3 veces mayor que el promedio regional. La TB afecta desproporcionadamente a poblaciones vulnerables: personas que viven en pobreza, personas con VIH, y trabajadores de minas, aunque cabe aclarar que esta correlación con la pobreza es consistente con la literatura epidemiológica general y no implica que la TB tenga una causa única.
 
+**Tabla 1. Incidencia de tuberculosis: Bolivia frente a la Región de las Américas**
+
+| Indicador | Bolivia | Región de las Américas | Fuente |
+|---|---|---|---|
+| Incidencia de TB (casos/100,000 hab.) | 105 (2023) | 31.4 (2022) | Banco Mundial / WHO Global TB Report |
+| Razón Bolivia vs. promedio regional | 3.3 veces mayor | — | Cálculo propio a partir de las cifras anteriores |
+| Variación de incidencia regional 2015-2023 | — | +20% | WHO Global TB Report 2024 |
+
 **La Intervención de la OMS:**
 
 Desde los años 1990, la OMS ha promovido la estrategia DOTS (Directly Observed Therapy Short Course—Tratamiento Acortado Estrictamente Supervisado). En Bolivia, esta estrategia se implementa con:
@@ -82,14 +90,25 @@ Mientras el caso de la tuberculosis ilustra un desafío persistente, el caso del
 
 **La Historia (con fechas verificables):**
 
-- **2000**: Bolivia registra su último caso de sarampión endémico, en la localidad de Amarete, La Paz
-- **2012**: La OPS/OMS certifica a Bolivia como país libre de sarampión, tras más de una década sin transmisión
-- **Julio de 2023**: PAHO/OMS recertifica a los departamentos bolivianos como libres de sarampión, rubéola y poliomielitis
-- **Junio de 2025**: Bolivia declara **Emergencia Sanitaria Nacional** tras un brote de sarampión que se originó en colonias menonitas y se extendió a comunidades indígenas rurales — el mayor brote en más de dos décadas
+**Tabla 2. Línea de tiempo del sarampión en Bolivia (2000-2025)**
+
+| Año | Hito | Fuente |
+|---|---|---|
+| 2000 | Último caso de sarampión endémico (Amarete, La Paz) | PAHO/OMS |
+| 2012 | Bolivia certificada como país libre de sarampión | PAHO/OMS |
+| Julio 2023 | Recertificación de todos los departamentos como libres de sarampión, rubéola y polio | PAHO/OMS |
+| Junio 2025 | Emergencia Sanitaria Nacional por nuevo brote (colonias menonitas → comunidades rurales indígenas) | Ministerio de Salud de Bolivia |
 
 **La Causa Raíz: Cobertura de Vacunación Insuficiente**
 
 Según cifras oficiales citadas por PAHO/OMS, en 2023 solo el **68% de los niños menores de un año** había recibido la primera dosis de la vacuna triple viral (SRP: sarampión, rubéola, paperas), y **menos del 50%** había completado el esquema con la segunda dosis. La meta técnica para mantener la "inmunidad de rebaño" y evitar brotes es de al menos 95% de cobertura con dos dosis. Bolivia llevaba años por debajo de ese umbral sin que se produjera un brote visible — hasta 2025.
+
+**Tabla 3. Cobertura de vacunación SRP en Bolivia (2023) frente a la meta técnica**
+
+| Indicador | Cifra | Meta técnica (OMS) | Brecha |
+|---|---|---|---|
+| Primera dosis SRP (niños < 1 año) | 68% | 95% | -27 puntos |
+| Esquema completo (dos dosis) | < 50% | 95% | > -45 puntos |
 
 **La Respuesta de la OMS/OPS:**
 
@@ -138,6 +157,22 @@ UNESCO trabaja en cuatro áreas estratégicas: educación para todos, ciencias n
 **Ciencia y Tecnología**: Promueve la investigación científica y el acceso a tecnología para el desarrollo sostenible.
 
 En Bolivia, UNESCO cuenta con una oficina de programas en La Paz que coordina iniciativas en educación, patrimonio cultural y comunicación.
+
+**Tabla 4. Sitios bolivianos en la Lista de Patrimonio Mundial de UNESCO**
+
+| Sitio | Tipo de Patrimonio | Año de inscripción |
+|---|---|---|
+| Ciudad de Potosí | Cultural | 1987 |
+| Misiones Jesuíticas de Chiquitos (6 misiones) | Cultural | 1990 |
+| Sucre (centro histórico) | Cultural | 1991 |
+| Fuerte de Samaipata | Cultural | 1998 |
+| Tiwanaku | Cultural | 2000 |
+| Parque Nacional Noel Kempff Mercado | Natural | 2000 |
+| Qhapaq Ñan, Sistema Vial Andino (sitio transnacional) | Cultural | 2014 |
+
+Bolivia tiene, además, un reconocimiento en una lista distinta —la Lista Representativa del Patrimonio Cultural Inmaterial— que no se cuenta dentro de los 7 sitios anteriores: el **Carnaval de Oruro** (2001), desarrollado como caso de estudio más abajo.
+
+*Fuente: UNESCO World Heritage Centre, listado oficial de Estados Parte — Bolivia (whc.unesco.org/en/statesparties/bo). El informe desarrolla en detalle solo Tiwanaku y el Carnaval de Oruro como casos de estudio.*
 
 ### 2.3 Caso 1: Tiwanaku—Patrimonio de la Humanidad
 

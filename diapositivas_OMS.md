@@ -96,9 +96,12 @@
 # Caso 1: Tuberculosis en Bolivia
 
 **Los datos (fuente: Banco Mundial / OMS Global TB Report):**
-- Bolivia: **105 casos por 100,000 hab.** (2023)
-- Región de las Américas: **31.4 por 100,000** (2022)
-- Bolivia tiene una incidencia **~3.3 veces mayor** que el promedio regional
+
+| Indicador | Cifra |
+|---|---|
+| Incidencia Bolivia (2023) | **105** / 100,000 hab. |
+| Incidencia Región Américas (2022) | **31.4** / 100,000 hab. |
+| Diferencia | **3.3 veces mayor** |
 
 **La Estrategia OMS - DOTS:**
 - Tratamiento supervisado directamente por personal de salud
@@ -125,10 +128,13 @@
 # Caso 2: Sarampión en Bolivia—Cuando un Logro No Es Permanente
 
 **Línea de tiempo real:**
-- **2000**: Último caso de sarampión endémico en Bolivia (Amarete, La Paz)
-- **2012**: PAHO/OMS certifica a Bolivia libre de sarampión
-- **2023**: Recertificación de todos los departamentos como libres de sarampión, rubéola y polio
-- **Junio 2025**: Bolivia declara **Emergencia Sanitaria Nacional** por un nuevo brote
+
+| Año | Hito |
+|---|---|
+| 2000 | Último caso endémico (Amarete, La Paz) |
+| 2012 | Bolivia certificada libre de sarampión |
+| 2023 | Recertificación de todos los departamentos |
+| Jun. 2025 | **Emergencia Sanitaria Nacional** por nuevo brote |
 
 **¿Qué pasó?**
 
@@ -137,10 +143,11 @@ El brote se originó en colonias menonitas y se extendió a comunidades indígen
 **Imagen sugerida:** `imagenes/oms_vacuna_mmr.jpg` — vacuna MMR/SRP (sarampión-rubéola-paperas)
 
 **La causa raíz (dato clave):**
-> En 2023, solo **68%** de los niños menores de 1 año recibió  
-> la primera dosis de la vacuna SRP, y **menos del 50%**  
-> completó las dos dosis necesarias.  
-> La meta técnica para evitar brotes es **95% de cobertura.**
+
+| Indicador (2023) | Cifra | Meta OMS | Brecha |
+|---|---|---|---|
+| 1ª dosis SRP (< 1 año) | 68% | 95% | -27 pts |
+| Esquema completo (2 dosis) | < 50% | 95% | > -45 pts |
 
 **La lección:**
 La cobertura llevaba años por debajo del umbral seguro sin que se notara un brote — hasta que las condiciones se acumularon. Un logro sanitario **no es un punto de llegada**, es un esfuerzo que se sostiene o se pierde.

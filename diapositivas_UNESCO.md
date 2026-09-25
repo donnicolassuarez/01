@@ -75,13 +75,20 @@ Protegiendo la Cultura y Educación en Bolivia
 **Título:**
 # UNESCO en Bolivia
 
-**7 Sitios Patrimonio de la Humanidad:**
-1. 🏛️ Tiwanaku (2000)
-2. ⛪ 6 Misiones Jesuíticas (1990)
-   - San Javier, Concepción, Santa Ana, San Miguel, San Rafael, San Ignacio
+**7 Sitios en la Lista de Patrimonio Mundial:**
 
-**1 Patrimonio Inmaterial de la Humanidad:**
-3. 🎭 Carnaval de Oruro (2001)
+| Sitio | Año |
+|---|---|
+| Ciudad de Potosí | 1987 |
+| Misiones Jesuíticas de Chiquitos | 1990 |
+| Sucre (centro histórico) | 1991 |
+| Fuerte de Samaipata | 1998 |
+| Tiwanaku | 2000 |
+| P.N. Noel Kempff Mercado | 2000 |
+| Qhapaq Ñan (sitio transnacional) | 2014 |
+
+**+ 1 Patrimonio Cultural Inmaterial (lista aparte):**
+🎭 Carnaval de Oruro (2001)
 
 **Programas Activos:**
 - ✅ Educación para el Desarrollo Sostenible
