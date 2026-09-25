@@ -4,6 +4,23 @@ Análisis de qué formatos de este paquete son seguros de subir y cuáles tienen
 
 ---
 
+## 0. Auditoría de tamaño y cantidad (verificada, no estimada)
+
+**Antes de esta revisión:** 30 archivos, 20.7 MB (zip completo, incluía por error `build_docx.js`, un script que no tiene nada que ver con las diapositivas).
+
+**Corregido:**
+- Fotos JPG redimensionadas a máximo 1920px de lado mayor y recomprimidas (calidad 85) — de ~20 MB a ~4 MB en fotos, sin pérdida visible de calidad (verificado visualmente). Ninguna diapositiva necesita más resolución que esa para proyección o impresión.
+- `build_docx.js` excluido de ambos paquetes de entrega — no es contenido de diapositiva.
+- Ahora existen **dos paquetes separados** con propósitos distintos:
+  - `paquete_claude_design_SOLO_IMAGENES.zip` — **4.4 MB, 18 archivos**. Únicamente imágenes (`.jpg`/`.png`/`.svg`). Esto es lo único que corresponde subir a una plataforma de diseño.
+  - `entrega_completa.zip` — **4.5 MB, 28 archivos**. Imágenes + el informe en Word + los documentos de texto (`.md`) para copiar/pegar. Paquete de archivo/respaldo, no para subir tal cual a ningún lado.
+
+**Por qué importa el tamaño:** 20 MB estaba cerca del límite de adjuntos de Gmail (25 MB) y de límites típicos de subida por archivo en muchas plataformas web (10-25 MB es común). A 4.4-4.5 MB, ambos paquetes están cómodamente dentro de cualquier límite razonable, incluida una plataforma externa con restricciones estrictas.
+
+**Ningún archivo individual excede límites típicos:** la imagen más pesada ahora es ~1 MB (antes 4.9 MB); el resto están entre 10 KB y 550 KB.
+
+---
+
 ## 1. Hallazgo real (verificado, no teórico)
 
 Convertí los 4 archivos `.svg` del paquete a `.png` para probar su compatibilidad. Resultado:
@@ -32,6 +49,10 @@ Convertí los 4 archivos `.svg` del paquete a `.png` para probar su compatibilid
 | `.docx` (el informe) | Ninguno | No es para las diapositivas — es material de referencia aparte, no se sube a Claude Design. |
 
 ---
+
+## 2.1 Regla absoluta (no depende de la plataforma)
+
+`.md`, `.docx`, `.js` **no son formatos de imagen y no se pueden insertar como imagen en ninguna herramienta de diseño, sin excepción** — esto no es una limitación de "Claude Design" en particular, es una propiedad del formato. El `.docx` y el `.js` de este proyecto no deben tocarse al construir las diapositivas. Los `.md` se copian y pegan como texto — nunca se "suben" como archivo.
 
 ## 3. Checklist antes de pegar/subir en Claude Design
 
