@@ -23,10 +23,10 @@ Protegiendo la Cultura y Educación en Bolivia
 # ¿Qué es UNESCO?
 
 **Contenido (Puntos clave):**
-- ✅ Fundada en **1945** (después de la Segunda Guerra Mundial)
-- ✅ Organismo especializado de las Naciones Unidas
-- ✅ Sede en **París, Francia**
-- ✅ 195 países miembros (incluyendo Bolivia)
+- Fundada en **1945** (después de la Segunda Guerra Mundial)
+- Organismo especializado de las Naciones Unidas
+- Sede en **París, Francia**
+- 195 países miembros (incluyendo Bolivia)
 
 **Lema de UNESCO:**
 > "Puesto que las guerras nacen en la mente de los hombres,  
@@ -35,7 +35,7 @@ Protegiendo la Cultura y Educación en Bolivia
 
 **En otras palabras:** La paz comienza en las mentes de las personas
 
-**Pregunta para conectar:** ¿Sabían que Bolivia tiene 7 sitios reconocidos como Patrimonio de la Humanidad por UNESCO?
+**Pregunta para conectar:** ¿Sabían que Bolivia tiene 7 sitios reconocidos en la Lista de Patrimonio Mundial de UNESCO?
 
 **Imagen sugerida:** `imagenes/unesco_logo.svg` — logo institucional
 
@@ -88,13 +88,13 @@ Protegiendo la Cultura y Educación en Bolivia
 | Qhapaq Ñan (sitio transnacional) | 2014 |
 
 **+ 1 Patrimonio Cultural Inmaterial (lista aparte):**
-🎭 Carnaval de Oruro (2001)
+Carnaval de Oruro (2001)
 
 **Programas Activos:**
-- ✅ Educación para el Desarrollo Sostenible
-- ✅ Programas de alfabetización en zonas rurales
-- ✅ Formación docente
-- ✅ Preservación de lenguas indígenas
+- Educación para el Desarrollo Sostenible
+- Programas de alfabetización en zonas rurales
+- Formación docente
+- Preservación de lenguas indígenas
 
 **Impacto:**
 - Generación de turismo e ingresos
@@ -117,9 +117,9 @@ Protegiendo la Cultura y Educación en Bolivia
 
 **Monumentos Principales:**
 
-🔺 **Templo Kalasasaya** — Pirámide escalonada, originalmente 130 metros de largo
-🚪 **Puerta del Sol** — Monolito tallado de 10 toneladas, símbolo icónico del sitio
-📦 **Plataforma Akapana** — Estructura piramidal de función aún debatida
+**Templo Kalasasaya** — Pirámide escalonada, originalmente 130 metros de largo
+**Puerta del Sol** — Monolito tallado de 10 toneladas, símbolo icónico del sitio
+**Plataforma Akapana** — Estructura piramidal de función aún debatida
 
 **Reconocimiento UNESCO (2000) — Ficha oficial 567:**
 - **Criterio iii**: Testimonio excepcional del poder del imperio Tiwanaku en el desarrollo de la civilización andina prehispánica
@@ -141,44 +141,43 @@ Protegiendo la Cultura y Educación en Bolivia
 # Carnaval de Oruro: Patrimonio Inmaterial de la Humanidad
 
 **¿Qué es el Carnaval de Oruro?**
-- 🎉 Celebración religiosa y folclórica en febrero/marzo
-- 📍 Ubicación: Oruro, en el altiplano boliviano
-- 👥 Miles de danzarines y músicos participan
-- 🎭 Procesión de 2 días con danzas tradicionales
+- Celebración religiosa y folclórica en febrero/marzo
+- Ubicación: Oruro, en el altiplano boliviano
+- Miles de danzarines y músicos participan
+- Procesión de 2 días con danzas tradicionales
 
 **Imagen sugerida:** `imagenes/carnaval_oruro_diablada.jpg` — danzarines de la Diablada
 
 **Danzas Principales:**
-1. **Diablada** 👿
+1. **Diablada**
    - Danzarines disfrazados de diablos
    - Batalla entre el bien y el mal
 
-2. **Morenada** 💔
+2. **Morenada**
    - Lenta y melancólica
    - Representa la esclavitud africana
 
-3. **Tinku** ⚡
+3. **Tinku**
    - Confrontación ritual
    - Originaria de comunidades indígenas
 
-4. **Andanza** 🎶
+4. **Andanza**
    - Danza de celebración y alegría
 
 **Sincretismo Cultural Único:**
-- 🕯️ Rituales pre-incaicos a la Pachamama (Madre Tierra)
-- ⛪ Devoción cristiana a la Virgen del Socavón
-- 🎵 Tradiciones africanas (esclavitud)
-- ⛏️ Cultura minera de Oruro
+- Rituales pre-incaicos a la Pachamama (Madre Tierra)
+- Devoción cristiana a la Virgen del Socavón
+- Tradiciones africanas (esclavitud)
+- Cultura minera de Oruro
 
 **Reconocimiento UNESCO (2001):**
-✅ Declarado Patrimonio Inmaterial de la Humanidad
-→ Fue uno de los PRIMEROS patrimonios inmateriales reconocidos
+Declarado Patrimonio Inmaterial de la Humanidad — fue uno de los primeros patrimonios inmateriales reconocidos
 
 **Desafíos:**
-- ❌ Presión del turismo (puede afectar autenticidad)
-- ❌ Jóvenes pierden interés en tradiciones
-- ❌ Costo alto de participar (costumes, viajes)
-- ❌ Modernización (luces, amplificadores) vs. tradición
+- Presión del turismo (puede afectar autenticidad)
+- Jóvenes pierden interés en tradiciones
+- Costo alto de participar (trajes, viajes)
+- Modernización (luces, amplificadores) vs. tradición
 
 ---
 
@@ -192,10 +191,10 @@ Protegiendo la Cultura y Educación en Bolivia
 **¿Qué protege UNESCO en Bolivia?**
 
 UNESCO protege:
-- ✅ **Patrimonio Material:** Tiwanaku y Misiones Jesuíticas (piedra y arquitectura)
-- ✅ **Patrimonio Inmaterial:** Carnaval de Oruro (tradiciones vivas)
-- ✅ **Educación:** Programas de alfabetización y calidad educativa
-- ✅ **Identidad:** Fortalece la identidad cultural boliviana
+- **Patrimonio Material:** Tiwanaku y Misiones Jesuíticas (piedra y arquitectura)
+- **Patrimonio Inmaterial:** Carnaval de Oruro (tradiciones vivas)
+- **Educación:** Programas de alfabetización y calidad educativa
+- **Identidad:** Fortalece la identidad cultural boliviana
 
 **¿Por qué importa?**
 
@@ -205,7 +204,7 @@ Cuando UNESCO protege nuestra cultura:
 3. **Afirmamos nuestra identidad** como nación
 4. **Educamos a nuestros hijos** sobre quiénes somos
 
-**La Cultura es un Derecho Humano** 🎭
+**La Cultura es un Derecho Humano**
 
 **Reflexión Final:**
 La OMS cuida nuestra salud física. UNESCO cuida nuestra salud cultural.  

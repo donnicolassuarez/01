@@ -53,7 +53,7 @@
 
 **Nota:** En América funciona a través de PAHO (Oficina en La Paz)
 
-**Sin imagen adjunta en esta diapositiva** (el archivo de mapa original tenía texto de leyenda ilegible — ver `PROTOCOLO_ARCHIVOS_CLAUDE_DESIGN.md`). En su lugar, pide a Claude Design que genere un **grid de 4 iconos de línea simple** (documento/balanza, lupa, apretón de manos, libro), uno por cada función — ya especificado en `ESPECIFICACION_DISENO.md`, tabla "Motivo por diapositiva".
+**Sin imagen adjunta en esta diapositiva** (el archivo de mapa original tenía texto de leyenda ilegible — ver `PROTOCOLO_ARCHIVOS_CLAUDE_DESIGN.md`). En su lugar, pide a Claude Design un **grid de 4 iconos de línea profesionales** (estilo Material Icons/Feather: trazo fino monocromático, sin relleno de color, sin caras ni efectos 3D) — documento/balanza para "normas", lupa para "vigilancia", apretón de manos para "asistencia técnica", libro para "investigación". Nada de clipart, emojis ni ilustraciones "friendly". Detalle completo en `ESPECIFICACION_DISENO.md`.
 
 ---
 

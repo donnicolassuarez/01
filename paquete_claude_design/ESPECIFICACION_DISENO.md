@@ -54,6 +54,8 @@ Ambas fuentes son estándar en Google Fonts — Claude Design/Canva/Google Slide
 
 **Regla general:** los motivos andinos son acentos (5-15% del espacio de la diapositiva), nunca fondo dominante — así se evita el efecto "folclórico de cliché" y se mantiene la seriedad académica.
 
+**Regla explícita anti-infantilización (aplica a cualquier elemento que Claude Design deba generar, no solo motivos andinos):** "iconos de línea simple" significa el estilo de librerías profesionales tipo Material Icons, Feather o Lucide — trazo fino, monocromático, sin relleno de colores saturados, sin caras, sin efectos 3D ni sombras gruesas. "Línea de tiempo con puntos" significa una línea delgada horizontal con círculos pequeños y sólidos del tamaño de una viñeta (no burbujas grandes de colores) — el estilo de un infográfico editorial (The Economist, Pew Research), no un póster escolar. Si Claude Design ofrece variantes "playful"/"fun"/con emojis o mascotas, rechazarlas.
+
 ---
 
 ## 4. Motivo por diapositiva
