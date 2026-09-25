@@ -174,38 +174,81 @@ Derechos relacionados:
 
 ---
 
-## Slide 13: Consulta vs Consentimiento - Diferencias Clave
+## Slide 13: Pilar 1 Profundidad - Consulta vs Consentimiento
 
-| Aspecto | Convenio 169 (OIT) | Declaración ONU 2007 |
+**¿Qué significa cada uno?**
+
+| Aspecto | Consulta (Art. 6) | Consentimiento (Decl. ONU 2007) |
 |---------|-------------------|----------------------|
-| Derecho | Consulta | Consentimiento Libre, Previo e Informado (CLPI) |
-| Objetivo | Busca acuerdo | Busca consentimiento |
-| ¿Es veto? | No es veto | En algunos casos sí |
-| Obligación | Consultar y considerar | Obtener consentimiento |
+| Concepto | Participación en decisiones | Aprobación obligatoria |
+| ¿Veto? | NO - El Estado decide | SÍ - En ciertos casos |
+| Alcance | Medidas que afecten | Traslado de tierras |
 
-**Bolivia ha ratificado ambos instrumentos**
-
----
-
-## Slide 14: Desafíos en Bolivia
-
-**Incumplimiento y Dificultades**
-
-- Consultas no realizadas o deficientes
-- Falta de tiempo para procesos consultivos adecuados
-- Presión por aprovechamiento de recursos naturales
-- Conflicto entre desarrollo económico y derechos indígenas
-- Necesidad de fortalecimiento institucional
+**OJO:** Bolivia ratificó AMBOS. En traslados, el Convenio 169 también requiere consentimiento (Art. 16).
 
 ---
 
-## Slide 15: Resumen - Respuesta de 1 Minuto
+## Slide 14: Caso Emblemático: TIPNIS 2011 - El Contexto
 
-Bolivia ratificó el Convenio 169 de la OIT el 11 de julio de 1991 con Ley 1257, dándole rango constitucional. 
+**El caso que nunca falta en examen**
 
-Es la norma que garantiza a los 36 pueblos indígenas:
-- Derecho a consulta previa, libre e informada
-- Derecho a sus territorios y recursos
-- Autodeterminación
+**¿Qué era TIPNIS?**
+- Territorio Indígena y Parque Nacional Isiboro Sécure
+- Hogar de pueblos Tsimane y Moxeña
+- Área protegida de 1.2 millones de hectáreas
 
-El incumplimiento más famoso fue el caso **TIPNIS 2011**.
+**El proyecto:**
+- Carretera: Villa Tunari → San Ignacio de Moxos
+- Gobierno de Evo Morales
+- Atravesaría el corazón del TIPNIS
+
+---
+
+## Slide 15: TIPNIS 2011 - Lo que Pasó
+
+**La violación de derechos**
+
+- **NO hubo consulta previa** con pueblos indígenas
+- Gobierno anuncia proyecto sin participación
+- Indígenas se organizan → Marcha de 500 km a La Paz (agosto-octubre 2011)
+- **Punto de quiebre:** Represión en Chaparina
+- Proyecto suspendido por presión internacional
+- Posterior "consulta" fue rechazada por OIT y CIDH
+
+**Resultado:** Claro ejemplo de incumplimiento del Convenio 169
+
+---
+
+## Slide 16: Desafíos y Cumplimiento en Bolivia
+
+**¿Por qué no se cumple?**
+
+- Presiones económicas por recursos naturales
+- Falta de claridad en procedimientos
+- Consultas realizadas pero sin tiempo real
+- Débil institucionalidad para monitorear
+- Conflicto entre desarrollo y derechos
+- Insuficiente capacitación en cumplimiento
+
+**Necesidad urgente de:**
+- Protocolos claros de consulta
+- Financiamiento adecuado
+- Capacitación estatal
+
+---
+
+## Slide 17: Cierre y Agradecimiento
+
+**¿Qué recordar para el examen?**
+
+✓ Bolivia ratificó el Convenio 169 el **11 de julio de 1991** (Ley 1257)
+✓ Tiene **rango constitucional** (Art. 410 CPE)
+✓ Los **3 Pilares**: Consulta Previa | Territorio | Autogobierno
+✓ La consulta **NO es veto**, EXCEPTO para traslado de pueblos
+✓ Caso emblemático: **TIPNIS 2011** (violación de derechos)
+
+---
+
+**Gracias por tu atención**
+
+*Convenio 169 de la OIT: Garantizando los derechos de pueblos indígenas en Bolivia*
