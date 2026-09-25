@@ -20,7 +20,7 @@ Este informe examina cómo la OMS y UNESCO contribuyen al desarrollo de Bolivia,
 
 ### 1.1 ¿Qué es la OMS?
 
-La Organización Mundial de la Salud fue fundada en 1945 como un organismo especializado de las Naciones Unidas, oficialmente constituida en 1948. Su sede se encuentra en Ginebra, Suiza. La OMS define la salud como "un estado de bienestar físico, mental y social completo, no sólo la ausencia de enfermedad o dolencia".
+La Organización Mundial de la Salud es un organismo especializado de las Naciones Unidas cuya constitución fue firmada en 1946 y entró en vigor el 7 de abril de 1948, fecha que hoy se celebra como el Día Mundial de la Salud. Su sede se encuentra en Ginebra, Suiza. La OMS define la salud como "un estado de bienestar físico, mental y social completo, no sólo la ausencia de enfermedad o dolencia" (Constitución de la OMS, 1946).
 
 La OMS es la autoridad directriz de la salud en el sistema de las Naciones Unidas. Nació del reconocimiento post-Segunda Guerra Mundial de que la salud es un derecho fundamental y que su alcance global requiere cooperación internacional coordinada.
 
@@ -42,7 +42,7 @@ En América, la OMS opera a través de la Organización Panamericana de la Salud
 
 **La Realidad Epidemiológica:**
 
-Bolivia enfrenta una de las cargas más altas de tuberculosis (TB) en América Latina. Según datos de PAHO, el país reporta aproximadamente 100-120 casos de TB por cada 100,000 habitantes. Esta cifra es significativamente mayor que el promedio latinoamericano de 32 casos por 100,000. La TB afecta desproporcionadamente a poblaciones vulnerables: personas que viven en pobreza, minorías étnicas, personas con VIH, y trabajadores de minas.
+Bolivia enfrenta una de las cargas más altas de tuberculosis (TB) de la región. Según cifras del Banco Mundial basadas en el Informe Mundial de Tuberculosis de la OMS, la incidencia en Bolivia fue de 105 casos por cada 100,000 habitantes en 2023, frente a un promedio de 31.4 casos por 100,000 en la Región de las Américas en 2022 (WHO Global TB Report). Esto significa que Bolivia registra una incidencia aproximadamente 3.3 veces mayor que el promedio regional. La TB afecta desproporcionadamente a poblaciones vulnerables: personas que viven en pobreza, personas con VIH, y trabajadores de minas, aunque cabe aclarar que esta correlación con la pobreza es consistente con la literatura epidemiológica general y no implica que la TB tenga una causa única.
 
 **La Intervención de la OMS:**
 
@@ -53,74 +53,69 @@ Desde los años 1990, la OMS ha promovido la estrategia DOTS (Directly Observed 
 - Laboratorios de diagnóstico equipados con tecnología moderna (microscopia de fluorescencia y pruebas rápidas)
 - Sistemas de vigilancia para detectar casos resistentes a medicamentos
 
-El Ministerio de Salud de Bolivia, con apoyo técnico de PAHO/OMS, ha integrado el control de TB en su plan nacional de salud. Más de 2,500 unidades de salud en todo el país están capacitadas en el protocolo DOTS.
+El Ministerio de Salud de Bolivia, con apoyo técnico de PAHO/OMS, ha integrado el control de TB en su plan nacional de salud a través de la estrategia DOTS aplicada en la red pública de establecimientos de salud del país.
 
-**Resultados Alcanzados:**
+**Resultados y Tendencia Reciente:**
 
-Entre 2010 y 2024, se observaron avances importantes:
+Es importante presentar este caso con honestidad académica: la evidencia no muestra una historia de éxito lineal. Según el informe de la OMS "Insights from the 2024 WHO Global TB Report", la incidencia de tuberculosis en la Región de las Américas **aumentó un 20% entre 2015 y 2023**, revirtiendo parcialmente los avances logrados en la década anterior. Bolivia no es una excepción a esta tendencia regional.
 
-- **Tasa de Curación**: Aumentó de 75% a 85% de los casos diagnosticados
-- **Detección de Casos**: Mejoró la identificación de casos, con cobertura llegando a 90% de los casos estimados
-- **Reducción de Mortalidad**: La tasa de mortalidad por TB bajó de 8 muertes por 100,000 habitantes a 4 por 100,000
-- **Acceso a Medicamentos**: 95% de las unidades de salud tiene disponibilidad continua de medicamentos
-
-**Desafíos Persistentes:**
-
-A pesar de los avances, quedan desafíos importantes:
-
-1. **Acceso Geográfico**: En zonas rurales e indígenas, el acceso a tratamiento sigue siendo limitado
-2. **Tuberculosis Resistente**: Aproximadamente 3% de los casos nuevos de TB son resistentes a múltiples fármacos (MDR-TB), complicando el tratamiento
-3. **Comorbilidad VIH-TB**: La coinfección sigue siendo un reto, especialmente en La Paz y Santa Cruz
-4. **Adherencia al Tratamiento**: El tratamiento requiere 6 meses de medicación supervisada, y algunos pacientes abandonan el tratamiento
-
-### 1.4 Caso 2: Programas de Vacunación e Inmunización en Bolivia
-
-**La Realidad Epidemiológica:**
-
-Antes de 1990, Bolivia tenía tasas muy bajas de cobertura de vacunación (inferior a 50%), lo que resultaba en brotes periódicos de enfermedades prevenibles como sarampión, poliomielitis y difteria. La falta de vacunación causaba miles de muertes anuales, especialmente en niños menores de 5 años.
-
-**La Intervención de la OMS:**
-
-La OMS, trabajando a través de PAHO y el Ministerio de Salud de Bolivia, implementó:
-
-- **Calendario de Vacunación Nacional**: Estandarización de vacunas para todas las edades
-- **Campañas Masivas de Inmunización**: Vacunación puerta a puerta en zonas remotas
-- **Capacitación de Personal**: Entrenamiento de trabajadores de salud en técnicas de vacunación segura
-- **Vigilancia Epidemiológica**: Sistema para detectar brotes rápidamente
-- **Cadena de Frío**: Inversión en refrigeración para preservar vacunas
-- **Información Pública**: Programas de educación contra la desinformación sobre vacunas
-
-Estos esfuerzos fueron reforzados durante la pandemia COVID-19 (2020-2023), cuando Bolivia vacunó a millones de personas.
-
-**Resultados Alcanzados:**
-
-Entre 2000 y 2024, se lograron avances extraordinarios:
-
-- **Cobertura DPT (Difteria-Polio-Tétanos)**: Aumentó de 70% en 2000 a 92% en 2024
-- **Cobertura de Sarampión**: Subió de 60% a 95% (reducción casi total de casos)
-- **Poliomielitis**: Bolivia hace más de 30 años que **no registra casos**
-- **Mortalidad Infantil Prevenible**: Bajó de 65 por cada 1,000 nacidos vivos en 2000 a 30 por 1,000 en 2024
-- **Vidas Salvadas**: Aproximadamente 500,000 niños más viven hoy gracias a las vacunas
-
-**Ejemplo Concreto:**
-En 1999, hubo un brote de sarampión en La Paz que infectó a 5,000 niños y causó 150 muertes. Tras la campaña de vacunación masiva de 2000-2002, los casos bajaron a cifras cercanas a cero. En 2023, cuando circuló una variante de COVID-19, Bolivia logró vacunar a 8 millones de personas en 6 meses gracias a la infraestructura establecida.
+- **Cobertura de tratamiento supervisado (DOTS)**: Se ha expandido a la mayoría de la red pública de salud del país desde su adopción en los años 1990
+- **Detección de casos**: Persisten brechas de subdiagnóstico, especialmente en zonas rurales, lo cual es reconocido por la propia OPS como un desafío estructural en la región andina
+- **Repunte post-pandemia**: Al igual que en el resto de la región, la pandemia de COVID-19 (2020-2021) interrumpió servicios de diagnóstico y tratamiento, contribuyendo al repunte de casos observado después de 2021
 
 **Desafíos Persistentes:**
 
-Aunque los logros son significativos, quedan desafíos:
+A pesar del marco institucional establecido, quedan desafíos importantes:
 
-1. **Zonas de Difícil Acceso**: Comunidades en el Chocó y amazonia boliviana aún tienen coberturas bajas (60-70%)
-2. **Desinformación**: Grupos anti-vacunas circulan información falsa especialmente en redes sociales
-3. **Desigualdad Regional**: Ciudades grandes (La Paz, Santa Cruz) tienen 95% de cobertura, mientras zonas rurales tienen 70-75%
-4. **Financiamiento**: Bolivia depende de donantes internacionales para 60% de su presupuesto de vacunas
+1. **Acceso Geográfico**: En zonas rurales e indígenas, el acceso a tratamiento continuo sigue siendo limitado
+2. **Tuberculosis Resistente**: La tuberculosis resistente a múltiples fármacos (MDR-TB) complica el tratamiento y requiere terapias más prolongadas y costosas
+3. **Comorbilidad VIH-TB**: La coinfección sigue siendo un reto, especialmente en centros urbanos como La Paz y Santa Cruz
+4. **Adherencia al Tratamiento**: El esquema DOTS requiere hasta 6 meses de medicación supervisada, y el abandono del tratamiento es un factor de riesgo para el desarrollo de resistencia
 
-**Impacto Económico:**
+**Nota metodológica:** Las cifras exactas de curación y mortalidad por TB específicas para Bolivia varían según la fuente y el año de corte; se recomienda citar directamente el reporte más reciente del Programa Nacional de Control de la Tuberculosis del Ministerio de Salud o el WHO Global Tuberculosis Report vigente al momento de la presentación.
 
-Más allá de salud, la vacunación tiene impacto económico:
-- Menos niños enfermos = más asistencia escolar
-- Menos hospitalizaciones = menos gasto en salud
-- Fuerza laboral más productiva
-- Se estima que por cada dólar invertido en vacunas, se ahorran $10 en costos médicos
+### 1.4 Caso 2: Eliminación del Sarampión y su Reaparición en 2025 — Una Lección sobre la Fragilidad de los Logros en Salud
+
+**Por qué este caso es distinto al anterior:**
+
+Mientras el caso de la tuberculosis ilustra un desafío persistente, el caso del sarampión en Bolivia ilustra algo distinto y pedagógicamente más interesante: **un éxito real que luego se revirtió por una caída en la cobertura de vacunación**. Es un ejemplo concreto de por qué la OMS insiste en que la inmunización no es una meta que se alcanza una vez, sino un esfuerzo que debe sostenerse permanentemente.
+
+**La Historia (con fechas verificables):**
+
+- **2000**: Bolivia registra su último caso de sarampión endémico, en la localidad de Amarete, La Paz
+- **2012**: La OPS/OMS certifica a Bolivia como país libre de sarampión, tras más de una década sin transmisión
+- **Julio de 2023**: PAHO/OMS recertifica a los departamentos bolivianos como libres de sarampión, rubéola y poliomielitis
+- **Junio de 2025**: Bolivia declara **Emergencia Sanitaria Nacional** tras un brote de sarampión que se originó en colonias menonitas y se extendió a comunidades indígenas rurales — el mayor brote en más de dos décadas
+
+**La Causa Raíz: Cobertura de Vacunación Insuficiente**
+
+Según cifras oficiales citadas por PAHO/OMS, en 2023 solo el **68% de los niños menores de un año** había recibido la primera dosis de la vacuna triple viral (SRP: sarampión, rubéola, paperas), y **menos del 50%** había completado el esquema con la segunda dosis. La meta técnica para mantener la "inmunidad de rebaño" y evitar brotes es de al menos 95% de cobertura con dos dosis. Bolivia llevaba años por debajo de ese umbral sin que se produjera un brote visible — hasta 2025.
+
+**La Respuesta de la OMS/OPS:**
+
+- Vacunación intensificada con esquema acortado para niños de 1 a 4 años (dos dosis de SRP)
+- La vacuna SRP tiene una eficacia documentada de aproximadamente 97% con dos dosis
+- Apoyo técnico y logístico de PAHO para la respuesta de emergencia
+
+**Lo que este caso enseña:**
+
+1. **Un logro sanitario no es permanente**: Bolivia pasó de "libre de sarampión" (2012, 2023) a emergencia nacional (2025) en cuestión de dos años
+2. **Las brechas de cobertura tienen consecuencias tardías**: la caída por debajo del 68-50% de cobertura no causó un brote inmediato, pero sí creó las condiciones para uno
+3. **La heterogeneidad importa**: el brote se concentró en comunidades específicas (menonitas y rurales indígenas) con menor acceso o menor aceptación de la vacuna, lo que muestra que los promedios nacionales pueden ocultar bolsones de alto riesgo
+
+**Contexto Regional: Poliomielitis**
+
+A diferencia del sarampión, la poliomielitis sí representa un éxito sostenido: la Región de las Américas —incluida Bolivia— fue certificada libre de polio en 1994 por la Comisión Internacional para la Certificación de la Erradicación de la Polio, y no se ha registrado un caso de polio salvaje en la región desde 1991 (último caso en Perú). Han pasado más de 30 años sin transmisión endémica.
+
+**Impacto Económico de la Vacunación (evidencia global, no específica de Bolivia):**
+
+No existe una cifra confiable específica para Bolivia sobre retorno económico de la vacunación, pero vale citar la evidencia global disponible: un estudio de la Universidad de Pekín, que evaluó 50 años del Programa Ampliado de Inmunización de la OMS (1974-2024), estima que **cada dólar invertido en vacunación generó aproximadamente 16 dólares en beneficios económicos**, y que la vacunación evitó cerca de 154 millones de muertes a nivel mundial, la mayoría en menores de 5 años.
+
+**Desafíos Persistentes:**
+
+1. **Cobertura Desigual**: existen bolsones de población con cobertura muy por debajo de la meta del 95%, no distribuidos uniformemente por región sino por comunidad específica
+2. **Vacilación y Desinformación**: la aceptación de la vacuna varía entre comunidades, lo que requiere estrategias de comunicación diferenciadas, no solo más dosis disponibles
+3. **Sostenibilidad**: mantener coberturas altas exige inversión constante, no solo campañas puntuales de respuesta a brotes
 
 ---
 
@@ -157,11 +152,12 @@ Los monumentos más importantes incluyen:
 
 **Reconocimiento UNESCO:**
 
-Tiwanaku fue inscrito en la Lista del Patrimonio Mundial de UNESCO en 2000, cumpliendo con varios criterios:
+Tiwanaku fue inscrito en la Lista del Patrimonio Mundial de UNESCO en el año 2000 bajo dos criterios oficiales (UNESCO World Heritage Centre, ficha del sitio 567):
 
-- **Criterio i**: Representar una obra maestra del ingenio creativo humano (su arquitectura es única)
-- **Criterio iii**: Aportar testimonio excepcional sobre civilizaciones extintas (la cultura Tiwanaku)
-- **Criterio iv**: Ejemplificar tipos de construcción arquitectónica representativos (la construcción sin mortero)
+- **Criterio iii**: Las ruinas de Tiwanaku dan testimonio excepcional del poder del imperio que jugó un papel protagónico en el desarrollo de la civilización prehispánica andina
+- **Criterio iv**: Las edificaciones de Tiwanaku son ejemplos excepcionales de la arquitectura ceremonial y pública de una de las manifestaciones más importantes de las civilizaciones de la región andina
+
+El sitio abarca 71.5 hectáreas en la Provincia de Ingavi, Departamento de La Paz, y la ciudad alcanzó su apogeo entre los años 500 y 900 d.C., como capital de un imperio que dominó gran parte de los Andes del sur.
 
 **Trabajos de Conservación:**
 
@@ -172,7 +168,7 @@ Desde su inscripción, UNESCO y el gobierno boliviano han ejecutado proyectos de
 - Restauración de las estructuras de piedra afectadas por sismos
 - Instalación de sistemas de drenaje para proteger contra erosión hídrica
 
-Instituciones como UNECO (Unidad de Patrimonio de UNESCO Bolivia) y el Instituto Nacional de Arqueología trabajan conjuntamente en estos esfuerzos. El presupuesto proviene de donantes internacionales, gobiernos, y recursos nacionales.
+El Ministerio de Culturas, Descolonización y Despatriarcalización de Bolivia, a través de sus unidades de arqueología y patrimonio, trabaja de forma conjunta con UNESCO en estos esfuerzos, con financiamiento proveniente de recursos nacionales y cooperación internacional.
 
 **Impacto Económico y Social:**
 
@@ -231,7 +227,7 @@ La OMS y UNESCO, aunque trabajan en campos distintos, contribuyen conjuntamente 
 
 En el caso específico de Bolivia, vemos cómo:
 
-- **OMS** ha reducido la carga de tuberculosis y mejora las coberturas de vacunación, permitiendo que más niños vivan vidas saludables
+- **OMS** sostiene un esfuerzo continuo contra la tuberculosis, cuya incidencia sigue siendo alta pese a décadas de intervención, y respalda al país en el control del sarampión, cuyo brote de 2025 demuestra que los logros en inmunización deben sostenerse permanentemente y no se pueden dar por adquiridos
 - **UNESCO** preserva Tiwanaku como testimonio de civilizaciones pasadas y protege el Carnaval de Oruro como expresión viva de identidad cultural
 
 ### Logros Alcanzados
@@ -264,23 +260,28 @@ La colaboración entre organismos internacionales y gobiernos locales es fundame
 
 ## REFERENCIAS
 
-Organización Panamericana de la Salud (PAHO). (2023). *Tuberculosis en las Américas*. Washington, D.C.
+Banco Mundial. (2024). *Incidence of tuberculosis (per 100,000 people) - Bolivia*. World Development Indicators. https://data.worldbank.org/indicator/SH.TBS.INCD?locations=BO
 
-Organización Mundial de la Salud. (2024). *Informe Global de Tuberculosis 2024*. Ginebra.
+World Health Organization. (2024). *Global Tuberculosis Report 2024 — 1.1 TB incidence*. https://www.who.int/teams/global-programme-on-tuberculosis-and-lung-health/tb-reports/global-tuberculosis-report-2024/tb-disease-burden/1-1-tb-incidence
 
-UNESCO. (2000). *Tiwanaku: Centro de Poder Espiritual y Administrativo del Imperio Tiwanaku*. Recuperado de https://whc.unesco.org/en/list/567
+Organización Panamericana de la Salud. (s.f.). *Vacunar para volver a empezar: Bolivia frente al mayor brote de sarampión en dos décadas*. https://www.paho.org/es/historias/vacunar-para-volver-empezar-bolivia-frente-al-mayor-brote-sarampion-dos-decadas
 
-UNESCO. (2001). *Carnaval de Oruro*. Recuperado de https://ich.unesco.org/en/RL/carnival-of-oruro-00055
+Organización Panamericana de la Salud. (2023, 18 de julio). *Bolivia recertifica de libres de sarampión, rubéola y polio a sus departamentos*. https://www.paho.org/es/noticias/18-7-2023-bolivia-recertifica-libres-sarampion-rubeola-polio-sus-departamentos
 
-Ministerio de Salud de Bolivia. (2024). *Plan Nacional de Prevención y Control de la Tuberculosis*. La Paz.
+Organización Panamericana de la Salud. (2024, 23 de octubre). *PAHO celebrates 30 years without wild polio in the Americas*. https://www.paho.org/en/news/23-10-2024-paho-celebrates-30-years-without-wild-polio-americas
 
-Instituto Nacional de Arqueología. (2023). *Avances en Conservación de Tiwanaku*. La Paz.
+Ministerio de Salud y Deportes de Bolivia. (s.f.). *Bolivia eliminó la rubéola, poliomielitis y sarampión con la aplicación de vacunas*. https://www.minsalud.gob.bo/3438-bolivia-elimino-la-rubeola-poliomielitis-y-sarampion-con-la-aplicacion-de-vacunas
 
-Organización de las Naciones Unidas. (1945). *Constitución de la UNESCO*. París.
+CIDRAP, University of Minnesota. (2026). *In its 50-year history, global vaccination program generated $16 in benefits for every $1 invested*. https://www.cidrap.umn.edu/childhood-vaccines/its-50-year-history-global-vaccination-program-generated-16-benefits-every-1
 
-Organización de las Naciones Unidas. (1946). *Constitución de la OMS*. Ginebra.
+UNESCO World Heritage Centre. (2000). *Tiwanaku: Spiritual and Political Centre of the Tiwanaku Culture*. Ficha oficial del sitio 567. https://whc.unesco.org/en/list/567
+
+UNESCO. (2001). *Carnival of Oruro*. Lista Representativa del Patrimonio Cultural Inmaterial. https://ich.unesco.org/en/RL/carnival-of-oruro-00055
+
+World Health Organization. (1946/2020). *Constitution of the World Health Organization*. https://www.who.int/about/governance/constitution
+
+**Nota sobre las fuentes:** Todas las cifras de este informe fueron verificadas contra las fuentes citadas al momento de su redacción (2026). Se recomienda a los presentadores confirmar las cifras más recientes en las mismas fuentes antes de la defensa oral, ya que los datos de salud pública se actualizan periódicamente.
 
 ---
 
-**Total de palabras:** ~3,200  
 **Total de páginas:** 10 (aproximadamente)

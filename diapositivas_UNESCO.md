@@ -1,4 +1,5 @@
 # PRESENTACIÓN UNESCO - 7 DIAPOSITIVAS
+*(Verificado contra UNESCO World Heritage Centre, ficha oficial del sitio Tiwanaku n.° 567)*
 
 ## DIAPOSITIVA 1: PORTADA
 
@@ -89,58 +90,35 @@ Protegiendo la Cultura y Educación en Bolivia
 
 ---
 
-## DIAPOSITIVA 5: TIWANAKU - PATRIMONIO DE LA HUMANIDAD (PARTE 1)
+## DIAPOSITIVA 5: TIWANAKU - PATRIMONIO DE LA HUMANIDAD
 
 **Título:**
 # Tiwanaku: Civilización Ancestral
 
 **¿Qué es Tiwanaku?**
-- Sitio arqueológico ubicado a 20 km de La Paz
-- Capital de una civilización preincaica (1500 a.C. - 950 d.C.)
-- **Es la cuna de civilizaciones andinas** (su influencia llegó a Perú, Chile, Argentina)
-- A 3,825 metros de altura en el Altiplano
+- Sitio arqueológico a 20 km de La Paz, en la Provincia de Ingavi (71.5 hectáreas)
+- Capital de un imperio que alcanzó su apogeo entre los años 500 y 900 d.C.
+- Su influencia se extendió por gran parte de los Andes del sur (hoy Perú, Chile, Argentina)
 
 **Monumentos Principales:**
 
-🔺 **Templo Kalasasaya**
-- Pirámide escalonada de piedra
-- Originalmente 130 metros de largo
-- Dedicado a rituales ceremoniales
+🔺 **Templo Kalasasaya** — Pirámide escalonada, originalmente 130 metros de largo
+🚪 **Puerta del Sol** — Monolito tallado de 10 toneladas, símbolo icónico del sitio
+📦 **Plataforma Akapana** — Estructura piramidal de función aún debatida
 
-🚪 **Puerta del Sol**
-- Monolito de piedra único y elaboradamente tallado
-- Pesa 10 toneladas
-- Símbolo icónico de Tiwanaku
+**Reconocimiento UNESCO (2000) — Ficha oficial 567:**
+- **Criterio iii**: Testimonio excepcional del poder del imperio Tiwanaku en el desarrollo de la civilización andina prehispánica
+- **Criterio iv**: Arquitectura ceremonial y pública excepcional de las civilizaciones andinas
 
-📦 **Plataforma Akapana**
-- Estructura piramidal
-- Función exacta aún se debate entre arqueólogos
-
-**Reconocimiento UNESCO (2000):**
-✅ Inscrito como Patrimonio de la Humanidad
+**Conservación e Impacto:**
+- Restauración de estructuras dañadas por sismos y sistemas de drenaje contra erosión
+- Trabajo conjunto: Ministerio de Culturas de Bolivia y UNESCO
+- ~200,000-250,000 visitantes anuales; genera empleo para guías, artesanos y servicios
+- Símbolo de orgullo para comunidades aymara; destino educativo para escuelas de todo el país
 
 ---
 
-## DIAPOSITIVA 6: TIWANAKU Y CARNAVAL DE ORURO (PARTE 2)
-
-**Título:**
-# Tiwanaku y Carnaval: Patrimonio Vivo
-
-**TIWANAKU - Conservación:**
-- 💪 Restauración de estructuras dañadas por sismos
-- 💪 Laboratorios de diagnóstico arqueológico
-- 💪 Sistemas de drenaje contra erosión
-- 👥 Colaboración: UNESCO, Gobierno de Bolivia, PAHO, donantes internacionales
-
-**TIWANAKU - Impacto Económico:**
-- 🎫 200,000-250,000 visitantes anuales
-- 💵 Genera empleo para guías, artesanos, servicios
-- 🏫 Símbolo de orgullo para comunidades aymara
-- 📚 Escuelas de todo Bolivia hacen visitas educativas
-
----
-
-## DIAPOSITIVA 7: CARNAVAL DE ORURO - PATRIMONIO INMATERIAL
+## DIAPOSITIVA 6: CARNAVAL DE ORURO - PATRIMONIO INMATERIAL
 
 **Título:**
 # Carnaval de Oruro: Patrimonio Inmaterial de la Humanidad
@@ -185,7 +163,7 @@ Protegiendo la Cultura y Educación en Bolivia
 
 ---
 
-## DIAPOSITIVA 8: CONCLUSIÓN - CULTURA Y EDUCACIÓN
+## DIAPOSITIVA 7: CONCLUSIÓN - CULTURA Y EDUCACIÓN
 
 **Título:**
 # UNESCO en Bolivia: Conclusión
@@ -214,7 +192,7 @@ Ambas son necesarias para que Bolivia prospere.
 
 ---
 
-**NOTAS PARA EL PRESENTADOR (Diapositiva 8):**
+**NOTAS PARA EL PRESENTADOR (Diapositiva 7):**
 
 *Tiempo total: 8-10 minutos*
 

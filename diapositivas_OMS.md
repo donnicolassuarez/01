@@ -20,10 +20,10 @@
 # ¿Qué es la OMS?
 
 **Contenido (Puntos clave):**
-- ✅ Fundada en **1948** (después de la Segunda Guerra Mundial)
-- ✅ Organismo especializado de las Naciones Unidas
-- ✅ Sede en **Ginebra, Suiza**
-- ✅ 194 países miembros (incluyendo Bolivia)
+- Constitución firmada en 1946; entró en vigor el **7 de abril de 1948**
+- Organismo especializado de las Naciones Unidas
+- Sede en **Ginebra, Suiza**
+- 194 países miembros (incluyendo Bolivia)
 
 **Definición de Salud (OMS):**
 > "Estado de bienestar físico, mental y social completo,  
@@ -71,15 +71,14 @@
 - Colaboración con Ministerio de Salud
 
 **Principales Desafíos de Salud en Bolivia:**
-- 🔴 **Tuberculosis** (100-120 casos/100,000 hab)
-- 🔴 **Malaria** (en zonas endémicas de Oriente)
-- 🔴 **VIH/SIDA** (principalmente en La Paz y Santa Cruz)
-- 🟡 **Desnutrición infantil** (en el altiplano)
-- 🟡 **Falta de acceso** (especialmente en zonas rurales)
+- **Tuberculosis** (105 casos/100,000 hab. en 2023 — Banco Mundial/OMS)
+- **Cobertura de vacunación insuficiente** en algunas comunidades
+- **VIH/SIDA** (principalmente en La Paz y Santa Cruz)
+- **Desnutrición infantil** (en el altiplano)
+- **Falta de acceso** (especialmente en zonas rurales)
 
-**Lo positivo:**
-- ✅ Aumento de cobertura de vacunación
-- ✅ Reducción de mortalidad infantil
+**Un logro sostenido:**
+- Región de las Américas libre de poliomielitis desde 1994 (30+ años)
 
 ---
 
@@ -88,98 +87,99 @@
 **Título:**
 # Caso 1: Tuberculosis en Bolivia
 
-**¿Por qué es importante?**
-
-Bolivia tiene **una de las tasas más altas de TB en América Latina:**
-- 100-120 casos por cada 100,000 habitantes
-- Promedio latinoamericano: solo 32 casos/100,000
-- **Esto significa: Bolivia tiene 3-4 veces más TB que el promedio**
+**Los datos (fuente: Banco Mundial / OMS Global TB Report):**
+- Bolivia: **105 casos por 100,000 hab.** (2023)
+- Región de las Américas: **31.4 por 100,000** (2022)
+- Bolivia tiene una incidencia **~3.3 veces mayor** que el promedio regional
 
 **La Estrategia OMS - DOTS:**
-- Medicamentos gratuitos y supervisados
+- Tratamiento supervisado directamente por personal de salud
+- Medicamentos gratuitos en la red pública
 - 6 meses de tratamiento
-- Laboratorios de diagnóstico moderno
 
-**Resultados 2010-2024:**
-```
-Tasa de Curación:      75% → 85%  ✅
-Diagnóstico Temprano:  60% → 90%  ✅
-Mortalidad:            8 → 4 por 100k  ✅
-Acceso a Medicamentos: 70% → 95%  ✅
-```
+**Un dato honesto (no todo es progreso lineal):**
+> Según la OMS, la incidencia de TB en la Región de las Américas  
+> **aumentó 20% entre 2015 y 2023**, en parte por la interrupción  
+> de servicios de salud durante la pandemia de COVID-19
 
-**Impacto:**
-- Más de 2,500 centros de salud capacitados
-- Decenas de miles de vidas salvadas
+**Desafíos que persisten:**
+- Subdiagnóstico en zonas rurales
+- Tuberculosis resistente a fármacos (MDR-TB)
+- Abandono del tratamiento supervisado
 
 ---
 
-## DIAPOSITIVA 6: CASO 2 - VACUNACIÓN E INMUNIZACIÓN EN BOLIVIA
+## DIAPOSITIVA 6: CASO 2 - SARAMPIÓN: UN ÉXITO QUE SE REVIRTIÓ
 
 **Título:**
-# Caso 2: Vacunación en Bolivia—Un Éxito
+# Caso 2: Sarampión en Bolivia—Cuando un Logro No Es Permanente
 
-**¿Por qué es importante?**
+**Línea de tiempo real:**
+- **2000**: Último caso de sarampión endémico en Bolivia (Amarete, La Paz)
+- **2012**: PAHO/OMS certifica a Bolivia libre de sarampión
+- **2023**: Recertificación de todos los departamentos como libres de sarampión, rubéola y polio
+- **Junio 2025**: Bolivia declara **Emergencia Sanitaria Nacional** por un nuevo brote
 
-Antes de 1990: Cobertura de vacunación < 50%, miles de muertes anuales
-Hoy: Cobertura de 92%, enfermedades casi erradicadas
+**¿Qué pasó?**
 
-**Logros Extraordinarios:**
-- 🎯 Poliomielitis: **30+ años sin un caso**
-- 📊 Sarampión: De 5,000 casos en 1999 a casi cero hoy
-- 💪 Cobertura DPT: 70% (2000) → 92% (2024)
-- 👶 Mortalidad infantil: 65 → 30 por 1,000 nacidos vivos
+El brote se originó en colonias menonitas y se extendió a comunidades indígenas rurales — el mayor brote en más de dos décadas.
 
-**Estrategia OMS:**
-- Calendario de vacunación nacional
-- Campañas puerta a puerta en zonas remotas
-- Cadena de frío moderna
-- Educación contra desinformación
+**La causa raíz (dato clave):**
+> En 2023, solo **68%** de los niños menores de 1 año recibió  
+> la primera dosis de la vacuna SRP, y **menos del 50%**  
+> completó las dos dosis necesarias.  
+> La meta técnica para evitar brotes es **95% de cobertura.**
 
-**Vidas Salvadas:**
-> Aproximadamente **500,000 niños más viven hoy**  
-> gracias a los programas de vacunación
+**La lección:**
+La cobertura llevaba años por debajo del umbral seguro sin que se notara un brote — hasta que las condiciones se acumularon. Un logro sanitario **no es un punto de llegada**, es un esfuerzo que se sostiene o se pierde.
 
-**Ejemplo Real (2000-2002):**
-- Brote de sarampión en La Paz: 5,000 infectados, 150 muertes
-- Campaña de vacunación masiva: Casos bajaron a casi cero
-- Resultado: Generación de niños protegida permanentemente
+**Contraste: Poliomielitis (sí es un éxito sostenido)**
+- Región de las Américas libre de polio desde **1994**
+- Sin casos de polio salvaje desde 1991 (último caso: Perú)
+- Más de 30 años de éxito ininterrumpido
 
-**Desafíos Aún Hoy:**
-- ❌ Zonas remotas: cobertura 60-70% (vs. 95% en ciudades)
-- ❌ Desinformación en redes sociales
-- ❌ Dependencia de donantes internacionales (60% del presupuesto)
+**Evidencia global sobre inversión en vacunas:**
+> Un estudio de 50 años (1974-2024) del Programa Ampliado de  
+> Inmunización de la OMS estima que **cada $1 invertido generó  
+> $16 en beneficios económicos**, evitando ~154 millones de  
+> muertes a nivel mundial (CIDRAP / Universidad de Pekín, 2026)
 
 ---
 
-## DIAPOSITIVA 7: CONCLUSIÓN—DOS HISTORIAS DE ÉXITO
+## DIAPOSITIVA 7: CONCLUSIÓN—DOS CARAS DEL MISMO DESAFÍO
 
 **Título:**
-# La OMS en Bolivia: Dos Casos de Éxito
+# La OMS en Bolivia: Un Trabajo Nunca Terminado
 
-**¿Qué logró la OMS en Bolivia?**
+**Lo que muestran los dos casos:**
 
 **Tuberculosis:**
-- De 3-4 veces el promedio latinoamericano → a tasas decrecientes
-- 85% de curación, 50% menos muertes
-- Pero: TB resistente y acceso rural siguen siendo desafíos
+- Incidencia 3.3 veces mayor que el promedio regional
+- Un desafío estructural que no se resuelve solo con más recursos puntuales
+- La región entera retrocedió 20% desde 2015
 
-**Vacunación:**
-- De < 50% cobertura → a 92% de cobertura nacional
-- Erradicamos poliomielitis (30+ años sin casos)
-- 500,000 niños más viven hoy gracias a vacunas
-- Pero: Desigualdad rural-urbana y desinformación persisten
+**Sarampión:**
+- Bolivia logró eliminarlo (2000-2023), un éxito real y certificado
+- Pero la cobertura de vacunación cayó por debajo del umbral seguro
+- Resultado: emergencia nacional en 2025
 
-**¿Por qué importan estos casos?**
+**La idea central que conecta ambos casos:**
 
-✅ Muestran que **es posible cambiar** cuando hay voluntad política y cooperación
-✅ Demuestran el poder de la **prevención y tratamiento** coordinados
-✅ Prueban que la **salud es un derecho** que se puede garantizar
+> En salud pública, **no hay logros permanentes, solo logros sostenidos.**  
+> La tuberculosis nunca llegó a controlarse del todo;  
+> el sarampión sí se controló, y aun así volvió.
+
+**¿Por qué importa esto para Bolivia?**
+
+- La cooperación con la OMS/OPS da herramientas técnicas (DOTS, esquemas de vacunación, vigilancia)
+- Pero la sostenibilidad depende de **financiamiento constante y cobertura comunitaria real**, no solo de campañas puntuales
+- Los promedios nacionales esconden bolsones de riesgo (comunidades específicas con baja cobertura)
 
 **Mensaje Final:**
 
-> La OMS y Bolivia trabajan juntas por una nación más saludable.  
-> Aún hay mucho por hacer, pero hemos demostrado que **sí es posible.**
+> La salud es un derecho, pero también es un esfuerzo continuo.  
+> Los datos de Bolivia muestran tanto lo que la cooperación internacional  
+> puede lograr como lo rápido que un logro se puede perder.
 
 ---
 
@@ -188,14 +188,14 @@ Hoy: Cobertura de 92%, enfermedades casi erradicadas
 *Tiempo total: 8-10 minutos*
 
 **Guión de apertura:**
-"¿Sabían que hace 30 años, la poliomielitis paralizaba a niños en Bolivia? Hoy es historia. ¿Cómo pasó? A través de la OMS y programas como DOTS y vacunación masiva."
+"En 2023, Bolivia fue recertificada como libre de sarampión. Dos años después, en 2025, declaró una emergencia sanitaria nacional por un brote de esa misma enfermedad. ¿Qué pasó en el medio?"
 
 **Énfasis clave:**
-- TB: Tratamiento directo supervisado funciona
-- Vacunación: La prevención es más efectiva que el tratamiento
+- TB: un desafío que persiste pese a décadas de intervención — no es una historia de éxito simple
+- Sarampión: sí fue un éxito, pero reversible — la cobertura bajó silenciosamente antes del brote
 
 **Cierre:**
-"Gracias a la OMS y miles de trabajadores de salud, Bolivia ha reducido muertes a la mitad en TB y casi ha erradicado enfermedades prevenibles. Pero aún hay trabajo por hacer, especialmente en zonas rurales. La salud es un derecho de todos los bolivianos."
+"Estos dos casos nos enseñan algo distinto a la idea de que 'la OMS resuelve problemas de salud y ya está'. La salud pública es un esfuerzo que nunca termina, y los datos de Bolivia lo muestran con claridad."
 
 **Transición a UNESCO:**
 "Mientras la OMS cuida nuestra salud física, ahora mi compañero les mostrará cómo UNESCO protege nuestra identidad cultural y patrimonio..."
