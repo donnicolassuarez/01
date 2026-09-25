@@ -1,0 +1,1 @@
+Reutilizar: slide-01-logo-oit.svg + slide-01-wiphala.png
