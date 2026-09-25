@@ -1,0 +1,146 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                  PROYECTO CONVENIO 169 OIT - 100% COMPLETO                ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+✅ ENTREGA TOTAL
+
+📚 GUIÓN + IMÁGENES LISTOS PARA CLAUDE DESIGN
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ TODO LO QUE TIENES:                                                         │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+1. GUIÓN MAESTRO (copiar-pegar directo):
+   ↳ GUION-COMPLETO-PARA-CLAUDE-DESIGN.md
+   
+   - 17 slides completos con textos exactos
+   - Tamaños de fuente especificados
+   - Referencias exactas a cada imagen
+   - Instrucciones de posicionamiento
+   - LISTO para copiar-pegar en Claude Design
+
+2. 17 IMÁGENES DESCARGADAS Y VERIFICADAS:
+   ↳ 05-IMAGENES-DESCARGADAS/
+   
+   ✓ slide-01-logo-oit.svg
+   ✓ slide-01-wiphala.png
+   ✓ slide-02-oit-logo.svg
+   ✓ slide-03-tripartismo.png
+   ✓ slide-04-documento.png
+   ✓ slide-05-comunidad-indigena.jpg (33K)
+   ✓ slide-06-bandera-bolivia.svg
+   ✓ slide-07-constitucion-icono.png
+   ✓ slide-08-reunion-consulta.jpg (25K)
+   ✓ slide-09-acuerdo-dialogo.jpg (25K)
+   ✓ slide-10-bosque-territorio.jpg (44K)
+   ✓ slide-11-comunidad-asamblea.jpg (23K)
+   ✓ slide-12-comparacion-icono.png
+   ✓ slide-13-mapa-tipnis.svg
+   ✓ slide-14-mapa-bolivia.svg
+   ✓ slide-15-recursos-naturales.jpg (29K)
+   ✓ slide-16-paz-comunidad.jpg (23K)
+
+3. DOCUMENTACIÓN COMPLETA:
+   ↳ 04-INSTRUCCIONES/
+   
+   - WORKFLOW-PASO-A-PASO.md (cómo crear en Claude Design)
+   - CHECKLIST.md (verificar que todo esté correcto)
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ CÓMO USAR:                                                                  │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+PASO 1: Abre Claude Design
+   → https://claude.ai/design
+
+PASO 2: Crea nuevo proyecto
+   → Nombre: "Convenio 169 OIT - Bolivia"
+
+PASO 3: Para CADA slide (1-17):
+   
+   a) Abre: GUION-COMPLETO-PARA-CLAUDE-DESIGN.md
+   
+   b) Copia el texto de "# SLIDE X"
+   
+   c) Pega en Claude Design
+   
+   d) Haz clic en "Add Image"
+   
+   e) Selecciona: 05-IMAGENES-DESCARGADAS/slide-XX-xxx.ext
+   
+   f) Posiciona y ajusta tamaño
+   
+   g) Continúa con siguiente slide
+
+PASO 4: Verifica con CHECKLIST.md
+
+PASO 5: Exporta en PDF
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ TIEMPO ESTIMADO:                                                            │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+   Crear 17 slides en Claude Design: 30-45 minutos
+   (Copiar texto + cargar imagen x 17 = repetitivo pero rápido)
+   
+   Verificación final: 5-10 minutos
+   
+   Exportación: 2-3 minutos
+
+   TOTAL: ~1 hora
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ UBICACIÓN DE ARCHIVOS:                                                      │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+Dirección: /home/user/01/Convenio-169-OIT-Deck/
+
+├─ GUION-COMPLETO-PARA-CLAUDE-DESIGN.md  ← EMPEZAR AQUÍ
+├─ STATUS-ACTUAL.md
+├─ 00-MAESTRO/
+│  ├─ README-INICIO-AQUI.md
+│  └─ ...
+├─ 01-SLIDES-CONTENIDO/
+│  ├─ SLIDE-01-Portada.md
+│  ├─ SLIDE-02-OIT-Datos.md
+│  └─ SLIDES-03-A-17-CONTENIDO-COMPLETO.md
+├─ 04-INSTRUCCIONES/
+│  ├─ WORKFLOW-PASO-A-PASO.md
+│  └─ CHECKLIST.md
+└─ 05-IMAGENES-DESCARGADAS/
+   ├─ slide-01-logo-oit.svg
+   ├─ slide-02-oit-logo.svg
+   ├─ slide-03-tripartismo.png
+   ├─ slide-04-documento.png
+   ├─ slide-05-comunidad-indigena.jpg
+   ├─ slide-06-bandera-bolivia.svg
+   ├─ slide-07-constitucion-icono.png
+   ├─ slide-08-reunion-consulta.jpg
+   ├─ slide-09-acuerdo-dialogo.jpg
+   ├─ slide-10-bosque-territorio.jpg
+   ├─ slide-11-comunidad-asamblea.jpg
+   ├─ slide-12-comparacion-icono.png
+   ├─ slide-13-mapa-tipnis.svg
+   ├─ slide-14-mapa-bolivia.svg
+   ├─ slide-15-recursos-naturales.jpg
+   ├─ slide-16-paz-comunidad.jpg
+   └─ slide-01-wiphala.png
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ RESUMEN EJECUTIVO:                                                          │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+✅ 17 Slides de contenido
+✅ 17 Imágenes descargadas y verificadas
+✅ Guión completo listo para copiar-pegar
+✅ Instrucciones paso-a-paso
+✅ Checklist de verificación
+✅ 100% COMPLETO - CERO TRABAJO MANUAL ADICIONAL
+
+El único trabajo que queda es montar en Claude Design.
+
+╔════════════════════════════════════════════════════════════════════════════╗
+║  Rama Git: claude/convenio-169-oit-deck-2m1x1n                           ║
+║  Commits: 17 entregas                                                      ║
+║  Estado: LISTO PARA USAR                                                   ║
+╚════════════════════════════════════════════════════════════════════════════╝
