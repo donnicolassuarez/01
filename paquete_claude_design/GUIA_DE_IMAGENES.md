@@ -10,7 +10,7 @@ Todas las imágenes provienen de **Wikimedia Commons** y son de uso libre (domin
 |---|---|---|---|
 | 1. Portada | `oms_logo.svg` | Emblema oficial de la OMS | Dominio público (OMS/Naciones Unidas) |
 | 2. ¿Qué es la OMS? | `oms_sede_ginebra.jpg` | Sede de la OMS en Ginebra, Suiza | Foto: Thorkild Tylleskar (CC BY-SA 3.0) — Wikimedia Commons |
-| 3. ¿Qué hace la OMS? | `oms_cobertura_sarampion_mundial.svg` | Mapa mundial de cobertura de vacunación (ejemplo de función de vigilancia) | Master Uegly / mapa base AMK1211 (CC BY-SA 3.0) — Wikimedia Commons |
+| 3. ¿Qué hace la OMS? | *(retirada — ver protocolo)* | El archivo original (mapa de cobertura de sarampión) tenía la leyenda con texto ilegible; reemplazado por un grid de iconos generado en Claude Design | — |
 | 4. OMS en Bolivia | `oms_lapaz_skyline.jpg` | Vista panorámica de La Paz | Foto: Christopher Walker (CC BY 2.0) — Wikimedia Commons |
 | 5. Caso 1: Tuberculosis | `oms_tuberculosis_bacteria.jpg` | *Mycobacterium tuberculosis* (microscopía electrónica) | CDC / Janice Carr, Dr. Ray Butler — Dominio público |
 | 6. Caso 2: Sarampión | `oms_vacuna_mmr.jpg` | Vacuna MMR/SRP (sarampión-rubéola-paperas) | Foto: Whispyhistory (CC BY-SA 4.0) — Wikimedia Commons |

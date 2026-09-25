@@ -53,7 +53,7 @@
 
 **Nota:** En América funciona a través de PAHO (Oficina en La Paz)
 
-**Imagen a adjuntar:** `imagenes_OMS/OMS_S3_que-hace-la-oms_mapa-cobertura-mundial.svg` (mapa mundial de cobertura de vacunación — ilustra la función de vigilancia)
+**Sin imagen adjunta en esta diapositiva** (el archivo de mapa original tenía texto de leyenda ilegible — ver `PROTOCOLO_ARCHIVOS_CLAUDE_DESIGN.md`). En su lugar, pide a Claude Design que genere un **grid de 4 iconos de línea simple** (documento/balanza, lupa, apretón de manos, libro), uno por cada función — ya especificado en `ESPECIFICACION_DISENO.md`, tabla "Motivo por diapositiva".
 
 ---
 
