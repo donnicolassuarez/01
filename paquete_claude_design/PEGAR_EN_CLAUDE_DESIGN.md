@@ -39,6 +39,8 @@
 
 **Imagen a adjuntar:** `imagenes_OMS/OMS_S2_que-es-la-oms_sede-ginebra.jpg` (sede de la OMS en Ginebra)
 
+**Imagen opcional adicional:** `imagenes_OMS/OMS_EXTRA_paho_logo.png` (logo de PAHO/OPS) — solo si hay espacio sin recargar la diapositiva; refuerza visualmente el nivel regional (gobernanza multinivel)
+
 ---
 
 ## Diapositiva 3 — ¿Qué hace la OMS?
@@ -76,6 +78,8 @@
 **Un logro sostenido:** Región de las Américas libre de poliomielitis desde 1994 (30+ años)
 
 **Imagen a adjuntar:** `imagenes_OMS/OMS_S4_oms-en-bolivia_skyline-lapaz.jpg` (vista panorámica de La Paz)
+
+**Imagen opcional adicional:** `imagenes_OMS/OMS_EXTRA_ministerio-salud-bolivia_logo.png` — junto al texto de colaboración con el Ministerio de Salud, si no compite con la tabla de desafíos
 
 ---
 
@@ -207,6 +211,8 @@
 **Gancho para el público:** ¿Sabían que Bolivia tiene 7 sitios reconocidos en la Lista de Patrimonio Mundial de UNESCO?
 
 **Imagen a adjuntar:** `imagenes_UNESCO/UNESCO_S2_que-es-unesco_logo.svg` (logo institucional)
+
+**Imagen opcional adicional:** `imagenes_UNESCO/UNESCO_EXTRA_sede-paris.jpg` (fachada de la sede en París) — alternativa o complemento al logo, útil junto al párrafo nuevo sobre las convenciones internacionales
 
 ---
 
