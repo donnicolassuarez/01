@@ -9,6 +9,8 @@
 **Subtítulo:**
 Protegiendo la Cultura y Educación en Bolivia
 
+**Imagen sugerida:** `imagenes/unesco_logo.svg` — logo oficial de UNESCO
+
 **Autores:** [Nombre Presentador 2]  
 **Institución:** [Nombre de la Institución]  
 **Fecha:** 2026
@@ -34,6 +36,8 @@ Protegiendo la Cultura y Educación en Bolivia
 **En otras palabras:** La paz comienza en las mentes de las personas
 
 **Pregunta para conectar:** ¿Sabían que Bolivia tiene 7 sitios reconocidos como Patrimonio de la Humanidad por UNESCO?
+
+**Imagen sugerida:** `imagenes/unesco_logo.svg` — logo institucional
 
 ---
 
@@ -62,6 +66,8 @@ Protegiendo la Cultura y Educación en Bolivia
 
 **En Bolivia:** Oficina de Programas UNESCO en La Paz
 
+**Imagen sugerida:** `imagenes/unesco_patrimonio_mundial_logo.svg` — emblema del Patrimonio Mundial
+
 ---
 
 ## DIAPOSITIVA 4: UNESCO EN BOLIVIA
@@ -88,6 +94,8 @@ Protegiendo la Cultura y Educación en Bolivia
 - Fortalecimiento de identidad nacional
 - Educación de calidad accesible
 
+**Imagen sugerida:** `imagenes/mapa_bolivia_departamentos.png` — mapa de Bolivia con los departamentos
+
 ---
 
 ## DIAPOSITIVA 5: TIWANAKU - PATRIMONIO DE LA HUMANIDAD
@@ -110,6 +118,8 @@ Protegiendo la Cultura y Educación en Bolivia
 - **Criterio iii**: Testimonio excepcional del poder del imperio Tiwanaku en el desarrollo de la civilización andina prehispánica
 - **Criterio iv**: Arquitectura ceremonial y pública excepcional de las civilizaciones andinas
 
+**Imágenes sugeridas:** `imagenes/tiwanaku_puerta_del_sol.jpg` y `imagenes/tiwanaku_kalasasaya.jpg` — Puerta del Sol y Templo de Kalasasaya
+
 **Conservación e Impacto:**
 - Restauración de estructuras dañadas por sismos y sistemas de drenaje contra erosión
 - Trabajo conjunto: Ministerio de Culturas de Bolivia y UNESCO
@@ -128,6 +138,8 @@ Protegiendo la Cultura y Educación en Bolivia
 - 📍 Ubicación: Oruro, en el altiplano boliviano
 - 👥 Miles de danzarines y músicos participan
 - 🎭 Procesión de 2 días con danzas tradicionales
+
+**Imagen sugerida:** `imagenes/carnaval_oruro_diablada.jpg` — danzarines de la Diablada
 
 **Danzas Principales:**
 1. **Diablada** 👿
@@ -167,6 +179,8 @@ Protegiendo la Cultura y Educación en Bolivia
 
 **Título:**
 # UNESCO en Bolivia: Conclusión
+
+**Imagen sugerida:** `imagenes/tiwanaku_kalasasaya.jpg` — cierre visual con patrimonio material
 
 **¿Qué protege UNESCO en Bolivia?**
 

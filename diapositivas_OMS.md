@@ -8,6 +8,8 @@
 **Subtítulo:**
 ¿Cómo cuida la salud en Bolivia?
 
+**Imagen sugerida:** `imagenes/oms_logo.svg` — emblema oficial de la OMS
+
 **Autores:** [Nombre Presentador 1]  
 **Institución:** [Nombre de la Institución]  
 **Fecha:** 2026
@@ -24,6 +26,8 @@
 - Organismo especializado de las Naciones Unidas
 - Sede en **Ginebra, Suiza**
 - 194 países miembros (incluyendo Bolivia)
+
+**Imagen sugerida:** `imagenes/oms_sede_ginebra.jpg` — sede de la OMS en Ginebra
 
 **Definición de Salud (OMS):**
 > "Estado de bienestar físico, mental y social completo,  
@@ -58,6 +62,8 @@
 
 **En América:** Funciona a través de **PAHO** (Oficina en La Paz)
 
+**Imagen sugerida:** `imagenes/oms_cobertura_sarampion_mundial.svg` — mapa mundial de cobertura de vacunación (ilustra la función de vigilancia)
+
 ---
 
 ## DIAPOSITIVA 4: OMS EN BOLIVIA
@@ -79,6 +85,8 @@
 
 **Un logro sostenido:**
 - Región de las Américas libre de poliomielitis desde 1994 (30+ años)
+
+**Imagen sugerida:** `imagenes/oms_lapaz_skyline.jpg` — vista panorámica de La Paz
 
 ---
 
@@ -107,6 +115,8 @@
 - Tuberculosis resistente a fármacos (MDR-TB)
 - Abandono del tratamiento supervisado
 
+**Imagen sugerida:** `imagenes/oms_tuberculosis_bacteria.jpg` — *Mycobacterium tuberculosis* vista al microscopio electrónico
+
 ---
 
 ## DIAPOSITIVA 6: CASO 2 - SARAMPIÓN: UN ÉXITO QUE SE REVIRTIÓ
@@ -123,6 +133,8 @@
 **¿Qué pasó?**
 
 El brote se originó en colonias menonitas y se extendió a comunidades indígenas rurales — el mayor brote en más de dos décadas.
+
+**Imagen sugerida:** `imagenes/oms_vacuna_mmr.jpg` — vacuna MMR/SRP (sarampión-rubéola-paperas)
 
 **La causa raíz (dato clave):**
 > En 2023, solo **68%** de los niños menores de 1 año recibió  
@@ -150,6 +162,8 @@ La cobertura llevaba años por debajo del umbral seguro sin que se notara un bro
 
 **Título:**
 # La OMS en Bolivia: Un Trabajo Nunca Terminado
+
+**Imagen sugerida:** `imagenes/mapa_bolivia_departamentos.png` — mapa de los 9 departamentos (ilustra la desigualdad regional de cobertura mencionada en ambos casos)
 
 **Lo que muestran los dos casos:**
 
