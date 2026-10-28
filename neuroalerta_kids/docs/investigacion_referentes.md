@@ -1,131 +1,150 @@
-# Referentes y evaluación previa a definir el modelo — NeuroAlerta Kids
+# Referentes, código analizado y evaluación de decisiones — NeuroAlerta Kids
 
-Fecha de la búsqueda: 28/10/2026. Método: 2 rondas de búsqueda web (16 consultas) más 2 verificaciones en fuente primaria.
-Cada hallazgo lleva un grado de confianza: **A** = fuente primaria o revisión revisada por pares leída por mí;
-**B** = resumen secundario creíble; **C** = blog, prensa o fuente comercial. Donde no pude acceder a la fuente, lo digo.
+Búsqueda del 28/10/2026: 2 rondas web (≈32 consultas), verificación en fuente primaria donde fue posible y análisis estático
+de 3 repositorios abiertos. Cada hallazgo lleva confianza: **A** = fuente primaria o código leído por mí; **B** = resumen
+secundario creíble; **C** = blog, prensa o comercial.
 
-## 1. Plan y criterios
+**Límites de acceso en este entorno:** no pude abrir `arxiv.org`, `mchatscreen.com`, `drexel.edu`, `hhs.iowa.gov` ni
+`calmed.tricare.mil` (fuera de los dominios permitidos). Por eso **no leí el texto del M-CHAT-R/F ni el estudio de ETH en la
+fuente**; lo que digo de ellos viene de resultados de búsqueda y está señalado.
 
-Cuatro frentes: (A) instrumentos y apps específicos de cribado del desarrollo; (B) evidencia general sobre apps para
-padres, regulación y ética; (C) base técnica y plantillas; (D) metodología de desarrollo con agentes (harness, TDD, SDD).
+## 1. Criterios y plan
 
-Criterios para decidir si algo se adopta: 1) evidencia de validez en la población y edad; 2) licencia y costo;
-3) encaje con las reglas no negociables del encargo (orienta, no diagnostica; sin internet; sin datos que salgan);
-4) esfuerzo de adopción frente a construir; 5) riesgo si está mal.
+Frentes: (A) instrumentos y apps de cribado, (B) evidencia general, regulación y ética, (C) base técnica y código,
+(D) metodología con agentes, (E) pilotos y herramientas para médicos, (F) ciclo de vida, datos y estilo gráfico.
+Criterios de adopción: 1) evidencia de validez; 2) licencia y costo; 3) encaje con las reglas del encargo (orienta, no
+diagnostica; sin internet; datos locales); 4) esfuerzo frente a construir; 5) riesgo si falla.
 
-## 2. Frente A — Modelos específicos
+## 2. Instrumentos y apps de cribado
 
-| Referente | Qué es | Hallazgo clave | Conf. | Correspondencia |
+| Referente | Hallazgo clave | Conf. | Correspondencia |
+| --- | --- | --- | --- |
+| CDC Milestone Tracker | Gratuita, 2 meses–5 años, resumen compartible con el médico; monitoreo, no diagnóstico. CDC evalúa su uso con encuestas (2026); sin estudio revisado por pares | B | Alta como modelo de producto y lenguaje |
+| M-CHAT-R/F web | Versión web validada (n=17 900); la precisión del seguimiento depende de entrevista clínica. **Derechos de autor**: gratis para uso clínico, de investigación y formación; incorporarlo a software exige permiso y se usa completo | A/B | Alta para 16–30 meses; ver §6 |
+| EDI (México) | Semáforo verde/amarillo/rojo; aplicada por profesionales; concordancia 86,1 % con supervisor | B | Alta para justificar 3 niveles |
+| ASQ-3 en español | Validado en Chile, México (α .77–.88) y Perú; la licencia limita el uso | B | Metodología (cortes por edad) |
+| GSED (OMS/UNICEF) | Paquete abierto hasta 36 meses: forma corta (cuidador), larga (directa) y psicosocial; app de captura; validación en 7 países (n=8 736 planeado) | B | **Alta**: instrumento abierto para 0–36 meses |
+| DM-SWYC, PEDS móvil | Concordancia adecuada; PEDS móvil la usó un agente comunitario, no los padres | B | Media |
+| SNAP-IV / Vanderbilt | No diagnostican solos; el estándar usa varios informantes | B | Alta para atención e hiperactividad |
+| Guías CENETEC | Solo un resumen de la de TEA; no encontré la de TDAH | B parcial | Crítica: sin leerlas, «basado en guías mexicanas» no es verificable |
+| Canvas Dx (FDA) | 81 %/98 % pero 68 % indeterminados; solo niños de alto riesgo | B/C | Advertencia regulatoria, no modelo |
+
+## 3. Pilotos similares (padres y médicos)
+
+| Piloto | Quién lo usa | Resultado | Lección para nosotros |
+| --- | --- | --- | --- |
+| SenseToKnow (Duke) | Tableta en consulta de atención primaria | n=475, sensibilidad 87,8 %, especificidad 80,8 %; su valor predictivo mejora al sumar el cuestionario M-CHAT; ensayo en casa con padres en curso | Combinar fuentes mejora; fuera de nuestro alcance (video/IA) |
+| Autism & Beyond (Duke) | Padres, iPhone, ResearchKit | 1 756 familias, 5 618 encuestas, 87,6 % de videos usables; estudio de **factibilidad** | Un piloto honesto reporta factibilidad y aceptación |
+| Cribado electrónico en EHR (red de 14 sitios) | Médicos de atención primaria | Tamizaje a los 24 meses 79 %→94 %; derivación tras positivo 10 %→45 %; completar la evaluación sigue abierto | La derivación es el eslabón débil: el «paso recomendado» debe ser claro |
+| ASQ-3 electrónico en FQHC | Médicos y familias | Tamizaje 62,7 %→73,6 %; exige licencia anual y costo por prueba | El costo de licencia es una barrera real |
+| Afinidata (UNICEF, Bolivia) | Padres, chatbot | Bolivia lo adoptó y escaló (informe de dic. 2025); conectividad desigual | Precedente nacional de orientación digital a padres; nuestro diferencial es funcionar sin internet |
+| Revisión de apps parentales (MARS) | Evaluadores | 16 apps de Google Play, puntajes 4,2–4,4/5; otra revisión de 16 apps, media 3,42 | MARS sirve para evaluar nuestra app y las de referencia |
+
+No hay evidencia revisada por pares sobre la precisión de una app operada solo por padres en español (revisión de 2025,
+12 estudios, y protocolo de revisión de 2026). **El piloto debe afirmar factibilidad y aceptación, no precisión.**
+
+## 4. Código analizado (solo lectura, sin ejecutar nada descargado)
+
+No existe un repositorio abierto de app de cribado del desarrollo o M-CHAT que valga la pena reutilizar (búsquedas sin
+resultados; solo plantillas y proyectos personales sin licencia verificable). Se analizaron tres proyectos de infraestructura.
+
+| Repositorio | Licencia | Qué es | Lección aplicable | Evitar |
 | --- | --- | --- | --- | --- |
-| CDC Milestone Tracker | App gratuita para padres, 2 meses a 5 años, listas ilustradas, resumen para compartir con el médico, recordatorios | Es de **monitoreo**, no diagnóstica; guía cuándo actuar y a quién llamar | B | Alta como modelo de producto y de lenguaje. No cubre 6–12 años |
-| M-CHAT-R/F (versión web) | 20 preguntas a padres, 16–30 meses, con entrevista de seguimiento | Versión web validada en un ensayo no aleatorizado (n=17 900), sensibilidad y especificidad altas; la precisión del seguimiento depende de una entrevista clínica. Evidencia de sus propios desarrolladores | A/B | Alta para el tramo 0–36 meses |
-| EDI (México) | Prueba de tamizaje mexicana <5 años con semáforo verde/amarillo/rojo | La aplican profesionales; estudios de confiabilidad (concordancia 86,1 % con supervisor) y validación de grupos de edad. **Ningún estudio con aplicación por padres** | B | Alta como referente nacional y para el semáforo; no es transferible tal cual |
-| ASQ-3 en español | Cuestionario a padres con puntos de corte por edad | Validaciones en Chile, México (α .77–.88) y Perú urbano; el costo de licencia limita su uso | B | Alta como referencia metodológica |
-| DM-SWYC (Chile) | Cuestionario breve a padres, comparado con ASQ-3 | Correlación adecuada; los autores recomiendan complementarlo para no sobre-derivar | B | Media; no verifiqué licencia |
-| PEDS en teléfono | Versión móvil de PEDS | 207 cuidadores, concordancia 100 %/96 % con papel, pero la usó un agente comunitario, no los padres | B | Media |
-| Canvas Dx (Cognoa) | Ayuda diagnóstica con IA, autorizada por la FDA | 81 %/98 % frente a panel clínico, pero 68 % de casos "indeterminados"; solo niños de alto riesgo; sin utilidad clínica demostrada | B/C | Baja como modelo; alta como advertencia regulatoria y de validación |
-| SNAP-IV / Vanderbilt | Escalas de atención e hiperactividad (18 ítems DSM-5 / normas 5–12 años) | No diagnostican por sí solas; el estándar usa varios informantes (casa y escuela) | B | Alta para los tramos 3–6 y 7–12 |
-| Guías CENETEC (México) | Guía de práctica clínica de TEA; la de TDAH no la encontré | Solo conseguí un resumen; **no leí el texto ni sus signos de alarma** | B (parcial) | Crítica: el encargo dice que las preguntas se basan en ellas |
+| `d-score/dscore` (R, GSED) | Apache 2.0 | Calcula el D-score a partir de ítems pasa/falla; ≈3 200 líneas, 28 bloques de prueba | El **algoritmo tiene versión** (`algorithm = "current"` o `"1.8.7"`) además de los datos; tablas de referencia como datos; tratamiento explícito de ítems faltantes | Su modelo estadístico (IRT) no corresponde a un piloto con cortes provisionales |
+| `google/android-fhir` (módulo `datacapture`) | Apache 2.0 | Renderiza cuestionarios FHIR sin conexión; 95 archivos Kotlin | Condiciones de aparición con `enableWhen` (operadores y comportamiento TODAS/ALGUNA); módulo propio de validación | Adoptar FHIR completo: sobredimensionado para 3 protocolos |
+| `getodk/collect` | Apache 2.0 | Recolección Android sin conexión con XLSForm; módulos `forms`, `entities`, `db` | Formularios como **datos versionados**; pruebas de migración de base de datos (8 casos); política de seguridad publicada; cifrado de envíos por el destinatario | Su cifrado usa AES/CFB y MD5: anticuado, no copiarlo |
 
-## 3. Frente B — Evidencia general, regulación y ética
+Paquetes Flutter para FHIR (`fhir_questionnaire_r4`, `fhir_renderer_questionnaire`, B): existen, pero ninguno garantiza el
+estándar completo; no los adoptamos. **ODK/KoBo como alternativa a construir:** cubrirían formularios, fotos y trabajo sin
+conexión, pero no el perfil del niño, el consentimiento obligatorio previo, el semáforo ni el historial, y están pensados
+para sincronizar datos; se descarta, aunque XLSForm sirve de modelo para nuestros JSON.
 
-- **No hay evidencia de precisión para apps operadas por los propios padres.** Una revisión sistemática de 2025 (12 estudios,
-  PRISMA) señala vacíos de validez externa, diversidad cultural y privacidad; un protocolo de revisión de 2026 confirma que
-  no existe una revisión de apps de tamizaje neurológico en 0–24 meses (B). Consecuencia: el piloto puede afirmar
-  **factibilidad, usabilidad y aceptación**, no precisión.
-- **WHO 2019:** exige proteger la privacidad, consentimiento y permitir salir del servicio; los resultados dependen del contexto (B).
-- **Regulación:** el marco FDA/IMDRF clasifica según la importancia de la información y la gravedad de la condición; las
-  funciones para pacientes que orientan el manejo de condiciones graves quedan fuera de la discreción de no regulación (B,
-  documentos de 2019 que pueden estar desactualizados). **No investigué la regulación boliviana (AGEMED).** Mientras la app
-  se distribuya solo como piloto y sin Google Play, la exposición es baja, pero la redacción "orienta, no diagnostica" es
-  decisiva.
-- **Su propio estudio** (monografía sobre médicos de primer nivel de Cobija) aporta lo más específico del contexto: el
-  primer nivel decide si un niño avanza a evaluación; la ruta local existente es la **Sala de Desarrollo Infantil Temprano
-  del Hospital Roberto Galindo Terán** y el **Centro de Educación Especial Cobija B**; y cita los hitos redefinidos al 75 %
-  (Zubler 2022), el M-CHAT-R/F (Robins 2014), Hyman 2020 y Wolraich 2019.
+## 5. Ciclo de vida de una app de salud y dónde estamos
 
-## 4. Frente C — Base técnica
+| Etapa | Estado en el proyecto | Vacío | Referencia |
+| --- | --- | --- | --- |
+| 1. Descubrimiento y revisión de literatura | Hecha (este documento) | Guías CENETEC sin leer | — |
+| 2. Requisitos y especificación | El encargo | Trazabilidad requisito→prueba parcial | Práctica SDD (C) |
+| 3. Riesgo, ética y regulación | Reglas no negociables, consentimiento | Sin análisis formal de riesgos ni consulta a la regulación boliviana | OMS 2019; marco IMDRF/FDA (B) |
+| 4. Contenido clínico | Preguntas provisionales | Panel de expertos; licencias | ASQ/M-CHAT |
+| 5. Diseño (UX, texto, estilo) | Material 3 con color semilla | Guía visual, pruebas con padres | §7 |
+| 6. Arquitectura y construcción | Hecha | Pruebas de migración de esquema | ODK |
+| 7. Pruebas | 43 pruebas | Dispositivo real, accesibilidad, usabilidad | MARS, SUS |
+| 8. Seguridad y privacidad | Cifrado, sin red, sin copias | Revisión externa | ISO/TS 82304-2 (B) |
+| 9. Piloto de campo | Pendiente | Protocolo del piloto y consentimiento institucional | Autism & Beyond (factibilidad) |
+| 10. Distribución y mantenimiento | APK de depuración | Firma de release, versionado | — |
+| 11. Evaluación posterior | Pendiente | Qué se mide y cuándo | MARS, SUS |
 
-- No encontré una plantilla abierta Flutter + drift + cifrado orientada a salud; hay piezas sueltas (ejemplos oficiales de
-  drift). **Construir a medida está justificado**, reutilizando esas piezas (B).
-- La documentación de drift ofrece dos rutas de cifrado que se contradicen entre páginas: SQLite3MultipleCiphers
-  (drift ≥ 2.32 y sqlite3 3.x) y `sqlcipher_flutter_libs`, que ya figura como fin de vida. Elegí la primera y una prueba
-  confirma que el archivo no se puede leer sin clave. La documentación advierte además de las copias de seguridad de
-  Android, por eso `allowBackup=false`.
+ISO/TS 82304-2 cubre el ciclo de vida de apps de salud (B); IEC 62304 y 62366 aparecen solo como estándares relacionados
+(no verificados); NHS DTAC no se pudo verificar.
 
-## 5. Frente D — Metodología con agentes
+## 6. Datos, M-CHAT y decisión sobre los ítems
 
-**Harness (A, verificado).** La publicación de Anthropic del 26/11/2025 describe los fallos de agentes de larga duración:
-intentar todo de una vez, declarar la victoria antes de tiempo, traspasos desordenados y marcar funciones como
-terminadas sin prueba de extremo a extremo. Prácticas: lista de funciones en JSON con estado pasa/falla, archivo de
-progreso, script de arranque, una función por sesión con commit, y prueba de extremo a extremo antes de seguir.
+- **Qué se hizo:** el protocolo 0–36 meses pasó a `0.2.0-provisional` con 22 preguntas, 16 alineadas **por constructo** con
+  el M-CHAT-R/F (respuesta al nombre, señalar para pedir y para compartir, seguir el señalamiento, imitación, juego
+  simbólico, referencia social, etc.) y redacción propia. **No** reproduce su texto, su puntuación ni su entrevista y **no
+  hereda su validez**. Los constructos los fijé de mi conocimiento del instrumento, sin poder contrastarlos con su texto
+  (dominio bloqueado): conviene que el equipo los revise contra la versión oficial en español.
+- **Camino sólido:** pedir permiso a los autores (borrador en `docs/solicitud_permiso_mchat.md`) o basarse en GSED (abierto).
+- **Recolección y exportación (ODK, dscore):** añadir un diccionario de datos del CSV y la versión del motor junto a la
+  del protocolo; versionar el esquema con pruebas de migración. La exportación del equipo podría cifrarse para el
+  destinatario (patrón de ODK, con algoritmos modernos).
 
-**Archivos de instrucciones (B).** Un estudio de ETH Zurich (arXiv 2602.11988) se conoce solo por resúmenes: los archivos
-generados automáticamente reducen el éxito y suben el costo más de 20 %; los escritos por personas ayudan cuando traen
-información que no está ya en el repositorio. **No pude abrir arXiv desde este entorno** (dominio no permitido); la cifra
-no está verificada en la fuente.
+## 7. Estilo gráfico y de voz
 
-**TDD con agentes (C).** Hay consenso entre practicantes y ningún estudio controlado. En esta sesión las pruebas
-detectaron tres errores reales (conflicto del *upsert*, `setState` devolviendo un `Future`, botón «No sé» oculto en
-pantallas pequeñas): es una anécdota, no evidencia.
+| Aspecto | Medición o evidencia | Decisión propuesta |
+| --- | --- | --- |
+| Legibilidad del texto | Escala INFLESZ (>55 recomendado, B); estimación propia con silabeo aproximado: preguntas y niveles entre 70 y 80, «bastante fácil»; el aviso obligatorio 54,2 | Mantener el aviso literal (regla 2); medir todo texto nuevo; validar con padres reales |
+| Contraste | Color semilla 2A7F8E sobre blanco: 4,64 (AA exige 4,5) | Oscurecer a ≈1B5E6B (7,34) para texto y botones |
+| Color de «consultar pronto» | Hoy usa el rojo de error | Cambiar a un tono cálido y calmado con icono; el rojo de alarma aumenta la ansiedad (guías de diseño calmado, C) |
+| Sistema de diseño | NHS (derivado de GOV.UK, guía WCAG 2.2 AA, B) y Material 3 | Seguir Material 3 con tokens propios; tomar de NHS las reglas de foco y de texto |
+| Tamaños táctiles y texto | Botones de 50–56 dp, texto escalable | Probar con texto al 200 % y lector de pantalla |
+| Voz | Tono tranquilo, sin jerga, sin culpa (C) | Guía de redacción con palabras permitidas y prohibidas |
+| Identidad (firma) | Nombre provisional | Decidir nombre, ícono y lema; no usar marcas de organismos de salud |
 
-**SDD (C).** Spec Kit (MIT, independiente del agente), Kiro (IDE propio, orden especificación→diseño→tareas, riesgo de
-dependencia) y OpenSpec (ligero, versionado en el repositorio). Todas las comparaciones son de sitios afines a los
-proveedores; no hay una evaluación independiente de si mejoran el código.
+Son propuestas de diseño apoyadas en mediciones y en fuentes de menor peso, no hallazgos clínicos.
 
-**Instancias y agentes (C).** Separar los agentes de pruebas y de implementación es un patrón con pocos datos; hay
-indicios de que un agente tiende a elogiar su propio trabajo.
+## 8. Metodología con agentes (resumen)
 
-## 6. Evaluación de decisiones
+- **Harness (A):** publicación de Anthropic del 26/11/2025: lista de funciones en JSON, archivo de progreso, una función por
+  sesión, commits y prueba de extremo a extremo. El `CLAUDE.md` del proyecto aplica lo que corresponde.
+- **Archivos de instrucciones (B):** resúmenes del estudio de ETH indican que los generados automáticamente perjudican y los
+  escritos a mano ayudan; por eso el `CLAUDE.md` es manual y corto. No lo verifiqué en la fuente.
+- **TDD y SDD (C):** sin estudios controlados; práctica sin herramienta adicional. En esta sesión las pruebas detectaron
+  cuatro errores reales (upsert, `setState`, botón oculto, aviso fuera de vista).
+- **Multiagente (C):** solo como revisor aparte; no sustituye a expertos clínicos.
 
-| Decisión | Opciones | Elección | Razón | Riesgo residual |
-| --- | --- | --- | --- | --- |
-| Origen de las preguntas | (1) redactarlas a partir de signos [actual]; (2) adaptar instrumentos abiertos; (3) licenciar ASQ-3 | **(2) híbrida, con (1) como respaldo** | Hay evidencia de validez en instrumentos conocidos; (1) no tiene ninguna. (3) tiene costo | Verificar licencias; el M-CHAT-R/F exige seguimiento clínico |
-| Alcance de lo que afirma el piloto | Precisión / factibilidad | **Factibilidad y aceptación** | No hay evidencia de precisión para apps de padres | Jurado esperando "detecta" |
-| Cortes de puntuación | Propios / de cada instrumento | **Los del instrumento donde exista; propios solo marcados provisionales** | Los cortes inventados no son defendibles | Mezclar escalas complica el motor |
-| Semáforo de 3 niveles | Mantener / otro | **Mantener** | Coincide con la EDI de México | Etiquetas por revisar con expertos |
-| SDD | Adoptar herramienta / adoptar práctica | **Práctica, sin herramienta** | `encargo` ya es la especificación; falta trazabilidad | Menos disciplina si el equipo crece |
-| TDD | Estricto / mixto | **Mixto**: pruebas primero en motor y reglas; después en interfaz | El motor es determinista y barato de probar | — |
-| Harness | Mínimo / completo | **Ligero**: CLAUDE.md escrito a mano, `feature_list.json`, prueba antes de cada commit | Respaldo directo de Anthropic; el estudio ETH desaconseja generarlo | Mantenerlo corto |
-| Multiagente | Sí / no | **No** para código; **sí** como revisor aparte | Escala pequeña; el elogio propio sesga | Un revisor no sustituye a expertos clínicos |
+## 9. Decisiones
 
-## 7. Qué investigaciones previas corresponden
+| Decisión | Elección | Razón |
+| --- | --- | --- |
+| Origen de las preguntas | Alineación por constructo hoy; M-CHAT con permiso o GSED después | Sin licencia no se puede incorporar el instrumento |
+| Qué afirma el piloto | Factibilidad y aceptación | No hay evidencia de precisión para apps de padres |
+| Construir o usar ODK/FHIR | Construir | Requisitos de consentimiento, semáforo e historial; datos locales |
+| Cortes | Provisionales, marcados | No hay base para validarlos aún |
+| Estilo | Material 3 con tokens propios, contraste AA, tono calmado | Medido y de bajo costo |
 
-**Usar ya:** hitos CDC 2022 al 75 % (Zubler) y M-CHAT-R/F (ambos ya citados en su monografía) para el tramo 0–36;
-Vanderbilt/SNAP-IV como referencia para atención e hiperactividad; la publicación de harness de Anthropic; el semáforo EDI
-como justificación de los tres niveles; su monografía como contexto local.
-**Usar con cautela:** ASQ-3 (licencia), DM-SWYC, PEDS móvil, SDD (evidencia débil).
-**No aplica como modelo:** Canvas Dx (diagnóstico con IA, otro tipo de producto).
+## 10. Backlog priorizado
 
-## 8. Vacíos que no pude cerrar
-
-1. Texto de las guías CENETEC (TEA y TDAH): sin él, "basadas en guías mexicanas" no es verificable.
-2. Licencias de M-CHAT-R/F, SNAP-IV, Vanderbilt y DM-SWYC.
-3. Regulación boliviana de software de salud.
-4. Estudio de ETH en fuente primaria (arXiv bloqueado).
-5. Ninguna fuente demuestra precisión de una app de padres en español.
-
-## 9. Acciones propuestas, en orden
-
-1. Obtener los documentos CENETEC y revisar licencias (el equipo, no el agente: son decisiones de acceso y legales).
-2. Reemplazar o alinear los ítems del tramo 0–36 con M-CHAT-R/F y los hitos CDC 2022; actualizar `fuente` y `version`.
-3. Añadir al resultado la ruta local (Sala de Desarrollo Infantil Temprano; Centro Cobija B) como "paso recomendado".
-4. Redactar `CLAUDE.md` corto y `feature_list.json` con los 6 criterios de aceptación y su estado.
-5. Panel de expertos sobre cortes y preguntas; incluir a los médicos del estudio de Cobija.
-6. Prueba con teléfonos reales y medición de usabilidad (SUS) como único resultado de eficacia del piloto.
+1. (Equipo) Pedir permiso a los autores del M-CHAT-R/F; obtener y leer las guías CENETEC; confirmar constructos con la versión oficial.
+2. Panel de expertos y prueba de usabilidad (SUS) con padres en teléfonos reales.
+3. Esquema versionado con pruebas de migración; versión del motor en el resultado; diccionario de datos del CSV.
+4. Color calmado para «consultar pronto» y contraste ≥ 7:1; pruebas con texto al 200 %.
+5. Resumen compartible para el médico (modelo CDC) sin datos identificables.
+6. Comprobación de legibilidad INFLESZ como prueba automática.
+7. Exportación cifrada para el destinatario; opcional: QuestionnaireResponse de FHIR.
 
 ## Fuentes
 
-- [CDC Milestone Tracker (CDC)](https://cdc.gov/act-early/families/milestones-matter.html) · [lanzamiento 2017](https://archive.cdc.gov/www_cdc_gov/media/releases/2017/p1024-app-development-milestones.html)
-- [M-CHAT-R/F web, validación](https://pmc.ncbi.nlm.nih.gov/articles/PMC8536796) · [ensayo en atención primaria](https://pmc.ncbi.nlm.nih.gov/articles/PMC5397992)
-- [EDI México, confiabilidad del semáforo](https://www.scielo.org.mx/pdf/bmim/v71n5/v71n5a4.pdf) · [EDI, validación de grupo 15](https://www.scielo.org.mx/pdf/bmim/v72n6/1665-1146-bmim-72-06-00385.pdf)
-- [ASQ-3 en Chile](https://andespediatrica.cl/index.php/rchped/article/download/5849/5520/53197) · [ASQ-3 en Argentina](https://scholarsbank.uoregon.edu/items/f6f4f420-0d3c-4172-beb7-f7c288cbaddd/full) · [comparativo ASQ 2025](https://agesandstages.com/wp-content/uploads/2026/01/ASQ-Parent-Report-Tools-Comparison-Chart-2025.pdf)
-- [Revisión de apps en atención temprana, 2025](https://doaj.org/article/9bd8350001ff4cdd97f8ed8524ba735d) · [PEDS en teléfono](https://repository.up.ac.za/bitstreams/fcce895e-07c2-464c-88f4-4ef27e5c964d/download)
-- [Canvas Dx, FDA De Novo](https://hcplive.com/view/fda-grants-de-novo-clearance-to-ai-based-autism-diagnosis-aid) · [revisión de un asegurador](https://www.southcarolinablues.com/web/public/brands/medicalpolicy/external/external-policies/digital-health-technologies-diagnostic-applications)
-- [Guía mexicana de TEA (resumen)](https://www.actuamed.com.mx/node/885206) · [SNAP-IV, Vanderbilt y alternativas](https://novopsych.com/es-us/alternatives-to-the-conners-for-child-adhd-assessment-snap-iv-swan-and-vanderbilt/)
-- [OMS 2019, intervenciones digitales](https://www.who.int/news-room/detail/17-04-2019-who-releases-first-guideline-on-digital-health-interventions) · [software de apoyo a decisiones clínicas (FDA)](https://www.thefdalawblog.com/2019/10/fda-issues-a-second-draft-guidance-for-clinical-decision-support-software/)
-- [drift: cifrado](https://drift.simonbinder.eu/platforms/encryption) · [drift: ejemplos](https://drift.simonbinder.eu/docs/examples/)
-- [Anthropic: harnesses para agentes de larga duración](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents)
-- [Resumen del estudio de ETH sobre AGENTS.md](https://arxiviq.substack.com/p/evaluating-agentsmd-are-repository) · [crítica](https://codex.danielvaughan.com/2026/04/13/what-eth-zurich-paper-gets-wrong-right-about-agents-md/)
-- [Spec Kit vs Kiro vs OpenSpec](https://ssojet.com/blog/best-spec-driven-development-tools) · [Spec Kit y Kiro](https://codemyspec.com/blog/spec-kit-vs-kiro)
-- [TDD con agentes (CircleCI)](https://circleci.com/blog/test-hooks-ai-development) · [pruebas frente a instrucciones](https://caimito.net/en/blog/2026/04/17/tests-beat-instructions-for-ai-coding-agents.html)
+- CDC: [Milestone Tracker](https://cdc.gov/act-early/families/milestones-matter.html) · [lanzamiento](https://archive.cdc.gov/www_cdc_gov/media/releases/2017/p1024-app-development-milestones.html) · [aviso de evaluación 2026](https://public-inspection.federalregister.gov/2023-02951.pdf)
+- M-CHAT-R/F: [validación web](https://pmc.ncbi.nlm.nih.gov/articles/PMC8536796) · [ensayo](https://pmc.ncbi.nlm.nih.gov/articles/PMC5397992) · [traducciones y permisos](https://mchatscreen.com/mchat-rf/translations/) · [versión España](https://mchatscreen.com/wp-content/uploads/2015/05/M-CHAT-R_F_Spanish_Spain.pdf) · [permisos](https://hipaa.jotform.com/211646680007048)
+- EDI: [confiabilidad](https://www.scielo.org.mx/pdf/bmim/v71n5/v71n5a4.pdf) · [grupo 15](https://www.scielo.org.mx/pdf/bmim/v72n6/1665-1146-bmim-72-06-00385.pdf)
+- ASQ-3: [Chile](https://andespediatrica.cl/index.php/rchped/article/download/5849/5520/53197) · [Argentina](https://scholarsbank.uoregon.edu/items/f6f4f420-0d3c-4172-beb7-f7c288cbaddd/full) · [comparativo](https://agesandstages.com/wp-content/uploads/2026/01/ASQ-Parent-Report-Tools-Comparison-Chart-2025.pdf)
+- GSED: [paquete OMS](https://www.covid.comesa.int/publications/i/item/WHO-MSD-GSED-package-v1.0-2023.1) · [forma corta](https://www.paho.org/en/documents/global-scales-early-development-v10-short-form-caregiver-reported) · [protocolo BMJ Open](https://bmjopen.bmj.com/content/13/1/e062562) · [paquete dscore](https://rdrr.io/cran/dscore/man/dscore-package.html)
+- Pilotos: [SenseToKnow (NIMH)](https://www.nimh.nih.gov/news/science-news/2024/digital-autism-screening-tool-could-enhance-early-identification) · [Autism & Beyond](https://neurosciencenews.com/autism-app-data-9219/) · [EHR red de 14 sitios](https://pediatricsnationwide.org/2025/07/23/streamlining-autism-diagnosis-how-electronic-health-record-tools-increased-early-identification-and-referrals-in-a-primary-care-network/) · [ASQ en FQHC](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC11420335/) · [Afinidata (UNICEF)](https://www.unicef.org/innovation/stories/artificial-intelligence-early-childhood-innovation)
+- Apps y evaluación: [revisión 2025](https://doaj.org/article/9bd8350001ff4cdd97f8ed8524ba735d) · [PEDS móvil](https://repository.up.ac.za/bitstreams/fcce895e-07c2-464c-88f4-4ef27e5c964d/download) · [MARS, apps parentales](https://mhealth.amegroups.org/article/view/29870) · [MARS, 2023](https://doaj.org/article/9ab0c51de12643678189f7bb24b44656)
+- Regulación y ética: [OMS 2019](https://www.who.int/news-room/detail/17-04-2019-who-releases-first-guideline-on-digital-health-interventions) · [software de apoyo a decisiones (FDA)](https://www.thefdalawblog.com/2019/10/fda-issues-a-second-draft-guidance-for-clinical-decision-support-software/) · [Canvas Dx](https://hcplive.com/view/fda-grants-de-novo-clearance-to-ai-based-autism-diagnosis-aid) · [ISO/TS 82304-2](https://www.evs.ee/en/iso-ts-82304-2-2021) · [WHO SMART](https://smart.who.int/index.html)
+- Escalas TDAH y guías: [SNAP-IV y Vanderbilt](https://novopsych.com/es-us/alternatives-to-the-conners-for-child-adhd-assessment-snap-iv-swan-and-vanderbilt/) · [guía mexicana de TEA (resumen)](https://www.actuamed.com.mx/node/885206)
+- Técnica: [drift, cifrado](https://drift.simonbinder.eu/platforms/encryption) · [SDC de Android FHIR](https://developers.google.com/open-health-stack/android-fhir/data-capture) · [paquetes Flutter FHIR](https://pub.dev/packages/fhir_questionnaire_r4) · [ODK/CommCare en Malawi](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4216812/) · [XLSForm](https://www.casrai.org/guides/kobotoolbox-mobile-field-data-collection) · repositorios [dscore](https://github.com/d-score/dscore), [android-fhir](https://github.com/google/android-fhir), [ODK Collect](https://github.com/getodk/collect)
+- Diseño y texto: [sistema de diseño NHS](https://service-manual.nhs.uk/design-system) · [escala INFLESZ](https://recyt.fecyt.es/index.php/ASSN/article/view/1953) · [diseño calmado](https://www.uxmatters.com/mt/archives/2025/05/designing-calm-ux-principles-for-reducing-users-anxiety.php)
+- Agentes: [Anthropic, harnesses](https://www.anthropic.com/engineering/effective-harnesses-for-long-running-agents) · [resumen del estudio ETH](https://arxiviq.substack.com/p/evaluating-agentsmd-are-repository) · [Spec Kit, Kiro, OpenSpec](https://ssojet.com/blog/best-spec-driven-development-tools) · [TDD con agentes](https://circleci.com/blog/test-hooks-ai-development)

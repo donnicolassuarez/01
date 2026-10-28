@@ -51,6 +51,7 @@ class ItemProtocolo {
     required this.signoReferencia,
     required this.puntos,
     this.edadMinMeses,
+    this.afinMchat,
   });
 
   final String id;
@@ -61,6 +62,9 @@ class ItemProtocolo {
   /// Puntos por opción; "No sé" nunca suma y no figura aquí.
   final Map<Opcion, int> puntos;
   final int? edadMinMeses;
+
+  /// Constructo del M-CHAT-R/F con el que se alineó la pregunta (solo trazabilidad interna).
+  final String? afinMchat;
 
   int get maximo => puntos.values.reduce((a, b) => a > b ? a : b);
 
@@ -177,6 +181,7 @@ class Protocolo {
           signoReferencia: x['signo_referencia'] as String,
           puntos: valores,
           edadMinMeses: (x['edad_min_meses'] as num?)?.toInt(),
+          afinMchat: x['afin_mchat'] as String?,
         );
       }).toList(),
       focosRojos: (m['focos_rojos'] as List).map((f) {

@@ -61,6 +61,58 @@ void main() {
       });
     }
 
+    test(
+      '0 a 36: alineado con constructos del M-CHAT-R/F, sin heredar su validez',
+      () {
+        final alineados = p036.items.where((i) => i.afinMchat != null).toList();
+        expect(alineados.length, greaterThanOrEqualTo(14));
+        final constructos = alineados.map((i) => i.afinMchat).toSet();
+        expect(
+          constructos,
+          containsAll([
+            'Respuesta al nombre',
+            'Señalar para pedir',
+            'Señalar para compartir interés',
+            'Seguir el señalamiento del adulto',
+            'Juego simbólico',
+            'Referencia social',
+            'Imitación',
+            'Contacto visual',
+          ]),
+        );
+        expect(
+          constructos.length,
+          alineados.length,
+          reason: 'un constructo por pregunta',
+        );
+        expect(p36.items.every((i) => i.afinMchat == null), isTrue);
+        expect(p712.items.every((i) => i.afinMchat == null), isTrue);
+        final json = File('assets/protocolos/protocolo_0_36.json')
+            .readAsStringSync();
+        expect(json, contains('NO es el M-CHAT-R/F'));
+        expect(p036.version, '0.2.0-provisional');
+      },
+    );
+
+    test('0 a 36: las preguntas se filtran por edad (6, 12 y 20 meses)', () {
+      expect(
+        p036.itemsPara(6).map((i) => i.id),
+        containsAll(['c09', 's01', 's02']),
+      );
+      expect(p036.itemsPara(6).map((i) => i.id), isNot(contains('c02')));
+      expect(
+        p036.itemsPara(12).map((i) => i.id),
+        containsAll(['c02', 'c06', 'c07', 's07']),
+      );
+      expect(p036.itemsPara(12).map((i) => i.id), isNot(contains('c08')));
+      expect(
+        p036.itemsPara(20).length,
+        p036.items.length,
+        reason: 'a los 20 meses aplican todas',
+      );
+      expect(p036.itemsPara(15).map((i) => i.id), isNot(contains('c08')));
+    });
+
     test('0 a 36 meses no incluye áreas de atención ni hiperactividad', () {
       expect(p036.areas.map((a) => a.id), [
         'comunicacion',

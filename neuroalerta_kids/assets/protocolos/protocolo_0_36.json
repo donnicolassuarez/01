@@ -1,10 +1,10 @@
 {
   "tramo": "0_36",
-  "version": "0.1.0-provisional",
+  "version": "0.2.0-provisional",
   "estado": "provisional",
-  "fuente": "Signos de alerta descritos en guías clínicas mexicanas de detección temprana del neurodesarrollo. Preguntas redactadas en lenguaje cotidiano; referencia exacta por confirmar en la revisión de expertos.",
-  "nota": "Cortes y preguntas provisionales; pendientes de revisión por panel de expertos.",
-  "minimo_respondidas": 5,
+  "fuente": "Signos de alerta de guías clínicas mexicanas de detección temprana del neurodesarrollo (referencia exacta por confirmar). Los constructos de las preguntas marcadas con «afin_mchat» se alinearon con los del M-CHAT-R/F (Robins et al., 2014), con redacción propia.",
+  "nota": "Cortes y preguntas provisionales; pendientes de revisión por panel de expertos. Este protocolo NO es el M-CHAT-R/F: no reproduce su texto, su puntuación ni su entrevista de seguimiento, y su validez no se hereda. Incorporar el instrumento exige permiso de sus autores.",
+  "minimo_respondidas": 6,
   "umbral_no_se": 0.34,
   "areas": [
     {
@@ -31,19 +31,47 @@
         "a_veces": 1,
         "casi_nunca": 0
       },
-      "edad_min_meses": 9
+      "edad_min_meses": 9,
+      "afin_mchat": "Respuesta al nombre"
     },
     {
       "id": "c02",
       "area": "comunicacion",
-      "texto": "No señala con el dedo para pedir algo o para mostrar lo que le interesa.",
-      "signo_referencia": "Señalar protodeclarativo",
+      "texto": "No señala con el dedo para pedir algo que quiere, por ejemplo un juguete que no alcanza.",
+      "signo_referencia": "Señalar para pedir",
       "valores": {
         "casi_siempre": 2,
         "a_veces": 1,
         "casi_nunca": 0
       },
-      "edad_min_meses": 12
+      "edad_min_meses": 12,
+      "afin_mchat": "Señalar para pedir"
+    },
+    {
+      "id": "c06",
+      "area": "comunicacion",
+      "texto": "No señala con el dedo para enseñarle algo que le interesa.",
+      "signo_referencia": "Señalar para compartir interés",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      },
+      "edad_min_meses": 12,
+      "afin_mchat": "Señalar para compartir interés"
+    },
+    {
+      "id": "c07",
+      "area": "comunicacion",
+      "texto": "No mira hacia donde usted señala cuando le dice «mira» y apunta a algo lejos.",
+      "signo_referencia": "Seguir el señalamiento",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      },
+      "edad_min_meses": 12,
+      "afin_mchat": "Seguir el señalamiento del adulto"
     },
     {
       "id": "c03",
@@ -56,6 +84,32 @@
         "casi_nunca": 0
       },
       "edad_min_meses": 12
+    },
+    {
+      "id": "c08",
+      "area": "comunicacion",
+      "texto": "Parece no entender cuando usted le pide algo sencillo sin hacer gestos, como «dame» o «ven».",
+      "signo_referencia": "Comprensión de indicaciones simples",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      },
+      "edad_min_meses": 16,
+      "afin_mchat": "Comprensión de indicaciones simples"
+    },
+    {
+      "id": "c09",
+      "area": "comunicacion",
+      "texto": "Ha dudado de que oiga bien, porque casi no reacciona a los sonidos.",
+      "signo_referencia": "Duda sobre la audición",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      },
+      "edad_min_meses": 6,
+      "afin_mchat": "Duda sobre la audición"
     },
     {
       "id": "c04",
@@ -91,7 +145,8 @@
         "a_veces": 1,
         "casi_nunca": 0
       },
-      "edad_min_meses": 4
+      "edad_min_meses": 4,
+      "afin_mchat": "Sonrisa en respuesta"
     },
     {
       "id": "s02",
@@ -103,7 +158,8 @@
         "a_veces": 1,
         "casi_nunca": 0
       },
-      "edad_min_meses": 6
+      "edad_min_meses": 6,
+      "afin_mchat": "Contacto visual"
     },
     {
       "id": "s03",
@@ -115,19 +171,47 @@
         "a_veces": 1,
         "casi_nunca": 0
       },
-      "edad_min_meses": 9
+      "edad_min_meses": 9,
+      "afin_mchat": "Imitación"
     },
     {
       "id": "s04",
       "area": "interaccion",
-      "texto": "No busca compartir lo que le gusta: no le trae ni le enseña juguetes u objetos.",
-      "signo_referencia": "Atención conjunta",
+      "texto": "No le trae ni le levanta objetos para enseñárselos.",
+      "signo_referencia": "Mostrar objetos",
       "valores": {
         "casi_siempre": 2,
         "a_veces": 1,
         "casi_nunca": 0
       },
-      "edad_min_meses": 12
+      "edad_min_meses": 12,
+      "afin_mchat": "Mostrar objetos al adulto"
+    },
+    {
+      "id": "s06",
+      "area": "interaccion",
+      "texto": "No busca que usted lo mire ni que participe en lo que está haciendo.",
+      "signo_referencia": "Llamar la atención del adulto",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      },
+      "edad_min_meses": 12,
+      "afin_mchat": "Buscar que el adulto mire"
+    },
+    {
+      "id": "s07",
+      "area": "interaccion",
+      "texto": "Cuando pasa algo nuevo o extraño, no la o lo mira a usted para ver cómo reacciona.",
+      "signo_referencia": "Referencia social",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      },
+      "edad_min_meses": 12,
+      "afin_mchat": "Referencia social"
     },
     {
       "id": "s05",
@@ -139,7 +223,21 @@
         "a_veces": 1,
         "casi_nunca": 0
       },
-      "edad_min_meses": 18
+      "edad_min_meses": 18,
+      "afin_mchat": "Interés en otros niños"
+    },
+    {
+      "id": "s08",
+      "area": "interaccion",
+      "texto": "Casi no hace juego de imaginar, como dar de comer a un muñeco o hablar por un teléfono de juguete.",
+      "signo_referencia": "Juego simbólico",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      },
+      "edad_min_meses": 14,
+      "afin_mchat": "Juego simbólico"
     },
     {
       "id": "r01",
@@ -166,6 +264,19 @@
       "edad_min_meses": 12
     },
     {
+      "id": "r05",
+      "area": "conductas",
+      "texto": "Hace movimientos raros con los dedos cerca de los ojos.",
+      "signo_referencia": "Movimientos inusuales de los dedos",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      },
+      "edad_min_meses": 12,
+      "afin_mchat": "Movimientos inusuales de los dedos"
+    },
+    {
       "id": "r03",
       "area": "conductas",
       "texto": "Se molesta mucho cuando cambia su rutina o algo de lugar.",
@@ -180,14 +291,15 @@
     {
       "id": "r04",
       "area": "conductas",
-      "texto": "Reacciona de forma muy fuerte a ciertos ruidos, texturas o sabores.",
-      "signo_referencia": "Sensibilidad sensorial",
+      "texto": "Se molesta mucho con ruidos de todos los días, como la licuadora o la aspiradora.",
+      "signo_referencia": "Sensibilidad a sonidos cotidianos",
       "valores": {
         "casi_siempre": 2,
         "a_veces": 1,
         "casi_nunca": 0
       },
-      "edad_min_meses": 12
+      "edad_min_meses": 12,
+      "afin_mchat": "Sensibilidad a sonidos cotidianos"
     }
   ],
   "focos_rojos": [
