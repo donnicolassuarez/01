@@ -1,0 +1,240 @@
+{
+  "tramo": "0_36",
+  "version": "0.1.0-provisional",
+  "estado": "provisional",
+  "fuente": "Signos de alerta descritos en guías clínicas mexicanas de detección temprana del neurodesarrollo. Preguntas redactadas en lenguaje cotidiano; referencia exacta por confirmar en la revisión de expertos.",
+  "nota": "Cortes y preguntas provisionales; pendientes de revisión por panel de expertos.",
+  "minimo_respondidas": 5,
+  "umbral_no_se": 0.34,
+  "areas": [
+    {
+      "id": "comunicacion",
+      "nombre": "Comunicación"
+    },
+    {
+      "id": "interaccion",
+      "nombre": "Interacción social"
+    },
+    {
+      "id": "conductas",
+      "nombre": "Conductas repetitivas o rigidez"
+    }
+  ],
+  "items": [
+    {
+      "id": "c01",
+      "area": "comunicacion",
+      "texto": "No se voltea cuando lo o la llaman por su nombre.",
+      "signo_referencia": "Respuesta al nombre",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      },
+      "edad_min_meses": 9
+    },
+    {
+      "id": "c02",
+      "area": "comunicacion",
+      "texto": "No señala con el dedo para pedir algo o para mostrar lo que le interesa.",
+      "signo_referencia": "Señalar protodeclarativo",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      },
+      "edad_min_meses": 12
+    },
+    {
+      "id": "c03",
+      "area": "comunicacion",
+      "texto": "Usa pocos gestos, como decir adiós con la mano o mover la cabeza para decir sí o no.",
+      "signo_referencia": "Gestos comunicativos",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      },
+      "edad_min_meses": 12
+    },
+    {
+      "id": "c04",
+      "area": "comunicacion",
+      "texto": "Dice muy pocas palabras para su edad.",
+      "signo_referencia": "Lenguaje expresivo",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      },
+      "edad_min_meses": 16
+    },
+    {
+      "id": "c05",
+      "area": "comunicacion",
+      "texto": "Repite palabras o frases que escucha, sin usarlas para pedir o contar algo.",
+      "signo_referencia": "Ecolalia",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      },
+      "edad_min_meses": 18
+    },
+    {
+      "id": "s01",
+      "area": "interaccion",
+      "texto": "Casi no sonríe ni responde con gestos cuando usted le sonríe o le habla.",
+      "signo_referencia": "Sonrisa social",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      },
+      "edad_min_meses": 4
+    },
+    {
+      "id": "s02",
+      "area": "interaccion",
+      "texto": "Rara vez lo mira a los ojos cuando le hablan o juegan.",
+      "signo_referencia": "Contacto visual",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      },
+      "edad_min_meses": 6
+    },
+    {
+      "id": "s03",
+      "area": "interaccion",
+      "texto": "No imita lo que usted hace, como aplaudir, hacer caras o jugar a esconderse y aparecer.",
+      "signo_referencia": "Imitación",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      },
+      "edad_min_meses": 9
+    },
+    {
+      "id": "s04",
+      "area": "interaccion",
+      "texto": "No busca compartir lo que le gusta: no le trae ni le enseña juguetes u objetos.",
+      "signo_referencia": "Atención conjunta",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      },
+      "edad_min_meses": 12
+    },
+    {
+      "id": "s05",
+      "area": "interaccion",
+      "texto": "Muestra poco interés por otros niños.",
+      "signo_referencia": "Interés social",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      },
+      "edad_min_meses": 18
+    },
+    {
+      "id": "r01",
+      "area": "conductas",
+      "texto": "Se queda mirando cosas que giran, como ruedas o ventiladores, o alinea juguetes una y otra vez.",
+      "signo_referencia": "Intereses sensoriales o repetitivos",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      },
+      "edad_min_meses": 12
+    },
+    {
+      "id": "r02",
+      "area": "conductas",
+      "texto": "Repite movimientos como aletear con las manos, balancearse o caminar en puntas de pie.",
+      "signo_referencia": "Estereotipias motoras",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      },
+      "edad_min_meses": 12
+    },
+    {
+      "id": "r03",
+      "area": "conductas",
+      "texto": "Se molesta mucho cuando cambia su rutina o algo de lugar.",
+      "signo_referencia": "Rigidez ante cambios",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      },
+      "edad_min_meses": 18
+    },
+    {
+      "id": "r04",
+      "area": "conductas",
+      "texto": "Reacciona de forma muy fuerte a ciertos ruidos, texturas o sabores.",
+      "signo_referencia": "Sensibilidad sensorial",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      },
+      "edad_min_meses": 12
+    }
+  ],
+  "focos_rojos": [
+    {
+      "id": "f01",
+      "texto": "Perdió palabras, gestos o habilidades que ya tenía (por ejemplo, ya hablaba o jugaba con otros y dejó de hacerlo).",
+      "signo_referencia": "Regresión del lenguaje o de habilidades sociales",
+      "grave": true
+    },
+    {
+      "id": "f02",
+      "texto": "A los 12 meses o más, todavía no balbucea ni hace gestos como señalar o decir adiós.",
+      "signo_referencia": "Sin balbuceo ni gestos a los 12 meses",
+      "grave": false,
+      "edad_min_meses": 12
+    },
+    {
+      "id": "f03",
+      "texto": "A los 16 meses o más, todavía no dice ninguna palabra.",
+      "signo_referencia": "Sin palabras a los 16 meses",
+      "grave": false,
+      "edad_min_meses": 16
+    },
+    {
+      "id": "f04",
+      "texto": "A los 24 meses o más, todavía no junta dos palabras (por ejemplo, 'mamá agua').",
+      "signo_referencia": "Sin frases de dos palabras a los 24 meses",
+      "grave": false,
+      "edad_min_meses": 24
+    }
+  ],
+  "reglas_nivel": [
+    {
+      "nivel": "consultar_pronto",
+      "proporcion_total_min": 0.5,
+      "proporcion_area_min": 0.75,
+      "area_min_items": 2,
+      "focos_rojos_min": 2,
+      "foco_grave": true
+    },
+    {
+      "nivel": "comentar_control",
+      "proporcion_total_min": 0.25,
+      "proporcion_area_min": 0.5,
+      "area_min_items": 2,
+      "focos_rojos_min": 1,
+      "foco_grave": false
+    }
+  ]
+}
