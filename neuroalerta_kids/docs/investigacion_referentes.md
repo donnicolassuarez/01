@@ -26,7 +26,7 @@ diagnostica; sin internet; datos locales); 4) esfuerzo frente a construir; 5) ri
 | GSED (OMS/UNICEF) | Paquete abierto hasta 36 meses: forma corta (cuidador), larga (directa) y psicosocial; app de captura; validación en 7 países (n=8 736 planeado) | B | **Alta**: instrumento abierto para 0–36 meses |
 | DM-SWYC, PEDS móvil | Concordancia adecuada; PEDS móvil la usó un agente comunitario, no los padres | B | Media |
 | SNAP-IV / Vanderbilt | No diagnostican solos; el estándar usa varios informantes | B | Alta para atención e hiperactividad |
-| Guías CENETEC | Solo un resumen de la de TEA; no encontré la de TDAH | B parcial | Crítica: sin leerlas, «basado en guías mexicanas» no es verificable |
+| Guías mexicanas del proyecto (según la conversación previa del equipo): Guía Clínica de Trastornos Generalizados del Desarrollo (Hospital Psiquiátrico Infantil Juan N. Navarro, 2018), Guía del INPRF para TDAH (2010), Guía de Veracruz sobre TEA (2020) y NOM-031-SSA2-1999 | Conozco sus resúmenes por la conversación del equipo; **yo no las abrí** (dominios `gob.mx`, `inprf.gob.mx` y `ssaver.gob.mx` fuera de la red permitida). La del INPRF usa criterios del DSM-IV y solo cubre bien hasta los 6–7 años de inicio; ninguna fija 12 años | B (de segunda mano) | Crítica: mis preguntas parten de conocimiento general, no de la lectura de estas guías; falta trazar cada pregunta a su signo y página |
 | Canvas Dx (FDA) | 81 %/98 % pero 68 % indeterminados; solo niños de alto riesgo | B/C | Advertencia regulatoria, no modelo |
 
 ## 3. Pilotos similares (padres y médicos)
@@ -63,7 +63,7 @@ para sincronizar datos; se descarta, aunque XLSForm sirve de modelo para nuestro
 
 | Etapa | Estado en el proyecto | Vacío | Referencia |
 | --- | --- | --- | --- |
-| 1. Descubrimiento y revisión de literatura | Hecha (este documento) | Guías CENETEC sin leer | — |
+| 1. Descubrimiento y revisión de literatura | Hecha (este documento) | Guías mexicanas del proyecto sin leer en el original | — |
 | 2. Requisitos y especificación | El encargo | Trazabilidad requisito→prueba parcial | Práctica SDD (C) |
 | 3. Riesgo, ética y regulación | Reglas no negociables, consentimiento | Sin análisis formal de riesgos ni consulta a la regulación boliviana | OMS 2019; marco IMDRF/FDA (B) |
 | 4. Contenido clínico | Preguntas provisionales | Panel de expertos; licencias | ASQ/M-CHAT |
@@ -126,7 +126,7 @@ Son propuestas de diseño apoyadas en mediciones y en fuentes de menor peso, no 
 
 ## 10. Backlog priorizado
 
-1. (Equipo) Pedir permiso a los autores del M-CHAT-R/F; obtener y leer las guías CENETEC; confirmar constructos con la versión oficial.
+1. (Equipo) Pedir permiso a los autores del M-CHAT-R/F; leer en el original las cuatro guías mexicanas del proyecto (ver §2) y trazar cada pregunta a su signo y página; confirmar constructos con la versión oficial.
 2. Panel de expertos y prueba de usabilidad (SUS) con padres en teléfonos reales.
 3. Esquema versionado con pruebas de migración; versión del motor en el resultado; diccionario de datos del CSV.
 4. Color calmado para «consultar pronto» y contraste ≥ 7:1; pruebas con texto al 200 %.
