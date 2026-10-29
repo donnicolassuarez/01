@@ -1,8 +1,11 @@
 import { evaluar } from '../src/domain/motor';
+import { TEXTOS } from '../src/servicios/textos';
 import { PROTOCOLOS } from '../src/domain/protocolos';
 import {
   focosPara,
+  ETIQUETA_OPCION,
   itemsPara,
+  OPCIONES,
   parsearProtocolo,
   type Opcion,
   type Protocolo,
@@ -91,11 +94,25 @@ describe('protocolos', () => {
     const conAreaInexistente = { ...base, items: [{ ...base.items[0], area: 'otra' }, ...base.items.slice(1)] };
     expect(() => parsearProtocolo(conAreaInexistente)).toThrow(/área inexistente/);
     const noSeSuma = { ...base, items: [{ ...base.items[0], valores: { ...base.items[0].valores, no_se: 1 } }, ...base.items.slice(1)] };
-    expect(() => parsearProtocolo(noSeSuma)).toThrow(/No sé/);
+    expect(() => parsearProtocolo(noSeSuma)).toThrow(/no_se/);
     const repetido = { ...base, items: [base.items[0], base.items[0]] };
     expect(() => parsearProtocolo(repetido)).toThrow(/repetidos/);
     expect(() => parsearProtocolo({ ...base, tramo: '9_99' })).toThrow(/tramo/);
     expect(() => parsearProtocolo(null)).toThrow();
+  });
+});
+
+describe('opción de respuesta «Todavía no lo he observado»', () => {
+  it('tiene la etiqueta acordada y el aviso la menciona con el mismo texto', () => {
+    expect(ETIQUETA_OPCION.no_se).toBe('Todavía no lo he observado');
+    expect(TEXTOS.notaNoSe).toContain(`«${ETIQUETA_OPCION.no_se}»`);
+  });
+
+  it('solo cambia el texto visible: el identificador, el puntaje y el conteo siguen igual', () => {
+    expect(OPCIONES).toEqual(['casi_siempre', 'a_veces', 'casi_nunca', 'no_se']);
+    const r = evaluar({ protocolo: p36, edadMeses: 50, respuestas: { c01: 'no_se', c02: 'casi_siempre' } });
+    expect(r.noSe).toBe(1);
+    expect(r.puntosTotal).toBe(2);
   });
 });
 

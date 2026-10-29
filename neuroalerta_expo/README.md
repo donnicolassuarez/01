@@ -22,7 +22,7 @@ Cada archivo trae `version`, `estado`, `areas`, `items`, `focos_rojos` y `reglas
 cambie una pregunta o un corte: cada resultado guarda la versión con la que se calculó. El lector (`parsearProtocolo`)
 rechaza protocolos mal formados y las pruebas fallan si falta algo esencial.
 
-- Cada ítem se redacta como una **señal observada**: «Casi siempre» = 2, «A veces» = 1, «Casi nunca» = 0 (`valores`). «No sé» no suma.
+- Cada ítem se redacta como una **señal observada**: «Casi siempre» = 2, «A veces» = 1, «Casi nunca» = 0 (`valores`). «Todavía no lo he observado» (id interno `no_se`) no suma y se cuenta aparte.
 - `edad_min_meses` (opcional) oculta ítems o focos que no corresponden a niños más pequeños.
 - Los cortes usan proporciones sobre lo respondido (`proporcion_total_min`, `proporcion_area_min`); `minimo_respondidas` evita decidir con muy pocas respuestas.
 - Un foco con `"grave": true` lleva directamente a «consultar pronto» sin esperar el puntaje.

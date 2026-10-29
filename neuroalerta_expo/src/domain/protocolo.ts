@@ -8,7 +8,7 @@ export const ETIQUETA_OPCION: Record<Opcion, string> = {
   casi_siempre: 'Casi siempre',
   a_veces: 'A veces',
   casi_nunca: 'Casi nunca',
-  no_se: 'No sé',
+  no_se: 'Todavía no lo he observado',
 };
 
 export type NivelOrientacion = 'sin_senales' | 'comentar_control' | 'consultar_pronto';
@@ -29,7 +29,7 @@ export interface ItemProtocolo {
   areaId: string;
   texto: string;
   signoReferencia: string;
-  /** Puntos por opción; "No sé" nunca suma y no figura aquí. */
+  /** Puntos por opción; la opción `no_se` («Todavía no lo he observado») nunca suma y no figura aquí. */
   puntos: Partial<Record<Opcion, number>>;
   edadMinMeses?: number;
   /** Constructo del M-CHAT-R/F con el que se alineó la pregunta (solo trazabilidad interna). */
@@ -147,7 +147,7 @@ export function parsearProtocolo(fuente: unknown): Protocolo {
     const puntos: Partial<Record<Opcion, number>> = {};
     for (const [k, v] of Object.entries(valores)) {
       const op = opcionDe(k);
-      if (op === 'no_se') throw new Error('Protocolo inválido: "No sé" no puede sumar puntos');
+      if (op === 'no_se') throw new Error('Protocolo inválido: la opción «no_se» no puede sumar puntos');
       puntos[op] = req(v, 'ítem.valores', esNumero);
     }
     const areaId = req(x.area, 'ítem.area', esTexto);

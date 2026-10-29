@@ -12,7 +12,7 @@ export interface PuntajeArea {
   areaId: string;
   /** Suma de puntos de las preguntas respondidas. */
   puntos: number;
-  /** Puntos máximos posibles de las preguntas respondidas (sin contar "No sé"). */
+  /** Puntos máximos posibles de las preguntas respondidas (sin contar la opción `no_se`). */
   maximo: number;
   respondidas: number;
   noSe: number;

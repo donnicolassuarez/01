@@ -18,6 +18,8 @@ Investigación y decisiones: `docs/investigacion_referentes.md`. Estructura y c�
 - Plataforma: **Expo / React Native** (cambio decidido el 29/10/2026; antes fue Flutter, que ya no existe en el repositorio).
 - No mencionar en la app ni en documentos ningún centro, hospital o servicio local de referencia concreto.
 - Preguntas y cortes son **provisionales** hasta el panel de expertos; no los presente como validados.
+- La respuesta de duda se muestra como «Todavía no lo he observado» (id interno `no_se`, no suma). Las opciones A (dejar «No sé») y B (quitarla) quedaron guardadas en `docs/decisiones_pendientes.md`: no las aplique sin que el equipo lo pida.
+- No se hace validación con personas en esta fase: no construya registro de uso, abandono ni usabilidad.
 - Nada de IA para clasificar ni redactar resultados. El motor (`src/domain/motor.ts`) es puro y determinista.
 
 ## Licencias de instrumentos

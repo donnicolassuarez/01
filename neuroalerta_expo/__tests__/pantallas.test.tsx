@@ -144,6 +144,16 @@ describe('cuestionario', () => {
     expect(screen.getByText('Pregunta 1 de 19')).toBeOnTheScreen();
   });
 
+  it('la opción de duda se muestra como «Todavía no lo he observado» y se guarda como no_se', async () => {
+    const nino = await conNino();
+    await mostrar(e, <Cuestionario ninoId={nino.id} />);
+    await fireEvent.press(await screen.findByTestId('continuar_focos'));
+    expect(screen.getByTestId('opcion_no_se')).toHaveTextContent('Todavía no lo he observado');
+    expect(screen.queryByText('No sé')).toBeNull();
+    await fireEvent.press(screen.getByTestId('opcion_no_se'));
+    expect(Object.values(await e.repo.respuestasDe(1))).toEqual(['no_se']);
+  });
+
   it('guarda el avance, se puede volver atrás y retomar', async () => {
     const nino = await conNino();
     const vista = await mostrar(e, <Cuestionario ninoId={nino.id} />);
