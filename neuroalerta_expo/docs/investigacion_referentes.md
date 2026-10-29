@@ -8,6 +8,24 @@ secundario creíble; **C** = blog, prensa o comercial.
 `calmed.tricare.mil` (fuera de los dominios permitidos). Por eso **no leí el texto del M-CHAT-R/F ni el estudio de ETH en la
 fuente**; lo que digo de ellos viene de resultados de búsqueda y está señalado.
 
+## Actualización del 29/10/2026: cambio de plataforma a Expo / React Native
+
+El equipo decidió pasar de Flutter a **Expo (React Native + TypeScript)**. Las referencias a Flutter, drift o Dart en este
+informe describen la versión anterior, que se retiró del repositorio (queda en su historial). Lo que cambia:
+
+- **El cifrado de la base ya no es verificable en las pruebas automáticas.** En Flutter una prueba abría el archivo cifrado y
+  comprobaba que no se leía sin clave. Con `expo-sqlite` el cifrado (SQLCipher) lo aporta el código nativo, que Jest no carga:
+  se prueba la lógica (formato de clave, falla si no hay cifrado, clave incorrecta) y **el cifrado real debe comprobarse en un
+  teléfono**.
+- **SQLCipher exige una compilación nativa propia**: no corre en Expo Go. La ventaja de «ver la app con un código QR» solo vale
+  para la interfaz, con una bandera de desarrollo explícita y una banda roja; para probar el cifrado hay que usar
+  `expo run:android` o EAS.
+- **Este entorno** tiene bloqueados `docs.expo.dev`, los servidores de Expo y `dl.google.com`: la API se leyó en los tipos de
+  los paquetes instalados y no se pudo compilar el APK. Sí se verificó que Metro empaqueta la app para Android y que los
+  plugins nativos generan lo esperado (`useSQLCipher=true`, copia de seguridad desactivada, permisos removidos).
+- **Backlog aplicado** al rehacer la interfaz: esquema versionado con pruebas de migración (§10.3, parcial: faltan la versión
+  del motor y el diccionario del CSV), color calmado para «consultar pronto» y contraste ≥ 7:1 (§10.4).
+
 ## 1. Criterios y plan
 
 Frentes: (A) instrumentos y apps de cribado, (B) evidencia general, regulación y ética, (C) base técnica y código,

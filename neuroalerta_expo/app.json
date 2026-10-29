@@ -1,0 +1,42 @@
+{
+  "expo": {
+    "name": "NeuroAlerta Kids",
+    "slug": "neuroalerta-kids",
+    "scheme": "neuroalerta",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "android": {
+      "package": "bo.edu.uap.neuroalerta",
+      "allowBackup": false,
+      "adaptiveIcon": {
+        "backgroundColor": "#E6F4FE",
+        "foregroundImage": "./assets/android-icon-foreground.png",
+        "backgroundImage": "./assets/android-icon-background.png",
+        "monochromeImage": "./assets/android-icon-monochrome.png"
+      },
+      "blockedPermissions": [
+        "android.permission.RECORD_AUDIO",
+        "android.permission.SYSTEM_ALERT_WINDOW",
+        "android.permission.VIBRATE",
+        "android.permission.READ_EXTERNAL_STORAGE",
+        "android.permission.WRITE_EXTERNAL_STORAGE"
+      ],
+      "predictiveBackGestureEnabled": false
+    },
+    "plugins": [
+      "expo-router",
+      ["expo-sqlite", { "useSQLCipher": true }],
+      "expo-secure-store",
+      [
+        "expo-image-picker",
+        {
+          "cameraPermission": "La cámara se usa solo para tomar fotos de conductas que usted decida guardar. Las fotos quedan en este teléfono.",
+          "photosPermission": "Se usa solo para que usted elija una foto de conductas. Las fotos quedan en este teléfono.",
+          "microphonePermission": false
+        }
+      ]
+    ]
+  }
+}

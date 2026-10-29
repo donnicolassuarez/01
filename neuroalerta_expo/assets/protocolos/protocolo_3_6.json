@@ -1,0 +1,280 @@
+{
+  "tramo": "3_6",
+  "version": "0.1.0-provisional",
+  "estado": "provisional",
+  "fuente": "Signos de alerta descritos en guías clínicas mexicanas de detección temprana del neurodesarrollo. Preguntas redactadas en lenguaje cotidiano; referencia exacta por confirmar en la revisión de expertos.",
+  "nota": "Cortes y preguntas provisionales; pendientes de revisión por panel de expertos.",
+  "minimo_respondidas": 8,
+  "umbral_no_se": 0.34,
+  "areas": [
+    {
+      "id": "comunicacion",
+      "nombre": "Comunicación"
+    },
+    {
+      "id": "interaccion",
+      "nombre": "Interacción social"
+    },
+    {
+      "id": "conductas",
+      "nombre": "Conductas repetitivas o rigidez"
+    },
+    {
+      "id": "atencion",
+      "nombre": "Atención"
+    },
+    {
+      "id": "hiperactividad",
+      "nombre": "Hiperactividad o impulsividad"
+    }
+  ],
+  "items": [
+    {
+      "id": "c01",
+      "area": "comunicacion",
+      "texto": "Cuesta entender lo que dice, incluso para las personas de la familia.",
+      "signo_referencia": "Inteligibilidad del habla",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "c02",
+      "area": "comunicacion",
+      "texto": "Habla en frases muy cortas o de pocas palabras para su edad.",
+      "signo_referencia": "Lenguaje expresivo",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "c03",
+      "area": "comunicacion",
+      "texto": "Repite frases enteras de videos o de lo que escucha, en lugar de responder.",
+      "signo_referencia": "Ecolalia",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "c04",
+      "area": "comunicacion",
+      "texto": "Le cuesta sostener una conversación de ida y vuelta, aunque sea corta.",
+      "signo_referencia": "Reciprocidad conversacional",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "s01",
+      "area": "interaccion",
+      "texto": "Prefiere jugar solo o sola y no se acerca a otros niños.",
+      "signo_referencia": "Juego con pares",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "s02",
+      "area": "interaccion",
+      "texto": "Casi no juega a imaginar, como cuidar muñecos o hacer de cuenta que cocina.",
+      "signo_referencia": "Juego simbólico",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "s03",
+      "area": "interaccion",
+      "texto": "Le cuesta darse cuenta de cómo se sienten los demás o consolar a alguien.",
+      "signo_referencia": "Empatía y reciprocidad emocional",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "s04",
+      "area": "interaccion",
+      "texto": "Casi no mira a la cara cuando se le habla.",
+      "signo_referencia": "Contacto visual",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "r01",
+      "area": "conductas",
+      "texto": "Se altera mucho si cambia la rutina o el camino de siempre.",
+      "signo_referencia": "Rigidez ante cambios",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "r02",
+      "area": "conductas",
+      "texto": "Juega siempre igual, o alinea y ordena sus juguetes en lugar de jugar con ellos.",
+      "signo_referencia": "Juego repetitivo",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "r03",
+      "area": "conductas",
+      "texto": "Repite movimientos como aletear, balancearse o dar vueltas.",
+      "signo_referencia": "Estereotipias motoras",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "r04",
+      "area": "conductas",
+      "texto": "Le molestan mucho ciertos ruidos, ropas, sabores o texturas.",
+      "signo_referencia": "Sensibilidad sensorial",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "a01",
+      "area": "atencion",
+      "texto": "Se distrae con facilidad cuando hace algo que le gusta poco.",
+      "signo_referencia": "Distractibilidad",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "a02",
+      "area": "atencion",
+      "texto": "Le cuesta terminar un juego o una tarea sencilla.",
+      "signo_referencia": "Persistencia en la tarea",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "a03",
+      "area": "atencion",
+      "texto": "Parece no escuchar cuando se le habla directamente.",
+      "signo_referencia": "Inatención auditiva",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "h01",
+      "area": "hiperactividad",
+      "texto": "No puede quedarse sentado o sentada cuando se espera que lo haga, por ejemplo a la mesa.",
+      "signo_referencia": "Hiperactividad motora",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "h02",
+      "area": "hiperactividad",
+      "texto": "Corre o trepa en lugares donde no debe, más que otros niños de su edad.",
+      "signo_referencia": "Actividad excesiva",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "h03",
+      "area": "hiperactividad",
+      "texto": "Le cuesta esperar su turno.",
+      "signo_referencia": "Impulsividad",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "h04",
+      "area": "hiperactividad",
+      "texto": "Interrumpe o habla encima de otras personas.",
+      "signo_referencia": "Impulsividad verbal",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    }
+  ],
+  "focos_rojos": [
+    {
+      "id": "f01",
+      "texto": "Perdió palabras, gestos o habilidades que ya tenía (por ejemplo, ya hablaba o jugaba con otros y dejó de hacerlo).",
+      "signo_referencia": "Regresión del lenguaje o de habilidades sociales",
+      "grave": true
+    },
+    {
+      "id": "f02",
+      "texto": "Después de los 3 años casi no habla, o casi nadie le entiende.",
+      "signo_referencia": "Retraso marcado del lenguaje",
+      "grave": false
+    },
+    {
+      "id": "f03",
+      "texto": "Se hace daño con frecuencia, por ejemplo se golpea la cabeza o se muerde.",
+      "signo_referencia": "Conductas autolesivas",
+      "grave": false
+    }
+  ],
+  "reglas_nivel": [
+    {
+      "nivel": "consultar_pronto",
+      "proporcion_total_min": 0.5,
+      "proporcion_area_min": 0.75,
+      "area_min_items": 2,
+      "focos_rojos_min": 2,
+      "foco_grave": true
+    },
+    {
+      "nivel": "comentar_control",
+      "proporcion_total_min": 0.25,
+      "proporcion_area_min": 0.5,
+      "area_min_items": 2,
+      "focos_rojos_min": 1,
+      "foco_grave": false
+    }
+  ]
+}

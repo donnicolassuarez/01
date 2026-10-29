@@ -1,0 +1,313 @@
+{
+  "tramo": "7_12",
+  "version": "0.1.0-provisional",
+  "estado": "provisional",
+  "fuente": "Signos de alerta descritos en guías clínicas mexicanas de detección temprana del neurodesarrollo. Preguntas redactadas en lenguaje cotidiano; referencia exacta por confirmar en la revisión de expertos.",
+  "nota": "Cortes y preguntas provisionales; pendientes de revisión por panel de expertos.",
+  "minimo_respondidas": 8,
+  "umbral_no_se": 0.34,
+  "areas": [
+    {
+      "id": "comunicacion",
+      "nombre": "Comunicación"
+    },
+    {
+      "id": "interaccion",
+      "nombre": "Interacción social"
+    },
+    {
+      "id": "conductas",
+      "nombre": "Conductas repetitivas o rigidez"
+    },
+    {
+      "id": "atencion",
+      "nombre": "Atención"
+    },
+    {
+      "id": "hiperactividad",
+      "nombre": "Hiperactividad o impulsividad"
+    }
+  ],
+  "items": [
+    {
+      "id": "c01",
+      "area": "comunicacion",
+      "texto": "Habla con un tono o un ritmo poco común, por ejemplo muy parejo, muy fuerte o muy formal.",
+      "signo_referencia": "Prosodia atípica",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "c02",
+      "area": "comunicacion",
+      "texto": "Entiende las bromas o los dichos al pie de la letra y se confunde.",
+      "signo_referencia": "Lenguaje figurado",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "c03",
+      "area": "comunicacion",
+      "texto": "Le cuesta contar lo que le pasó en el día de forma ordenada.",
+      "signo_referencia": "Discurso narrativo",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "c04",
+      "area": "comunicacion",
+      "texto": "Le cuesta sostener una conversación; habla sobre todo de sus propios temas.",
+      "signo_referencia": "Reciprocidad conversacional",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "s01",
+      "area": "interaccion",
+      "texto": "Tiene pocos amigos o ninguno con quien compartir, aunque quiera tenerlos.",
+      "signo_referencia": "Relaciones con pares",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "s02",
+      "area": "interaccion",
+      "texto": "Le cuesta entender las reglas no escritas de la convivencia, como respetar turnos o el espacio de los demás.",
+      "signo_referencia": "Reglas sociales implícitas",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "s03",
+      "area": "interaccion",
+      "texto": "Le cuesta darse cuenta de cómo se sienten los demás.",
+      "signo_referencia": "Empatía y reciprocidad emocional",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "s04",
+      "area": "interaccion",
+      "texto": "Otros niños lo rechazan o se burlan de él o ella con frecuencia.",
+      "signo_referencia": "Dificultades con pares",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "r01",
+      "area": "conductas",
+      "texto": "Se altera mucho cuando algo cambia en su rutina.",
+      "signo_referencia": "Rigidez ante cambios",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "r02",
+      "area": "conductas",
+      "texto": "Tiene un interés muy intenso en un solo tema y solo quiere hablar de eso.",
+      "signo_referencia": "Intereses restringidos",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "r03",
+      "area": "conductas",
+      "texto": "Se tapa los oídos o evita lugares por ruidos, olores o texturas.",
+      "signo_referencia": "Sensibilidad sensorial",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "r04",
+      "area": "conductas",
+      "texto": "Repite movimientos o rituales que son difíciles de interrumpir.",
+      "signo_referencia": "Estereotipias y rituales",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "a01",
+      "area": "atencion",
+      "texto": "Comete errores por descuido en las tareas de la escuela.",
+      "signo_referencia": "Descuido en tareas",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "a02",
+      "area": "atencion",
+      "texto": "Le cuesta mantener la atención en tareas o lecturas largas.",
+      "signo_referencia": "Atención sostenida",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "a03",
+      "area": "atencion",
+      "texto": "Pierde o se olvida con frecuencia de útiles, cuadernos o tareas.",
+      "signo_referencia": "Olvidos y pérdida de objetos",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "a04",
+      "area": "atencion",
+      "texto": "Se distrae con facilidad con ruidos o cosas a su alrededor.",
+      "signo_referencia": "Distractibilidad",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "a05",
+      "area": "atencion",
+      "texto": "Le cuesta organizarse y empezar sus tareas sin que se lo recuerden.",
+      "signo_referencia": "Organización",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "h01",
+      "area": "hiperactividad",
+      "texto": "Se mueve en el asiento o no puede quedarse quieto o quieta en clase o a la mesa.",
+      "signo_referencia": "Hiperactividad motora",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "h02",
+      "area": "hiperactividad",
+      "texto": "Habla mucho más que otros niños de su edad.",
+      "signo_referencia": "Locuacidad excesiva",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "h03",
+      "area": "hiperactividad",
+      "texto": "Le cuesta esperar su turno.",
+      "signo_referencia": "Impulsividad",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "h04",
+      "area": "hiperactividad",
+      "texto": "Actúa sin pensar en el peligro, por ejemplo cruza la calle sin mirar.",
+      "signo_referencia": "Impulsividad conductual",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    },
+    {
+      "id": "h05",
+      "area": "hiperactividad",
+      "texto": "Interrumpe a otros o se mete en sus juegos o conversaciones.",
+      "signo_referencia": "Impulsividad social",
+      "valores": {
+        "casi_siempre": 2,
+        "a_veces": 1,
+        "casi_nunca": 0
+      }
+    }
+  ],
+  "focos_rojos": [
+    {
+      "id": "f01",
+      "texto": "Perdió palabras, gestos o habilidades que ya tenía (por ejemplo, ya hablaba o jugaba con otros y dejó de hacerlo).",
+      "signo_referencia": "Regresión de habilidades",
+      "grave": true
+    },
+    {
+      "id": "f02",
+      "texto": "Ha dicho que quiere hacerse daño o que no quiere seguir viviendo.",
+      "signo_referencia": "Riesgo para su seguridad",
+      "grave": true
+    },
+    {
+      "id": "f03",
+      "texto": "Las dificultades se notan igual en la casa y en la escuela, y afectan sus tareas o sus amistades.",
+      "signo_referencia": "Afectación en más de un ámbito",
+      "grave": false
+    }
+  ],
+  "reglas_nivel": [
+    {
+      "nivel": "consultar_pronto",
+      "proporcion_total_min": 0.5,
+      "proporcion_area_min": 0.75,
+      "area_min_items": 2,
+      "focos_rojos_min": 2,
+      "foco_grave": true
+    },
+    {
+      "nivel": "comentar_control",
+      "proporcion_total_min": 0.25,
+      "proporcion_area_min": 0.5,
+      "area_min_items": 2,
+      "focos_rojos_min": 1,
+      "foco_grave": false
+    }
+  ]
+}
