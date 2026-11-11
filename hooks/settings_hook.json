@@ -1,0 +1,15 @@
+{
+  "hooks": {
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python \"C:/Users/Usuario/.claude/hooks/bloqueo_entrega.py\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

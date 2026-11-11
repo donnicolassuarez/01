@@ -159,8 +159,14 @@ def leer_texto_paginado(ruta):
 
 
 def ruta_soffice():
-    """Ruta de LibreOffice o None. No depende del PATH de Windows."""
+    """Ruta de LibreOffice o None. No depende del PATH de Windows.
+
+    SOFFICE=ninguno (o "no", "0") desactiva la búsqueda: sirve para
+    probar el comportamiento sin LibreOffice.
+    """
     candidata = os.environ.get("SOFFICE", "").strip()
+    if candidata.lower() in ("ninguno", "no", "0", "none"):
+        return None
     if candidata and os.path.exists(candidata):
         return candidata
     for nombre in ("soffice", "libreoffice"):
@@ -171,3 +177,162 @@ def ruta_soffice():
         if os.path.exists(candidata):
             return candidata
     return None
+
+
+def escribir_atomico(ruta, contenido):
+    """Escribe texto (str) o bytes en `ruta` vía temporal + reemplazo.
+
+    Si el proceso se corta a mitad, el archivo anterior queda intacto.
+    """
+    import tempfile
+    ruta = os.fspath(ruta)
+    carpeta = os.path.dirname(os.path.abspath(ruta))
+    os.makedirs(carpeta, exist_ok=True)
+    binario = isinstance(contenido, (bytes, bytearray))
+    descriptor, temporal = tempfile.mkstemp(dir=carpeta, prefix=".tmp_", suffix=".parcial")
+    try:
+        if binario:
+            with os.fdopen(descriptor, "wb") as archivo:
+                archivo.write(contenido)
+        else:
+            with os.fdopen(descriptor, "w", encoding="utf-8", newline="\n") as archivo:
+                archivo.write(contenido)
+        os.replace(temporal, ruta)
+    except BaseException:
+        try:
+            os.remove(temporal)
+        except OSError:
+            pass
+        raise
+
+
+# ---------------------------------------------------------------------------
+# Render a PDF y medición (compartido por construir_docx.py y
+# verificar_formato.py). PyMuPDF es la única dependencia externa y se
+# importa solo al medir.
+
+PUNTOS_POR_CM = 72 / 2.54
+
+
+class ErrorRender(Exception):
+    """No se pudo convertir a PDF; el mensaje dice la causa."""
+
+
+def importar_pymupdf():
+    """Devuelve el módulo PyMuPDF (nombre nuevo `pymupdf` o el antiguo `fitz`)."""
+    try:
+        import pymupdf
+    except ImportError:
+        import fitz as pymupdf
+    return pymupdf
+
+
+def renderizar_pdf(ruta_docx, carpeta_salida, limite=240):
+    """Convierte un .docx a PDF con LibreOffice y devuelve la ruta del PDF.
+
+    Trabaja sobre una copia con nombre simple en una carpeta temporal y
+    con un perfil de usuario temporal, para no chocar con otra instancia
+    de LibreOffice abierta. Lanza ErrorRender si no hay LibreOffice, si
+    se agota el tiempo o si no sale el PDF.
+    """
+    import subprocess
+    import tempfile
+    from pathlib import Path
+
+    soffice = ruta_soffice()
+    if not soffice:
+        raise ErrorRender("LibreOffice no encontrado (ni SOFFICE, ni PATH, "
+                          "ni rutas habituales)")
+    origen = Path(ruta_docx)
+    destino = Path(carpeta_salida) / (origen.stem + ".pdf")
+    with tempfile.TemporaryDirectory(prefix="agac_render_") as temporal:
+        temporal = Path(temporal)
+        entrada = temporal / "documento.docx"
+        shutil.copyfile(origen, entrada)
+        perfil = (temporal / "perfil").resolve().as_uri()
+        orden = [soffice, f"-env:UserInstallation={perfil}", "--headless",
+                 "--norestore", "--nolockcheck", "--convert-to", "pdf",
+                 "--outdir", str(temporal / "pdf"), str(entrada)]
+        try:
+            resultado = subprocess.run(orden, capture_output=True,
+                                       timeout=limite)
+        except subprocess.TimeoutExpired:
+            raise ErrorRender(f"LibreOffice no terminó en {limite} s")
+        except OSError as error:
+            raise ErrorRender(f"no se pudo ejecutar LibreOffice: {error}")
+        pdf = temporal / "pdf" / "documento.pdf"
+        if not pdf.exists():
+            detalle = (resultado.stderr or resultado.stdout or b"")
+            detalle = detalle.decode("utf-8", "replace").strip()[:300]
+            raise ErrorRender(f"LibreOffice no produjo el PDF "
+                              f"(código {resultado.returncode}) {detalle}")
+        Path(carpeta_salida).mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(pdf, destino)
+    return destino
+
+
+def medir_pdf(ruta_pdf):
+    """Páginas de un PDF: lista de dicts {ancho_cm, alto_cm, texto}."""
+    pymupdf = importar_pymupdf()
+    paginas = []
+    with pymupdf.open(str(ruta_pdf)) as documento:
+        for pagina in documento:
+            paginas.append({
+                "ancho_cm": round(pagina.rect.width / PUNTOS_POR_CM, 2),
+                "alto_cm": round(pagina.rect.height / PUNTOS_POR_CM, 2),
+                "texto": pagina.get_text("text"),
+            })
+    return paginas
+
+
+def paginas_seccion_pdf(ruta_pdf, encabezados=ENCABEZADOS_REFERENCIAS,
+                        margen_sup_cm=2.54, margen_inf_cm=2.54,
+                        siguiente=None):
+    """Páginas (fracción) que ocupa una sección en el PDF, o None.
+
+    La sección empieza en la última línea cuyo texto normalizado está en
+    `encabezados` y termina en la línea `siguiente` (texto del encabezado
+    que la sigue, si lo hay) o en la última línea de texto del documento.
+    Las líneas del pie de página (bajo el margen inferior) no cuentan.
+    La fracción se calcula sobre el alto útil (página menos márgenes).
+    """
+    pymupdf = importar_pymupdf()
+    objetivos = {normalizar(e) for e in encabezados}
+    with pymupdf.open(str(ruta_pdf)) as documento:
+        lineas = []  # (pagina, y0, y1, texto normalizado)
+        for numero, pagina in enumerate(documento):
+            limite = pagina.rect.height - margen_inf_cm * PUNTOS_POR_CM
+            for bloque in pagina.get_text("dict")["blocks"]:
+                for linea in bloque.get("lines", []):
+                    texto = "".join(s["text"] for s in linea["spans"]).strip()
+                    y0, y1 = linea["bbox"][1], linea["bbox"][3]
+                    if texto and y0 < limite:
+                        lineas.append((numero, y0, y1, normalizar(texto)))
+        if not lineas:
+            return None
+        alto = documento[0].rect.height
+    inicio = None
+    for i, linea in enumerate(lineas):
+        if linea[3] in objetivos:
+            inicio = i
+    if inicio is None:
+        return None
+    fin = None
+    if siguiente:
+        buscado = normalizar(siguiente)
+        for linea in lineas[inicio + 1:]:
+            if linea[3] == buscado:
+                fin = (linea[0], linea[1])
+                break
+    if fin is None:
+        ultima = lineas[-1]
+        fin = (ultima[0], ultima[2])
+    tope = margen_sup_cm * PUNTOS_POR_CM
+    util = alto - (margen_sup_cm + margen_inf_cm) * PUNTOS_POR_CM
+    pagina0, y0 = lineas[inicio][0], lineas[inicio][1]
+    pagina1, y1 = fin
+    if pagina0 == pagina1:
+        return round((y1 - y0) / util, 2)
+    fraccion = (alto - margen_inf_cm * PUNTOS_POR_CM - y0) / util
+    fraccion += (pagina1 - pagina0 - 1) + (y1 - tope) / util
+    return round(fraccion, 2)
