@@ -211,7 +211,7 @@ def buscar_s2(consulta, opciones):
     if clave:
         cabeceras["x-api-key"] = clave
     url = "https://api.semanticscholar.org/graph/v1/paper/search?" + urllib.parse.urlencode(parametros)
-    datos = comun.pedir_json(url, cabeceras, intentos=4, espera=3.0)
+    datos = comun.pedir_json(url, cabeceras, intentos=3, espera=4.0)
     salida = []
     for obra in datos.get("data") or []:
         ids = obra.get("externalIds") or {}

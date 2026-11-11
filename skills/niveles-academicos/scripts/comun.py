@@ -80,13 +80,14 @@ def pedir(url, cabeceras=None, intentos=3, espera=2.0, limite=60):
         except urllib.error.HTTPError as error:
             cuerpo = error.read(300).decode("utf-8", "replace")
             ultimo = f"HTTP {error.code}: {cuerpo.strip()[:200]}"
-            if error.code not in (429, 500, 502, 503, 504):
+            if error.code not in (429, 500, 502, 503, 504) or intento == intentos - 1:
                 break
             pausa = error.headers.get("Retry-After", "")
             time.sleep(min(float(pausa), 30) if pausa.isdigit() else espera * (2 ** intento))
         except Exception as error:  # red caída, tiempo agotado, TLS
             ultimo = f"{type(error).__name__}: {error}"
-            time.sleep(espera * (2 ** intento))
+            if intento < intentos - 1:
+                time.sleep(espera * (2 ** intento))
     raise ErrorRed(ultimo)
 
 
@@ -336,3 +337,22 @@ def paginas_seccion_pdf(ruta_pdf, encabezados=ENCABEZADOS_REFERENCIAS,
     fraccion = (alto - margen_inf_cm * PUNTOS_POR_CM - y0) / util
     fraccion += (pagina1 - pagina0 - 1) + (y1 - tope) / util
     return round(fraccion, 2)
+
+
+def tras_referencias(parrafos):
+    """Párrafos que siguen a la lista de referencias (anexos, apéndices).
+
+    Complementa a separar_referencias: cuerpo + referencias + esto = todo.
+    Lista vacía si no hay encabezado de referencias o nada lo sigue.
+    """
+    inicio = None
+    for i, parrafo in enumerate(parrafos):
+        if es_encabezado_referencias(parrafo):
+            inicio = i
+    if inicio is None:
+        return []
+    for j in range(inicio + 1, len(parrafos)):
+        parrafo = parrafos[j]
+        if parrafo.startswith("#") or normalizar(parrafo).startswith(("anexo", "apendice")):
+            return list(parrafos[j:])
+    return []
