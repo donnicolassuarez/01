@@ -866,7 +866,8 @@ def comprobar_tipo(parrafos, portada_fin, args, medida, informe):
             con_texto = [resumen(p) for p in parrafos[:portada_fin] if p["texto"]]
             if con_texto:
                 informe.agregar("o", "ERROR", "la primera página no está en blanco", con_texto)
-        if medida.get("primera_vacia") is False and portada_fin:
+        if medida.get("primera_vacia") is False and portada_fin and \
+                not any(p["texto"] for p in parrafos[:portada_fin]):
             informe.agregar("o", "ERROR", "en el PDF la primera página tiene texto")
     elif portada == "datos" and not portada_fin:
         informe.agregar("o", "ERROR", "falta la portada con datos")
