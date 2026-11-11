@@ -77,10 +77,16 @@ ningún criterio por debajo de 3.
 | Escritura | Correcta | Precisa | De publicación |
 
 ## Dónde buscar
-- OpenAlex (api.openalex.org) y Crossref (api.crossref.org): libres,
-  sin clave. Semantic Scholar para citas y trabajos relacionados.
+- OpenAlex (api.openalex.org): exige clave gratuita desde 2026
+  (variable `OPENALEX_API_KEY`). Crossref (api.crossref.org): libre;
+  con `AGENTE_ACADEMICO_CORREO` entra en el grupo de cortesía.
+  Semantic Scholar para citas y trabajos relacionados (sin
+  `S2_API_KEY` limita las consultas). `buscar_academico.py` consulta
+  las tres y arXiv.
 - En español: SciELO, Redalyc, Dialnet, La Referencia y repositorios
-  de universidades bolivianas.
+  de universidades bolivianas. `search.scielo.org` tiene control
+  antibots y no se fuerza: SciELO se cubre con Crossref y OpenAlex
+  (`--scielo`); lo que no se pueda descargar lo consigue el usuario.
 - Bolivia: Gaceta Oficial, INE, UDAPE, ministerios, Tribunal
   Constitucional, gobernaciones y municipios.
 
@@ -91,9 +97,34 @@ ningún criterio por debajo de 3.
   analizan los datos que el usuario entregue.
 - El aporte original se propone; lo decide quien firma.
 
-## Verificación mecánica de referencias
-`python scripts/verificar_referencias.py <archivo .txt, .md o .docx>`
-consulta Crossref y OpenAlex y marca cada referencia como
-ENCONTRADA, DUDOSA o NO ENCONTRADA. Libros, leyes y documentos
-oficiales suelen salir NO ENCONTRADA y se comprueban contra el
-archivo guardado en `fuentes/`.
+## Herramientas
+En `scripts/` (instaladas en
+`C:\Users\Usuario\.claude\skills\niveles-academicos\scripts\`).
+Todas aceptan `--json` y salen con 0 (sin problemas), 1 (hay
+hallazgos) o 2 (no se pudo ejecutar). `--help` da el uso completo.
+
+- `buscar_academico.py "consulta" [--desde AAAA] [--idioma es] [--solo-abierto] [--scielo] [--salida archivo.json]`:
+  OpenAlex, Crossref, Semantic Scholar y arXiv, sin duplicados.
+- `zotero_apa.py --doi <DOI> | --buscar "texto" | --coleccion "nombre"`:
+  busca en la biblioteca Zotero local y da la referencia APA 7.
+- `descargar_abierto.py <DOI | archivo de DOI> --carpeta <trabajo>/fuentes`:
+  baja el PDF abierto, actualiza `fuentes/indice.json` y anota los
+  fallos en `fuentes/descartadas.md`.
+- `extraer_texto.py <trabajo>/fuentes`: texto con número de página en
+  `fuentes/texto/`. Con `--buscar "frase"` localiza un pasaje y su página.
+- `cruzar_citas.py <texto .md o .docx>`: citas sin referencia,
+  referencias no citadas, autor o año que no coinciden.
+- `similitud_fuentes.py <texto> <trabajo>/fuentes`: oraciones copiadas
+  o casi idénticas a las fuentes, con archivo y página.
+- `construir_docx.py <borrador/texto.md> --salida <entrega/x.docx> --tipo <tipo>`:
+  constructor único con el formato UAP; cuenta páginas.
+- `verificar_formato.py <x.docx> [--tipo] [--min-paginas] [--max-paginas]`:
+  control de formato del archivo final, independiente del constructor.
+- `verificar_referencias.py <archivo .txt, .md o .docx>`: busca cada
+  referencia en Crossref y OpenAlex (ENCONTRADA, DUDOSA o NO
+  ENCONTRADA). Libros, leyes y documentos oficiales suelen salir NO
+  ENCONTRADA y se comprueban contra el archivo guardado en `fuentes/`.
+- `control_final.py <carpeta del trabajo> [--archivo entrega/x.docx] [--sin-red]`:
+  corre los controles sobre el entregable y escribe
+  `entrega/controles.json` (lo lee el hook de cierre) y
+  `entrega/controles.md` (lo lee el verificador).

@@ -8,6 +8,10 @@ documentos académicos de Don Nico (pregrado a postdoctorado).
   productor, verificador, revisor.
 - `skills/` — niveles-academicos (perfiles, rúbrica, scripts) y
   verificar-docx-generado.
+- `hooks/` — hook de bloqueo de entrega (evento Stop) y el fragmento
+  de `settings.json` que lo activa.
+- `pruebas/` — casos de prueba, generadores de casos y salidas de
+  las pruebas de cada herramienta.
 - `reglas/CLAUDE.md` — reglas globales de trabajo del usuario.
 - `docs/` — diagnóstico, plan de construcción y bibliografía.
 - `PROYECTO.md` — estado y registro de decisiones. Leerlo primero.

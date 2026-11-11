@@ -1,7 +1,7 @@
 ---
 name: revisor
 description: Revisión académica de fondo, como par evaluador, con rúbrica según el nivel. Usar en trabajos de maestría, doctorado y postdoctorado antes de producir el archivo final, o cuando el usuario pida una crítica de fondo de un texto.
-tools: Read, Glob, Grep
+tools: Read, Write, Glob, Grep
 model: opus
 skills: niveles-academicos
 ---

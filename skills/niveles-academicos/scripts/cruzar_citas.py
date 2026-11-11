@@ -7,7 +7,8 @@ Extrae del cuerpo (y de los anexos) las citas parentéticas
 "(Autor, 2020)", "(Autor y Otro, 2020; Otro et al., 2019a)",
 "(véase Autor, 2020, p. 5)", "(Instituto Nacional de Estadística
 [INE], 2022)", y las narrativas "Autor (2020)", "Autor et al. (2020)",
-"de la Cruz (2020)". Analiza cada referencia (primer autor o
+"de la Cruz (2020)", y obras republicadas "(Autor, 1605/2004)" (se
+coteja el año de la edición, el segundo). Analiza cada referencia (primer autor o
 institución y su sigla, número de autores, año) y reporta:
 
   (a) citas sin referencia;
@@ -60,7 +61,10 @@ PARTICULAS_INICIALES = ("de", "del", "la", "las", "los", "van", "von", "der", "d
                         "das", "do", "dos", "di", "du", "le")
 CONECTORES = ("y", "e", "&")
 ANIO = r"(?:1[5-9]\d\d|20\d\d)[a-z]?(?![\d])|s\.\s?f\.(?:-[a-z])?"
-ANIOS = rf"(?:{ANIO})(?:\s*,\s*(?:{ANIO}))*"
+# "1605/2004": año de la obra original y año de la edición consultada (APA 7,
+# obras republicadas); la referencia lleva el segundo.
+ANIO_CITA = rf"(?:(?:1[5-9]\d\d|20\d\d)/(?=\d{{4}}))?(?:{ANIO})"
+ANIOS = rf"(?:{ANIO_CITA})(?:\s*,\s*(?:{ANIO_CITA}))*"
 LOCALIZADOR = r"(?:pp?\.|p[aá]rr\.|cap\.|sec\.|secc\.|min\.|fig\.|tabla)\s*[\w–\-]+"
 CORRIDA = (rf"(?:{PALABRA_MAY}|(?:{'|'.join(PARTICULAS_INICIALES)})(?=\s+(?:{PALABRA_MAY}|"
            rf"(?:{'|'.join(PARTICULAS_INICIALES)})\s)))"
@@ -135,7 +139,11 @@ def analizar_referencia(texto, indice):
     for i, trozo in enumerate(trozos):
         trozo = re.sub(r"^(?:y|&)\s+", "", trozo)
         # Iniciales: "J.", "J. C.", "J.-P.", "Á" (el punto final se quitó al cortar).
-        if i > 0 and apellidos and len(trozo) <= 12 and PATRON_INICIALES.fullmatch(trozo):
+        # "M. de", "L. van der": partícula del apellido pospuesta a las iniciales.
+        sin_particula = re.sub(r"(?:\s+(?:de|del|la|las|los|van|von|der|den|da|das|do|dos|di|du|le))+$",
+                               "", trozo)
+        if i > 0 and apellidos and len(sin_particula) <= 12 and \
+                PATRON_INICIALES.fullmatch(sin_particula):
             iniciales += 1
         else:
             apellidos.append(trozo)
@@ -259,7 +267,8 @@ def armar(m, forma, numero, texto, base, refs, secundaria):
         # Ampliar al paréntesis completo para el contexto.
         inicio = texto.rfind("(", 0, inicio + 1)
         fin = texto.find(")", fin - 1) + 1 or fin
-    anios = [norm_anio(a.strip()) for a in re.findall(ANIO, m.group("anios"))]
+    sin_original = re.sub(r"(?:1[5-9]\d\d|20\d\d)/(?=\d{4})", "", m.group("anios"))
+    anios = [norm_anio(a.strip()) for a in re.findall(ANIO, sin_original)]
     salida = []
     for anio in anios:
         cand = candidatas

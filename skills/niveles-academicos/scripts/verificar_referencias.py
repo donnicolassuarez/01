@@ -9,6 +9,9 @@ ENCONTRADA, DUDOSA (título hallado con año distinto) o NO ENCONTRADA.
 Libros, leyes y documentos oficiales suelen salir NO ENCONTRADA y se
 comprueban contra el archivo guardado en fuentes/.
 
+Variable de entorno opcional: OPENALEX_API_KEY (OpenAlex exige clave
+gratuita desde 2026; sin ella solo responde Crossref).
+
 Solo biblioteca estándar. Códigos de salida: 0 todas ENCONTRADA;
 1 alguna DUDOSA o NO ENCONTRADA; 2 no se pudo ejecutar (archivo
 ilegible, sin referencias, o ninguna consulta llegó a Crossref ni a
@@ -16,6 +19,7 @@ OpenAlex: red caída).
 """
 import argparse
 import json
+import os
 import re
 import sys
 import unicodedata
@@ -35,7 +39,11 @@ def normalizar(texto):
 
 
 def pedir(url):
-    solicitud = urllib.request.Request(url, headers={"User-Agent": AGENTE})
+    cabeceras = {"User-Agent": AGENTE}
+    clave = os.environ.get("OPENALEX_API_KEY", "").strip()
+    if clave and "api.openalex.org" in url:  # OpenAlex exige clave gratuita desde 2026
+        cabeceras["Authorization"] = f"Bearer {clave}"
+    solicitud = urllib.request.Request(url, headers=cabeceras)
     with urllib.request.urlopen(solicitud, timeout=25) as respuesta:
         return json.loads(respuesta.read().decode("utf-8"))
 
@@ -60,7 +68,12 @@ def leer_referencias(ruta):
     for i, linea in enumerate(lineas):
         if normalizar(linea.lstrip("# ")) in ENCABEZADOS:
             inicio = i + 1
-    candidatas = [l.lstrip("-* ").strip() for l in lineas[inicio:]]
+    candidatas = []
+    for linea in lineas[inicio:]:
+        # La lista termina donde empieza otro apartado (anexos, apéndices).
+        if inicio and (linea.startswith("#") or normalizar(linea).startswith(("anexo", "apendice"))):
+            break
+        candidatas.append(linea.lstrip("-* ").strip())
     patron = re.compile(r"\((\d{4}[a-z]?|s\.\s?f\.)[^)]*\)")
     return [l for l in candidatas if len(l) > 30 and patron.search(l)]
 
@@ -109,7 +122,10 @@ def evaluar(ref):
         try:
             candidatos = buscar(ref)
         except Exception as error:  # red caída, DOI inexistente, etc.
-            errores.append(f"{buscar.__name__}: {error}")
+            nota = ""
+            if buscar is en_openalex and "401" in str(error) and not os.environ.get("OPENALEX_API_KEY"):
+                nota = " (falta la variable OPENALEX_API_KEY)"
+            errores.append(f"{buscar.__name__}: {error}{nota}")
             continue
         for titulo, publicado, doi, base in candidatos:
             if not coincide(titulo, ref):

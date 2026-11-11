@@ -354,7 +354,14 @@ def evaluar(carpeta):
         detalle = controles.get("controles")
         if isinstance(detalle, dict):
             for nombre, r in detalle.items():
-                if isinstance(r, dict) and r.get("codigo") not in (0, None):
+                if not isinstance(r, dict):
+                    continue
+                # Con "estado" manda el estado: un aviso con código 1 no bloquea.
+                if "estado" in r:
+                    es_malo = r.get("estado") == "bloquea"
+                else:
+                    es_malo = r.get("codigo") not in (0, None)
+                if es_malo:
                     malos.append("%s (código %s)" % (nombre, r.get("codigo")))
         faltas.append("los controles mecánicos no pasaron (aprobado_mecanico no es true)"
                       + (": " + ", ".join(malos) if malos else ""))

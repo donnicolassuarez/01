@@ -61,45 +61,50 @@ salida legible por máquina y código de salida 0 (sin problemas),
 `en verificación`, `aprobado`, `no aprobado`, `suspendido`.
 
 ## Capa 1 — herramientas propias
-- [ ] 0. `comun.py`: funciones compartidas.
-- [ ] 1. `buscar_academico.py`: consulta OpenAlex, Crossref, Semantic
+- [x] 0. `comun.py`: funciones compartidas.
+- [x] 1. `buscar_academico.py`: consulta OpenAlex, Crossref, Semantic
       Scholar y arXiv; marca SciELO; une duplicados por DOI o título;
       devuelve título, autores, año, DOI, citas, tipo, idioma y enlace
       de acceso abierto, en JSON y en tabla. Filtros de año, idioma y
       solo acceso abierto.
-- [ ] 2. `descargar_abierto.py`: dado un DOI, una lista o el JSON del
+- [x] 2. `descargar_abierto.py`: dado un DOI, una lista o el JSON del
       buscador, localiza la versión de acceso abierto (Unpaywall,
       OpenAlex, Crossref, arXiv y la etiqueta `citation_pdf_url` de la
       página), comprueba que sea un PDF real, lo guarda en `fuentes/`,
       actualiza `indice.json` y anota los fallos en `descartadas.md`.
-- [ ] 3. `extraer_texto.py`: PDF a texto con número de página
+- [x] 3. `extraer_texto.py`: PDF a texto con número de página
       (PyMuPDF), un `.txt` por fuente; avisa si el PDF es escaneado;
       opción `--buscar` para localizar un pasaje con su página.
 - [ ] 4. `zotero_apa.py`: lee la biblioteca Zotero local (copia de
       solo lectura del sqlite), emite referencias en APA 7 y permite
       buscar por título o DOI para no descargar dos veces.
+      Escrito y probado solo con una biblioteca sintética; falta la
+      prueba con la biblioteca real del usuario.
 
 ## Capa 2 — controles que no dependen del modelo
 - [x] `verificar_referencias.py`: existencia en Crossref y OpenAlex.
-- [ ] 5. `cruzar_citas.py`: toda cita del texto está en referencias y
+- [x] 5. `cruzar_citas.py`: toda cita del texto está en referencias y
       toda referencia está citada; autor y año coinciden.
-- [ ] 6. `similitud_fuentes.py`: detecta frases del texto casi
+- [x] 6. `similitud_fuentes.py`: detecta frases del texto casi
       idénticas a las de `fuentes/texto/`, con fuente y página.
-- [ ] 7. `construir_docx.py`: constructor único con el formato del
+- [x] 7. `construir_docx.py`: constructor único con el formato del
       usuario; renderiza a PDF con LibreOffice y cuenta páginas.
-- [ ] 7b. `verificar_formato.py`: sobre el docx final revisa tamaño
+- [x] 7b. `verificar_formato.py`: sobre el docx final revisa tamaño
       carta, tipografía, interlineado, justificado, títulos, saltos
       de página, marcadores prohibidos, menciones a versiones y
       número de páginas.
-- [ ] 7c. `control_final.py`: corre 5, 6, 7b y `verificar_referencias`
+- [x] 7c. `control_final.py`: corre 5, 6, 7b y `verificar_referencias`
       sobre la carpeta del encargo y escribe `entrega/controles.json`.
 - [ ] 8. Hook de bloqueo (`hooks/bloqueo_entrega.py`): sin
       `entrega/informe_verificacion.md` con dictamen APROBADO,
       controles mecánicos en regla y huella vigente no se cierra el
       encargo. Mostrar al usuario el cambio a `settings.json` antes
-      de aplicarlo.
+      de aplicarlo. Escrito y probado en Linux (24 casos); falta
+      fusionar `hooks/settings_hook.json` en `settings.json` y
+      probarlo en una sesión real.
 - [ ] 9. Actualizar los cinco agentes para que usen estas
-      herramientas y reinstalar con `instalar.ps1`.
+      herramientas y reinstalar con `instalar.ps1`. Agentes
+      actualizados; falta reinstalar en el equipo del usuario.
 
 ## Capa 3 — profundidad académica
 - [ ] 10. Skills por tipo de trabajo: ensayo, monografía, perfil de

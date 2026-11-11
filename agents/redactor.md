@@ -30,6 +30,10 @@ ni generas el archivo final.
   análisis propio.
 - Citas APA 7 simples (Autor, año), sin página ni párrafo.
 - Parafrasea; no copies frases de las fuentes.
+- El texto pasará por controles automáticos: `cruzar_citas.py` exige
+  que cada cita tenga su referencia y cada referencia su cita, con el
+  mismo autor y año; `similitud_fuentes.py` compara cada oración con
+  las fuentes descargadas y bloquea las copiadas o casi idénticas.
 - De maestría hacia arriba: el marco teórico se usa para analizar,
   no se expone como resumen de autores; el método se justifica; el
   vacío y el aporte se dicen de forma explícita y acotada.

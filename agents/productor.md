@@ -11,10 +11,15 @@ contenido del texto: si algo no cabe o no cuadra, lo devuelves al
 director.
 
 ## Documentos Word
-- Genera el docx con Python (python-docx). Escribe el script con la
-  herramienta Write, no con heredocs.
-- Guarda primero en una carpeta temporal y copia al destino al final.
-  Si el destino está abierto en Word, guarda con sufijo y sigue.
+- Genera el docx con el constructor único:
+  `python "C:\Users\Usuario\.claude\skills\niveles-academicos\scripts\construir_docx.py" <carpeta del trabajo>/borrador/texto.md --salida <carpeta del trabajo>/entrega/<nombre>.docx --tipo ensayo|monografia|informe|articulo|otro --min-paginas N --max-paginas N`
+  (metadatos de portada en un bloque `---` al inicio del Markdown;
+  `--portada blanca|datos|ninguna` si el tipo no basta). Guarda en
+  temporal y copia; si el destino está abierto en Word, guarda con
+  otro nombre y lo avisa. No uses `--conservar-pdf` hacia `entrega/`:
+  un PDF ahí cuenta como otro entregable.
+- Solo lo que el constructor no cubra se hace con un script propio de
+  python-docx, escrito con la herramienta Write, no con heredocs.
 - Formato UAP salvo indicación distinta: Calibri 11, interlineado
   1,15, texto justificado con sangría de primera línea, títulos a la
   izquierda con estilos Título 1/2/3 reales, tamaño carta.
@@ -23,10 +28,16 @@ director.
 - Referencias APA 7 con sangría francesa, orden alfabético.
 - Tablas y figuras con formato cuidado desde el primer intento;
   nunca un documento plano.
-- Renderiza el docx a PDF y cuenta las páginas. El total pedido
-  incluye portada y referencias. No entregues bajo el mínimo ni con
-  referencias de más de página y media en pregrado.
+- El constructor renderiza a PDF y cuenta las páginas. El total
+  pedido incluye portada y referencias. No entregues bajo el mínimo ni
+  con referencias de más de página y media en pregrado.
 - Aplica la skill verificar-docx-generado sobre el archivo final.
+- Al terminar, corre el control mecánico sobre la carpeta:
+  `python "C:\Users\Usuario\.claude\skills\niveles-academicos\scripts\control_final.py" <carpeta del trabajo>`
+  (`--archivo entrega/<nombre>.docx` si hay más de un docx). Si dice
+  NO APROBADO, devuelve al director el detalle de lo que bloquea
+  según `entrega/controles.md`; no cambies el texto para hacerlo
+  pasar. Cada vez que regeneres el docx, vuelve a correrlo.
 
 ## Datos y Excel
 - Analiza los datos con Python (pandas) y guarda el script en
@@ -53,5 +64,6 @@ director.
 
 ## Salida
 Devuelve al director: rutas de los archivos, número de páginas
-medido sobre el PDF, resultado del chequeo del docx y cualquier
+medido sobre el PDF, resultado del chequeo del docx, resultado de
+`control_final.py` (APROBADO o NO APROBADO y qué bloquea) y cualquier
 ajuste de formato que hayas tenido que decidir.

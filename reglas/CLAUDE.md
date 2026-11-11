@@ -100,6 +100,10 @@ siguen vigentes para su proyecto.
   formato, extensión, estado), `fuentes/`, `borrador/` y `entrega/`.
   Actualizar el estado en `encargo.md` al cerrar cada etapa, para
   poder retomar en otra sesión sin repetir trabajo.
+- La línea `estado:` de `encargo.md` toma uno de estos valores: en
+  curso, en verificación, aprobado, no aprobado, suspendido. Para
+  cerrar como aprobado hacen falta `control_final.py` sin bloqueos y
+  el dictamen APROBADO del verificador sobre el mismo archivo.
 - Nada se entrega sin el visto bueno del verificador. Máximo tres
   vueltas de corrección; si no pasa, informar qué falla y por qué.
 - El director coordina y decide; no redacta ni verifica él mismo.
