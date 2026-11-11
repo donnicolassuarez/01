@@ -200,7 +200,8 @@ def analizar_bloques(lineas):
             elementos = []
             while i < len(lineas):
                 actual = PATRON_LISTA.match(lineas[i])
-                if actual and actual.group(2)[0].isdigit() == ordenada:
+                if actual and (actual.group(2)[0].isdigit() == ordenada
+                               or len(actual.group(1)) >= 2):
                     if len(actual.group(1)) >= 2:
                         avisos.append("lista anidada aplanada a un nivel: "
                                       f"«{actual.group(3)[:50]}»")
@@ -235,6 +236,7 @@ def analizar_bloques(lineas):
             if hallado:
                 bloques[indice - 1]["tipo"] = "titulo_tabla"
                 bloques[indice - 1]["texto"] = hallado.group(2).strip().strip("*_")
+                bloque["numero_fuente"] = hallado.group(1)
         if indice + 1 < len(bloques) and bloques[indice + 1]["tipo"] == "parrafo":
             hallado = PATRON_NOTA.match(bloques[indice + 1]["texto"])
             if hallado:
@@ -683,6 +685,9 @@ def construir(bloques, meta, opciones, carpeta_md, avisos, notas):
         elif tipo == "tabla":
             cuenta["tablas"] += 1
             parrafo = documento.add_paragraph(style="Caption")
+            if bloque.get("numero_fuente") and int(bloque["numero_fuente"]) != cuenta["tablas"]:
+                avisos.append(f"la «Tabla {bloque['numero_fuente']}» del texto se numeró "
+                              f"{cuenta['tablas']}: revisar las menciones en el cuerpo")
             run = parrafo.add_run(f"Tabla {cuenta['tablas']}.")
             run.bold = True
             if titulo_tabla_pendiente:
@@ -903,8 +908,11 @@ def main():
             if comun.normalizar(nombre) not in titulos:
                 avisos.append(f"falta el encabezado «{nombre}» (solo, como título)")
     for bloque in bloques:
-        contenido = bloque.get("texto", "")
-        if re.search(r"\*\*|__|`|^#+\s", contenido):
+        textos = [bloque.get("texto", "")] + bloque.get("elementos", []) + \
+            [c for fila in bloque.get("filas", []) for c in fila]
+        convertido = " | ".join("".join(t for t, _, _ in trozos_inline(x)) for x in textos)
+        contenido = convertido
+        if re.search(r"\*\*|__|`|^#+\s|!\[|\]\(", contenido):
             avisos.append(f"posible Markdown sin convertir: «{contenido[:60]}»")
 
     try:

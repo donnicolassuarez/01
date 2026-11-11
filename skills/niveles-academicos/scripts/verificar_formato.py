@@ -26,8 +26,9 @@ Heurística de marcadores (j), para no confundir palabras comunes:
 - "pendiente" y "completar" solo con forma de marcador: entre corchetes
   o paréntesis, en MAYÚSCULAS, o seguidos de dos puntos ("Pendiente:").
   "La pendiente del terreno" o "falta completar el censo" no cuentan.
-- "TODO" solo en mayúsculas y aislado: no cuenta si la palabra vecina
-  también va en mayúsculas ("TODO EL PAÍS" en un título); "TODO:" sí.
+- "TODO" (y "PENDIENTE"/"COMPLETAR" en mayúsculas) solo aislado: no
+  cuenta si la palabra vecina también va en mayúsculas ("TODO EL PAÍS"
+  o "LA PENDIENTE DEL TERRENO" en un título); "TODO:" sí.
 - "XXX" no cuenta tras "siglo", "capítulo", "congreso", etc. (romano).
 - "[...]" o "[…]" es elisión legítima dentro de una cita; solo es
   ERROR si el párrafo es casi solo eso (relleno) y AVISO si aparece
@@ -552,11 +553,18 @@ def comprobar_parrafos(parrafos, informe):
             informe.agregar("g", "ERROR", f"espaciado desigual en títulos de nivel {nivel} "
                             f"(lo común: antes {fmt_pt(mayoritario[0])}, después "
                             f"{fmt_pt(mayoritario[1])})", lugares)
+    # El primer párrafo tras una tabla, figura o nota puede llevar aire
+    # propio; no cuenta para la uniformidad del cuerpo.
     cuerpo = defaultdict(list)
+    previa = None
     for parrafo in parrafos:
-        if parrafo["clase"] == "cuerpo" and not parrafo["tras_tabla"] and not titulo_falso(parrafo) \
+        if parrafo["clase"] == "vacio" or parrafo["en_tabla"]:
+            continue
+        tras_bloque = parrafo["tras_tabla"] or previa in ("leyenda", "figura", "formula")
+        if parrafo["clase"] == "cuerpo" and not tras_bloque and not titulo_falso(parrafo) \
                 and parrafo["primera"] > 0.1 * TWIP_CM:
             cuerpo[(parrafo["antes"], parrafo["despues"])].append(resumen(parrafo))
+        previa = parrafo["clase"]
     if len(cuerpo) > 1:
         mayoritario = max(cuerpo, key=lambda v: len(cuerpo[v]))
         lugares = [f"{l}: antes {fmt_pt(v[0])}, después {fmt_pt(v[1])}"
@@ -638,7 +646,6 @@ def marcadores(texto, en_cita=False):
         (r"\bpor\s+verificar\b", re.I, "«por verificar»"),
         (r"\bpor\s+completar\b", re.I, "«por completar»"),
         (r"[\[\(]\s*(pendiente|completar)[^\]\)]*[\]\)]", re.I, "marcador entre corchetes/paréntesis"),
-        (r"\b(PENDIENTE|COMPLETAR)\b", 0, "marcador en mayúsculas"),
         (r"\b(pendiente|completar)\s*:", re.I, "marcador seguido de dos puntos"),
         (r"\[\s*(cita|citation|fuente|referencia|ref)\b[^\]]*\]", re.I, "«[cita]»"),
         (r"\blorem\s+ipsum\b", re.I, "«lorem ipsum»"),
@@ -652,12 +659,12 @@ def marcadores(texto, en_cita=False):
                 hallados.append(("ERROR", descripcion))
             else:
                 hallados.append(("ERROR", f"{descripcion}: «{hallado.group(0)}»"))
-    for hallado in re.finditer(r"\bTODO\b(:?)", texto):
+    for hallado in re.finditer(r"\b(?:TODO|PENDIENTE|COMPLETAR)\b(:?)", texto):
         antes = re.findall(r"[A-Za-zÁÉÍÓÚÑÜáéíóúñü]+", texto[:hallado.start()])
         despues = re.findall(r"[A-Za-zÁÉÍÓÚÑÜáéíóúñü]+", texto[hallado.end():])
         vecinas = ([antes[-1]] if antes else []) + ([despues[0]] if despues else [])
         if hallado.group(1) or not any(v.isupper() and len(v) > 1 for v in vecinas):
-            hallados.append(("ERROR", "«TODO» de marcador"))
+            hallados.append(("ERROR", f"«{hallado.group(0).rstrip(':')}» de marcador"))
     for hallado in re.finditer(r"\bX{3,}\b", texto):
         previa = re.findall(r"\w+", texto[:hallado.start()])
         siguiente = re.findall(r"\w+", texto[hallado.end():])
