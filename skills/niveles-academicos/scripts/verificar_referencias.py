@@ -1,10 +1,20 @@
 # -*- coding: utf-8 -*-
 """Verificación mecánica de referencias contra Crossref y OpenAlex.
 
-Uso: python verificar_referencias.py <archivo .txt, .md o .docx>
-Solo biblioteca estándar. Devuelve código 1 si alguna referencia
-queda DUDOSA o NO ENCONTRADA.
+Uso: python verificar_referencias.py <archivo .txt, .md o .docx> [--json]
+
+Toma las líneas posteriores al último encabezado «Referencias» o
+«Bibliografía» que tengan un año entre paréntesis y marca cada una como
+ENCONTRADA, DUDOSA (título hallado con año distinto) o NO ENCONTRADA.
+Libros, leyes y documentos oficiales suelen salir NO ENCONTRADA y se
+comprueban contra el archivo guardado en fuentes/.
+
+Solo biblioteca estándar. Códigos de salida: 0 todas ENCONTRADA;
+1 alguna DUDOSA o NO ENCONTRADA; 2 no se pudo ejecutar (archivo
+ilegible, sin referencias, o ninguna consulta llegó a Crossref ni a
+OpenAlex: red caída).
 """
+import argparse
 import json
 import re
 import sys
@@ -106,26 +116,49 @@ def evaluar(ref):
                 continue
             detalle = f"{base} | {publicado} | {doi or 'sin DOI'} | {titulo}"
             if anio is None or publicado is None or abs(publicado - anio) <= 1:
-                return "ENCONTRADA", detalle
+                return "ENCONTRADA", detalle, len(errores)
             dudosa = dudosa or f"año distinto ({anio} en la referencia) | {detalle}"
     if dudosa:
-        return "DUDOSA", dudosa
-    return "NO ENCONTRADA", "; ".join(errores) or "sin coincidencia de título en Crossref ni OpenAlex"
+        return "DUDOSA", dudosa, len(errores)
+    return ("NO ENCONTRADA", "; ".join(errores) or "sin coincidencia de título en Crossref ni OpenAlex",
+            len(errores))
 
 
 def main():
-    if len(sys.argv) != 2:
-        sys.exit(__doc__)
     sys.stdout.reconfigure(encoding="utf-8")
-    referencias = leer_referencias(sys.argv[1])
+    analizador = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    analizador.add_argument("archivo", help="archivo .txt, .md o .docx con la lista de referencias")
+    analizador.add_argument("--json", action="store_true")
+    args = analizador.parse_args()
+    try:
+        referencias = leer_referencias(args.archivo)
+    except (OSError, KeyError, UnicodeDecodeError, zipfile.BadZipFile) as error:
+        print(f"No se pudo leer el archivo: {type(error).__name__}: {error}", file=sys.stderr)
+        sys.exit(2)
     if not referencias:
-        sys.exit("No se hallaron referencias en el archivo.")
+        print("No se hallaron referencias en el archivo.", file=sys.stderr)
+        sys.exit(2)
     conteo = {"ENCONTRADA": 0, "DUDOSA": 0, "NO ENCONTRADA": 0}
+    resultados, sin_red = [], 0
     for numero, ref in enumerate(referencias, 1):
-        estado, detalle = evaluar(ref)
+        estado, detalle, fallos = evaluar(ref)
         conteo[estado] += 1
-        print(f"[{numero}] {estado}\n    {ref[:160]}\n    -> {detalle}\n")
-    print("RESUMEN:", ", ".join(f"{k}: {v}" for k, v in conteo.items()))
+        sin_red += fallos == 2
+        resultados.append({"numero": numero, "estado": estado, "referencia": ref,
+                           "detalle": detalle})
+        if not args.json:
+            print(f"[{numero}] {estado}\n    {ref[:160]}\n    -> {detalle}\n")
+    red_caida = sin_red == len(referencias)
+    if args.json:
+        print(json.dumps({"archivo": args.archivo, "conteo": conteo, "red_caida": red_caida,
+                          "referencias": resultados}, ensure_ascii=False, indent=2))
+    else:
+        print("RESUMEN:", ", ".join(f"{k}: {v}" for k, v in conteo.items()))
+        if red_caida:
+            print("No se pudo consultar Crossref ni OpenAlex (red caída): nada quedó verificado.",
+                  file=sys.stderr)
+    if red_caida:
+        sys.exit(2)
     sys.exit(0 if conteo["ENCONTRADA"] == len(referencias) else 1)
 
 
