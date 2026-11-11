@@ -42,7 +42,7 @@ try:
     from docx.enum.section import WD_SECTION
     from docx.enum.style import WD_STYLE_TYPE
     from docx.enum.table import WD_TABLE_ALIGNMENT
-    from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_LINE_SPACING
+    from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK, WD_LINE_SPACING
     from docx.oxml import OxmlElement
     from docx.oxml.ns import qn
     from docx.shared import Cm, Pt, RGBColor
@@ -399,6 +399,11 @@ def preparar_estilos(documento):
     fijar_fuente_rpr(rpr_de_estilo(tabla))
     configurar_parrafo(tabla, WD_ALIGN_PARAGRAPH.LEFT, despues=0)
 
+    # Primer párrafo tras una tabla: igual que Normal, con aire antes.
+    tras_tabla = estilo_parrafo(documento, "Texto tras tabla")
+    configurar_parrafo(tras_tabla, WD_ALIGN_PARAGRAPH.JUSTIFY,
+                       primera=SANGRIA_PRIMERA_CM, antes=12)
+
     nota = estilo_parrafo(documento, "Nota de tabla")
     fijar_fuente_rpr(rpr_de_estilo(nota))
     configurar_parrafo(nota, WD_ALIGN_PARAGRAPH.LEFT, antes=3)
@@ -648,14 +653,17 @@ def construir(bloques, meta, opciones, carpeta_md, avisos, notas):
     cuenta = {"titulos": 0, "tablas": 0, "figuras": 0}
     referencias = []
     titulo_tabla_pendiente = None
+    anterior = None
     for bloque in bloques:
         tipo = bloque["tipo"]
+        anterior, previo = tipo, anterior
         if tipo == "titulo":
             parrafo = documento.add_paragraph(style=f"Heading {bloque['nivel']}")
             agregar_texto(parrafo, bloque["texto"])
             cuenta["titulos"] += 1
         elif tipo == "parrafo":
-            parrafo = documento.add_paragraph(style="Normal")
+            estilo = "Texto tras tabla" if previo in ("tabla", "nota_tabla") else "Normal"
+            parrafo = documento.add_paragraph(style=estilo)
             agregar_texto(parrafo, bloque["texto"])
         elif tipo == "cita":
             texto = bloque["texto"].strip()
@@ -675,7 +683,6 @@ def construir(bloques, meta, opciones, carpeta_md, avisos, notas):
         elif tipo == "tabla":
             cuenta["tablas"] += 1
             parrafo = documento.add_paragraph(style="Caption")
-            parrafo.paragraph_format  # estilo ya define espaciado
             run = parrafo.add_run(f"Tabla {cuenta['tablas']}.")
             run.bold = True
             if titulo_tabla_pendiente:
@@ -721,7 +728,7 @@ def construir(bloques, meta, opciones, carpeta_md, avisos, notas):
                 avisos.append(f"la figura {cuenta['figuras']} no tiene pie")
         elif tipo == "salto":
             parrafo = documento.add_paragraph()
-            parrafo.add_run().add_break(__import__("docx.enum.text", fromlist=["WD_BREAK"]).WD_BREAK.PAGE)
+            parrafo.add_run().add_break(WD_BREAK.PAGE)
         elif tipo == "referencia":
             referencias.append(bloque["texto"])
             continue

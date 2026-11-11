@@ -66,6 +66,8 @@ La historia de la lectura muestra que los soportes nunca son neutrales. La escri
 
 La pregunta útil, entonces, no es si se debe leer en papel o en pantalla, sino qué hábitos de lectura se quieren formar y qué condiciones hacen falta para formarlos. Como recuerda Wolf (2007), el cerebro lector se construye con la práctica; lo que se lee y el modo en que se lee terminan dando forma al lector.
 
+Para la escuela y la universidad, esta conclusión tiene una consecuencia práctica. Enseñar a leer no termina cuando el estudiante aprende a descifrar palabras; continúa mientras aprende a sostener la atención, a reconocer la estructura de un argumento y a decidir cuándo conviene leer despacio. Esas destrezas pueden ejercitarse en papel o en pantalla, siempre que alguien las enseñe de manera deliberada.
+
 # Referencias
 
 Wolf, M. (2007). *Proust and the squid: The story and science of the reading brain*. HarperCollins.

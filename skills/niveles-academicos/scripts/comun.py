@@ -321,9 +321,12 @@ def paginas_seccion_pdf(ruta_pdf, encabezados=ENCABEZADOS_REFERENCIAS,
     fin = None
     if siguiente:
         buscado = normalizar(siguiente)
-        for linea in lineas[inicio + 1:]:
-            if linea[3] == buscado:
-                fin = (linea[0], linea[1])
+        for k in range(inicio + 1, len(lineas)):
+            if lineas[k][3] == buscado:
+                # Termina en la última línea anterior al encabezado siguiente
+                # (puede estar en otra página si hubo un salto).
+                previa = lineas[k - 1]
+                fin = (previa[0], previa[2])
                 break
     if fin is None:
         ultima = lineas[-1]
@@ -356,3 +359,31 @@ def tras_referencias(parrafos):
         if parrafo.startswith("#") or normalizar(parrafo).startswith(("anexo", "apendice")):
             return list(parrafos[j:])
     return []
+
+
+def leer_bloques(ruta):
+    """Como leer_parrafos, pero en .md y .txt une las líneas de un mismo
+    párrafo (separados por líneas en blanco). Encabezados "#", elementos
+    de lista y líneas de tabla "|" van siempre como párrafo propio. En
+    .docx es igual a leer_parrafos.
+    """
+    ruta = str(ruta)
+    if ruta.lower().endswith(".docx"):
+        return leer_parrafos(ruta)
+    with open(ruta, encoding="utf-8-sig") as archivo:
+        lineas = archivo.read().splitlines()
+    bloques, actual = [], []
+    for linea in lineas:
+        limpia = linea.strip()
+        propia = limpia.startswith(("#", "|", "- ", "* ", "+ ")) or re.match(r"\d+[.)] ", limpia)
+        if not limpia or propia:
+            if actual:
+                bloques.append(" ".join(actual))
+                actual = []
+            if propia:
+                bloques.append(limpia)
+            continue
+        actual.append(limpia)
+    if actual:
+        bloques.append(" ".join(actual))
+    return bloques
