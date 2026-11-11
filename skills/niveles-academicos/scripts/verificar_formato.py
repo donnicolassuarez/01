@@ -648,7 +648,10 @@ def marcadores(texto, en_cita=False):
     ]
     for patron, banderas, descripcion in reglas:
         for hallado in re.finditer(patron, texto, banderas):
-            hallados.append(("ERROR", f"{descripcion}: «{hallado.group(0)}»"))
+            if comun.normalizar(hallado.group(0)) in comun.normalizar(descripcion):
+                hallados.append(("ERROR", descripcion))
+            else:
+                hallados.append(("ERROR", f"{descripcion}: «{hallado.group(0)}»"))
     for hallado in re.finditer(r"\bTODO\b(:?)", texto):
         antes = re.findall(r"[A-Za-zÁÉÍÓÚÑÜáéíóúñü]+", texto[:hallado.start()])
         despues = re.findall(r"[A-Za-zÁÉÍÓÚÑÜáéíóúñü]+", texto[hallado.end():])
