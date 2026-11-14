@@ -1,0 +1,28 @@
+{
+  "titulo": "Desempeño en exámenes de biología introductoria según género (otoño 2016)",
+  "datos": {
+    "archivo": "datos/PLoSOneData_ExamsDisWomen.csv",
+    "separador": "\t",
+    "fuente": "Cotner, S., Salehi, S. y Ballen, C. J. (2018). Data from: Exams disadvantage women in introductory biology [Conjunto de datos]. Dryad/Zenodo. https://doi.org/10.5061/dryad.53t31"
+  },
+  "recodificar": {
+    "Gender": {"0": "Mujer", "1": "Hombre"},
+    "URM": {"0": "No URM", "1": "URM"}
+  },
+  "orden": {
+    "YearSchool": ["Freshman", "Sophomore", "Junior", "Senior", "Non-degree"],
+    "Gender": ["Mujer", "Hombre"]
+  },
+  "filtros": [],
+  "redondeo": {"porcentaje": 1, "estadistico": 2, "prueba": 2, "p_valor": 3},
+  "tablas": [
+    {"id": "t1", "tipo": "frecuencias", "variable": "YearSchool", "titulo": "Año de estudios", "figura": true},
+    {"id": "t2", "tipo": "frecuencias", "variable": "URM", "titulo": "Pertenencia a minoría subrepresentada (URM)"},
+    {"id": "t3", "tipo": "cruzada", "filas": "Gender", "columnas": "GRADING_BASIS_ENRL",
+     "porcentajes": ["fila", "columna"], "prueba": "chi2", "titulo": "Género según modalidad de calificación", "figura": true},
+    {"id": "t4", "tipo": "resumen", "variables": ["Exams_percent", "COMP_ACT_SCORE", "AGE"],
+     "titulo": "Resumen numérico global"},
+    {"id": "t5", "tipo": "resumen", "variables": ["Exams_percent", "NonExam_percent"], "por": "Gender",
+     "prueba": "t", "titulo": "Rendimiento en exámenes y en otras evaluaciones según género", "figura": true}
+  ]
+}

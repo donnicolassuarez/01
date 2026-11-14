@@ -1,0 +1,20 @@
+{
+  "titulo": "Encuesta sobre noticias falsas en estudiantes universitarios (Ecuador, 2024)",
+  "datos": {
+    "archivo": "datos/Respuestas_Encuesta.csv",
+    "fuente": "Espinoza Mina, M. A. (2024). Respuestas a la encuesta para el estudio de noticias falsas [Conjunto de datos]. Zenodo. https://doi.org/10.5281/zenodo.12702201"
+  },
+  "orden": {
+    "Edad": ["Menos de 18 años", "18 a 21 años", "22 a 25 años", "26 a 30 años", "más de 30 años"],
+    "7. ¿Ha compartido alguna vez una noticia que luego resultó ser falsa?": ["Nunca", "Casi nunca", "A veces", "Casi siempre", "Siempre"]
+  },
+  "filtros": [{"columna": "Género", "op": "en", "valor": ["Femenino", "Masculino"]}],
+  "tablas": [
+    {"id": "n1", "tipo": "frecuencias", "variable": "Facultad", "titulo": "Facultad"},
+    {"id": "n2", "tipo": "cruzada", "filas": "Género",
+     "columnas": "7. ¿Ha compartido alguna vez una noticia que luego resultó ser falsa?",
+     "porcentajes": "fila", "prueba": "chi2", "titulo": "Haber compartido noticias falsas según género"},
+    {"id": "n3", "tipo": "serie", "fecha": "Marca temporal", "periodo": "semana",
+     "titulo": "Respuestas por semana", "figura": true}
+  ]
+}
