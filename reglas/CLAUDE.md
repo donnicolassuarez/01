@@ -107,3 +107,4 @@ siguen vigentes para su proyecto.
 - Nada se entrega sin el visto bueno del verificador. Máximo tres
   vueltas de corrección; si no pasa, informar qué falla y por qué.
 - El director coordina y decide; no redacta ni verifica él mismo.
+- Los encargos se inician y se retoman con `/encargo`.

@@ -6,6 +6,8 @@ documentos académicos de Don Nico (pregrado a postdoctorado).
 ## Cómo está organizado
 - `agents/` — los cinco subagentes: investigador, redactor,
   productor, verificador, revisor.
+- `commands/` — comando `/encargo` (director: inicia, retoma y
+  cierra encargos).
 - `skills/` — niveles-academicos (perfiles, rúbrica, scripts) y
   verificar-docx-generado.
 - `hooks/` — hook de bloqueo de entrega (evento Stop) y el fragmento
@@ -15,7 +17,7 @@ documentos académicos de Don Nico (pregrado a postdoctorado).
 - `reglas/CLAUDE.md` — reglas globales de trabajo del usuario.
 - `docs/` — diagnóstico, plan de construcción y bibliografía.
 - `PROYECTO.md` — estado y registro de decisiones. Leerlo primero.
-- `instalar.ps1` — copia agentes, skills y reglas a
+- `instalar.ps1` — copia agentes, comandos, skills y reglas a
   `C:\Users\Usuario\.claude\`.
 
 ## Reglas para trabajar en este repositorio

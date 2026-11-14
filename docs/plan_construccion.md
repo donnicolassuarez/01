@@ -138,8 +138,10 @@ dejan configurables y con el comportamiento actual por defecto.
        jurídico. Insumo pendiente: libros de metodología del usuario
        y su ubicación.
 - [ ] 12. Plantillas de análisis de datos (requiere instalar pandas).
-- [ ] 13. Comando de inicio de encargo: crea carpeta, `encargo.md` y
-       permite retomar en otra sesión.
+- [x] 13. Comando de inicio de encargo: crea carpeta, `encargo.md` y
+       permite retomar en otra sesión. `encargo.py` probado en Linux
+       (51 casos); el comando `/encargo` falta probarlo en una sesión
+       real de Claude Code.
 
 ## Capa 4 — medición
 - [ ] 14. Banco de pruebas con tres a cinco trabajos ya calificados.

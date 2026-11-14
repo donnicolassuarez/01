@@ -31,7 +31,27 @@ Heurísticas documentadas:
   "datos de Mongabay Latam (2024)" es Mongabay Latam.
 - Si una cita narrativa no coincide, se mira el texto previo de la
   misma oración (hasta 80 caracteres): "datos del IPCC, Sexto Informe
-  de Evaluación (2021)" se toma como cita de IPCC 2021.
+  de Evaluación (2021)" se toma como cita de IPCC 2021. Solo si la
+  institución va inmediatamente antes del título (entre ambos solo
+  signos y conectores: de, del, en, el, la, su...). En "Según el IPCC,
+  el calentamiento sigue, como muestra Pérez (2021)" la cita es de
+  Pérez, el autor inmediatamente anterior al paréntesis.
+- "El IPCC y Pérez (2021)" con solo IPCC 2021 en la lista: va a (c),
+  nombra dos autores y la obra tiene uno.
+- Localizadores tras el año, uno o varios separados por comas: "p. 5",
+  "pp. 3-4", "párr. 2", "cap. 3", "sec. 2.1", "fig. 2", "tabla 1",
+  "t. 2", "vol. 1", "lib. 2" y tomo o parte en romanos ("(Cervantes,
+  1605/2004, I, cap. 1)"). La cita cuenta como (Autor, año) y el
+  localizador va a la observación.
+- Apellidos compuestos: si la cita no coincide con ninguna referencia y
+  comparte el primer apellido con una referencia de persona del mismo
+  año que lleva uno más ("García" y "García Linera") o uno menos
+  ("Rivera Cusicanqui" y "Rivera"), va a (c) como discordancia de
+  apellido, no a (a) y (b). Si dos o más referencias del mismo año
+  encajan ("Pérez" con "Pérez Gómez" y "Pérez Soto"), va a (c) como
+  ambigua, sin elegir. Las referencias institucionales no entran en
+  este emparejamiento. Límite: no se reconocen apellidos compuestos sin
+  apellido en común ("Linera, 2019" frente a "García Linera").
 - "(Bolivia, 2022)", "(Pando, 2024)", "(junio, 2024)": si el supuesto
   autor no coincide con ninguna referencia y es un lugar o periodo de
   la lista LUGARES_Y_PERIODOS, no es cita; se informa como descartado.
@@ -65,7 +85,13 @@ ANIO = r"(?:1[5-9]\d\d|20\d\d)[a-z]?(?![\d])|s\.\s?f\.(?:-[a-z])?"
 # obras republicadas); la referencia lleva el segundo.
 ANIO_CITA = rf"(?:(?:1[5-9]\d\d|20\d\d)/(?=\d{{4}}))?(?:{ANIO})"
 ANIOS = rf"(?:{ANIO_CITA})(?:\s*,\s*(?:{ANIO_CITA}))*"
-LOCALIZADOR = r"(?:pp?\.|p[aá]rr\.|cap\.|sec\.|secc\.|min\.|fig\.|tabla)\s*[\w–\-]+"
+LOCALIZADOR = r"(?:pp?\.|p[aá]rr\.|cap\.|sec\.|secc\.|min\.|fig\.|tabla)\s*[\w–\-]+(?:\.\d+)*"
+# Tras el año, uno o más localizadores separados por comas: "p. 5", "cap. 3",
+# "sec. 2.1", "t. 2", "vol. 1", "lib. 2" y el tomo o parte en romanos de las
+# obras clásicas: "(Cervantes, 1605/2004, I, cap. 1)".
+LOCALIZADOR_CITA = (rf"(?:{LOCALIZADOR}|(?:t|vol|lib)\.\s*[\w–\-]+(?:\.\d+)*|"
+                    r"[IVX]{1,6}(?![\w.]))")
+LOCALIZADORES = rf"(?:\s*,\s*{LOCALIZADOR_CITA})+"
 CORRIDA = (rf"(?:{PALABRA_MAY}|(?:{'|'.join(PARTICULAS_INICIALES)})(?=\s+(?:{PALABRA_MAY}|"
            rf"(?:{'|'.join(PARTICULAS_INICIALES)})\s)))"
            rf"(?:[ \t]+(?:{PALABRA_MAY}|(?:{'|'.join(map(re.escape, PARTICULAS))})(?=[ \t])))*")
@@ -73,10 +99,10 @@ ET_AL = r"(?:\s+et\s+al\.?)"
 SIGLA = r"(?:\s*\[(?P<sigla>[^\]]{1,20})\])"
 PATRON_PARENTETICA = re.compile(
     rf"(?<![\w'’\-/])(?P<autor>{CORRIDA})(?P<etal>{ET_AL})?{SIGLA}?\s*,\s*(?P<anios>{ANIOS})"
-    rf"(?P<loc>\s*,\s*{LOCALIZADOR})?")
+    rf"(?P<loc>{LOCALIZADORES})?")
 PATRON_NARRATIVA = re.compile(
     rf"(?<![\w'’\-/])(?P<autor>{CORRIDA})(?P<etal>{ET_AL})?{SIGLA}?\s*"
-    rf"\((?P<anios>{ANIOS})(?P<loc>\s*,\s*{LOCALIZADOR})?\)")
+    rf"\((?P<anios>{ANIOS})(?P<loc>{LOCALIZADORES})?\)")
 PATRON_LOCALIZADOR_SUELTO = re.compile(rf"\(\s*{LOCALIZADOR}[^()]*\)")
 PATRON_SECUNDARIA = re.compile(r"^\s*,?\s*(?:como\s+se\s+cit[oó]\s+en|citad[oa]\s+en|en)\b",
                                re.I)
@@ -225,6 +251,48 @@ def resolver(corrida, sigla, etal, refs):
     return [], autor, n, segundo
 
 
+def resolver_parcial(corrida, refs):
+    """Apellidos compuestos: la cita y la referencia comparten el primer apellido
+    pero una de las dos lleva uno más ("García" frente a "García Linera", o al
+    revés). Solo referencias de personas: en las institucionales "Bolivia" no
+    debe emparejar con "Bolivia. Ministerio de...". Devuelve (refs, autor_citado)
+    con el sufijo más largo de la corrida que empareja; refs de cualquier año."""
+    primera = re.split(r"\s+(?:y|e|&)\s+", corrida)[0].split()
+    for i in range(len(primera)):
+        sufijo = comun.normalizar(" ".join(primera[i:]))
+        if not sufijo or sufijo in PALABRAS_VACIAS:
+            continue
+        candidatas = []
+        for r in refs:
+            if r["institucional"] or not r["apellidos"]:
+                continue
+            apellido = comun.normalizar(r["apellidos"][0])
+            if apellido != sufijo and (apellido.startswith(sufijo + " ") or
+                                       sufijo.startswith(apellido + " ")):
+                candidatas.append(r)
+        if candidatas:
+            return candidatas, " ".join(primera[i:])
+    return [], None
+
+
+# Entre la institución y el título de su documento solo caben signos y
+# conectores: "datos del IPCC, Sexto Informe de Evaluación (2021)" o "el IPCC
+# en su Sexto Informe (2021)". Con otras palabras en medio ("Según el IPCC, el
+# calentamiento sigue, como muestra Pérez (2021)") la cita es de quien va justo
+# antes del paréntesis y no se atribuye a la institución.
+CONECTORES_PREVIOS = {"de", "del", "en", "el", "la", "los", "las", "su", "sus", "segun", "y"}
+
+
+def contiguo(previo_n, clave):
+    """True si la clave aparece al final de previo_n seguida solo de conectores."""
+    palabras = previo_n.split()
+    clave_p = clave.split()
+    j = len(palabras)
+    while j > 0 and palabras[j - 1] in CONECTORES_PREVIOS:
+        j -= 1
+    return j >= len(clave_p) and palabras[j - len(clave_p):j] == clave_p
+
+
 def extraer_citas(parrafos, refs):
     citas, descartes, localizadores = [], [], []
     for numero, parrafo in enumerate(parrafos, 1):
@@ -262,6 +330,7 @@ def extraer_citas(parrafos, refs):
 def armar(m, forma, numero, texto, base, refs, secundaria):
     corrida = m.group("autor")
     candidatas, autor, n, segundo = resolver(corrida, m.group("sigla"), m.group("etal"), refs)
+    parciales, autor_parcial = ([], None) if candidatas else resolver_parcial(corrida, refs)
     inicio, fin = base + m.start(), base + m.end()
     if forma == "parentética":
         # Ampliar al paréntesis completo para el contexto.
@@ -272,23 +341,30 @@ def armar(m, forma, numero, texto, base, refs, secundaria):
     salida = []
     for anio in anios:
         cand = candidatas
+        autor_anio, n_anio, parcial = autor, n, None
         if not cand and forma == "narrativa":
-            # Mirar atrás en la misma oración: "datos del IPCC, Sexto Informe (2021)".
-            previo = texto[max(0, base + m.start() - 80):base + m.end()]
+            # Mirar atrás en la misma oración: "datos del IPCC, Sexto Informe (2021)",
+            # solo si la institución precede inmediatamente al título (contiguo()).
+            previo = texto[max(0, base + m.start() - 80):base + m.start()]
             previo = re.split(r"[.!?]\s", previo)[-1]
-            previo_n = f" {comun.normalizar(previo)} "
+            previo_n = comun.normalizar(previo)
             cand = [r for r in refs if r["anio"] == anio and
-                    any(f" {c} " in previo_n for c in r["claves"])]
+                    any(contiguo(previo_n, c) for c in r["claves"])]
             if cand:
-                autor = cand[0]["sigla"] or cand[0]["apellidos"][0]
-                n = 1 if cand[0]["institucional"] else n
+                autor_anio = cand[0]["sigla"] or cand[0]["apellidos"][0]
+                n_anio = 1 if cand[0]["institucional"] else n
+        if not cand and parciales:
+            cand = [r for r in parciales if r["anio"] == anio]
+            if cand:
+                parcial = autor_parcial
+                autor_anio = autor_parcial
         salida.append({
             "forma": forma, "parrafo": numero, "texto": m.group(0).strip(),
-            "contexto": contexto(texto, max(inicio, 0), fin), "autor": autor,
-            "sigla_presentada": m.group("sigla"), "anio": anio, "n_autores": n,
+            "contexto": contexto(texto, max(inicio, 0), fin), "autor": autor_anio,
+            "sigla_presentada": m.group("sigla"), "anio": anio, "n_autores": n_anio,
             "et_al": bool(m.group("etal")), "segundo": segundo,
             "loc": (m.group("loc") or "").strip(" ,"), "refs": cand, "pos": base + m.start(),
-            "autor_ok": bool(cand), "secundaria": secundaria,
+            "autor_ok": bool(cand), "secundaria": secundaria, "parcial": parcial,
         })
     return salida
 
@@ -313,6 +389,12 @@ def cruzar(citas, refs):
         ref = mismas[0]
         for r in mismas:
             citadas.add(r["indice"])
+        if cita.get("parcial") and len(mismas) > 1:
+            # Dos o más referencias del mismo año empiezan por ese apellido: no se elige.
+            opciones = " o ".join(f"«{r['apellidos'][0]} ({r['anio']})»" for r in mismas)
+            discordantes.append((cita, f"ambigua: la cita usa «{cita['parcial']}» y puede ser "
+                                       f"{opciones}; se cita con los apellidos completos"))
+            continue
         reales = ref["n_autores"]
         problema = None
         if cita["et_al"] and reales == 2:
@@ -328,6 +410,14 @@ def cruzar(citas, refs):
         elif cita["segundo"] and reales == 2 and len(ref["apellidos"]) > 1 and \
                 comun.normalizar(cita["segundo"]) != comun.normalizar(ref["apellidos"][1]):
             problema = f"el segundo autor de la referencia es {ref['apellidos'][1]}"
+        elif not cita["et_al"] and cita["n_autores"] >= 2 and reales == 1 and cita["segundo"]:
+            # "El IPCC y Pérez (2021)" con solo IPCC 2021 en referencias.
+            problema = (f"nombra {cita['n_autores']} autores pero la obra de «{ref['sigla'] or ref['apellidos'][0]}» "
+                        f"tiene uno; si la cita es de «{cita['segundo']}», falta su referencia")
+        if cita.get("parcial"):
+            apellido = (f"la cita usa «{cita['parcial']}» y la referencia «{ref['apellidos'][0]}»: "
+                        "deben coincidir")
+            problema = apellido + (f"; además {problema}" if problema else "")
         if problema:
             discordantes.append((cita, problema))
     no_citadas = [r for r in refs if r["indice"] not in citadas]

@@ -65,6 +65,7 @@ DESTINATARIOS = ("don_nico", "jota")
 ESTADOS = {"en curso": "en curso", "en verificacion": "en verificación",
            "aprobado": "aprobado", "no aprobado": "no aprobado", "suspendido": "suspendido"}
 ABIERTOS = ("en curso", "en verificacion")
+CON_TILDE = {"monografia": "monografía", "articulo": "artículo", "maestria": "maestría"}
 MAX_VUELTAS = 3
 TOLERANCIA_MTIME = 2.0  # segundos, como el hook
 RAIZ_POR_DEFECTO = Path("Desktop") / "JP" / "ACADEMIA_CLAUDE" / "08_PRODUCCION_ACADEMICA"
@@ -582,7 +583,8 @@ def siguiente_paso(d, estado):
                                              "materiales de entrega/informe_verificacion.md (redactor "
                                              "si son de contenido o citas; productor si son de formato)"),)
     if estado != "aprobado":
-        return "cierre", ("director", "todo en regla: `anotar --estado aprobado` e informar al usuario")
+        return "cierre", ("director", "cierre: control mecánico aprobado y dictamen APROBADO sobre el "
+                      "mismo archivo; `anotar --estado aprobado` e informar al usuario")
     return "cerrado", ("cerrado", "aprobado y en regla; no hay nada que hacer")
 
 
@@ -667,6 +669,7 @@ def cmd_nuevo(args):
     if carpeta.exists():
         raise Fallo("ya existe %s: no se pisa. Para seguir con ese encargo usa "
                     "`encargo.py retomar \"%s\"`; para uno nuevo, otro --carpeta" % (carpeta, nombre))
+    tipo, nivel = CON_TILDE.get(tipo, tipo), CON_TILDE.get(nivel, nivel)
     campos = {"tema": tema, "tipo": tipo, "nivel": nivel, "paginas": paginas, "formato": formato,
               "estado": "en curso", "revisor": "sí" if args.con_revisor else None,
               "para": para, "categoria": categoria,
@@ -734,6 +737,7 @@ def texto_estado(d):
     for a in d["avisos"]:
         out.append("aviso: " + a)
     quien, que = d["siguiente"]
+    out.append("Etapa: %s" % d["etapa"])
     out.append("SIGUIENTE PASO: cerrado — %s" % que if quien == "cerrado"
                else "SIGUIENTE PASO: %s — %s" % (quien, que))
     return "\n".join(out)

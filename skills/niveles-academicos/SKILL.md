@@ -128,3 +128,7 @@ hallazgos) o 2 (no se pudo ejecutar). `--help` da el uso completo.
   corre los controles sobre el entregable y escribe
   `entrega/controles.json` (lo lee el hook de cierre) y
   `entrega/controles.md` (lo lee el verificador).
+- `encargo.py nuevo --tema "..." | estado <carpeta> | anotar <carpeta> "texto" [--estado] [--vuelta] | listar`:
+  crea la carpeta y `encargo.md`, diagnostica la etapa para retomar
+  (con el siguiente paso), lleva la bitácora y no deja cerrar como
+  aprobado sin respaldo. Lo usa el comando `/encargo`.
