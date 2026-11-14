@@ -71,7 +71,9 @@ python skills/niveles-academicos/scripts/cruzar_citas.py pruebas/casos/citas_pru
   En un xlsx solo ve valores guardados, no fórmulas sin calcular.
 - `cifras_texto.py` sabe si un número existe en el análisis, no a qué
   variable se refiere; los enteros pequeños coinciden por azar.
-- El constructor no genera índice.
+- Los números del índice se miden con la paginación de LibreOffice;
+  si Word pagina distinto en un caso límite, pueden diferir en una
+  página hasta que se actualice el índice en Word.
 - El hook bloquea una vez por turno y confía en el contenido de
   `controles.json` y del informe; sí exige que la huella coincida
   con el archivo real.
@@ -86,6 +88,7 @@ python skills/niveles-academicos/scripts/cruzar_citas.py pruebas/casos/citas_pru
 | Tipos de trabajo | `pruebas/probar_tipos.py` | 50 casos sin fallos; regresiones idénticas |
 | Límites de las capas 1 y 2 | `pruebas/probar_limites.py` | 37 casos sin fallos (3 necesitan red) |
 | Análisis de datos | `pruebas/probar_datos.py` | 51 casos sin fallos; fórmulas recalculadas con LibreOffice sin diferencias |
+| Índice automático | `pruebas/probar_indice.py` | 25 casos sin fallos; 24 entradas de un caso de 13 páginas coinciden con la página real |
 | Control final con variante de capítulos | Monografía real con `estructura: capitulos` | Los errores de estructura bajan de 3 a 1 |
 | Control final con cifras | Texto con dos cifras alteradas | Bloquea y nombra las dos |
 

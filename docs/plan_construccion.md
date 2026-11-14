@@ -129,9 +129,11 @@ Lo que sigue necesita al usuario:
 5. Confirmar con el reglamento de la carrera la estructura de
    informe, artículo, perfil y tesis en `tipos.json`.
 
-Sin esos insumos todavía se puede: generar el índice automático en
-el constructor (tesis y monografía por capítulos dan hoy un aviso
-por su falta) y controlar entregables `.pptx` y `.pdf`.
+El índice automático del constructor también quedó hecho: campo de
+índice de Word con los números de página ya medidos, y una
+comprobación del verificador que compara cada número con la página
+real. Sin esos insumos solo queda controlar entregables `.pptx` y
+`.pdf`.
 
 ## Capa 3 — profundidad académica
 - [x] 10. Skills por tipo de trabajo: ensayo, monografía, perfil de

@@ -174,10 +174,16 @@ def probar_tipos(salida):
         avisos_c = (datos_c or {}).get("avisos", [])
         o = mensajes_o(datos_v)
         bien = codigo_c == 0 and codigo_v == 0 and not any(n == "ERROR" for n, _ in o)
+        esperado = "CONFORME, o) sin ERROR"
+        if tt.estructura(DEFS, tipo, variante)["previos"].get("indice") == "obligatorio":
+            # El constructor genera el índice: sin el AVISO de índice ausente.
+            esperado = "CONFORME sin avisos (índice generado), o) sin ERROR"
+            bien = bien and (datos_v or {}).get("avisos") == 0 and \
+                ((datos_c or {}).get("indice") or {}).get("numeros") == "medidos"
         obtenido = (f"construir {codigo_c}{' ' + '; '.join(avisos_c) if avisos_c else ''}; "
                     f"{(datos_v or {}).get('veredicto', salida_v[-120:])}; "
                     f"{(datos_v or {}).get('paginas')} pág.; o) " + " | ".join(m for _, m in o))
-        anotar(f"{nombre}: esqueleto", "CONFORME, o) sin ERROR", obtenido, bien)
+        anotar(f"{nombre}: esqueleto", esperado, obtenido, bien)
 
         for etiqueta, ruta_md, nombres, patron in negativos(nombre, tipo, variante, carpeta):
             docx = ruta_md.with_suffix(".docx")

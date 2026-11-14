@@ -19,13 +19,24 @@ efectiva; d) interlineado; e) alineación y sangrías; f) títulos con
 estilos reales y jerarquía; g) espaciado uniforme; h) saltos de página;
 i) párrafos vacíos seguidos; j) marcadores prohibidos; k) autonomía;
 l) referencias; m) restos de Markdown; n) páginas en el PDF (LibreOffice);
-o) portada y secciones según el tipo.
+o) portada y secciones según el tipo; p) índice y números de página.
+
+p) reconoce el índice generado como campo TOC de Word (el de
+construir_docx.py o el de Word): cada entrada debe apuntar a un título
+existente (hipervínculo a su marcador o, sin hipervínculo, mismo texto en
+orden), todo título de nivel 1 a 3 debe estar en el índice y el número de
+cada entrada debe ser el que imprime el pie de la página donde está el
+título en el PDF renderizado (ERROR si no; AVISO si no se puede medir). Los
+títulos se ubican en el PDF por su texto en negrita, en orden, saltando el
+propio índice. Un índice escrito a mano (sin campo TOC) se reconoce como
+índice, pero sus números no se comprueban (AVISO).
 
 o) lee la definición del tipo en skills/tipos-de-trabajo/tipos.json
 (../../tipos-de-trabajo/tipos.json desde este script; si no está, la ruta
 de la variable TIPOS_TRABAJO): portada por defecto del tipo (o --portada),
 secciones obligatorias presentes, con el nivel pedido y en orden, y
-resumen y palabras clave cuando el tipo los exige (índice: solo AVISO).
+resumen y palabras clave cuando el tipo los exige (índice: solo AVISO; sus
+números los controla p).
 `--variante` elige una variante del tipo (p. ej. `capitulos` en
 monografía); sin ella rige la estructura por defecto. Sin tipos.json rige
 la regla anterior (solo ensayo y monografía) con un AVISO en o); con
@@ -81,7 +92,7 @@ NOMBRES = {
     "f": "títulos y jerarquía", "g": "espaciado", "h": "saltos de página",
     "i": "párrafos vacíos", "j": "marcadores prohibidos", "k": "autonomía",
     "l": "referencias", "m": "restos de Markdown", "n": "páginas (PDF)",
-    "o": "portada y encabezados del tipo",
+    "o": "portada y encabezados del tipo", "p": "índice y números de página",
 }
 MAX_LUGARES = 12
 TIPOS_ANTERIORES = ("ensayo", "monografia", "informe", "articulo", "otro")
@@ -339,6 +350,35 @@ def analizar(documento, resolutor):
     return parrafos
 
 
+def marcar_campo_toc(parrafos):
+    """Marca los párrafos que están dentro del resultado de un campo TOC
+    (campo_toc) y anota en cada párrafo sus hipervínculos internos (anclas)
+    y los marcadores que contiene."""
+    pila = []  # campos abiertos: {"instr": str, "resultado": bool}
+    for parrafo in parrafos:
+        dentro = any(c["resultado"] and c["instr"].strip().upper().startswith("TOC") for c in pila)
+        for nodo in parrafo["p"].iter(qn("w:fldChar"), qn("w:instrText"), qn("w:t")):
+            if nodo.tag == qn("w:fldChar"):
+                tipo = nodo.get(qn("w:fldCharType"))
+                if tipo == "begin":
+                    pila.append({"instr": "", "resultado": False})
+                elif tipo == "separate" and pila:
+                    pila[-1]["resultado"] = True
+                elif tipo == "end" and pila:
+                    pila.pop()
+            elif nodo.tag == qn("w:instrText") and pila and not pila[-1]["resultado"]:
+                pila[-1]["instr"] += nodo.text or ""
+            elif nodo.tag == qn("w:t") and (nodo.text or "").strip():
+                if any(c["resultado"] and c["instr"].strip().upper().startswith("TOC") for c in pila):
+                    dentro = True
+        parrafo["campo_toc"] = dentro
+        if dentro:
+            parrafo["indice"] = True
+        parrafo["anclas"] = [h.get(qn("w:anchor")) for h in parrafo["p"].iter(qn("w:hyperlink"))
+                             if h.get(qn("w:anchor"))]
+        parrafo["marcadores"] = [b.get(qn("w:name")) for b in parrafo["p"].iter(qn("w:bookmarkStart"))]
+
+
 def zona_portada(parrafos):
     """(fin, explícita): índice exclusivo del final de la portada y si
     termina en un salto real. (0, True) si no hay portada.
@@ -352,12 +392,12 @@ def zona_portada(parrafos):
     for i, parrafo in enumerate(parrafos[:40]):
         if parrafo["salto_antes"] and i > 0:
             return i, True
-        if parrafo["nivel"] is not None:
+        if parrafo["nivel"] is not None or (parrafo["indice"] and parrafo["texto"]):
             break
         if parrafo["saltos"] or parrafo["seccion"] in ("nextPage", "oddPage", "evenPage"):
             return i + 1, True
     for i, parrafo in enumerate(parrafos[:40]):
-        if parrafo["nivel"] is not None:
+        if parrafo["nivel"] is not None or (parrafo["indice"] and parrafo["texto"]):
             break
         if i > 0 and parrafo["pagina_renderizada"] and any(p["texto"] for p in parrafos[:i]):
             return i, False
@@ -639,6 +679,8 @@ def comprobar_saltos(parrafos, portada_fin, informe, portada_explicita=True):
         if parrafo["seccion"] in ("nextPage", "oddPage", "evenPage"):
             if portada_fin and i == portada_fin - 1:
                 estructurales.append(f"{resumen(parrafo)}: salto de sección (fin de portada)")
+            elif fin_de_indice(parrafos, i):
+                estructurales.append(f"{resumen(parrafo)}: salto de sección (fin del índice)")
             else:
                 otros.append(f"{resumen(parrafo)}: salto de sección ({parrafo['seccion']})")
     if escondidos:
@@ -646,8 +688,24 @@ def comprobar_saltos(parrafos, portada_fin, informe, portada_explicita=True):
     if otros:
         informe.agregar("h", "AVISO", f"{len(otros)} salto(s) no estructurales: comprobar que "
                         "cada uno haga falta", otros)
-    informe.cerrar("h", f"{len(estructurales)} salto estructural (portada)" if estructurales
-                   else "sin saltos forzados")
+    if estructurales:
+        partes = [x for x, clave in (("portada", "portada"), ("índice", "índice"))
+                  if any(clave in e for e in estructurales)]
+        informe.cerrar("h", f"{len(estructurales)} salto(s) estructural(es) ({' e '.join(partes)})")
+    else:
+        informe.cerrar("h", "sin saltos forzados")
+
+
+def fin_de_indice(parrafos, i):
+    """¿El párrafo i (sin texto, con salto de sección) cierra un índice generado?
+    Lo es si cierra el campo TOC o si el párrafo anterior es una entrada del
+    índice de un campo TOC."""
+    parrafo = parrafos[i]
+    if parrafo["texto"]:
+        return False
+    if i > 0 and parrafos[i - 1].get("clase") == "indice" and parrafos[i - 1].get("campo_toc"):
+        return True
+    return False
 
 
 def comprobar_vacios(parrafos, portada_fin, informe):
@@ -849,6 +907,63 @@ def comprobar_markdown(parrafos, informe):
     informe.cerrar("m")
 
 
+def numero_pie(pagina, margen_inf_cm):
+    """Número que imprime el pie de una página del PDF (texto bajo el margen
+    inferior) o None."""
+    limite = pagina.rect.height - margen_inf_cm * comun.PUNTOS_POR_CM
+    numeros = []
+    for bloque in pagina.get_text("dict")["blocks"]:
+        for linea in bloque.get("lines", []):
+            texto = "".join(s["text"] for s in linea["spans"]).strip()
+            if linea["bbox"][1] >= limite and texto.isdigit():
+                numeros.append(int(texto))
+    return numeros[-1] if numeros else None
+
+
+def ubicar_titulos_pdf(ruta_pdf, titulos, margen_inf_cm):
+    """Página impresa (número del pie; si no hay, la física) de cada título,
+    buscándolos en orden como líneas en negrita cuyo texto es el del título
+    (un título largo puede ocupar varias líneas). Las entradas del índice no
+    van en negrita y llevan el número detrás, así que no se confunden. None
+    para los que no se encuentran."""
+    pymupdf = comun.importar_pymupdf()
+    lineas, pies = [], []
+    with pymupdf.open(str(ruta_pdf)) as pdf:
+        for numero, pagina in enumerate(pdf):
+            pies.append(numero_pie(pagina, margen_inf_cm))
+            limite = pagina.rect.height - margen_inf_cm * comun.PUNTOS_POR_CM
+            for bloque in pagina.get_text("dict")["blocks"]:
+                for linea in bloque.get("lines", []):
+                    spans = [s for s in linea["spans"] if s["text"].strip()]
+                    texto = comun.normalizar("".join(s["text"] for s in linea["spans"]))
+                    if not texto or linea["bbox"][1] >= limite:
+                        continue
+                    negrita = all(s["flags"] & 16 or "bold" in s["font"].lower() for s in spans)
+                    lineas.append((numero, texto, negrita))
+    resultado, cursor = [], 0
+    for titulo in titulos:
+        objetivo = comun.normalizar(titulo)
+        hallado = None
+        for i in range(cursor, len(lineas)):
+            if not lineas[i][2]:
+                continue
+            acumulado, j = lineas[i][1], i
+            while (acumulado != objetivo and objetivo.startswith(acumulado + " ")
+                   and j + 1 < len(lineas) and lineas[j + 1][2] and j - i < 4):
+                j += 1
+                acumulado += " " + lineas[j][1]
+            if acumulado == objetivo:
+                hallado = (i, j)
+                break
+        if hallado is None:
+            resultado.append(None)
+            continue
+        pagina = lineas[hallado[0]][0]
+        resultado.append(pies[pagina] if pies[pagina] is not None else pagina + 1)
+        cursor = hallado[1] + 1
+    return resultado
+
+
 def comprobar_paginas(ruta, documento, parrafos, refs_inicio, args, informe, portada_fin):
     resultado = {"paginas": None, "paginas_referencias": None}
     seccion = documento.sections[-1]
@@ -869,6 +984,9 @@ def comprobar_paginas(ruta, documento, parrafos, refs_inicio, args, informe, por
                 refs = comun.paginas_seccion_pdf(
                     pdf, encabezados=(parrafos[refs_inicio]["texto"],),
                     margen_sup_cm=margen_sup, margen_inf_cm=margen_inf, siguiente=siguiente)
+            if any(p.get("campo_toc") for p in parrafos):
+                resultado["paginas_titulos"] = ubicar_titulos_pdf(
+                    pdf, [p["texto"] for p in parrafos if p["clase"] == "titulo"], margen_inf)
         except comun.ErrorRender as error:
             informe.agregar("n", "ERROR", f"páginas no medidas: {error}. No se da por bueno.")
             return resultado
@@ -970,7 +1088,7 @@ def comprobar_tipo(parrafos, portada_fin, args, medida, informe, tt=None, est=No
                 continue
             if clave == "indice":
                 informe.agregar("o", "AVISO", "el tipo lleva índice y no se encontró "
-                                "(construir_docx.py no lo genera)")
+                                "(construir_docx.py lo genera salvo con --sin-indice)")
             else:
                 informe.agregar("o", "ERROR", f"falta «{previo['nombre']}»: el tipo lo exige "
                                 "antes del cuerpo")
@@ -1019,6 +1137,98 @@ def comprobar_tipo_anterior(parrafos, portada_fin, args, medida, informe):
         else:
             informe.agregar("o", "ERROR", f"falta el encabezado «{nombre}»")
     informe.cerrar("o", f"portada {portada} e Introducción, Desarrollo y Conclusiones presentes")
+
+
+def texto_y_numero(parrafo):
+    """(texto de la entrada, número de página o None): lo que va antes y
+    después de la última tabulación del párrafo."""
+    partes = []
+    for nodo in parrafo["p"].iter(qn("w:t"), qn("w:tab")):
+        if nodo.tag == qn("w:tab"):
+            if nodo.getparent().tag == qn("w:r"):  # no las paradas de pPr
+                partes.append("\t")
+        else:
+            partes.append(nodo.text or "")
+    texto = "".join(partes)
+    if "\t" not in texto:
+        hallado = re.match(r"^(.*?)\s*(\d+)?\s*$", texto.strip())
+        return hallado.group(1), (int(hallado.group(2)) if hallado.group(2) else None)
+    titulo, _, numero = texto.rpartition("\t")
+    numero = numero.strip()
+    return titulo.strip(), (int(numero) if numero.isdigit() else None)
+
+
+def comprobar_indice(parrafos, medida, informe):
+    """p) índice: entradas que apuntan a títulos reales, títulos que faltan y
+    número de página de cada entrada frente al PDF."""
+    entradas = [p for p in parrafos if p.get("campo_toc") and p["texto"]]
+    if not entradas:
+        manual = [p for p in parrafos if p["clase"] == "indice" and p["texto"]
+                  and re.search(r"\d+\s*$", p["texto"])]
+        if manual:
+            informe.agregar("p", "AVISO", f"índice escrito a mano ({len(manual)} entradas, sin campo "
+                            "TOC): sus números de página no se comprueban y Word no puede "
+                            "actualizarlo", [resumen(manual[0])])
+        informe.cerrar("p", "el documento no tiene índice")
+        return
+    titulos = [p for p in parrafos if p["clase"] == "titulo"]
+    por_marcador = {}
+    for k, titulo in enumerate(titulos):
+        for nombre in titulo.get("marcadores", []):
+            por_marcador.setdefault(nombre, k)
+    asignadas, rotas, distintas = [], [], []
+    cursor = 0
+    for entrada in entradas:
+        texto, numero = texto_y_numero(entrada)
+        ancla = next(iter(entrada.get("anclas", [])), None)
+        k = None
+        if ancla:
+            k = por_marcador.get(ancla)
+            if k is None:
+                rotas.append(f"{resumen(entrada)}: apunta a «{ancla}», que no es un título")
+                continue
+        else:
+            k = next((j for j in range(cursor, len(titulos))
+                      if comun.normalizar(titulos[j]["texto"]) == comun.normalizar(texto)), None)
+            if k is None:
+                rotas.append(f"{resumen(entrada)}: no corresponde a ningún título")
+                continue
+            cursor = k + 1
+        if comun.normalizar(titulos[k]["texto"]) != comun.normalizar(texto):
+            distintas.append(f"{resumen(entrada)}: el título dice «{titulos[k]['texto'][:60]}»")
+        asignadas.append((entrada, texto, numero, k))
+    if rotas:
+        informe.agregar("p", "ERROR", "entradas del índice que no llevan a un título", rotas)
+    if distintas:
+        informe.agregar("p", "ERROR", "entradas del índice con un texto distinto del título "
+                        "(actualizar el índice)", distintas)
+    cubiertos = {k for _, _, _, k in asignadas}
+    faltan = [resumen(t) for k, t in enumerate(titulos) if k not in cubiertos and t["nivel"] <= 3]
+    if faltan:
+        informe.agregar("p", "ERROR", "títulos que no están en el índice (actualizar el índice)", faltan)
+    reales = medida.get("paginas_titulos")
+    if reales is None:
+        informe.agregar("p", "AVISO", "números de página del índice no comprobados: no se pudo "
+                        "renderizar el PDF")
+    else:
+        mal, sin_numero, no_ubicados = [], [], []
+        for entrada, texto, numero, k in asignadas:
+            real = reales[k] if k < len(reales) else None
+            if real is None:
+                no_ubicados.append(f"«{texto[:60]}»")
+            elif numero is None:
+                sin_numero.append(f"«{texto[:60]}»: sin número en el índice; está en la página {real}")
+            elif numero != real:
+                mal.append(f"«{texto[:60]}»: el índice dice página {numero}; está en la página {real}")
+        if mal:
+            informe.agregar("p", "ERROR", "números de página del índice que no coinciden con el PDF", mal)
+        if sin_numero:
+            informe.agregar("p", "ERROR", "entradas del índice sin número de página", sin_numero)
+        if no_ubicados:
+            informe.agregar("p", "AVISO", "títulos del índice que no se pudieron ubicar en el PDF: "
+                            "su página no se comprobó", no_ubicados)
+    informe.cerrar("p", f"índice (campo TOC) con {len(asignadas)} entradas; cada número coincide "
+                   "con la página del título en el PDF")
 
 
 # ---------------------------------------------------------------------------
@@ -1109,6 +1319,7 @@ def main():
         secundarios = textos_secundarios(paquete)
 
     parrafos = analizar(documento, resolutor)
+    marcar_campo_toc(parrafos)
     portada_fin, portada_explicita = zona_portada(parrafos)
     refs_inicio, refs_entradas = zona_referencias(parrafos)
     clasificar(parrafos, portada_fin, refs_entradas)
@@ -1125,6 +1336,7 @@ def main():
     comprobar_markdown(parrafos, informe)
     medida = comprobar_paginas(ruta, documento, parrafos, refs_inicio, args, informe, portada_fin)
     comprobar_tipo(parrafos, portada_fin, args, medida, informe, tt, est, aviso_tipos)
+    comprobar_indice(parrafos, medida, informe)
 
     orden = {clave: i for i, clave in enumerate(NOMBRES)}
     hallazgos = sorted(informe.hallazgos, key=lambda h: (orden[h["comprobacion"]], NIVELES.index(h["nivel"])))

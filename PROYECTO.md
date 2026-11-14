@@ -21,6 +21,7 @@ postdoctorado.
 | Capa 3: skills por tipo de trabajo (ítem 10) | Probadas en Linux (50 casos); informe, artículo, perfil y tesis son convención general a confirmar |
 | Capa 3: análisis de datos (ítem 12) | Probado con dos conjuntos de datos reales (51 casos); falta Excel |
 | Límites conocidos de las capas 1 y 2 | Corregidos y probados (37 casos) |
+| Índice automático en el constructor | Probado en Linux (25 casos); falta abrirlo y actualizarlo en Word |
 | Capa 3: skills por método (ítem 11) | Por construir; falta el insumo del usuario |
 | Capa 4: banco de pruebas (ítem 14) | Por construir; falta el insumo del usuario |
 

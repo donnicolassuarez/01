@@ -16,7 +16,9 @@ director.
   (metadatos de portada en un bloque `---` al inicio del Markdown;
   `--portada blanca|datos|ninguna` si el tipo no basta; `--variante`
   solo si el encargo la indica). Portada y secciones de cada tipo: skill
-  tipos-de-trabajo. Guarda en
+  tipos-de-trabajo. El índice (tesis, monografía por capítulos, o
+  `\indice` en el texto) lo genera el constructor con los números de
+  página medidos; no se hace a mano en Word. Guarda en
   temporal y copia; si el destino está abierto en Word, guarda con
   otro nombre y lo avisa. No uses `--conservar-pdf` hacia `entrega/`:
   un PDF ahí cuenta como otro entregable.

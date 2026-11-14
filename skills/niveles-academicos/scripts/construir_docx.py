@@ -5,7 +5,8 @@ Uso:
   python construir_docx.py <borrador/texto.md> --salida <entrega/nombre.docx>
          [--tipo ensayo|monografia|informe|articulo|perfil|tesis|otro]
          [--variante NOMBRE] [--portada blanca|datos|ninguna]
-         [--min-paginas N] [--max-paginas N] [--sin-pdf] [--conservar-pdf] [--json]
+         [--min-paginas N] [--max-paginas N] [--sin-indice] [--sin-pdf]
+         [--conservar-pdf] [--json]
 
 Lee un Markdown sencillo y produce un .docx con estilos reales de Word.
 Después lo convierte a PDF con LibreOffice para contar páginas (el PDF
@@ -13,7 +14,8 @@ solo se guarda con --conservar-pdf).
 
 Metadatos opcionales al inicio, entre dos líneas `---`:
   titulo, autor, institucion, carrera, materia, docente, lugar, fecha,
-  tipo, portada, variante (o estructura)  (formato `clave: valor`, una por línea)
+  tipo, portada, variante (o estructura), indice (si|no)
+  (formato `clave: valor`, una por línea)
 
 Tipos de trabajo: la portada por defecto y las secciones obligatorias de
 cada tipo salen de skills/tipos-de-trabajo/tipos.json (junto a esta skill
@@ -33,9 +35,30 @@ Markdown admitido: `#`, `##`, `###` (Título 1/2/3); párrafos; **negrita**,
 justo después es su nota); imágenes `![pie](ruta)`; citas en bloque `>`;
 `\\pagebreak` en una línea sola; comentarios HTML `<!-- -->` (se eliminan).
 
+Índice automático. Se genera cuando el tipo lo exige (tipos.json:
+previos.indice = obligatorio: tesis y monografía por capítulos) o cuando el
+Markdown lo pide con una línea `\\indice` sola (en cualquier lugar; la
+posición no cambia nada) o con el metadato `indice: si`. En los tipos donde
+es opcional o no se usa (ensayo, artículo) solo se genera si se pide.
+`--sin-indice` o `indice: no` lo desactivan siempre. Va en su propia página
+tras la portada (o al comienzo si no hay portada), con el encabezado
+«Índice» (estilo «TOC Heading»: aspecto de Título 1, sin nivel de esquema)
+y los títulos de nivel 1 a 3 (estilos «toc 1/2/3»: sangría por nivel,
+puntos de relleno y número alineado a la derecha). Es un campo TOC real de
+Word (`TOC \\o "1-3" \\h \\z \\u`) con el resultado ya escrito: cada
+entrada es un hipervínculo al marcador `_Toc…` de su título y su número un
+campo PAGEREF, así que Word lo puede actualizar. Los números se miden en
+el PDF de LibreOffice (esquema de marcadores del PDF y número que imprime
+el pie de cada página) y se reescriben hasta que no cambian (dos renders
+como mínimo, cuatro como máximo); el PDF de la última pasada sirve para
+contar páginas. Sin LibreOffice (o con --sin-pdf) el campo va con las
+entradas pero sin números, con w:updateFields para que Word ofrezca
+actualizarlo al abrir, y sale con 1 y un AVISO. Con números medidos no se
+activa w:updateFields (Word mostraría una pregunta al abrir).
+
 Códigos de salida: 0 bien; 1 hay avisos (páginas fuera de rango o no
-medidas, guardado con otro nombre, encabezados que faltan...); 2 no se
-pudo construir.
+medidas, números del índice sin calcular, guardado con otro nombre,
+encabezados que faltan...); 2 no se pudo construir.
 """
 import argparse
 import json
@@ -55,7 +78,8 @@ try:
     from docx.enum.section import WD_SECTION
     from docx.enum.style import WD_STYLE_TYPE
     from docx.enum.table import WD_TABLE_ALIGNMENT
-    from docx.enum.text import WD_ALIGN_PARAGRAPH, WD_BREAK, WD_LINE_SPACING
+    from docx.enum.text import (WD_ALIGN_PARAGRAPH, WD_BREAK, WD_LINE_SPACING,
+                                WD_TAB_ALIGNMENT, WD_TAB_LEADER)
     from docx.oxml import OxmlElement
     from docx.oxml.ns import qn
     from docx.shared import Cm, Pt, RGBColor
@@ -82,10 +106,23 @@ ESPACIO_TITULOS = {         # nivel: (antes, después) en puntos
     3: (12, 6),
 }
 SOMBRA_ENCABEZADO_TABLA = "E7E6E6"
+# Índice: encabezado con el estilo «TOC Heading» (aspecto de Título 1, sin
+# nivel de esquema) y entradas «toc 1/2/3» con relleno de puntos hasta el
+# número, alineado al margen derecho.
+TEXTO_INDICE = "Índice"
+INSTRUCCION_TOC = ' TOC \\o "1-3" \\h \\z \\u '
+SANGRIA_INDICE_CM = {1: 0.0, 2: 0.63, 3: 1.27}   # sangría izquierda por nivel
+SANGRIA_DERECHA_INDICE_CM = 1.0                  # el texto largo no pisa el número
+ESPACIO_INDICE_ANTES = {1: 6, 2: 0, 3: 0}
+ESPACIO_INDICE_DESPUES = 3
+MAX_PASADAS_INDICE = 4                           # renders como máximo
+PREFIJO_MARCADOR = 202600000                     # _Toc202600001, _Toc202600002...
+PATRON_PEDIDO_INDICE = re.compile(r"^\\indice\s*$")
 TIPOS = ("ensayo", "monografia", "informe", "articulo", "otro")
 TIPOS_SIN_DEFINICION = ("perfil", "tesis")  # sin tipos.json se tratan como «otro»
 CLAVES_META = ("titulo", "autor", "institucion", "carrera", "materia",
-               "docente", "lugar", "fecha", "tipo", "portada", "variante", "estructura")
+               "docente", "lugar", "fecha", "tipo", "portada", "variante", "estructura",
+               "indice")
 ENCABEZADOS_ENSAYO = ("Introducción", "Desarrollo", "Conclusiones")
 
 PATRON_TITULO = re.compile(r"^(#{1,6})\s+(.*?)\s*#*\s*$")
@@ -152,9 +189,7 @@ def revisar_estructura(tt, est, bloques, avisos, notas):
     for clave, previo in tt.buscar_previos(est, parrafos).items():
         if previo["estado"] != "obligatorio" or previo["pos"] is not None:
             continue
-        if clave == "indice":
-            notas.append(f"el tipo lleva índice y el constructor no lo genera")
-        else:
+        if clave != "indice":  # el índice lo genera el constructor (ver decidir_indice)
             avisos.append(f"falta «{previo['nombre']}» (el tipo lo exige antes del cuerpo)")
 
 
@@ -457,6 +492,8 @@ def preparar_estilos(documento):
     configurar_parrafo(referencia, WD_ALIGN_PARAGRAPH.LEFT,
                        primera=-SANGRIA_FRANCESA_CM, izquierda=SANGRIA_FRANCESA_CM)
 
+    preparar_estilos_indice(documento)
+
     leyenda = estilos["Caption"]
     fijar_fuente_rpr(rpr_de_estilo(leyenda), negrita=False)
     configurar_parrafo(leyenda, WD_ALIGN_PARAGRAPH.LEFT, antes=6, despues=6)
@@ -496,6 +533,222 @@ def preparar_estilos(documento):
             fuentes = estilo.element.rPr.find(qn("w:rFonts"))
             if fuentes is not None:
                 fijar_fuente_rpr(estilo.element.rPr, tamano=TAMANO)
+
+
+def preparar_estilos_indice(documento):
+    """Estilos del índice con los nombres integrados de Word, para que Word
+    los use al actualizar el campo TOC: «TOC Heading» (Título de TDC) para
+    el encabezado y «toc 1/2/3» (TDC 1/2/3) para las entradas."""
+    estilos = documento.styles
+    # Encabezado «Índice»: como Título 1 (Calibri 11 negrita, a la
+    # izquierda), pero con nivel de esquema 9 (texto independiente): no sale
+    # en el propio índice, ni en el panel de navegación, ni cuenta como
+    # sección del trabajo.
+    try:
+        encabezado = estilos["TOC Heading"]
+    except KeyError:
+        encabezado = estilos.add_style("TOC Heading", WD_STYLE_TYPE.PARAGRAPH)
+    encabezado.base_style = estilos["Heading 1"]
+    fijar_fuente_rpr(rpr_de_estilo(encabezado), negrita=True, cursiva=False)
+    antes, despues = ESPACIO_TITULOS[1]
+    configurar_parrafo(encabezado, WD_ALIGN_PARAGRAPH.LEFT, antes=antes, despues=despues,
+                       con_siguiente=True)
+    ppr = encabezado.element.get_or_add_pPr()
+    esquema = ppr.find(qn("w:outlineLvl"))
+    if esquema is None:
+        esquema = OxmlElement("w:outlineLvl")
+        ppr.append(esquema)
+    esquema.set(qn("w:val"), "9")
+    util = ANCHO_PAGINA_CM - 2 * MARGEN_CM
+    for nivel, sangria in SANGRIA_INDICE_CM.items():
+        nombre = f"toc {nivel}"
+        try:
+            estilo = estilos[nombre]
+        except KeyError:
+            estilo = estilos.add_style(nombre, WD_STYLE_TYPE.PARAGRAPH)
+        estilo.base_style = estilos["Normal"]
+        fijar_fuente_rpr(rpr_de_estilo(estilo), negrita=False, cursiva=False)
+        configurar_parrafo(estilo, WD_ALIGN_PARAGRAPH.LEFT, izquierda=sangria,
+                           antes=ESPACIO_INDICE_ANTES[nivel], despues=ESPACIO_INDICE_DESPUES)
+        # Un título largo se parte antes de la columna de números.
+        estilo.paragraph_format.right_indent = Cm(SANGRIA_DERECHA_INDICE_CM)
+        paradas = estilo.paragraph_format.tab_stops
+        paradas.clear_all()
+        paradas.add_tab_stop(Cm(util), WD_TAB_ALIGNMENT.RIGHT, WD_TAB_LEADER.DOTS)
+        estilo.element.set(qn("w:customStyle"), "0")
+
+
+# ---------------------------------------------------------------------------
+# Índice (campo TOC de Word con el resultado ya escrito)
+
+def run_campo(padre, tipo=None, instruccion=None, texto=None, oculto_web=False):
+    """Agrega a `padre` (párrafo o hipervínculo) un w:r con un fldChar, una
+    instrucción o un texto. Devuelve el w:r."""
+    run = OxmlElement("w:r")
+    if oculto_web:
+        rpr = OxmlElement("w:rPr")
+        rpr.append(OxmlElement("w:webHidden"))
+        run.append(rpr)
+    if tipo:
+        caracter = OxmlElement("w:fldChar")
+        caracter.set(qn("w:fldCharType"), tipo)
+        run.append(caracter)
+    elif instruccion is not None:
+        nodo = OxmlElement("w:instrText")
+        nodo.set(qn("xml:space"), "preserve")
+        nodo.text = instruccion
+        run.append(nodo)
+    elif texto == "\t":
+        run.append(OxmlElement("w:tab"))
+    else:
+        nodo = OxmlElement("w:t")
+        nodo.set(qn("xml:space"), "preserve")
+        nodo.text = texto or ""
+        run.append(nodo)
+    padre.append(run)
+    return run
+
+
+def marcar_titulo(parrafo, marcador, numero):
+    """Envuelve el texto del título en el marcador `_Toc…` al que apunta el índice."""
+    inicio = OxmlElement("w:bookmarkStart")
+    inicio.set(qn("w:id"), str(numero))
+    inicio.set(qn("w:name"), marcador)
+    fin = OxmlElement("w:bookmarkEnd")
+    fin.set(qn("w:id"), str(numero))
+    p = parrafo._p
+    ppr = p.find(qn("w:pPr"))
+    if ppr is not None:
+        ppr.addnext(inicio)
+    else:
+        p.insert(0, inicio)
+    p.append(fin)
+
+
+def entradas_indice(bloques):
+    """[(nivel, texto, marcador)] de los títulos, en orden; marca los bloques."""
+    entradas = []
+    for bloque in bloques:
+        if bloque["tipo"] == "titulo":
+            marcador = f"_Toc{PREFIJO_MARCADOR + len(entradas) + 1}"
+            bloque["_marcador"] = marcador
+            texto = "".join(t for t, _, _ in trozos_inline(bloque["texto"]))
+            entradas.append((bloque["nivel"], texto, marcador))
+    return entradas
+
+
+def escribir_indice(documento, entradas):
+    """Encabezado «Índice» y campo TOC con una entrada por título (hipervínculo
+    al marcador y campo PAGEREF). Cierra con un salto de sección a página
+    nueva. Devuelve los w:t de los números de página, en orden."""
+    documento.add_paragraph(TEXTO_INDICE, style="TOC Heading")
+    numeros = []
+    for k, (nivel, texto, marcador) in enumerate(entradas):
+        p = documento.add_paragraph(style=f"toc {nivel}")._p
+        if k == 0:
+            run_campo(p, "begin")
+            run_campo(p, instruccion=INSTRUCCION_TOC)
+            run_campo(p, "separate")
+        enlace = OxmlElement("w:hyperlink")
+        enlace.set(qn("w:anchor"), marcador)
+        enlace.set(qn("w:history"), "1")
+        p.append(enlace)
+        run_campo(enlace, texto=texto)
+        run_campo(enlace, texto="\t", oculto_web=True)
+        run_campo(enlace, "begin", oculto_web=True)
+        run_campo(enlace, instruccion=f" PAGEREF {marcador} \\h ", oculto_web=True)
+        run_campo(enlace, "separate", oculto_web=True)
+        numero = run_campo(enlace, texto="", oculto_web=True)
+        run_campo(enlace, "end", oculto_web=True)
+        numeros.append(numero.find(qn("w:t")))
+    # Salto estructural: fin de la sección del índice. El párrafo que lleva
+    # el salto de sección cierra también el campo TOC y no tiene texto.
+    documento.add_section(WD_SECTION.NEW_PAGE)
+    cierre = documento.element.body.findall(qn("w:p"))[-1]
+    run_campo(cierre, "end")
+    return numeros
+
+
+def pedir_actualizacion(documento):
+    """w:updateFields en settings.xml: Word ofrece actualizar los campos al abrir."""
+    ajustes = documento.settings.element
+    nodo = ajustes.find(qn("w:updateFields"))
+    if nodo is None:
+        nodo = OxmlElement("w:updateFields")
+        ajustes.append(nodo)
+    nodo.set(qn("w:val"), "true")
+
+
+def paginas_titulos_pdf(ruta_pdf, entradas):
+    """Página impresa de cada título según el PDF de LibreOffice.
+
+    Usa el esquema (marcadores) del PDF, que LibreOffice exporta con un
+    elemento por título en orden; cada uno da la página física de destino,
+    que se traduce al número que imprime el pie de esa página. Devuelve
+    (lista de números o None, motivo si no se pudo).
+    """
+    pymupdf = comun.importar_pymupdf()
+    with pymupdf.open(str(ruta_pdf)) as pdf:
+        esquema = pdf.get_toc(simple=True)
+        pies = [numero_pie(pagina) for pagina in pdf]
+    if len(esquema) != len(entradas):
+        return None, (f"el PDF tiene {len(esquema)} títulos en su esquema y el documento "
+                      f"{len(entradas)}")
+    resultado = []
+    for (nivel, titulo, pagina), (nivel_e, texto, _) in zip(esquema, entradas):
+        if comun.normalizar(titulo) != comun.normalizar(texto) or nivel != nivel_e:
+            return None, f"el esquema del PDF no coincide con los títulos («{titulo[:40]}»)"
+        if pagina < 1 or pagina > len(pies):
+            return None, f"«{texto[:40]}» sin página de destino en el PDF"
+        resultado.append(pies[pagina - 1] if pies[pagina - 1] is not None else pagina)
+    return resultado, None
+
+
+def numero_pie(pagina):
+    """Número que imprime el pie de una página del PDF (texto bajo el margen
+    inferior), o None si la página no tiene pie con número."""
+    limite = pagina.rect.height - MARGEN_CM * comun.PUNTOS_POR_CM
+    textos = []
+    for bloque in pagina.get_text("dict")["blocks"]:
+        for linea in bloque.get("lines", []):
+            if linea["bbox"][1] >= limite:
+                textos.append("".join(s["text"] for s in linea["spans"]).strip())
+    numeros = [t for t in textos if t.isdigit()]
+    return int(numeros[-1]) if numeros else None
+
+
+def calcular_indice(documento, numeros, entradas, temporal, avisos):
+    """Pasadas de render hasta que los números del índice no cambian.
+
+    Devuelve (ruta del último PDF, ruta del docx de ese PDF, renders) si los
+    números quedaron medidos y estables; si no, (None, None, renders) y deja
+    un aviso.
+    """
+    previos = None
+    renders = 0
+    for pasada in range(1, MAX_PASADAS_INDICE + 1):
+        docx = Path(temporal) / f"pasada{pasada}.docx"
+        documento.save(str(docx))
+        try:
+            pdf = comun.renderizar_pdf(docx, Path(temporal) / f"pdf{pasada}")
+        except comun.ErrorRender as error:
+            avisos.append(f"índice con números de página SIN CALCULAR: {error}. Word ofrecerá "
+                          "actualizar los campos al abrir el archivo")
+            return None, None, renders
+        renders += 1
+        paginas, motivo = paginas_titulos_pdf(pdf, entradas)
+        if paginas is None:
+            avisos.append(f"índice con números de página SIN CALCULAR: {motivo}. Word ofrecerá "
+                          "actualizar los campos al abrir el archivo")
+            return None, None, renders
+        if paginas == previos:
+            return pdf, docx, renders
+        for nodo, pagina in zip(numeros, paginas):
+            nodo.text = str(pagina)
+        previos = paginas
+    avisos.append(f"los números del índice no se estabilizaron en {MAX_PASADAS_INDICE} "
+                  "pasadas: revisarlos con verificar_formato.py")
+    return None, None, renders
 
 
 # ---------------------------------------------------------------------------
@@ -720,6 +973,9 @@ def construir(bloques, meta, opciones, carpeta_md, avisos, notas):
     pie = seccion_pie.footer.paragraphs[0]
     pie.style = documento.styles["Footer"]
     campo_pagina(pie)
+    # Índice tras la portada, en su propia sección (la del cuerpo hereda el
+    # mismo pie, así que la numeración sigue corrida).
+    numeros_indice = escribir_indice(documento, opciones["indice"]) if opciones.get("indice") else []
 
     cuenta = {"titulos": 0, "tablas": 0, "figuras": 0}
     referencias = []
@@ -732,6 +988,8 @@ def construir(bloques, meta, opciones, carpeta_md, avisos, notas):
             parrafo = documento.add_paragraph(style=f"Heading {bloque['nivel']}")
             agregar_texto(parrafo, bloque["texto"])
             cuenta["titulos"] += 1
+            if numeros_indice:
+                marcar_titulo(parrafo, bloque["_marcador"], cuenta["titulos"])
         elif tipo == "parrafo":
             estilo = "Texto tras tabla" if previo in ("tabla", "nota_tabla") else "Normal"
             parrafo = documento.add_paragraph(style=estilo)
@@ -811,7 +1069,7 @@ def construir(bloques, meta, opciones, carpeta_md, avisos, notas):
         if tipo == "titulo" and bloque.get("referencias"):
             bloque["_ancla"] = parrafo
     # Las referencias se escriben al final de su sección, ordenadas.
-    return documento, cuenta, referencias
+    return documento, cuenta, numeros_indice
 
 
 def escribir_referencias(documento, bloques, notas):
@@ -838,6 +1096,41 @@ def escribir_referencias(documento, bloques, notas):
             ancla.addnext(parrafo._p)
         total += len(entradas)
     return total
+
+
+def decidir_indice(args, meta, est, tipo, pedido_md, bloques, avisos, notas):
+    """¿Se genera el índice? Lo exige el tipo (tipos.json: previos.indice =
+    obligatorio) o lo pide el Markdown (línea `\\indice` o `indice: si`).
+    `--sin-indice` o `indice: no` lo desactivan siempre."""
+    valor = comun.normalizar(meta.get("indice", ""))
+    pedido = pedido_md or valor in ("si", "s", "yes", "true", "1")
+    negado = args.sin_indice or valor in ("no", "false", "0")
+    if est is not None:
+        estado = est["previos"].get("indice", "no")
+        variantes = est["elementos_previos"]["indice"]["variantes"]
+    else:
+        estado = "no" if tipo == "ensayo" else "opcional"
+        variantes = ["Índice", "Índice general", "Contenido", "Tabla de contenido"]
+    if negado:
+        if estado == "obligatorio":
+            notas.append("índice desactivado (--sin-indice o «indice: no»); el tipo lo exige y "
+                         "el verificador dará AVISO")
+        return False
+    if not (pedido or estado == "obligatorio"):
+        return False
+    normalizadas = {comun.normalizar(v) for v in variantes}
+    manual = next((b["texto"] for b in bloques
+                   if b["tipo"] == "titulo" and comun.normalizar(b["texto"]) in normalizadas), None)
+    if manual:
+        avisos.append(f"el Markdown ya trae un encabezado «{manual}»: no se genera el índice "
+                      "automático (quitar el índice escrito a mano)")
+        return False
+    if not any(b["tipo"] == "titulo" for b in bloques):
+        avisos.append("se pidió índice pero el Markdown no tiene títulos")
+        return False
+    if pedido and estado == "no":
+        notas.append(f"el tipo «{tipo}» no suele llevar índice; se genera porque se pidió")
+    return True
 
 
 # ---------------------------------------------------------------------------
@@ -876,6 +1169,8 @@ def contar_palabras(documento):
     en_referencias = False
     for parrafo in documento.paragraphs:
         texto = parrafo.text.strip()
+        if parrafo.style.name.lower().startswith("toc"):
+            continue  # el índice no es texto del trabajo
         if parrafo.style.name.lower().startswith("heading"):
             en_referencias = comun.es_encabezado_referencias(texto)
         palabras = len(texto.split())
@@ -891,11 +1186,13 @@ def contar_palabras(documento):
     return total, cuerpo
 
 
-def medir(ruta_docx, conservar, siguiente_tras_referencias):
-    """Renderiza y mide. Devuelve dict con páginas o con 'error'."""
+def medir(ruta_docx, conservar, siguiente_tras_referencias, pdf_hecho=None):
+    """Renderiza y mide. Devuelve dict con páginas o con 'error'. Con
+    `pdf_hecho` (el PDF de la última pasada del índice, del mismo contenido)
+    no vuelve a renderizar."""
     with tempfile.TemporaryDirectory(prefix="agac_pdf_") as temporal:
         try:
-            pdf = comun.renderizar_pdf(ruta_docx, temporal)
+            pdf = pdf_hecho or comun.renderizar_pdf(ruta_docx, temporal)
             paginas = comun.medir_pdf(pdf)
             referencias = comun.paginas_seccion_pdf(
                 pdf, margen_sup_cm=MARGEN_CM, margen_inf_cm=MARGEN_CM,
@@ -935,6 +1232,8 @@ def main():
                             help="no renderiza ni cuenta páginas")
     analizador.add_argument("--conservar-pdf", action="store_true",
                             help="guarda el PDF de medición junto al docx")
+    analizador.add_argument("--sin-indice", action="store_true",
+                            help="no genera el índice aunque el tipo lo exija")
     analizador.add_argument("--json", action="store_true")
     args = analizador.parse_args()
 
@@ -999,6 +1298,8 @@ def main():
         avisos.append(f"portada «{portada}» desconocida; se usa «blanca»")
         portada = "blanca"
 
+    pedido_md = any(PATRON_PEDIDO_INDICE.match(linea.strip()) for linea in lineas)
+    lineas = [linea for linea in lineas if not PATRON_PEDIDO_INDICE.match(linea.strip())]
     bloques, avisos_md = analizar_bloques(lineas)
     avisos.extend(avisos_md)
     if not any(b["tipo"] in ("parrafo", "titulo") for b in bloques):
@@ -1018,18 +1319,39 @@ def main():
         if re.search(r"\*\*|__|`|^#+\s|!\[|\]\(", contenido):
             avisos.append(f"posible Markdown sin convertir: «{contenido[:60]}»")
 
+    entradas = []
+    if decidir_indice(args, meta, est, tipo, pedido_md, bloques, avisos, notas):
+        entradas = entradas_indice(bloques)
     try:
-        documento, cuenta, _ = construir(bloques, meta, {"portada": portada},
-                                         origen.parent, avisos, notas)
+        documento, cuenta, numeros_indice = construir(
+            bloques, meta, {"portada": portada, "indice": entradas}, origen.parent, avisos, notas)
         n_referencias = escribir_referencias(documento, bloques, notas)
     except Exception as error:  # noqa: BLE001 - se informa la causa
         fallar(f"no se pudo construir el documento: {type(error).__name__}: {error}")
     if n_referencias == 0:
         avisos.append("no hay sección de referencias")
 
+    # Números de página del índice: render, lectura del PDF y reescritura
+    # hasta que no cambian. El PDF de la última pasada sirve para medir.
+    temporal_indice = tempfile.TemporaryDirectory(prefix="agac_indice_")
+    pdf_indice, renders, estado_indice = None, 0, None
+    if numeros_indice:
+        if args.sin_pdf:
+            avisos.append("índice con números de página SIN CALCULAR (--sin-pdf): Word ofrecerá "
+                          "actualizar los campos al abrir el archivo")
+        else:
+            pdf_indice, _, renders = calcular_indice(documento, numeros_indice, entradas,
+                                                     temporal_indice.name, avisos)
+        if pdf_indice is None:
+            pedir_actualizacion(documento)
+            estado_indice = "sin calcular"
+        else:
+            estado_indice = "medidos"
+
     try:
         final = guardar_seguro(documento, args.salida, avisos)
     except Exception as error:  # noqa: BLE001
+        temporal_indice.cleanup()
         fallar(f"no se pudo guardar: {error}")
 
     total, cuerpo = contar_palabras(documento)
@@ -1046,7 +1368,7 @@ def main():
     if args.sin_pdf:
         avisos.append("páginas no medidas (--sin-pdf)")
     else:
-        medida = medir(final, args.conservar_pdf, siguiente)
+        medida = medir(final, args.conservar_pdf, siguiente, pdf_indice)
         if "error" in medida:
             avisos.append(f"páginas no medidas: {medida['error']}")
         else:
@@ -1063,6 +1385,7 @@ def main():
             if medida.get("pdf_error"):
                 avisos.append(medida["pdf_error"])
 
+    temporal_indice.cleanup()
     informe = {
         "ok": not avisos,
         "archivo": str(final),
@@ -1078,6 +1401,8 @@ def main():
         "tablas": cuenta["tablas"],
         "figuras": cuenta["figuras"],
         "referencias": n_referencias,
+        "indice": ({"entradas": len(entradas), "numeros": estado_indice, "renders": renders}
+                   if numeros_indice else None),
         "avisos": avisos,
         "notas": notas,
     }
@@ -1097,6 +1422,9 @@ def main():
         print(f"Palabras: {total} (sin referencias: {cuerpo})")
         print(f"Títulos: {cuenta['titulos']} | tablas: {cuenta['tablas']} | "
               f"figuras: {cuenta['figuras']} | referencias: {n_referencias}")
+        if numeros_indice:
+            print(f"Índice: {len(entradas)} entradas; números de página {estado_indice}"
+                  + (f" ({renders} renders)" if renders else ""))
         if informe["pdf"]:
             print(f"PDF: {informe['pdf']}")
         for nota in notas:

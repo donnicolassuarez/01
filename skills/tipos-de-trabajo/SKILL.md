@@ -32,7 +32,9 @@ director para ajustar `tipos.json`.
   en su orden. Los títulos del trabajo los fija el usuario; esta skill
   no inventa títulos de contenido.
 - **Productor:** `construir_docx.py ... --tipo <tipo> [--variante X]`.
-  La portada sale del tipo salvo `--portada`. Todo AVISO de sección
+  La portada sale del tipo salvo `--portada`. El índice se genera solo
+  cuando el tipo lo exige; en los demás, solo si el texto lo pide (línea
+  `\indice` o metadato `indice: si`); `--sin-indice` lo quita. Todo AVISO de sección
   que falta o fuera de orden vuelve al director, no se arregla
   cambiando el texto.
 - **Revisor:** además de la rúbrica, mira lo que se indica en «Qué mira
@@ -71,12 +73,13 @@ orientativa: la fija el encargo y nunca bloquea.
   delimitado, a partir de fuentes.
 - **Estructura por defecto:** portada blanca. Introducción,
   Desarrollo y Conclusiones, como encabezados solos y en ese orden;
-  el Desarrollo se divide en subtítulos de nivel 2. Índice opcional;
-  anexos opcionales; referencias al final.
+  el Desarrollo se divide en subtítulos de nivel 2. Índice opcional
+  (solo si se pide: `\indice` o `indice: si`); anexos opcionales;
+  referencias al final.
 - **Variante `capitulos`** (convención general; no se activa sola):
   portada datos, Introducción, Capítulos numerados («Capítulo I. …»,
   al menos uno, de nivel 1) y Conclusiones; Recomendaciones opcional;
-  índice esperado. Se elige con `--variante capitulos` o con
+  índice obligatorio (lo genera el constructor). Se elige con `--variante capitulos` o con
   `estructura: capitulos` en los metadatos del Markdown. Si la regla
   de portada en blanco y encabezados solos vale para monografías con
   capítulos es una **decisión abierta del usuario** (`PROYECTO.md`,
@@ -154,8 +157,8 @@ orientativa: la fija el encargo y nunca bloquea.
 ### Tesis (`tesis`)
 - **Propósito:** responder una pregunta de investigación con método
   propio y aporte acorde al nivel.
-- **Estructura:** portada datos. Índice (el constructor no lo genera:
-  el verificador da AVISO si falta) y Resumen (obligatorio) antes del
+- **Estructura:** portada datos. Índice (lo genera el constructor, con
+  los números de página medidos) y Resumen (obligatorio) antes del
   cuerpo; Palabras clave opcional. Introducción, Marco teórico,
   Metodología, Resultados y Conclusiones, de nivel 1 y en ese orden,
   normalmente como capítulos numerados. Opcionales: Planteamiento del
@@ -191,8 +194,13 @@ Un objeto por tipo en `tipos` (clave en minúsculas sin tildes):
 - `opcionales`: secciones que pueden ir; no se controlan.
 - `previos` (`indice`, `resumen`, `palabras_clave`) y `finales`
   (`referencias`, `anexos`): `obligatorio`, `opcional` o `no`. Resumen
-  y palabras clave obligatorios se controlan en o); el índice solo da
-  AVISO; las referencias las controla l).
+  y palabras clave obligatorios se controlan en o); las referencias, en
+  l). Índice: con `obligatorio`, `construir_docx.py` lo genera (campo
+  TOC de Word con los números medidos en el PDF); con `opcional` o
+  `no`, solo si el texto lo pide. Va en su propia página inmediatamente
+  después de la portada: `tipos.json` no fija si va antes o después del
+  resumen. Si falta, o) da AVISO; p) comprueba que cada número coincida
+  con la página real del título.
 - `extension`: `[mínimo, máximo]` de páginas por nivel o null; solo
   informativo. `por_nivel`: qué cambia según el nivel.
 - `variantes`: objetos con los campos que cambian (`portada`,
