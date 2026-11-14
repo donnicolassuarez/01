@@ -13,7 +13,9 @@ Orígenes, en este orden (se pasa al siguiente si uno falla o no da un PDF):
      usa OPENALEX_API_KEY como en buscar_academico.py;
   4. Crossref (campo link con content-type application/pdf);
   5. arXiv, si el DOI es 10.48550/arXiv.*;
-  6. la página de destino de https://doi.org/<doi>, buscando la etiqueta
+  6. la dirección directa del PDF en la editorial cuando se deduce del
+     DOI (revistas de PLOS);
+  7. la página de destino de https://doi.org/<doi>, buscando la etiqueta
      meta citation_pdf_url (SciELO, Redalyc, OJS...).
 Si un origen devuelve una página HTML, también se busca en ella
 citation_pdf_url antes de pasar al siguiente.
@@ -162,7 +164,9 @@ def completar_metadatos(fuente, notas):
         fuente["titulo"] = fuente.get("titulo") or (obra.get("title") or [None])[0]
         if not fuente.get("autores"):
             fuente["autores"] = [f"{a.get('family')}, " + " ".join(p[0] + "." for p in (a.get("given") or "").split() if p)
-                                 for a in obra.get("author") or [] if a.get("family")]
+                                 for a in sorted(obra.get("author") or [],
+                                                 key=lambda a: a.get("sequence") != "first")
+                                 if a.get("family")]
         partes = ((obra.get("issued") or {}).get("date-parts") or [[None]])[0]
         fuente["anio"] = fuente.get("anio") or (partes[0] if partes else None)
     except comun.ErrorRed as error:
@@ -216,13 +220,35 @@ def origen_arxiv(fuente):
     return ["https://arxiv.org/pdf/" + fuente["doi"].split("arxiv.", 1)[1]]
 
 
+REVISTAS_PLOS = {
+    "pone": "plosone", "pbio": "plosbiology", "pmed": "plosmedicine",
+    "pgen": "plosgenetics", "pcbi": "ploscompbiol", "ppat": "plospathogens",
+    "pntd": "plosntds", "pclm": "climate", "pwat": "water",
+    "pgph": "globalpublichealth", "pstr": "sustainabilitytransformation",
+}
+
+
+def origen_editorial(fuente):
+    """PDF directo en editoriales abiertas cuya dirección se deduce del DOI.
+
+    Evita depender de redirecciones intermedias (dx.plos.org) que algunas
+    redes no dejan pasar.
+    """
+    hallado = re.match(r"10\.1371/journal\.([a-z]+)\.", fuente["doi"])
+    if hallado and hallado.group(1) in REVISTAS_PLOS:
+        return [f"https://journals.plos.org/{REVISTAS_PLOS[hallado.group(1)]}/article/file?id="
+                f"{fuente['doi']}&type=printable"]
+    return []
+
+
 def origen_doi(fuente):
     return ["https://doi.org/" + fuente["doi"]]
 
 
 ORIGENES = (("enlace conocido", origen_conocido), ("Unpaywall", origen_unpaywall),
             ("OpenAlex", origen_openalex), ("Crossref", origen_crossref),
-            ("arXiv", origen_arxiv), ("doi.org", origen_doi))
+            ("arXiv", origen_arxiv), ("editorial", origen_editorial),
+            ("doi.org", origen_doi))
 
 
 def es_antibots(datos):
@@ -285,13 +311,16 @@ def obtener(fuente):
             notas.append(f"{nombre}: {aviso}")
             continue
         except comun.ErrorRed as error:
-            notas.append(f"{nombre}: {breve(error)}")
+            if "HTTP 401" in str(error) or "HTTP 403" in str(error):
+                notas.append(f"{nombre}: omitido: clave ausente o no válida")
+            else:
+                notas.append(f"{nombre}: {breve(error)}")
             continue
         except Exception as error:
             notas.append(f"{nombre}: {type(error).__name__}: {error}")
             continue
         if not urls:
-            if funcion not in (origen_arxiv, origen_conocido):
+            if funcion not in (origen_arxiv, origen_conocido, origen_editorial):
                 notas.append(f"{nombre}: sin enlace abierto")
             continue
         for url in dict.fromkeys(urls):
