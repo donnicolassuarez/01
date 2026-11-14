@@ -3,9 +3,9 @@
 
 Uso:
   python verificar_formato.py <archivo.docx>
-         [--tipo ensayo|monografia|informe|articulo|otro]
-         [--portada blanca|datos|ninguna] [--min-paginas N] [--max-paginas N]
-         [--max-paginas-referencias 1.5] [--json]
+         [--tipo ensayo|monografia|informe|articulo|perfil|tesis|otro]
+         [--variante NOMBRE] [--portada blanca|datos|ninguna]
+         [--min-paginas N] [--max-paginas N] [--max-paginas-referencias 1.5] [--json]
 
 No reutiliza nada del constructor: abre el archivo, lee su XML y resuelve
 la herencia de formato (run -> estilo de carácter -> estilo de párrafo ->
@@ -19,7 +19,17 @@ efectiva; d) interlineado; e) alineación y sangrías; f) títulos con
 estilos reales y jerarquía; g) espaciado uniforme; h) saltos de página;
 i) párrafos vacíos seguidos; j) marcadores prohibidos; k) autonomía;
 l) referencias; m) restos de Markdown; n) páginas en el PDF (LibreOffice);
-o) portada y encabezados según el tipo.
+o) portada y secciones según el tipo.
+
+o) lee la definición del tipo en skills/tipos-de-trabajo/tipos.json
+(../../tipos-de-trabajo/tipos.json desde este script; si no está, la ruta
+de la variable TIPOS_TRABAJO): portada por defecto del tipo (o --portada),
+secciones obligatorias presentes, con el nivel pedido y en orden, y
+resumen y palabras clave cuando el tipo los exige (índice: solo AVISO).
+`--variante` elige una variante del tipo (p. ej. `capitulos` en
+monografía); sin ella rige la estructura por defecto. Sin tipos.json rige
+la regla anterior (solo ensayo y monografía) con un AVISO en o); con
+tipos.json corrupto sale con 2.
 
 Heurística de marcadores (j), para no confundir palabras comunes:
 - "por verificar", "lorem ipsum", "[cita...]", "[]", "¿?" -> siempre.
@@ -37,7 +47,9 @@ Heurística de marcadores (j), para no confundir palabras comunes:
 Códigos de salida: 0 conforme; 1 hay algún ERROR; 2 no se pudo ejecutar.
 """
 import argparse
+import importlib.util
 import json
+import os
 import re
 import sys
 import tempfile
@@ -72,6 +84,29 @@ NOMBRES = {
     "o": "portada y encabezados del tipo",
 }
 MAX_LUGARES = 12
+TIPOS_ANTERIORES = ("ensayo", "monografia", "informe", "articulo", "otro")
+TIPOS_SIN_DEFINICION = ("perfil", "tesis")  # sin tipos.json: «no aplica»
+
+
+def localizar_tipos():
+    """(módulo, ruta de tipos.json, aviso). Sin archivo: (None, None, aviso)."""
+    base = Path(__file__).resolve().parent.parent.parent / "tipos-de-trabajo"
+    candidatos = [base / "tipos.json"]
+    variable = os.environ.get("TIPOS_TRABAJO", "").strip()
+    if variable:
+        candidatos.append(Path(variable))
+    ruta = next((c for c in candidatos if c.is_file()), None)
+    if ruta is None:
+        return None, None, ("no se encontró tipos.json (ni en la skill tipos-de-trabajo ni en "
+                            "TIPOS_TRABAJO): rige la regla anterior, solo para ensayo y monografía")
+    modulo_ruta = next((c / "tipos_trabajo.py" for c in (ruta.parent, base)
+                        if (c / "tipos_trabajo.py").is_file()), None)
+    if modulo_ruta is None:
+        return None, None, f"falta tipos_trabajo.py junto a {ruta}: rige la regla anterior"
+    spec = importlib.util.spec_from_file_location("tipos_trabajo", modulo_ruta)
+    modulo = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(modulo)
+    return modulo, ruta, None
 
 
 # ---------------------------------------------------------------------------
@@ -863,7 +898,95 @@ def comprobar_paginas(ruta, documento, parrafos, refs_inicio, args, informe, por
     return resultado
 
 
-def comprobar_tipo(parrafos, portada_fin, args, medida, informe):
+def comprobar_tipo(parrafos, portada_fin, args, medida, informe, tt=None, est=None, aviso=None):
+    if aviso:
+        informe.agregar("o", "AVISO", aviso)
+    if est is None:
+        comprobar_tipo_anterior(parrafos, portada_fin, args, medida, informe)
+        return
+    if not est["secciones"] and est["portada"] == "ninguna" and not args.portada:
+        informe.cerrar("o", "no aplica a este tipo")
+        return
+    portada = args.portada or est["portada"]
+    if portada == "blanca":
+        if not portada_fin:
+            informe.agregar("o", "ERROR", "falta la portada: la primera página debe ir en blanco "
+                            "(no hay salto de página antes del primer título)")
+        else:
+            con_texto = [resumen(p) for p in parrafos[:portada_fin] if p["texto"]]
+            if con_texto:
+                informe.agregar("o", "ERROR", "la primera página no está en blanco", con_texto)
+        if medida.get("primera_vacia") is False and portada_fin and \
+                not any(p["texto"] for p in parrafos[:portada_fin]):
+            informe.agregar("o", "ERROR", "en el PDF la primera página tiene texto")
+    elif portada == "datos":
+        if not portada_fin:
+            informe.agregar("o", "ERROR", "falta la portada con datos")
+        elif not any(p["texto"] for p in parrafos[:portada_fin]):
+            informe.agregar("o", "ERROR", "la portada está en blanco: el tipo pide portada con datos")
+
+    titulos = [{"pos": i, "nivel": p["nivel"], "texto": p["texto"]}
+               for i, p in enumerate(parrafos) if p["clase"] == "titulo"]
+    hallado = tt.buscar_secciones(est, titulos)
+    nombres = []
+    for fila in hallado["secciones"]:
+        seccion = fila["seccion"]
+        nombre = seccion["nombre"]
+        nombres.append(f"{nombre} ({fila['cantidad']})" if seccion.get("capitulos") else nombre)
+        if fila["estado"] == "nivel":
+            informe.agregar("o", "ERROR", f"«{nombre}» debe ser título de nivel {seccion['nivel']}; "
+                            f"está en nivel {fila['nivel']}", [resumen(parrafos[fila["pos"]])])
+        elif fila["estado"] == "falta":
+            if seccion.get("capitulos"):
+                informe.agregar("o", "ERROR", f"faltan los «{nombre}»: al menos "
+                                f"{seccion.get('minimo', 1)} título de nivel 1 «Capítulo I. …»")
+                continue
+            parecidos = [resumen(p) for p in parrafos
+                         if tt.parecido(p["texto"], seccion) and len(p["texto"]) < 150]
+            if parecidos:
+                solo = " solo" if seccion.get("solo", True) else ""
+                informe.agregar("o", "ERROR", f"«{nombre}» no aparece como encabezado{solo} con "
+                                "estilo de título", parecidos)
+            else:
+                informe.agregar("o", "ERROR", f"falta el encabezado «{nombre}»")
+    for seccion, titulo, previa, titulo_previo in hallado["fuera_de_orden"]:
+        informe.agregar("o", "ERROR", f"«{seccion['nombre']}» está fuera de orden: aparece antes de "
+                        f"«{previa['nombre']}» (orden: {tt.orden_esperado(est)})",
+                        [resumen(parrafos[titulo["pos"]]), resumen(parrafos[titulo_previo["pos"]])])
+
+    inicio_cuerpo = min((f["pos"] for f in hallado["secciones"] if f["pos"] is not None), default=None)
+    candidatos = []
+    for i, p in enumerate(parrafos):
+        if i < portada_fin or not p["texto"]:
+            continue
+        toc = any("TOC" in (nodo.text or "") for nodo in p["p"].iter(qn("w:instrText")))
+        candidatos.append({"pos": i, "texto": p["texto"], "indice": p["clase"] == "indice" or toc,
+                           "titulo": p["clase"] in ("titulo", "titulo_sin_nivel")})
+    for clave, previo in tt.buscar_previos(est, candidatos).items():
+        if previo["estado"] == "no":
+            continue
+        if previo["pos"] is None:
+            if previo["estado"] != "obligatorio":
+                continue
+            if clave == "indice":
+                informe.agregar("o", "AVISO", "el tipo lleva índice y no se encontró "
+                                "(construir_docx.py no lo genera)")
+            else:
+                informe.agregar("o", "ERROR", f"falta «{previo['nombre']}»: el tipo lo exige "
+                                "antes del cuerpo")
+        elif clave != "indice" and inicio_cuerpo is not None and previo["pos"] > inicio_cuerpo:
+            primera = next(f["seccion"]["nombre"] for f in hallado["secciones"] if f["pos"] == inicio_cuerpo)
+            informe.agregar("o", "ERROR", f"«{previo['nombre']}» está fuera de orden: debe ir antes "
+                            f"de «{primera}»", [resumen(parrafos[previo["pos"]])])
+    variante = f" (variante {est['variante']})" if est["variante"] else ""
+    if portada == "ninguna":
+        informe.cerrar("o", f"{est['nombre']}{variante}: {tt.lista_nombres(nombres)} presentes")
+    else:
+        informe.cerrar("o", f"portada {portada} e {tt.lista_nombres(nombres)} presentes{variante}")
+
+
+def comprobar_tipo_anterior(parrafos, portada_fin, args, medida, informe):
+    """Regla anterior a tipos.json: solo ensayo y monografía."""
     if args.tipo not in ("ensayo", "monografia"):
         informe.cerrar("o", "no aplica a este tipo")
         return
@@ -904,7 +1027,9 @@ def main():
     comun.salida_utf8()
     analizador = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     analizador.add_argument("docx")
-    analizador.add_argument("--tipo", choices=("ensayo", "monografia", "informe", "articulo", "otro"))
+    analizador.add_argument("--tipo", help="ensayo, monografia, informe, articulo, perfil, "
+                            "tesis u otro (o un sinónimo de tipos.json)")
+    analizador.add_argument("--variante", help="variante del tipo en tipos.json (p. ej. capitulos)")
     analizador.add_argument("--portada", choices=("blanca", "datos", "ninguna"))
     analizador.add_argument("--min-paginas", type=int)
     analizador.add_argument("--max-paginas", type=int)
@@ -921,6 +1046,34 @@ def main():
         else:
             print(f"No se pudo verificar: {mensaje}", file=sys.stderr)
         sys.exit(2)
+
+    tt, ruta_tipos, aviso_tipos = localizar_tipos()
+    est = None
+    if tt is not None:
+        try:
+            definiciones = tt.cargar(ruta_tipos)
+        except tt.ErrorTipos as error:
+            salir_sin_poder(f"tipos.json no es válido: {error}")
+        if args.tipo:
+            clave = tt.resolver(definiciones, args.tipo)
+            if clave is None:
+                salir_sin_poder(f"tipo «{args.tipo}» desconocido; tipos: "
+                                f"{', '.join(tt.tipos_disponibles(definiciones))}")
+            try:
+                est = tt.estructura(definiciones, clave, args.variante)
+            except tt.ErrorTipos as error:
+                salir_sin_poder(str(error))
+            args.tipo = clave
+        elif args.variante:
+            salir_sin_poder("--variante necesita --tipo")
+    else:
+        if args.tipo:
+            args.tipo = comun.normalizar(args.tipo)
+            if args.tipo not in TIPOS_ANTERIORES + TIPOS_SIN_DEFINICION:
+                salir_sin_poder(f"tipo «{args.tipo}» desconocido; tipos: "
+                                f"{', '.join(TIPOS_ANTERIORES + TIPOS_SIN_DEFINICION)}")
+        if args.variante:
+            aviso_tipos += f"; la variante «{args.variante}» no se aplica"
 
     if Document is None:
         salir_sin_poder("falta python-docx (pip install python-docx)")
@@ -971,7 +1124,7 @@ def main():
     comprobar_referencias(parrafos, refs_inicio, refs_entradas, informe)
     comprobar_markdown(parrafos, informe)
     medida = comprobar_paginas(ruta, documento, parrafos, refs_inicio, args, informe, portada_fin)
-    comprobar_tipo(parrafos, portada_fin, args, medida, informe)
+    comprobar_tipo(parrafos, portada_fin, args, medida, informe, tt, est, aviso_tipos)
 
     orden = {clave: i for i, clave in enumerate(NOMBRES)}
     hallazgos = sorted(informe.hallazgos, key=lambda h: (orden[h["comprobacion"]], NIVELES.index(h["nivel"])))
@@ -984,6 +1137,7 @@ def main():
         veredicto = f"FORMATO: NO CONFORME ({errores} errores, {avisos} avisos)"
     if args.json:
         print(json.dumps({"archivo": str(ruta), "conforme": conforme, "errores": errores,
+                          "tipo": args.tipo, "variante": est["variante"] if est else None,
                           "avisos": avisos, "paginas": medida.get("paginas"),
                           "paginas_referencias": medida.get("paginas_referencias"),
                           "parrafos": len(parrafos), "hallazgos": hallazgos,

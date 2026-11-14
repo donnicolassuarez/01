@@ -10,6 +10,20 @@ SIN COMPROBAR (Crossref no respondió: límite de uso o red caída).
 Libros, leyes y documentos oficiales suelen salir NO ENCONTRADA y se
 comprueban contra el archivo guardado en fuentes/.
 
+DOI que no están en Crossref (Crossref responde 404):
+  - arXiv (10.48550/arXiv.<id>): se consulta la API de arXiv
+    (export.arxiv.org, Atom) y se compara título y año. arXiv limita
+    con 429: se reintenta con pausa; si no responde, SIN COMPROBAR. Un
+    identificador que arXiv no conoce: NO ENCONTRADA.
+  - Otros (DataCite: Zenodo, repositorios): se resuelve
+    https://doi.org/<doi> con negociación de contenido CSL-JSON; si esa
+    vía no responde (doi.org deriva a api.datacite.org, que puede estar
+    bloqueado), se sigue la redirección normal de doi.org a la página
+    del registro: Zenodo se lee por su API (zenodo.org/api/records/<id>)
+    y las demás páginas por sus metadatos (citation_title, DC.title,
+    og:title). doi.org con 404: el DOI no existe, NO ENCONTRADA. Sin
+    respuesta: SIN COMPROBAR.
+
 Variable de entorno opcional: OPENALEX_API_KEY (OpenAlex exige clave
 gratuita desde 2026; sin ella solo responde Crossref).
 
@@ -59,6 +73,117 @@ def pedir(url):
         return json.loads(respuesta.read().decode("utf-8"))
 
 
+class DoiInexistente(Exception):
+    """El registro del DOI (o de arXiv) respondió que no existe."""
+
+
+class SinRespuesta(Exception):
+    """El servicio no respondió (límite de uso, red, host bloqueado)."""
+
+
+def pedir_bytes(url, cabeceras=None, intentos=3, pausa=3.0):
+    """GET con reintentos ante 429 y 5xx. Devuelve (bytes, url_final).
+    404 o 410 -> DoiInexistente; sin respuesta útil -> SinRespuesta."""
+    cab = {"User-Agent": AGENTE}
+    cab.update(cabeceras or {})
+    ultimo = "sin respuesta"
+    for intento in range(intentos):
+        try:
+            with urllib.request.urlopen(urllib.request.Request(url, headers=cab),
+                                        timeout=25) as respuesta:
+                return respuesta.read(), respuesta.geturl()
+        except urllib.error.HTTPError as error:
+            if error.code in (404, 410):
+                raise DoiInexistente(f"HTTP {error.code} en {url}")
+            ultimo = f"HTTP {error.code} en {url}"
+            if error.code not in (429, 500, 502, 503, 504):
+                break
+            espera = error.headers.get("Retry-After", "") if error.headers else ""
+            if intento < intentos - 1:
+                time.sleep(min(float(espera), 30) if espera.isdigit() else pausa * (2 ** intento))
+        except Exception as error:  # red caída, tiempo agotado, túnel rechazado
+            ultimo = f"{type(error).__name__}: {error}"
+            if intento < intentos - 1:
+                time.sleep(pausa)
+    raise SinRespuesta(ultimo)
+
+
+ATOM = "{http://www.w3.org/2005/Atom}"
+
+
+def en_arxiv(identificador):
+    """[(título, año, doi, "arXiv")] para un identificador de arXiv."""
+    import xml.etree.ElementTree as ET
+    url = "https://export.arxiv.org/api/query?id_list=" + urllib.parse.quote(identificador)
+    datos, _ = pedir_bytes(url, intentos=4, pausa=5.0)
+    try:
+        raiz = ET.fromstring(datos)
+    except ET.ParseError:
+        raise SinRespuesta("arXiv devolvió una respuesta que no es Atom ("
+                           + datos[:60].decode("utf-8", "replace") + ")")
+    salida = []
+    for entrada in raiz.findall(ATOM + "entry"):
+        titulo = " ".join((entrada.findtext(ATOM + "title") or "").split())
+        enlace = entrada.findtext(ATOM + "id") or ""
+        if not titulo or titulo.lower() == "error" or "/api/errors" in enlace:
+            continue
+        publicado = (entrada.findtext(ATOM + "published") or "")[:4]
+        salida.append((titulo, int(publicado) if publicado.isdigit() else None,
+                       "10.48550/arXiv." + identificador, "arXiv"))
+    if not salida:
+        raise DoiInexistente(f"arXiv no tiene el identificador {identificador}")
+    return salida
+
+
+def meta_html(html_texto, *nombres):
+    import html
+    for nombre in nombres:
+        for patron in (rf'<meta[^>]+(?:name|property)=["\']{re.escape(nombre)}["\'][^>]*'
+                       rf'content=["\']([^"\']+)["\']',
+                       rf'<meta[^>]+content=["\']([^"\']+)["\'][^>]*'
+                       rf'(?:name|property)=["\']{re.escape(nombre)}["\']'):
+            hallado = re.search(patron, html_texto, flags=re.I)
+            if hallado:
+                return html.unescape(hallado.group(1)).strip()
+    return None
+
+
+def anio_texto(texto):
+    hallado = re.search(r"(1[5-9]\d\d|20\d\d)", texto or "")
+    return int(hallado.group(1)) if hallado else None
+
+
+def en_doi_org(doi):
+    """[(título, año, doi, base)] resolviendo el DOI en doi.org."""
+    quoted = urllib.parse.quote(doi, safe="/")
+    try:  # 1) negociación de contenido CSL-JSON (DataCite, mEDRA, etc.)
+        datos, _ = pedir_bytes("https://doi.org/" + quoted,
+                               {"Accept": "application/vnd.citationstyles.csl+json"}, intentos=2)
+        d = json.loads(datos.decode("utf-8"))
+        partes = ((d.get("issued") or {}).get("date-parts") or [[None]])[0]
+        titulo = d.get("title")
+        titulo = titulo[0] if isinstance(titulo, list) and titulo else titulo
+        if titulo:
+            return [(titulo, partes[0] if partes else None, doi, "doi.org (CSL)")]
+    except (SinRespuesta, ValueError, AttributeError):
+        pass  # la negociación deriva a api.datacite.org, que puede no estar al alcance
+    # 2) redirección normal a la página del registro.
+    datos, final = pedir_bytes("https://doi.org/" + quoted, intentos=2)
+    zenodo = re.match(r"https://zenodo\.org/(?:records|record|doi/10\.5281/zenodo\.)/?(\d+)", final)
+    if zenodo:
+        d, _ = pedir_bytes(f"https://zenodo.org/api/records/{zenodo.group(1)}", intentos=2)
+        meta = json.loads(d.decode("utf-8")).get("metadata", {})
+        return [(meta.get("title"), anio_texto(meta.get("publication_date")), doi, "Zenodo")]
+    texto = datos.decode("utf-8", "replace")
+    titulo = meta_html(texto, "citation_title", "DC.title", "dc.title", "og:title")
+    if not titulo:
+        hallado = re.search(r"<title[^>]*>(.*?)</title>", texto, flags=re.S | re.I)
+        titulo = " ".join(hallado.group(1).split()) if hallado else None
+    anio = anio_texto(meta_html(texto, "citation_publication_date", "citation_date",
+                                "DC.date", "dc.date", "citation_online_date"))
+    return [(titulo, anio, doi, "doi.org (página)")]
+
+
 def leer_lineas(ruta):
     if ruta.lower().endswith(".docx"):
         import html
@@ -104,10 +229,23 @@ def coincide(titulo, ref):
     return bloque.size / len(t) >= 0.8
 
 
-def en_crossref(ref):
+def doi_de(ref):
     doi = re.search(r"10\.\d{4,9}/[^\s\"<>]+", ref)
-    if doi:
-        limpio = doi.group(0).rstrip(".,;)")
+    return doi.group(0).rstrip(".,;)") if doi else None
+
+
+def en_registro(ref):
+    """DOI que Crossref no tiene: arXiv o doi.org. Solo se llama tras un 404."""
+    doi = doi_de(ref)
+    arxiv = re.match(r"10\.48550/arxiv\.(.+)$", doi or "", flags=re.I)
+    if arxiv:
+        return en_arxiv(arxiv.group(1))
+    return en_doi_org(doi)
+
+
+def en_crossref(ref):
+    limpio = doi_de(ref)
+    if limpio:
         datos = [pedir("https://api.crossref.org/works/" + urllib.parse.quote(limpio))["message"]]
     else:
         consulta = urllib.parse.quote(ref[:300])
@@ -129,9 +267,22 @@ def en_openalex(ref):
 def evaluar(ref):
     anio = anio_de(ref)
     dudosa, errores = None, []
-    for buscar in (en_crossref, en_openalex):
+    registro = None  # resultado de arXiv / doi.org: "inexistente" o "sin respuesta"
+    for buscar in (en_crossref, en_registro, en_openalex):
+        if buscar is en_registro and not (doi_de(ref) and errores and
+                                          errores[-1].startswith("en_crossref") and
+                                          " 404" in errores[-1]):
+            continue  # solo para DOI que Crossref no tiene
         try:
             candidatos = buscar(ref)
+        except DoiInexistente as error:
+            registro = "inexistente"
+            errores.append(f"{buscar.__name__}: {error}")
+            continue
+        except SinRespuesta as error:
+            registro = "sin respuesta"
+            errores.append(f"{buscar.__name__}: {error}")
+            continue
         except Exception as error:  # red caída, DOI inexistente, etc.
             nota = ""
             if buscar is en_openalex and "401" in str(error) and not os.environ.get("OPENALEX_API_KEY"):
@@ -150,6 +301,9 @@ def evaluar(ref):
     # Si Crossref no llegó a responder (límite de uso, caída, sin red), la
     # referencia no quedó comprobada: decir "no encontrada" sería falso.
     pasajero = any(e.startswith("en_crossref") and " 404" not in e for e in errores)
+    # DOI fuera de Crossref (arXiv, DataCite) cuyo registro no respondió: no
+    # quedó comprobada; tampoco es "no encontrada" por un 429 de arXiv.
+    pasajero = pasajero or registro == "sin respuesta"
     if pasajero:
         return "SIN COMPROBAR", "; ".join(errores), len(errores)
     return ("NO ENCONTRADA", "; ".join(errores) or "sin coincidencia de título en Crossref ni OpenAlex",

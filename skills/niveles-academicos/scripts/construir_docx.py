@@ -3,9 +3,9 @@
 
 Uso:
   python construir_docx.py <borrador/texto.md> --salida <entrega/nombre.docx>
-         [--tipo ensayo|monografia|informe|articulo|otro]
-         [--portada blanca|datos|ninguna] [--min-paginas N] [--max-paginas N]
-         [--sin-pdf] [--conservar-pdf] [--json]
+         [--tipo ensayo|monografia|informe|articulo|perfil|tesis|otro]
+         [--variante NOMBRE] [--portada blanca|datos|ninguna]
+         [--min-paginas N] [--max-paginas N] [--sin-pdf] [--conservar-pdf] [--json]
 
 Lee un Markdown sencillo y produce un .docx con estilos reales de Word.
 Después lo convierte a PDF con LibreOffice para contar páginas (el PDF
@@ -13,7 +13,19 @@ solo se guarda con --conservar-pdf).
 
 Metadatos opcionales al inicio, entre dos líneas `---`:
   titulo, autor, institucion, carrera, materia, docente, lugar, fecha,
-  tipo, portada  (formato `clave: valor`, una por línea)
+  tipo, portada, variante (o estructura)  (formato `clave: valor`, una por línea)
+
+Tipos de trabajo: la portada por defecto y las secciones obligatorias de
+cada tipo salen de skills/tipos-de-trabajo/tipos.json (junto a esta skill
+instalada: ../../tipos-de-trabajo/tipos.json desde este script; si no
+está, de la ruta de la variable TIPOS_TRABAJO). El tipo admite nombre o
+sinónimo ("perfil de tesis"). `--variante` (o `variante:`/`estructura:` en
+los metadatos) elige una variante del tipo, p. ej. `capitulos` para una
+monografía por capítulos; sin ella rige la estructura por defecto. Si
+tipos.json no se encuentra, rige la regla anterior (solo ensayo y
+monografía: portada en blanco e Introducción, Desarrollo y Conclusiones)
+con una NOTA; si está corrupto, sale con 2. Las secciones que faltan o van
+fuera de orden se informan como AVISO: el control es verificar_formato.py.
 
 Markdown admitido: `#`, `##`, `###` (Título 1/2/3); párrafos; **negrita**,
 *cursiva*; listas `-` y `1.`; tablas de tubería con fila de encabezado
@@ -28,6 +40,7 @@ pudo construir.
 import argparse
 import json
 import os
+import importlib.util
 import re
 import shutil
 import sys
@@ -70,8 +83,9 @@ ESPACIO_TITULOS = {         # nivel: (antes, después) en puntos
 }
 SOMBRA_ENCABEZADO_TABLA = "E7E6E6"
 TIPOS = ("ensayo", "monografia", "informe", "articulo", "otro")
+TIPOS_SIN_DEFINICION = ("perfil", "tesis")  # sin tipos.json se tratan como «otro»
 CLAVES_META = ("titulo", "autor", "institucion", "carrera", "materia",
-               "docente", "lugar", "fecha", "tipo", "portada")
+               "docente", "lugar", "fecha", "tipo", "portada", "variante", "estructura")
 ENCABEZADOS_ENSAYO = ("Introducción", "Desarrollo", "Conclusiones")
 
 PATRON_TITULO = re.compile(r"^(#{1,6})\s+(.*?)\s*#*\s*$")
@@ -87,6 +101,61 @@ PATRON_INLINE = re.compile(
     r"|(?<![\w*])\*(?!\s)(.+?)(?<!\s)\*(?![\w*])"  # cursiva
     r"|\[([^\]]+)\]\(([^)\s]+)\)"            # enlace: queda el texto
 )
+
+
+# ---------------------------------------------------------------------------
+# Tipos de trabajo (definición única en skills/tipos-de-trabajo/tipos.json)
+
+def localizar_tipos():
+    """(módulo, ruta de tipos.json, aviso). Sin archivo: (None, None, aviso)."""
+    base = Path(__file__).resolve().parent.parent.parent / "tipos-de-trabajo"
+    candidatos = [base / "tipos.json"]
+    variable = os.environ.get("TIPOS_TRABAJO", "").strip()
+    if variable:
+        candidatos.append(Path(variable))
+    ruta = next((c for c in candidatos if c.is_file()), None)
+    if ruta is None:
+        return None, None, ("no se encontró tipos.json (ni en la skill tipos-de-trabajo ni en "
+                            "TIPOS_TRABAJO): rige la regla anterior, solo para ensayo y monografía")
+    modulo_ruta = next((c / "tipos_trabajo.py" for c in (ruta.parent, base)
+                        if (c / "tipos_trabajo.py").is_file()), None)
+    if modulo_ruta is None:
+        return None, None, f"falta tipos_trabajo.py junto a {ruta}: rige la regla anterior"
+    spec = importlib.util.spec_from_file_location("tipos_trabajo", modulo_ruta)
+    modulo = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(modulo)
+    return modulo, ruta, None
+
+
+def revisar_estructura(tt, est, bloques, avisos, notas):
+    """Avisos del constructor sobre secciones del tipo (presencia, nivel, orden)."""
+    titulos = [{"pos": i, "nivel": b["nivel"], "texto": b["texto"]}
+               for i, b in enumerate(bloques) if b["tipo"] == "titulo"]
+    hallado = tt.buscar_secciones(est, titulos)
+    for fila in hallado["secciones"]:
+        seccion = fila["seccion"]
+        if fila["estado"] == "falta":
+            if seccion.get("capitulos"):
+                avisos.append(f"faltan capítulos numerados (al menos {seccion.get('minimo', 1)} "
+                              "título «Capítulo I. …» de nivel 1)")
+            else:
+                solo = " (solo, como título)" if seccion.get("solo", True) else ""
+                avisos.append(f"falta el encabezado «{seccion['nombre']}»{solo}")
+        elif fila["estado"] == "nivel":
+            avisos.append(f"«{seccion['nombre']}» debe ser título de nivel {seccion['nivel']} "
+                          f"(está en nivel {fila['nivel']}: «{fila['titulo']['texto'][:50]}»)")
+    for seccion, _, previa, _ in hallado["fuera_de_orden"]:
+        avisos.append(f"«{seccion['nombre']}» está fuera de orden: va antes de «{previa['nombre']}» "
+                      f"(orden: {tt.orden_esperado(est)})")
+    parrafos = [{"pos": i, "texto": b.get("texto", ""), "titulo": b["tipo"] == "titulo"}
+                for i, b in enumerate(bloques) if b["tipo"] in ("titulo", "parrafo")]
+    for clave, previo in tt.buscar_previos(est, parrafos).items():
+        if previo["estado"] != "obligatorio" or previo["pos"] is not None:
+            continue
+        if clave == "indice":
+            notas.append(f"el tipo lleva índice y el constructor no lo genera")
+        else:
+            avisos.append(f"falta «{previo['nombre']}» (el tipo lo exige antes del cuerpo)")
 
 
 # ---------------------------------------------------------------------------
@@ -856,7 +925,9 @@ def main():
     analizador = argparse.ArgumentParser(description=__doc__.split("\n")[0])
     analizador.add_argument("markdown")
     analizador.add_argument("--salida", required=True)
-    analizador.add_argument("--tipo", choices=TIPOS)
+    analizador.add_argument("--tipo", help="ensayo, monografia, informe, articulo, perfil, "
+                            "tesis u otro (o un sinónimo de tipos.json)")
+    analizador.add_argument("--variante", help="variante del tipo en tipos.json (p. ej. capitulos)")
     analizador.add_argument("--portada", choices=("blanca", "datos", "ninguna"))
     analizador.add_argument("--min-paginas", type=int)
     analizador.add_argument("--max-paginas", type=int)
@@ -888,12 +959,42 @@ def main():
 
     avisos, notas = [], []
     meta, lineas = separar_metadatos(texto)
-    tipo = args.tipo or comun.normalizar(meta.get("tipo", "")) or "otro"
-    if tipo not in TIPOS:
-        avisos.append(f"tipo «{tipo}» desconocido; se usa «otro»")
-        tipo = "otro"
-    portada = args.portada or comun.normalizar(meta.get("portada", "")) or \
-        ("blanca" if tipo in ("ensayo", "monografia") else "ninguna")
+    tt, ruta_tipos, aviso_tipos = localizar_tipos()
+    est = None
+    variante = args.variante or meta.get("variante") or meta.get("estructura")
+    if tt is not None:
+        try:
+            definiciones = tt.cargar(ruta_tipos)
+        except tt.ErrorTipos as error:
+            fallar(f"tipos.json no es válido: {error}")
+        if args.tipo and not tt.resolver(definiciones, args.tipo):
+            fallar(f"tipo «{args.tipo}» desconocido; tipos: "
+                   f"{', '.join(tt.tipos_disponibles(definiciones))}")
+        tipo = tt.resolver(definiciones, args.tipo or meta.get("tipo", "") or "otro")
+        if tipo is None:
+            avisos.append(f"tipo «{meta.get('tipo')}» desconocido; se usa «otro»")
+            tipo = "otro"
+        try:
+            est = tt.estructura(definiciones, tipo, variante)
+        except tt.ErrorTipos as error:
+            fallar(str(error))
+        portada_tipo = est["portada"]
+    else:
+        notas.append(aviso_tipos)
+        if args.tipo and comun.normalizar(args.tipo) not in TIPOS + TIPOS_SIN_DEFINICION:
+            fallar(f"tipo «{args.tipo}» desconocido; tipos: {', '.join(TIPOS + TIPOS_SIN_DEFINICION)}")
+        tipo = comun.normalizar(args.tipo or "") or comun.normalizar(meta.get("tipo", "")) or "otro"
+        if tipo in TIPOS_SIN_DEFINICION:
+            notas.append(f"sin tipos.json, «{tipo}» se construye como «otro»")
+            tipo = "otro"
+        if tipo not in TIPOS:
+            avisos.append(f"tipo «{tipo}» desconocido; se usa «otro»")
+            tipo = "otro"
+        if variante:
+            notas.append(f"variante «{variante}» ignorada: sin tipos.json no hay variantes")
+            variante = None
+        portada_tipo = "blanca" if tipo in ("ensayo", "monografia") else "ninguna"
+    portada = args.portada or comun.normalizar(meta.get("portada", "")) or portada_tipo
     if portada not in ("blanca", "datos", "ninguna"):
         avisos.append(f"portada «{portada}» desconocida; se usa «blanca»")
         portada = "blanca"
@@ -902,7 +1003,9 @@ def main():
     avisos.extend(avisos_md)
     if not any(b["tipo"] in ("parrafo", "titulo") for b in bloques):
         fallar("el Markdown no tiene contenido")
-    if tipo in ("ensayo", "monografia"):
+    if est is not None:
+        revisar_estructura(tt, est, bloques, avisos, notas)
+    elif tipo in ("ensayo", "monografia"):
         titulos = [comun.normalizar(b["texto"]) for b in bloques if b["tipo"] == "titulo"]
         for nombre in ENCABEZADOS_ENSAYO:
             if comun.normalizar(nombre) not in titulos:
@@ -964,6 +1067,7 @@ def main():
         "ok": not avisos,
         "archivo": str(final),
         "tipo": tipo,
+        "variante": est["variante"] if est else None,
         "portada": portada,
         "paginas": medida.get("paginas"),
         "paginas_referencias": medida.get("paginas_referencias"),
@@ -981,7 +1085,8 @@ def main():
         print(json.dumps(informe, ensure_ascii=False, indent=2))
     else:
         print(f"Archivo: {final}")
-        print(f"Tipo: {tipo} | portada: {portada}")
+        variante_texto = f" ({est['variante']})" if est and est["variante"] else ""
+        print(f"Tipo: {tipo}{variante_texto} | portada: {portada}")
         if informe["paginas"] is not None:
             linea = f"Páginas (PDF, carta): {informe['paginas']}"
             if informe["paginas_referencias"] is not None:

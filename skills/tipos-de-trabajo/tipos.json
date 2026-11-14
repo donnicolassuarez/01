@@ -1,0 +1,259 @@
+{
+  "version": 1,
+  "nota": "Definición única de cada tipo de trabajo. La leen construir_docx.py y verificar_formato.py; el redactor y el revisor la leen a través de la skill tipos-de-trabajo. Esquema en SKILL.md, sección «El archivo tipos.json». fuente «usuario» = regla escrita en reglas/CLAUDE.md; «convencion» = convención académica general sin norma UAP confirmada. La extensión es orientativa: la fija el encargo y nunca bloquea.",
+  "elementos_previos": {
+    "indice": {"nombre": "Índice", "variantes": ["Índice", "Índice general", "Contenido", "Tabla de contenido", "Tabla de contenidos"]},
+    "resumen": {"nombre": "Resumen", "variantes": ["Resumen", "Abstract"]},
+    "palabras_clave": {"nombre": "Palabras clave", "variantes": ["Palabras clave", "Palabras claves", "Keywords", "Key words"]}
+  },
+  "tipos": {
+    "ensayo": {
+      "nombre": "Ensayo",
+      "sinonimos": ["ensayo argumentativo", "ensayo académico", "ensayo crítico"],
+      "fuente": "usuario",
+      "portada": "blanca",
+      "capitulos": false,
+      "secciones": [
+        {"clave": "introduccion", "nombre": "Introducción", "variantes": ["Introducción"], "solo": true, "nivel": null,
+         "contenido": "Tema, tesis que se defiende y recorrido del texto."},
+        {"clave": "desarrollo", "nombre": "Desarrollo", "variantes": ["Desarrollo"], "solo": true, "nivel": null,
+         "contenido": "Argumentos con su evidencia citada; puede llevar subtítulos de nivel 2."},
+        {"clave": "conclusiones", "nombre": "Conclusiones", "variantes": ["Conclusiones", "Conclusión"], "solo": true, "nivel": null,
+         "contenido": "Respuesta a la tesis a partir de lo argumentado, sin material nuevo."}
+      ],
+      "opcionales": [],
+      "previos": {"indice": "no", "resumen": "no", "palabras_clave": "no"},
+      "finales": {"referencias": "obligatorio", "anexos": "no"},
+      "extension": {"pregrado": [3, 10], "maestria": [8, 15], "doctorado": [10, 20], "postdoctorado": null},
+      "por_nivel": {
+        "pregrado": "Una tesis clara y dos o tres argumentos con fuentes accesibles; opinión razonada.",
+        "maestria": "Tesis delimitada que discute autores del campo y atiende objeciones.",
+        "doctorado": "Posición propia frente al debate, con contraargumentos tratados a fondo.",
+        "postdoctorado": "Formato y extensión de la revista o convocatoria de destino."
+      },
+      "variantes": {}
+    },
+    "monografia": {
+      "nombre": "Monografía",
+      "sinonimos": ["monografía", "monografia de grado", "trabajo monográfico"],
+      "fuente": "usuario",
+      "portada": "blanca",
+      "capitulos": false,
+      "secciones": [
+        {"clave": "introduccion", "nombre": "Introducción", "variantes": ["Introducción"], "solo": true, "nivel": null,
+         "contenido": "Tema delimitado, objetivo, enfoque y orden de la exposición."},
+        {"clave": "desarrollo", "nombre": "Desarrollo", "variantes": ["Desarrollo"], "solo": true, "nivel": null,
+         "contenido": "Exposición ordenada del tema en subtítulos de nivel 2, con la evidencia citada."},
+        {"clave": "conclusiones", "nombre": "Conclusiones", "variantes": ["Conclusiones", "Conclusión"], "solo": true, "nivel": null,
+         "contenido": "Síntesis de lo expuesto y respuesta al objetivo, sin material nuevo."}
+      ],
+      "opcionales": [],
+      "previos": {"indice": "opcional", "resumen": "no", "palabras_clave": "no"},
+      "finales": {"referencias": "obligatorio", "anexos": "opcional"},
+      "extension": {"pregrado": [10, 30], "maestria": [20, 50], "doctorado": null, "postdoctorado": null},
+      "por_nivel": {
+        "pregrado": "Exposición documental ordenada de un tema; teoría moderada.",
+        "maestria": "Revisión crítica de la literatura sobre un problema delimitado.",
+        "doctorado": "No es un tipo habitual en este nivel.",
+        "postdoctorado": "No es un tipo habitual en este nivel."
+      },
+      "variantes": {
+        "capitulos": {
+          "descripcion": "Monografía organizada en capítulos numerados. Decisión abierta del usuario: no se activa por defecto.",
+          "fuente": "convencion",
+          "portada": "datos",
+          "capitulos": true,
+          "secciones": [
+            {"clave": "introduccion", "nombre": "Introducción", "variantes": ["Introducción"], "solo": false, "nivel": 1,
+             "contenido": "Tema delimitado, objetivo, enfoque y orden de los capítulos."},
+            {"clave": "capitulos", "nombre": "Capítulos numerados", "capitulos": true, "minimo": 1, "nivel": 1,
+             "contenido": "El desarrollo en capítulos («Capítulo I. …»), cada uno con sus subtítulos."},
+            {"clave": "conclusiones", "nombre": "Conclusiones", "variantes": ["Conclusiones", "Conclusión"], "solo": false, "nivel": 1,
+             "contenido": "Síntesis de los capítulos y respuesta al objetivo, sin material nuevo."}
+          ],
+          "opcionales": [
+            {"clave": "recomendaciones", "nombre": "Recomendaciones", "variantes": ["Recomendaciones"],
+             "contenido": "Acciones que se desprenden de las conclusiones."}
+          ],
+          "previos": {"indice": "obligatorio", "resumen": "no", "palabras_clave": "no"}
+        }
+      }
+    },
+    "informe": {
+      "nombre": "Informe",
+      "sinonimos": ["informe de investigación", "informe de laboratorio", "informe técnico", "informe de práctica"],
+      "fuente": "convencion",
+      "portada": "datos",
+      "capitulos": false,
+      "secciones": [
+        {"clave": "introduccion", "nombre": "Introducción", "variantes": ["Introducción"], "solo": false, "nivel": 1,
+         "contenido": "Contexto, problema o encargo, y objetivos del informe."},
+        {"clave": "metodologia", "nombre": "Metodología", "variantes": ["Metodología", "Método", "Métodos", "Materiales y métodos", "Procedimiento", "Marco metodológico"], "solo": false, "nivel": 1,
+         "contenido": "Qué se hizo, con qué fuentes, datos, materiales o instrumentos, y cómo."},
+        {"clave": "resultados", "nombre": "Resultados", "variantes": ["Resultados", "Análisis de resultados", "Presentación de resultados"], "solo": false, "nivel": 1,
+         "contenido": "Lo obtenido, con tablas y figuras numeradas; sin interpretación extensa."},
+        {"clave": "conclusiones", "nombre": "Conclusiones", "variantes": ["Conclusiones", "Conclusión"], "solo": false, "nivel": 1,
+         "contenido": "Respuesta a los objetivos a partir de los resultados."}
+      ],
+      "opcionales": [
+        {"clave": "objetivos", "nombre": "Objetivos", "variantes": ["Objetivos"], "contenido": "Si no van dentro de la introducción."},
+        {"clave": "discusion", "nombre": "Discusión", "variantes": ["Discusión"], "contenido": "Interpretación de los resultados frente a las fuentes."},
+        {"clave": "recomendaciones", "nombre": "Recomendaciones", "variantes": ["Recomendaciones"], "contenido": "Acciones que se desprenden de las conclusiones."}
+      ],
+      "previos": {"indice": "opcional", "resumen": "opcional", "palabras_clave": "no"},
+      "finales": {"referencias": "obligatorio", "anexos": "opcional"},
+      "extension": {"pregrado": [5, 15], "maestria": [10, 25], "doctorado": [10, 30], "postdoctorado": null},
+      "por_nivel": {
+        "pregrado": "Procedimiento y resultados descritos con claridad; método en pocas líneas.",
+        "maestria": "Método justificado y discusión de los resultados frente a la literatura.",
+        "doctorado": "Procedimiento replicable y límites explícitos.",
+        "postdoctorado": "Formato de la entidad o convocatoria que lo pide."
+      },
+      "variantes": {
+        "simple": {
+          "descripcion": "Informe de lectura, de visita o de actividad, sin método ni resultados propios.",
+          "fuente": "convencion",
+          "secciones": [
+            {"clave": "introduccion", "nombre": "Introducción", "variantes": ["Introducción"], "solo": false, "nivel": 1,
+             "contenido": "Qué se informa y con qué propósito."},
+            {"clave": "desarrollo", "nombre": "Desarrollo", "variantes": ["Desarrollo"], "solo": false, "nivel": 1,
+             "contenido": "Lo leído, observado o realizado, en orden."},
+            {"clave": "conclusiones", "nombre": "Conclusiones", "variantes": ["Conclusiones", "Conclusión"], "solo": false, "nivel": 1,
+             "contenido": "Valoración y lo que se desprende de lo informado."}
+          ],
+          "opcionales": []
+        }
+      }
+    },
+    "articulo": {
+      "nombre": "Artículo",
+      "sinonimos": ["artículo", "artículo científico", "artículo de investigación", "paper"],
+      "fuente": "convencion",
+      "portada": "ninguna",
+      "capitulos": false,
+      "secciones": [
+        {"clave": "introduccion", "nombre": "Introducción", "variantes": ["Introducción"], "solo": false, "nivel": 1,
+         "contenido": "Problema, antecedentes inmediatos, vacío y objetivo o pregunta."},
+        {"clave": "metodo", "nombre": "Método", "variantes": ["Método", "Métodos", "Metodología", "Materiales y métodos"], "solo": false, "nivel": 1,
+         "contenido": "Diseño, datos o fuentes, procedimiento y análisis, con detalle suficiente para repetirlo."},
+        {"clave": "resultados", "nombre": "Resultados", "variantes": ["Resultados"], "solo": false, "nivel": 1,
+         "contenido": "Hallazgos con tablas y figuras, sin interpretarlos todavía."},
+        {"clave": "discusion", "nombre": "Discusión", "variantes": ["Discusión", "Resultados y discusión"], "solo": false, "nivel": 1,
+         "contenido": "Qué significan los resultados frente a la literatura, límites y aporte."}
+      ],
+      "opcionales": [
+        {"clave": "conclusiones", "nombre": "Conclusiones", "variantes": ["Conclusiones", "Conclusión"], "contenido": "Si la revista las pide aparte de la discusión."},
+        {"clave": "agradecimientos", "nombre": "Agradecimientos", "variantes": ["Agradecimientos"], "contenido": "Financiamiento y apoyos, si corresponde."}
+      ],
+      "previos": {"indice": "no", "resumen": "obligatorio", "palabras_clave": "obligatorio"},
+      "finales": {"referencias": "obligatorio", "anexos": "opcional"},
+      "extension": {"pregrado": [8, 15], "maestria": [12, 20], "doctorado": [15, 25], "postdoctorado": [15, 30]},
+      "por_nivel": {
+        "pregrado": "Poco habitual; si se pide, un caso acotado con método descriptivo.",
+        "maestria": "Hallazgos propios sobre un caso, con método justificado.",
+        "doctorado": "Contribución delimitada frente a los trabajos más cercanos.",
+        "postdoctorado": "Las normas de la revista de destino mandan sobre esta estructura y sobre el formato UAP."
+      },
+      "variantes": {
+        "revision": {
+          "descripcion": "Artículo de revisión o teórico, sin método empírico propio.",
+          "fuente": "convencion",
+          "secciones": [
+            {"clave": "introduccion", "nombre": "Introducción", "variantes": ["Introducción"], "solo": false, "nivel": 1,
+             "contenido": "Problema, alcance de la revisión y criterio de selección de las fuentes."},
+            {"clave": "conclusiones", "nombre": "Conclusiones", "variantes": ["Conclusiones", "Conclusión", "Consideraciones finales", "Reflexiones finales"], "solo": false, "nivel": 1,
+             "contenido": "Qué se sabe, qué falta y qué se propone."}
+          ],
+          "opcionales": []
+        }
+      }
+    },
+    "perfil": {
+      "nombre": "Perfil de tesis",
+      "sinonimos": ["perfil de tesis", "perfil de investigación", "perfil de proyecto", "proyecto de tesis", "protocolo de investigación", "anteproyecto"],
+      "fuente": "convencion",
+      "portada": "datos",
+      "capitulos": false,
+      "secciones": [
+        {"clave": "introduccion", "nombre": "Introducción", "variantes": ["Introducción", "Antecedentes"], "solo": false, "nivel": null,
+         "contenido": "Tema, contexto y antecedentes que llevan al problema."},
+        {"clave": "planteamiento", "nombre": "Planteamiento del problema", "variantes": ["Planteamiento del problema", "Problema de investigación", "Formulación del problema", "Problematización"], "solo": false, "nivel": null,
+         "contenido": "Situación problemática, delimitación y pregunta de investigación."},
+        {"clave": "objetivos", "nombre": "Objetivos", "variantes": ["Objetivos"], "solo": false, "nivel": null,
+         "contenido": "Objetivo general y específicos, verificables y coherentes con la pregunta."},
+        {"clave": "justificacion", "nombre": "Justificación", "variantes": ["Justificación"], "solo": false, "nivel": null, "orden": false,
+         "contenido": "Por qué importa el estudio y para quién; su posición varía según el reglamento."},
+        {"clave": "marco", "nombre": "Marco teórico", "variantes": ["Marco teórico", "Marco referencial", "Marco conceptual", "Fundamentación teórica"], "solo": false, "nivel": null,
+         "contenido": "Conceptos y antecedentes que guiarán el análisis, con fuentes leídas."},
+        {"clave": "metodologia", "nombre": "Metodología", "variantes": ["Metodología", "Marco metodológico", "Diseño metodológico", "Método"], "solo": false, "nivel": null,
+         "contenido": "Enfoque, tipo y diseño, población o fuentes, técnicas e instrumentos, plan de análisis."},
+        {"clave": "cronograma", "nombre": "Cronograma", "variantes": ["Cronograma", "Plan de trabajo"], "solo": false, "nivel": null,
+         "contenido": "Actividades y plazos, en tabla."}
+      ],
+      "opcionales": [
+        {"clave": "hipotesis", "nombre": "Hipótesis", "variantes": ["Hipótesis"], "contenido": "Solo si el enfoque la requiere."},
+        {"clave": "presupuesto", "nombre": "Presupuesto", "variantes": ["Presupuesto"], "contenido": "Si el reglamento lo pide."},
+        {"clave": "esquema", "nombre": "Índice tentativo", "variantes": ["Índice tentativo", "Esquema de contenidos"], "contenido": "Capítulos previstos para la tesis."}
+      ],
+      "previos": {"indice": "opcional", "resumen": "no", "palabras_clave": "no"},
+      "finales": {"referencias": "obligatorio", "anexos": "opcional"},
+      "extension": {"pregrado": [10, 20], "maestria": [15, 30], "doctorado": [20, 40], "postdoctorado": null},
+      "por_nivel": {
+        "pregrado": "Problema acotado y factible; método descriptivo o documental bien dicho.",
+        "maestria": "Diseño justificado y marco teórico articulado con las categorías del análisis.",
+        "doctorado": "Vacío identificado en la literatura y contribución prevista, delimitada.",
+        "postdoctorado": "Proyecto según las bases de la convocatoria."
+      },
+      "variantes": {}
+    },
+    "tesis": {
+      "nombre": "Tesis",
+      "sinonimos": ["tesis de grado", "tesis de licenciatura", "tesis de maestría", "tesis doctoral"],
+      "fuente": "convencion",
+      "portada": "datos",
+      "capitulos": true,
+      "secciones": [
+        {"clave": "introduccion", "nombre": "Introducción", "variantes": ["Introducción"], "solo": false, "nivel": 1,
+         "contenido": "Problema, pregunta, objetivos, justificación y estructura de la tesis."},
+        {"clave": "marco", "nombre": "Marco teórico", "variantes": ["Marco teórico", "Marco referencial", "Marco conceptual", "Fundamentación teórica", "Estado del arte", "Revisión de la literatura"], "solo": false, "nivel": 1,
+         "contenido": "Antecedentes y categorías que se usan después en el análisis."},
+        {"clave": "metodologia", "nombre": "Metodología", "variantes": ["Metodología", "Marco metodológico", "Diseño metodológico", "Método", "Materiales y métodos"], "solo": false, "nivel": 1,
+         "contenido": "Enfoque, diseño, población o fuentes, técnicas, instrumentos y análisis; límites."},
+        {"clave": "resultados", "nombre": "Resultados", "variantes": ["Resultados", "Análisis de resultados", "Presentación de resultados", "Presentación y análisis de resultados", "Análisis e interpretación de resultados"], "solo": false, "nivel": 1,
+         "contenido": "Hallazgos ordenados por objetivo, con tablas y figuras; discusión si va junta."},
+        {"clave": "conclusiones", "nombre": "Conclusiones", "variantes": ["Conclusiones", "Conclusión"], "solo": false, "nivel": 1,
+         "contenido": "Respuesta a cada objetivo y a la pregunta; aporte y límites."}
+      ],
+      "opcionales": [
+        {"clave": "planteamiento", "nombre": "Planteamiento del problema", "variantes": ["Planteamiento del problema"], "contenido": "Capítulo propio si no va en la introducción."},
+        {"clave": "discusion", "nombre": "Discusión", "variantes": ["Discusión"], "contenido": "Capítulo propio si no va con los resultados."},
+        {"clave": "recomendaciones", "nombre": "Recomendaciones", "variantes": ["Recomendaciones"], "contenido": "Junto a las conclusiones o aparte."},
+        {"clave": "propuesta", "nombre": "Propuesta", "variantes": ["Propuesta"], "contenido": "Si la modalidad o la carrera la exigen."}
+      ],
+      "previos": {"indice": "obligatorio", "resumen": "obligatorio", "palabras_clave": "opcional"},
+      "finales": {"referencias": "obligatorio", "anexos": "opcional"},
+      "extension": {"pregrado": [60, 120], "maestria": [80, 150], "doctorado": [150, 300], "postdoctorado": null},
+      "por_nivel": {
+        "pregrado": "Aplicación de método a un caso; aporte modesto y bien delimitado.",
+        "maestria": "Hallazgos propios con marco teórico articulado y método justificado.",
+        "doctorado": "Aporte original al campo, método replicable y estado del arte amplio.",
+        "postdoctorado": "No corresponde: el postdoctorado produce artículos o informes."
+      },
+      "variantes": {}
+    },
+    "otro": {
+      "nombre": "Otro",
+      "sinonimos": [],
+      "fuente": "convencion",
+      "portada": "ninguna",
+      "capitulos": false,
+      "secciones": [],
+      "opcionales": [],
+      "previos": {"indice": "opcional", "resumen": "opcional", "palabras_clave": "opcional"},
+      "finales": {"referencias": "opcional", "anexos": "opcional"},
+      "extension": {"pregrado": null, "maestria": null, "doctorado": null, "postdoctorado": null},
+      "por_nivel": {},
+      "variantes": {}
+    }
+  }
+}
