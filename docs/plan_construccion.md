@@ -108,36 +108,44 @@ salida legible por máquina y código de salida 0 (sin problemas),
 
 ## Orden de trabajo vigente (2026-11-14)
 
-Lo que se puede construir sin insumos del usuario, en este orden.
-Cada bloque se prueba con un caso real antes de marcarse.
+Hecho en esta fecha, cada bloque con su prueba: ítem 13 (comando de
+encargo), ítem 10 (tipos de trabajo), los límites conocidos de las
+capas 1 y 2 y el ítem 12 (análisis de datos). El control final
+quedó enlazado con las piezas nuevas: reconoce `perfil` y `tesis`,
+pasa la variante `estructura:` del encargo al verificador de formato
+y compara las cifras del texto con el análisis cuando el encargo
+tiene `analisis/resultados/resultados.json`.
 
-1. **Ítem 13, comando de inicio de encargo.** Primero porque el hook
-   y el control final dependen de `encargo.md`.
-2. **Ítem 10, skills por tipo de trabajo.** Una definición única de
-   cada tipo (secciones obligatorias, portada, extensión habitual
-   por nivel) que leen el redactor, el constructor y el verificador
-   de formato, para que la regla no viva en tres sitios.
-3. **Límites conocidos de las capas 1 y 2**, anotados en
-   `docs/pruebas_capas_1_2.md`: citas con localizador separado del
-   año, apellidos compuestos, preprints de arXiv en la verificación
-   de referencias y entregables `.xlsx` en el control final.
-4. **Ítem 12, plantillas de análisis de datos**, con un conjunto de
-   datos abierto real.
-5. Cierre: regresión completa, `PROYECTO.md` y registro de pruebas.
+Lo que sigue necesita al usuario:
 
-Quedan fuera hasta tener insumos: ítem 11 (libros de metodología),
-ítem 14 (trabajos calificados) y las tres decisiones abiertas de
-`PROYECTO.md` (márgenes UAP, monografías con capítulos, insistencia
-del hook). Ninguna pieza nueva debe decidirlas por su cuenta: se
-dejan configurables y con el comportamiento actual por defecto.
+1. En su equipo: instalar, activar el hook, definir las variables de
+   entorno, probar Zotero y repetir la prueba de aceptación
+   (`PROYECTO.md`, "Pasos pendientes").
+2. Decisiones abiertas de `PROYECTO.md`: márgenes UAP, monografías
+   con capítulos, insistencia del hook y si `/encargo` puede
+   activarse sin escribirlo.
+3. Ítem 11: libros de metodología y su ubicación.
+4. Ítem 14: tres a cinco trabajos ya calificados.
+5. Confirmar con el reglamento de la carrera la estructura de
+   informe, artículo, perfil y tesis en `tipos.json`.
+
+Sin esos insumos todavía se puede: generar el índice automático en
+el constructor (tesis y monografía por capítulos dan hoy un aviso
+por su falta) y controlar entregables `.pptx` y `.pdf`.
 
 ## Capa 3 — profundidad académica
-- [ ] 10. Skills por tipo de trabajo: ensayo, monografía, perfil de
-       tesis, tesis, artículo, informe.
+- [x] 10. Skills por tipo de trabajo: ensayo, monografía, perfil de
+       tesis, tesis, artículo, informe. Definición única en
+       `skills/tipos-de-trabajo/tipos.json`. Solo ensayo y monografía
+       salen de las reglas del usuario; el resto es convención
+       general a confirmar con el reglamento de la carrera.
 - [ ] 11. Skills por método: documental, cualitativo, cuantitativo,
        jurídico. Insumo pendiente: libros de metodología del usuario
        y su ubicación.
-- [ ] 12. Plantillas de análisis de datos (requiere instalar pandas).
+- [x] 12. Plantillas de análisis de datos: skill `analisis-de-datos`
+       (perfilar, analizar, exportar a xlsx y comparar las cifras del
+       texto con el análisis). Probada con dos conjuntos de datos
+       abiertos reales; falta probar el xlsx en Excel.
 - [x] 13. Comando de inicio de encargo: crea carpeta, `encargo.md` y
        permite retomar en otra sesión. `encargo.py` probado en Linux
        (51 casos); el comando `/encargo` falta probarlo en una sesión

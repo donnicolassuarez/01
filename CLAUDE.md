@@ -8,8 +8,9 @@ documentos académicos de Don Nico (pregrado a postdoctorado).
   productor, verificador, revisor.
 - `commands/` — comando `/encargo` (director: inicia, retoma y
   cierra encargos).
-- `skills/` — niveles-academicos (perfiles, rúbrica, scripts) y
-  verificar-docx-generado.
+- `skills/` — niveles-academicos (perfiles, rúbrica, scripts),
+  tipos-de-trabajo (estructura por tipo), analisis-de-datos
+  (análisis reproducible y xlsx) y verificar-docx-generado.
 - `hooks/` — hook de bloqueo de entrega (evento Stop) y el fragmento
   de `settings.json` que lo activa.
 - `pruebas/` — casos de prueba, generadores de casos y salidas de

@@ -73,7 +73,7 @@ VACIAS = {"de", "del", "la", "las", "el", "los", "y", "e", "o", "u", "en", "a", 
           "con", "por", "para", "su", "sus", "un", "una", "unos", "unas", "que", "se",
           "lo", "como", "sobre", "entre", "desde", "hacia", "sin"}
 PROHIBIDOS_EN_NOMBRE = re.compile(r'[<>:"/\\|?*\x00-\x1f]')
-CAMPOS_ORDEN = ("tema", "tipo", "nivel", "paginas", "formato", "estado", "revisor", "para",
+CAMPOS_ORDEN = ("tema", "tipo", "estructura", "nivel", "paginas", "formato", "estado", "revisor", "para",
                 "categoria", "materia", "docente", "fecha_entrega", "creado")
 
 
@@ -672,6 +672,7 @@ def cmd_nuevo(args):
     tipo, nivel = CON_TILDE.get(tipo, tipo), CON_TILDE.get(nivel, nivel)
     campos = {"tema": tema, "tipo": tipo, "nivel": nivel, "paginas": paginas, "formato": formato,
               "estado": "en curso", "revisor": "sí" if args.con_revisor else None,
+              "estructura": una_linea(args.estructura) if args.estructura else None,
               "para": para, "categoria": categoria,
               "materia": una_linea(args.materia) if args.materia else None,
               "docente": una_linea(args.docente) if args.docente else None,
@@ -869,6 +870,8 @@ def analizador():
     n.add_argument("--con-revisor", dest="con_revisor", action="store_true",
                    help="sumar el revisor aunque sea pregrado")
     n.add_argument("--nota", help="nota libre para la sección Notas")
+    n.add_argument("--estructura", help="variante del tipo según la skill tipos-de-trabajo "
+                   "(p. ej. capitulos para una monografía por capítulos)")
     for nombre in ("estado", "retomar"):
         e = sub.add_parser(nombre, parents=[comunes], help="diagnóstico para retomar")
         e.add_argument("carpeta", help="ruta o parte del nombre de la carpeta")

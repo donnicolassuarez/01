@@ -19,6 +19,11 @@
       "estado": "ok",
       "resumen": "0 errores, 0 avisos; páginas: 5 (pedido: 5)"
     },
+    "cifras": {
+      "codigo": -1,
+      "estado": "no aplica",
+      "resumen": "el encargo no tiene analisis/resultados/resultados.json"
+    },
     "referencias": {
       "codigo": -1,
       "estado": "no ejecutado",

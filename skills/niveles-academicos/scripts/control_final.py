@@ -52,6 +52,10 @@ Controles y política (aprobado_mecanico = ningún control bloquea):
               que no estén al día). Bloquea con COPIA o CASI IDÉNTICA.
               Sin ningún PDF ni texto en fuentes/: "no ejecutado" y
               BLOQUEA (solo se cita lo descargado y leído).
+  cifras      solo si existe analisis/resultados/resultados.json: las
+              cifras del texto deben ser el redondeo correcto de un valor
+              del análisis (cifras_texto.py de la skill analisis-de-datos);
+              una discrepancia BLOQUEA.
   formato     verificar_formato.py con --tipo y páginas del encargo:
               bloquea si hay algún ERROR.
   referencias verificar_referencias.py (red): no bloquea. Las DUDOSA y
@@ -95,9 +99,9 @@ from pathlib import Path
 
 AQUI = Path(__file__).resolve().parent
 TIPOS = {"ensayo": "ensayo", "monografia": "monografia", "informe": "informe",
-         "articulo": "articulo", "otro": "otro"}
+         "articulo": "articulo", "perfil": "perfil", "tesis": "tesis", "otro": "otro"}
 NIVELES = ("postdoctorado", "doctorado", "maestria", "pregrado")
-ORDEN = ("citas", "similitud", "formato", "referencias", "fuentes")
+ORDEN = ("citas", "similitud", "formato", "cifras", "referencias", "fuentes")
 NO_BLOQUEAN_SI_NO_CORREN = ("referencias", "fuentes")
 TIEMPO = {"cruzar_citas.py": 300, "extraer_texto.py": 900, "similitud_fuentes.py": 900,
           "verificar_formato.py": 900, "verificar_referencias.py": 1800}
@@ -153,7 +157,8 @@ def salida_utf8():
 
 def correr(script, *argumentos):
     """Ejecuta un script hermano. Devuelve (código, json o None, stderr)."""
-    ruta = AQUI / script
+    ruta = script if isinstance(script, Path) else AQUI / script
+    script = ruta.name
     if not ruta.is_file():
         return -1, None, f"no se encuentra {ruta}"
     entorno = dict(os.environ, PYTHONIOENCODING="utf-8", PYTHONUTF8="1")
@@ -189,7 +194,7 @@ def recortar(texto, n=160):
 def leer_encargo(carpeta):
     """Campos de encargo.md: nivel, tipo, paginas (min, max), estado, y avisos."""
     datos = {"nivel": None, "tipo": None, "min": None, "max": None, "estado": "", "estado_texto": "",
-             "paginas_texto": None, "existe": False}
+             "paginas_texto": None, "existe": False, "variante": None}
     avisos = []
     ruta = carpeta / "encargo.md"
     if not ruta.is_file():
@@ -201,7 +206,7 @@ def leer_encargo(carpeta):
     for linea in lineas:
         # mismo criterio que el hook: sin tildes, sin * ni _, sin viñetas, minúsculas
         limpia = sin_tildes(linea).replace("*", "").replace("_", "").strip(" \t-#>").lower()
-        m = re.match(r"(nivel|tipo|paginas|extension|estado)\s*:\s*(.*)$", limpia)
+        m = re.match(r"(nivel|tipo|paginas|extension|estado|estructura|variante)\s*:\s*(.*)$", limpia)
         if not m:
             continue
         clave, valor = m.group(1), re.sub(r"\s+", " ", m.group(2)).strip(" .`'\"")
@@ -217,6 +222,9 @@ def leer_encargo(carpeta):
             datos["tipo"] = next((TIPOS[t] for t in TIPOS if re.search(rf"\b{t}\b", valor)), None)
             if datos["tipo"] is None:
                 avisos.append(f"tipo no reconocido en encargo.md: «{valor}»; formato sin --tipo")
+        elif clave in ("estructura", "variante") and datos["variante"] is None:
+            # variante del tipo (p. ej. monografía por capítulos); la valida verificar_formato.py
+            datos["variante"] = re.sub(r"[^a-z0-9]+", "_", valor).strip("_") or None
         elif clave in ("paginas", "extension") and datos["paginas_texto"] is None:
             datos["paginas_texto"] = original
             datos["min"], datos["max"] = leer_paginas(valor)
@@ -515,6 +523,8 @@ def control_formato(docx, encargo, detalle, avisos):
     argumentos = [docx, "--json"]
     if encargo["tipo"]:
         argumentos += ["--tipo", encargo["tipo"]]
+        if encargo.get("variante"):
+            argumentos += ["--variante", encargo["variante"]]
     if encargo["min"]:
         argumentos += ["--min-paginas", encargo["min"]]
     if encargo["max"]:
@@ -541,6 +551,24 @@ def control_formato(docx, encargo, detalle, avisos):
         resumen += f" (pedido: {encargo['paginas_texto']})"
     estado = "bloquea" if (codigo == 1 or errores) else ("aviso" if datos.get("avisos") else "ok")
     return control(codigo, estado, resumen)
+
+
+def control_cifras(docx, carpeta, detalle):
+    """Cifras del texto contra analisis/resultados/resultados.json, si hay análisis."""
+    resultados = carpeta / "analisis" / "resultados" / "resultados.json"
+    if not resultados.is_file():
+        return no_aplica("el encargo no tiene analisis/resultados/resultados.json")
+    script = AQUI.parent.parent / "analisis-de-datos" / "scripts" / "cifras_texto.py"
+    codigo, datos, error = correr(script, docx, resultados, "--json")
+    if not isinstance(datos, dict) or "cifras" not in datos:
+        return no_ejecutado(codigo, "cifras_texto.py no se pudo ejecutar: "
+                            + (ultima_linea(error) or (datos or {}).get("error") or "sin salida"), True)
+    resumen = ", ".join(f"{k} {v}" for k, v in (datos.get("resumen") or {}).items())
+    malas = [c for c in datos["cifras"] if "DISCREPA" in str(c.get("estado", "")).upper()]
+    for c in malas[:MAX_LISTA]:
+        detalle["bloqueos"].append(("cifras", f"la cifra «{c.get('texto')}» no cuadra con el análisis — "
+                                    f"en: {recortar(c.get('contexto'), 120)}"))
+    return control(codigo, "bloquea" if (codigo == 1 or malas) else "ok", resumen)
 
 
 def control_referencias(docx, sin_red, pendientes):
@@ -775,6 +803,7 @@ def main(argv=None):
         controles["citas"], datos_citas = control_citas(docx, detalle, avisos)
         controles["similitud"] = control_similitud(docx, fuentes, detalle, avisos)
         controles["formato"] = control_formato(docx, encargo, detalle, avisos)
+        controles["cifras"] = control_cifras(docx, carpeta, detalle)
         controles["referencias"] = control_referencias(docx, args.sin_red, pendientes)
         controles["fuentes"] = control_fuentes(datos_citas, fuentes, pendientes, avisos) \
             if fuentes.is_dir() else no_ejecutado(-1, "no existe la carpeta fuentes/", False)

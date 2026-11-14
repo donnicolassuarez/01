@@ -57,18 +57,42 @@ python skills/niveles-academicos/scripts/cruzar_citas.py pruebas/casos/citas_pru
   Esas fuentes van a `descartadas.md` y el usuario las consigue.
 - Las revistas de SciELO Bolivia registran su DOI por cuenta propia:
   salen en la búsqueda normal pero sin la marca SciELO.
-- En Semantic Scholar y OpenAlex el apellido se toma de la última
-  palabra del nombre; los apellidos compuestos pueden salir mal.
-- `cruzar_citas.py` no detecta localizadores que no siguen al año
-  ("I, cap. 1") y una cita con un solo apellido de una referencia de
-  dos apellidos sale como "sin referencia" más "no citada".
+- Los apellidos compuestos sin partícula no se adivinan en Semantic
+  Scholar ni OpenAlex ("A. García Sánchez" sale "Sánchez, A. G.");
+  con partícula sí ("de Souza", "van der Werf"), y si el trabajo
+  también viene de Crossref mandan sus autores.
+- `cruzar_citas.py` no empareja un apellido compuesto sin apellido en
+  común ("Linera" frente a "García Linera") ni trata como
+  discordancia una referencia de igual apellido y otro año.
+- `verificar_referencias.py` puede tardar minutos si arXiv limita las
+  peticiones; en ese caso marca "sin comprobar".
 - `similitud_fuentes.py` no detecta paráfrasis ni traducciones.
-- `control_final.py` solo controla `.docx`.
+- `control_final.py` controla `.docx` y `.xlsx`, no `.pptx` ni `.pdf`.
+  En un xlsx solo ve valores guardados, no fórmulas sin calcular.
+- `cifras_texto.py` sabe si un número existe en el análisis, no a qué
+  variable se refiere; los enteros pequeños coinciden por azar.
+- El constructor no genera índice.
 - El hook bloquea una vez por turno y confía en el contenido de
   `controles.json` y del informe; sí exige que la huella coincida
   con el archivo real.
 - El hook no ve un encargo cuya ruta no aparezca en la transcripción
   ni en la carpeta de trabajo.
+
+## Pruebas del 2026-11-14 (capa 3 y límites)
+
+| Pieza | Prueba | Resultado |
+|---|---|---|
+| `encargo.py` y `/encargo` | `pruebas/probar_encargo.py` | 51 casos sin fallos |
+| Tipos de trabajo | `pruebas/probar_tipos.py` | 50 casos sin fallos; regresiones idénticas |
+| Límites de las capas 1 y 2 | `pruebas/probar_limites.py` | 37 casos sin fallos (3 necesitan red) |
+| Análisis de datos | `pruebas/probar_datos.py` | 51 casos sin fallos; fórmulas recalculadas con LibreOffice sin diferencias |
+| Control final con variante de capítulos | Monografía real con `estructura: capitulos` | Los errores de estructura bajan de 3 a 1 |
+| Control final con cifras | Texto con dos cifras alteradas | Bloquea y nombra las dos |
+
+Datos reales usados en el análisis, versionados en
+`pruebas/casos/datos/` con su procedencia: Cotner, Salehi y Ballen
+(2018), doi:10.5061/dryad.53t31, CC0; y Espinoza Mina (2024),
+doi:10.5281/zenodo.12702201, CC BY 4.0.
 
 ## Decisiones de formato que las reglas no fijaban
 

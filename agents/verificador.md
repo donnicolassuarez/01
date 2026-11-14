@@ -43,8 +43,11 @@ Las herramientas están en
 4. **Correspondencia.** Toda cita del texto está en referencias y
    toda referencia está citada. Autor y año coinciden. Lo revisa el
    control `citas`; mira también sus avisos.
-5. **Cifras.** Las cifras del texto coinciden con el script de
-   análisis o con la fuente.
+5. **Cifras.** Las cifras del texto coinciden con el análisis o
+   con la fuente. Si el encargo tiene `analisis/`, el control
+   `cifras` ya las comparó con `resultados.json`: una discrepancia
+   bloquea, y cada cifra "no hallada" se comprueba contra la fuente
+   que cita.
 6. **Marcadores.** "por verificar", "pendiente", "completar",
    "TODO", "[cita]", "XXX" y corchetes vacíos. Cualquiera bloquea.
    Los busca el control `formato`; revisa también sus avisos.

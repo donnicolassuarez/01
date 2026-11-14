@@ -17,7 +17,12 @@ postdoctorado.
 | Capa 2: cruce de citas, similitud, constructor, verificador de formato y control final | Probados en Linux con casos reales y defectos sembrados |
 | Capa 2: hook de bloqueo | Probado en Linux (24 casos); no está activo: falta fusionar `hooks/settings_hook.json` en `settings.json` |
 | Prueba de aceptación de las capas 1 y 2 | Corrida en la nube el 2026-11-14: aprobada en la segunda vuelta. Falta repetirla en el equipo del usuario con los agentes instalados |
-| Capas 3 y 4 (skills por tipo y método, banco de pruebas) | Por construir; requieren insumos del usuario |
+| Capa 3: comando `/encargo` (ítem 13) | `encargo.py` probado en Linux (51 casos); el comando falta probarlo en una sesión real |
+| Capa 3: skills por tipo de trabajo (ítem 10) | Probadas en Linux (50 casos); informe, artículo, perfil y tesis son convención general a confirmar |
+| Capa 3: análisis de datos (ítem 12) | Probado con dos conjuntos de datos reales (51 casos); falta Excel |
+| Límites conocidos de las capas 1 y 2 | Corregidos y probados (37 casos) |
+| Capa 3: skills por método (ítem 11) | Por construir; falta el insumo del usuario |
+| Capa 4: banco de pruebas (ítem 14) | Por construir; falta el insumo del usuario |
 
 El detalle de cada prueba, lo que quedó sin probar y los límites
 conocidos están en `docs/pruebas_capas_1_2.md`.
@@ -47,7 +52,9 @@ con el director coordinando. Archivos en
   cuando Crossref solo había limitado las peticiones.
 
 ## Pasos pendientes en el equipo del usuario
-1. Traer la rama y ejecutar `instalar.ps1`.
+1. Traer la rama y ejecutar `instalar.ps1` (ahora copia también el
+   comando `/encargo` y las skills nuevas). Instalar `matplotlib`.
+   Si el Escritorio está redirigido, definir `ENCARGOS_RAIZ`.
 2. Revisar `hooks/settings_hook.json` y fusionarlo en
    `C:\Users\Usuario\.claude\settings.json` junto al hook de RTK.
 3. Definir las variables de entorno opcionales: `OPENALEX_API_KEY`
@@ -78,10 +85,24 @@ con el director coordinando. Archivos en
 - 2026-11-14: la skill verificar-docx-generado empieza por
   `verificar_formato.py`; el chequeo manual del XML queda como
   respaldo, porque no ve el espaciado definido en los estilos.
+- 2026-11-14: la estructura de cada tipo de trabajo vive en un solo
+  archivo, `skills/tipos-de-trabajo/tipos.json`, que leen el
+  constructor y el verificador. La monografía por capítulos es una
+  variante que se elige con `estructura: capitulos` en `encargo.md`;
+  no está activa por defecto.
+- 2026-11-14: si un encargo tiene análisis de datos, una cifra del
+  texto que no cuadra con el análisis bloquea la entrega.
+- 2026-11-14: los encargos se inician y retoman con `/encargo`; el
+  estado "aprobado" solo se puede anotar con informe APROBADO y
+  controles en regla sobre el mismo archivo.
 - 2026-11-11: márgenes, sangrías y espaciados del constructor fijados
   en `docs/pruebas_capas_1_2.md`, a falta de norma UAP escrita.
 
 ## Sin resolver
+- ¿`/encargo` puede activarse solo ante un pedido de trabajo, o
+  únicamente cuando se escribe? Hoy puede activarse solo.
+- Confirmar con el reglamento de la carrera la estructura de informe,
+  artículo, perfil y tesis.
 - Confirmar márgenes y espaciados del formato UAP.
 - ¿La regla de portada en blanco e Introducción, Desarrollo y
   Conclusiones vale para monografías con capítulos?
