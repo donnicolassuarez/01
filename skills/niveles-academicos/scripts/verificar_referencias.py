@@ -5,7 +5,8 @@ Uso: python verificar_referencias.py <archivo .txt, .md o .docx> [--json]
 
 Toma las líneas posteriores al último encabezado «Referencias» o
 «Bibliografía» que tengan un año entre paréntesis y marca cada una como
-ENCONTRADA, DUDOSA (título hallado con año distinto) o NO ENCONTRADA.
+ENCONTRADA, DUDOSA (título hallado con año distinto), NO ENCONTRADA o
+SIN COMPROBAR (Crossref no respondió: límite de uso o red caída).
 Libros, leyes y documentos oficiales suelen salir NO ENCONTRADA y se
 comprueban contra el archivo guardado en fuentes/.
 
@@ -23,6 +24,8 @@ import os
 import re
 import sys
 import unicodedata
+import time
+import urllib.error
 import urllib.parse
 import urllib.request
 import zipfile
@@ -44,7 +47,15 @@ def pedir(url):
     if clave and "api.openalex.org" in url:  # OpenAlex exige clave gratuita desde 2026
         cabeceras["Authorization"] = f"Bearer {clave}"
     solicitud = urllib.request.Request(url, headers=cabeceras)
-    with urllib.request.urlopen(solicitud, timeout=25) as respuesta:
+    for intento in range(3):  # 429 y 5xx son pasajeros: se reintenta con pausa
+        try:
+            respuesta = urllib.request.urlopen(solicitud, timeout=25)
+            break
+        except urllib.error.HTTPError as error:
+            if error.code not in (429, 500, 502, 503, 504) or intento == 2:
+                raise
+            time.sleep(3 * (intento + 1))
+    with respuesta:
         return json.loads(respuesta.read().decode("utf-8"))
 
 
@@ -136,6 +147,11 @@ def evaluar(ref):
             dudosa = dudosa or f"año distinto ({anio} en la referencia) | {detalle}"
     if dudosa:
         return "DUDOSA", dudosa, len(errores)
+    # Si Crossref no llegó a responder (límite de uso, caída, sin red), la
+    # referencia no quedó comprobada: decir "no encontrada" sería falso.
+    pasajero = any(e.startswith("en_crossref") and " 404" not in e for e in errores)
+    if pasajero:
+        return "SIN COMPROBAR", "; ".join(errores), len(errores)
     return ("NO ENCONTRADA", "; ".join(errores) or "sin coincidencia de título en Crossref ni OpenAlex",
             len(errores))
 
@@ -154,7 +170,7 @@ def main():
     if not referencias:
         print("No se hallaron referencias en el archivo.", file=sys.stderr)
         sys.exit(2)
-    conteo = {"ENCONTRADA": 0, "DUDOSA": 0, "NO ENCONTRADA": 0}
+    conteo = {"ENCONTRADA": 0, "DUDOSA": 0, "NO ENCONTRADA": 0, "SIN COMPROBAR": 0}
     resultados, sin_red = [], 0
     for numero, ref in enumerate(referencias, 1):
         estado, detalle, fallos = evaluar(ref)
