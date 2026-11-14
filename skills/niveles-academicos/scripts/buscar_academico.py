@@ -8,6 +8,14 @@ Uso:
 
 --max es el número de resultados pedidos a CADA base (por defecto 20).
 Los resultados se unen por DOI o, sin DOI, por título normalizado + año.
+Autores: Crossref los trae con apellido y nombre separados; OpenAlex,
+Semantic Scholar y arXiv, como nombre completo, y el apellido se deduce
+(última palabra más partículas: "Guido R. van der Werf" -> "van der Werf,
+G. R."). Al unir duplicados mandan los autores de Crossref. Límite: un
+apellido compuesto sin partícula ("Jorge Cardoso de Azevedo" sale "de
+Azevedo, J. C."; "Adrian Rolando Riascos Vallejos", "Vallejos, A. R. R.")
+no se adivina; si la obra no llega también de Crossref, revisar a mano.
+Crossref tampoco es infalible: copia lo que depositó la editorial.
 Orden: primero los que aparecen en más bases, luego por número de citas.
 
 Claves (variables de entorno, opcionales):
@@ -79,14 +87,39 @@ def autor_formateado(apellido, nombre):
     return f"{apellido}, {iniciales}" if iniciales else apellido
 
 
+# Partículas que forman parte del apellido cuando preceden a la última palabra:
+# "Guido R. van der Werf" -> "van der Werf, G. R."; "A. D. de Almeida" ->
+# "de Almeida, A. D."; "A. C. Do Rêgo" -> "Do Rêgo, A. C.". "e" e "y" solo en
+# minúscula ("Chaves e Carvalho"): en mayúscula suelen ser una inicial.
+PARTICULAS_APELLIDO = {"de", "del", "la", "las", "los", "van", "von", "der", "den", "ter",
+                       "ten", "da", "das", "do", "dos", "di", "du", "le", "lo"}
+CONECTORES_APELLIDO = {"e", "y"}
+
+
 def autor_desde_nombre_completo(nombre):
-    """'Juan Carlos Pérez' -> 'Pérez, J. C.' (última palabra como apellido)."""
+    """'Juan Carlos Pérez' -> 'Pérez, J. C.'; 'Auke M. van der Woude' ->
+    'van der Woude, A. M.'.
+
+    El apellido es la última palabra más las partículas que la preceden.
+    Límite: un apellido compuesto sin partícula ("Adrian Rolando Riascos
+    Vallejos", "A. García Sánchez") no se puede separar del nombre y sale
+    con la última palabra ("Vallejos, A. R. R."). No se adivina: cuando la
+    misma obra llega de Crossref, unir() prefiere sus autores, que traen
+    apellido y nombre separados.
+    """
     partes = (nombre or "").strip().split()
     if not partes:
         return None
     if len(partes) == 1:
         return partes[0]
-    return autor_formateado(partes[-1], " ".join(partes[:-1]))
+    inicio = len(partes) - 1
+    while inicio > 1:  # siempre queda al menos una palabra de nombre
+        previa = partes[inicio - 1]
+        if previa.lower() in PARTICULAS_APELLIDO or previa in CONECTORES_APELLIDO:
+            inicio -= 1
+        else:
+            break
+    return autor_formateado(" ".join(partes[inicio:]), " ".join(partes[:inicio]))
 
 
 def es_scielo(*urls):
@@ -278,8 +311,15 @@ def fusionar(destino, nuevo):
     for campo in ("titulo", "doi", "tipo", "revista_o_fuente", "idioma", "url", "anio"):
         if not destino[campo] and nuevo[campo]:
             destino[campo] = nuevo[campo]
-    if len(nuevo["autores"]) > len(destino["autores"]):
+    # Autores: los de Crossref mandan (traen apellido y nombre separados; en
+    # Semantic Scholar, OpenAlex y arXiv el apellido se deduce del nombre
+    # completo). Entre bases que no son Crossref, la lista más larga.
+    nuevo_cr = "crossref" in nuevo["bases"] and bool(nuevo["autores"])
+    destino_cr = destino.get("_autores_crossref", False)
+    if (nuevo_cr and not destino_cr) or \
+            (nuevo_cr == destino_cr and len(nuevo["autores"]) > len(destino["autores"])):
         destino["autores"] = nuevo["autores"]
+        destino["_autores_crossref"] = nuevo_cr
     if nuevo["citas"] is not None:
         destino["citas"] = max(destino["citas"] or 0, nuevo["citas"])
     actual = destino["enlace_abierto"]
@@ -300,6 +340,7 @@ def unir(registros):
     """
     unidos, indice = [], {}
     for reg in registros:
+        reg["_autores_crossref"] = "crossref" in reg["bases"] and bool(reg["autores"])
         claves = [k for k in (f"d:{reg['doi']}" if reg["doi"] else None, clave_titulo(reg)) if k]
         existente = None
         for k in claves:
@@ -315,6 +356,8 @@ def unir(registros):
         for k in claves + [k for k in (f"d:{existente['doi']}" if existente["doi"] else None,
                                        clave_titulo(existente)) if k]:
             indice.setdefault(k, existente)
+    for reg in unidos:
+        reg.pop("_autores_crossref", None)
     return unidos
 
 

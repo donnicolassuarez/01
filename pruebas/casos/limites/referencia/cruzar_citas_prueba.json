@@ -1,0 +1,264 @@
+{
+  "archivo": "pruebas/casos/citas_prueba.md",
+  "total_citas": 14,
+  "citas_unicas": 10,
+  "referencias": 9,
+  "a_citas_sin_referencia": [
+    {
+      "parrafo": 16,
+      "cita": "Quispe, 2021",
+      "autor": "Quispe",
+      "anio": "2021",
+      "contexto": "…nal, y la crisis de la temporada (2024) fue grave (Quispe, 2021). Un estudio local (s. f.) no se cita formalmente."
+    }
+  ],
+  "b_referencias_no_citadas": [
+    "Hecht, S. B. (2005). Soybeans, development and conservation on the Amazon frontier. *Development and Change, 36*(2), 375–404."
+  ],
+  "c_autor_o_anio_discordante": [
+    {
+      "parrafo": 14,
+      "cita": "Fearnside, 2008",
+      "autor": "Fearnside",
+      "anio": "2008",
+      "contexto": "…azonía ha sido estudiada desde varias disciplinas (Nepstad et al., 2006; véase también Fearnside, 2008). Según el Instituto Nacional de Estadística [INE]…",
+      "problema": "el autor está en referencias pero con año 2005"
+    },
+    {
+      "parrafo": 15,
+      "cita": "Malhi et al. (2000)",
+      "autor": "Malhi",
+      "anio": "2000",
+      "contexto": "Malhi et al. (2000) explican el papel de los bosques tropicales en el…",
+      "problema": "usa «et al.» pero la obra tiene dos autores: se citan ambos"
+    },
+    {
+      "parrafo": 15,
+      "cita": "Nepstad y Stickler (2006)",
+      "autor": "Nepstad",
+      "anio": "2006",
+      "contexto": "… tropicales en el ciclo del carbono, mientras que Nepstad y Stickler (2006) revisan los mercados globales. Otros enfoques mir…",
+      "problema": "nombra 2 autores pero la obra tiene 3: va «et al.»"
+    }
+  ],
+  "d_lista_de_referencias": [
+    {
+      "tipo": "fuera de orden",
+      "referencia": "Nepstad, D. C., Stickler, C. M., y Almeida, O. T. (2006). Globalization of the Amazon soy and beef industries: Opportunities for conservation. *Conservation Biology, 20*(6), 1595–1603.",
+      "detalle": "debería ir antes de «van Dijk, T. A. (1999). *Ideología: Una aproximación multidisciplinari»"
+    }
+  ],
+  "observaciones": {
+    "localizadores": [
+      {
+        "parrafo": 15,
+        "localizador": "p. 45",
+        "contexto": "…l discurso (van Dijk, 1999) o la política plebeya (García Linera, 2008, p. 45)."
+      }
+    ],
+    "siglas_sin_presentar": [],
+    "descartados_lugar_o_periodo": [
+      {
+        "parrafo": 17,
+        "cita": "Bolivia, 2022",
+        "autor": "Bolivia",
+        "anio": "2022",
+        "contexto": "Figura 1. Superficie quemada por departamento (Bolivia, 2022)"
+      }
+    ],
+    "referencias_sin_anio": []
+  },
+  "citas": [
+    {
+      "parrafo": 14,
+      "cita": "Nepstad et al., 2006",
+      "autor": "Nepstad",
+      "anio": "2006",
+      "contexto": "…azonía ha sido estudiada desde varias disciplinas (Nepstad et al., 2006; véase también Fearnside, 2008). Según el Instituto Nacional de Estadística [INE]…",
+      "forma": "parentética",
+      "referencia": "Nepstad, D. C., Stickler, C. M., y Almeida, O. T. (2006). Globalization of the A"
+    },
+    {
+      "parrafo": 14,
+      "cita": "Fearnside, 2008",
+      "autor": "Fearnside",
+      "anio": "2008",
+      "contexto": "…azonía ha sido estudiada desde varias disciplinas (Nepstad et al., 2006; véase también Fearnside, 2008). Según el Instituto Nacional de Estadística [INE]…",
+      "forma": "parentética",
+      "referencia": "Fearnside, P. M. (2005). Deforestation in Brazilian Amazonia: History, rates, an"
+    },
+    {
+      "parrafo": 14,
+      "cita": "Instituto Nacional de Estadística [INE] (2015)",
+      "autor": "INE",
+      "anio": "2015",
+      "contexto": "…., 2006; véase también Fearnside, 2008). Según el Instituto Nacional de Estadística [INE] (2015), la población rural de Pando creció, y el mismo I…",
+      "forma": "narrativa",
+      "referencia": "Instituto Nacional de Estadística [INE]. (2015). *Censo de Población y Vivienda "
+    },
+    {
+      "parrafo": 14,
+      "cita": "INE (2015)",
+      "autor": "INE",
+      "anio": "2015",
+      "contexto": "…), la población rural de Pando creció, y el mismo INE (2015) lo confirma en otros cuadros (cf. INE, 2015).",
+      "forma": "narrativa",
+      "referencia": "Instituto Nacional de Estadística [INE]. (2015). *Censo de Población y Vivienda "
+    },
+    {
+      "parrafo": 14,
+      "cita": "INE, 2015",
+      "autor": "INE",
+      "anio": "2015",
+      "contexto": "… el mismo INE (2015) lo confirma en otros cuadros (cf. INE, 2015).",
+      "forma": "parentética",
+      "referencia": "Instituto Nacional de Estadística [INE]. (2015). *Censo de Población y Vivienda "
+    },
+    {
+      "parrafo": 15,
+      "cita": "Malhi et al. (2000)",
+      "autor": "Malhi",
+      "anio": "2000",
+      "contexto": "Malhi et al. (2000) explican el papel de los bosques tropicales en el…",
+      "forma": "narrativa",
+      "referencia": "Malhi, Y., y Grace, J. (2000). Tropical forests and atmospheric carbon dioxide. "
+    },
+    {
+      "parrafo": 15,
+      "cita": "Nepstad y Stickler (2006)",
+      "autor": "Nepstad",
+      "anio": "2006",
+      "contexto": "… tropicales en el ciclo del carbono, mientras que Nepstad y Stickler (2006) revisan los mercados globales. Otros enfoques mir…",
+      "forma": "narrativa",
+      "referencia": "Nepstad, D. C., Stickler, C. M., y Almeida, O. T. (2006). Globalization of the A"
+    },
+    {
+      "parrafo": 15,
+      "cita": "van Dijk, 1999",
+      "autor": "van Dijk",
+      "anio": "1999",
+      "contexto": "…s. Otros enfoques miran la ideología del discurso (van Dijk, 1999) o la política plebeya (García Linera, 2008, p. 45…",
+      "forma": "parentética",
+      "referencia": "van Dijk, T. A. (1999). *Ideología: Una aproximación multidisciplinaria*. Gedisa"
+    },
+    {
+      "parrafo": 15,
+      "cita": "García Linera, 2008, p. 45",
+      "autor": "García Linera",
+      "anio": "2008",
+      "contexto": "…l discurso (van Dijk, 1999) o la política plebeya (García Linera, 2008, p. 45).",
+      "forma": "parentética",
+      "referencia": "García Linera, Á. (2008). *La potencia plebeya: Acción colectiva e identidades i"
+    },
+    {
+      "parrafo": 16,
+      "cita": "Mamani, 1990",
+      "autor": "Mamani",
+      "anio": "1990",
+      "contexto": "…os pueblos andinos fueron descritas tempranamente (Mamani, 1990, como se citó en de la Cadena, 2015), y de la Cadena (2015) las interpreta como ontolo…",
+      "forma": "parentética",
+      "referencia": null
+    },
+    {
+      "parrafo": 16,
+      "cita": "de la Cadena, 2015",
+      "autor": "de la Cadena",
+      "anio": "2015",
+      "contexto": "…os pueblos andinos fueron descritas tempranamente (Mamani, 1990, como se citó en de la Cadena, 2015), y de la Cadena (2015) las interpreta como ontolo…",
+      "forma": "parentética",
+      "referencia": "de la Cadena, M. (2015). *Earth beings: Ecologies of practice across Andean worl"
+    },
+    {
+      "parrafo": 16,
+      "cita": "de la Cadena (2015)",
+      "autor": "de la Cadena",
+      "anio": "2015",
+      "contexto": "…ani, 1990, como se citó en de la Cadena, 2015), y de la Cadena (2015) las interpreta como ontologías. El Estado Plurina…",
+      "forma": "narrativa",
+      "referencia": "de la Cadena, M. (2015). *Earth beings: Ecologies of practice across Andean worl"
+    },
+    {
+      "parrafo": 16,
+      "cita": "El Estado Plurinacional de Bolivia (2024)",
+      "autor": "Estado Plurinacional de Bolivia",
+      "anio": "2024",
+      "contexto": "… la Cadena (2015) las interpreta como ontologías. El Estado Plurinacional de Bolivia (2024) presentó su contribución nacional, y la crisis de…",
+      "forma": "narrativa",
+      "referencia": "Estado Plurinacional de Bolivia. (2024). *Tercera contribución nacionalmente det"
+    },
+    {
+      "parrafo": 16,
+      "cita": "Quispe, 2021",
+      "autor": "Quispe",
+      "anio": "2021",
+      "contexto": "…nal, y la crisis de la temporada (2024) fue grave (Quispe, 2021). Un estudio local (s. f.) no se cita formalmente.",
+      "forma": "parentética",
+      "referencia": null
+    }
+  ],
+  "analisis_referencias": [
+    {
+      "referencia": "de la Cadena, M. (2015). *Earth beings: Ecologies of practice across Andean worlds*. Duke University Press.",
+      "primer_autor": "de la Cadena",
+      "sigla": null,
+      "n_autores": 1,
+      "anio": "2015"
+    },
+    {
+      "referencia": "Estado Plurinacional de Bolivia. (2024). *Tercera contribución nacionalmente determinada (NDC 3.0) 2026-2035*. UNFCCC.",
+      "primer_autor": "Estado Plurinacional de Bolivia",
+      "sigla": null,
+      "n_autores": 1,
+      "anio": "2024"
+    },
+    {
+      "referencia": "Fearnside, P. M. (2005). Deforestation in Brazilian Amazonia: History, rates, and consequences. *Conservation Biology, 19*(3), 680–688.",
+      "primer_autor": "Fearnside",
+      "sigla": null,
+      "n_autores": 1,
+      "anio": "2005"
+    },
+    {
+      "referencia": "García Linera, Á. (2008). *La potencia plebeya: Acción colectiva e identidades indígenas, obreras y populares en Bolivia*. CLACSO.",
+      "primer_autor": "García Linera",
+      "sigla": null,
+      "n_autores": 1,
+      "anio": "2008"
+    },
+    {
+      "referencia": "Hecht, S. B. (2005). Soybeans, development and conservation on the Amazon frontier. *Development and Change, 36*(2), 375–404.",
+      "primer_autor": "Hecht",
+      "sigla": null,
+      "n_autores": 1,
+      "anio": "2005"
+    },
+    {
+      "referencia": "Instituto Nacional de Estadística [INE]. (2015). *Censo de Población y Vivienda 2012: Características de la población*. INE.",
+      "primer_autor": "Instituto Nacional de Estadística",
+      "sigla": "INE",
+      "n_autores": 1,
+      "anio": "2015"
+    },
+    {
+      "referencia": "Malhi, Y., y Grace, J. (2000). Tropical forests and atmospheric carbon dioxide. *Trends in Ecology & Evolution, 15*(8), 332–337.",
+      "primer_autor": "Malhi",
+      "sigla": null,
+      "n_autores": 2,
+      "anio": "2000"
+    },
+    {
+      "referencia": "van Dijk, T. A. (1999). *Ideología: Una aproximación multidisciplinaria*. Gedisa.",
+      "primer_autor": "van Dijk",
+      "sigla": null,
+      "n_autores": 1,
+      "anio": "1999"
+    },
+    {
+      "referencia": "Nepstad, D. C., Stickler, C. M., y Almeida, O. T. (2006). Globalization of the Amazon soy and beef industries: Opportunities for conservation. *Conservation Biology, 20*(6), 1595–1603.",
+      "primer_autor": "Nepstad",
+      "sigla": null,
+      "n_autores": 3,
+      "anio": "2006"
+    }
+  ]
+}

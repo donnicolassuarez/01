@@ -3,3 +3,5 @@ openpyxl
 PyMuPDF
 requests
 pandas
+matplotlib
+# opcional: scipy (pruebas estadísticas de analizar.py; sin scipy se omiten y se avisa)

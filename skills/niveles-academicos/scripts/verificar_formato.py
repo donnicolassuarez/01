@@ -899,10 +899,10 @@ def comprobar_paginas(ruta, documento, parrafos, refs_inicio, args, informe, por
 
 
 def comprobar_tipo(parrafos, portada_fin, args, medida, informe, tt=None, est=None, aviso=None):
-    if aviso:
-        informe.agregar("o", "AVISO", aviso)
     if est is None:
         comprobar_tipo_anterior(parrafos, portada_fin, args, medida, informe)
+        if aviso:
+            informe.agregar("o", "AVISO", aviso)
         return
     if not est["secciones"] and est["portada"] == "ninguna" and not args.portada:
         informe.cerrar("o", "no aplica a este tipo")

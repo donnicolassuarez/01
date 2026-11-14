@@ -1,0 +1,35 @@
+{
+  "archivo": "Los_incendios_en_Pando_y_su_costo_climatico.docx",
+  "sha256": "7a345917c7e589cc46c73f47b047dbdd920f5b81bb9aaa1306321e9884b2eda9",
+  "fecha": "2026-11-14T04:32:14+00:00",
+  "aprobado_mecanico": true,
+  "controles": {
+    "citas": {
+      "codigo": 0,
+      "estado": "ok",
+      "resumen": "18 citas, 7 referencias; sin referencia 0, no citadas 0, discordantes 0; lista (orden/duplicadas) 0"
+    },
+    "similitud": {
+      "codigo": 0,
+      "estado": "ok",
+      "resumen": "7 fuentes comparadas; copia 0, casi idéntica 0, entre comillas 0"
+    },
+    "formato": {
+      "codigo": 0,
+      "estado": "ok",
+      "resumen": "0 errores, 0 avisos; páginas: 5 (pedido: 5)"
+    },
+    "referencias": {
+      "codigo": -1,
+      "estado": "no ejecutado",
+      "resumen": "se pidió --sin-red: la existencia de las referencias no se comprobó en Crossref ni OpenAlex"
+    },
+    "fuentes": {
+      "codigo": 0,
+      "estado": "ok",
+      "resumen": "7 referencias: con archivo 7, con ficha 7"
+    }
+  },
+  "pendientes_verificador": [],
+  "avisos": []
+}

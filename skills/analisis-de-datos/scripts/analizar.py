@@ -159,7 +159,7 @@ def preparar_datos(plan, base):
         return t
 
     df = df.apply(lambda col: col.map(limpiar)).astype(object)
-    df = df.where(df.notna(), None)
+    df = df.astype(object).where(df.notna(), None)
 
     recodificaciones = {}
     for columna, mapa in (plan.get("recodificar") or {}).items():
@@ -168,6 +168,7 @@ def preparar_datos(plan, base):
         sin_cambio = Counter(v for v in df[columna] if v is not None and v not in mapa)
         df[columna] = df[columna].map(lambda v: v if v is None or v not in mapa else
                                       (None if mapa[v] is None else str(mapa[v])))
+        df[columna] = df[columna].astype(object).where(df[columna].notna(), None)
         recodificaciones[columna] = {"mapa": mapa, "valores_sin_cambio": dict(sorted(sin_cambio.items()))}
 
     filtros = []
@@ -682,14 +683,21 @@ def escribir_md(plan, resultado, ruta_plan):
                 L += ["", texto_prueba(plan, t, t["prueba"])]
         elif t["tipo"] == "resumen":
             cab = ["Variable"] + (["Grupo"] if t["por"] else []) + [NOMBRE_ESTADISTICO[k] for k in ESTADISTICOS]
+            pedido = next((x for x in plan["tablas"] if x["id"] == t["id"]), {})
+            factor = 100 if pedido.get("mostrar_por_100") else 1
             filas = []
             for f in t["filas"]:
                 fila = [f["variable"]] + ([f["grupo"]] if t["por"] else [])
-                fila += [num(f[k]) if k in ("n", "faltantes") else num(f[k], de) for k in ESTADISTICOS]
+                fila += [num(f[k]) if k in ("n", "faltantes") else
+                         num(None if f[k] is None else f[k] * factor, de) for k in ESTADISTICOS]
                 filas.append(fila)
             L += _md_tabla(cab, filas)
+            L += [""]
+            if factor != 1:
+                L += ["Valores multiplicados por 100 para leerlos como porcentajes (resultados.json "
+                      "guarda la escala original)."]
             if t["por"]:
-                L += ["", f"Grupos según {t['por']}." + (f" Excluidas por no tener grupo: {num(t['excluidas_sin_grupo'])}."
+                L += [f"Grupos según {t['por']}." + (f" Excluidas por no tener grupo: {num(t['excluidas_sin_grupo'])}."
                                                          if t.get("excluidas_sin_grupo") else "")]
             L += ["DE: desviación estándar muestral (n − 1). Q1 y Q3: cuartiles por interpolación lineal."]
             if "pruebas" in t:
@@ -728,8 +736,11 @@ def texto_prueba(plan, t, pr):
         if pr.get("esperadas_menores_5"):
             partes.append(f"frecuencias esperadas < 5: {pr['esperadas_menores_5']}")
     if pr.get("diferencia_medias") is not None:
+        pedido = next((x for x in plan["tablas"] if x["id"] == t["id"]), {})
+        factor = 100 if pedido.get("mostrar_por_100") else 1
         partes.append(f"diferencia de medias ({pr['grupos'][0]} − {pr['grupos'][1]}) = "
-                      f"{dc.formato_es(pr['diferencia_medias'], decimales_de(plan, t, 'estadistico'))}")
+                      f"{dc.formato_es(pr['diferencia_medias'] * factor, decimales_de(plan, t, 'estadistico'))}"
+                      + (" (× 100)" if factor != 1 else ""))
     return " ".join(partes[:2]) + ("; " + "; ".join(partes[2:]) if len(partes) > 2 else "") + "."
 
 

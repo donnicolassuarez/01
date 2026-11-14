@@ -1,0 +1,393 @@
+{
+  "archivo": "pruebas/salida/monografia/monografia.docx",
+  "total_citas": 30,
+  "citas_unicas": 7,
+  "referencias": 8,
+  "a_citas_sin_referencia": [],
+  "b_referencias_no_citadas": [
+    "Organización Panamericana de la Salud [OPS/OMS]. (2024). Informe de situación 2: Incendios forestales, Bolivia, septiembre 2024. https://www.paho.org/es/documentos/informe-situacion-2-incendios-forestales-bolivia-septiembre-2024"
+  ],
+  "c_autor_o_anio_discordante": [],
+  "d_lista_de_referencias": [
+    {
+      "tipo": "fuera de orden",
+      "referencia": "Los Tiempos. (2024, 5 de septiembre). Cobija declara emergencia sanitaria y el fuego llega a tres parques nacionales. https://www.lostiempos.com/actualidad/pais/20240905/cobija-declara-emergencia-sanitaria-fuego-llega-tres-parques-nacionales",
+      "detalle": "debería ir antes de «Panel Intergubernamental sobre Cambio Climático [IPCC]. (2021). Climat»"
+    }
+  ],
+  "observaciones": {
+    "localizadores": [
+      {
+        "parrafo": 103,
+        "localizador": "(p. 7)",
+        "contexto": "IBIF (2025), \"Mapa 1\" (p. 7) y \"Mapa 3\" (p. 10). Composición lado a lado de el…"
+      },
+      {
+        "parrafo": 103,
+        "localizador": "(p. 10)",
+        "contexto": "IBIF (2025), \"Mapa 1\" (p. 7) y \"Mapa 3\" (p. 10). Composición lado a lado de elaboración propia."
+      }
+    ],
+    "siglas_sin_presentar": [
+      {
+        "parrafo": 73,
+        "sigla": "IPCC",
+        "detalle": "primera cita con «IPCC» sin el nombre completo «Panel Intergubernamental sobre Cambio Climático [IPCC]»",
+        "contexto": "Elaboración propia con base en IPCC (2019)."
+      },
+      {
+        "parrafo": 101,
+        "sigla": "IBIF",
+        "detalle": "primera cita con «IBIF» sin el nombre completo «Instituto Boliviano de Investigación Forestal [IBIF]»",
+        "contexto": "…solo con lo que leía, busqué en el propio informe del IBIF (2025) —uno de mis fuentes citadas— los mapas que usaron…"
+      }
+    ],
+    "descartados_lugar_o_periodo": [
+      {
+        "parrafo": 35,
+        "cita": "Bolivia, 2022",
+        "autor": "Bolivia",
+        "anio": "2022",
+        "contexto": "…articipación del sector forestal en las emisiones (Bolivia, 2022)9"
+      },
+      {
+        "parrafo": 130,
+        "cita": "Bolivia, 2022",
+        "autor": "Bolivia",
+        "anio": "2022",
+        "contexto": "…articipación del sector forestal en las emisiones (Bolivia, 2022)"
+      }
+    ],
+    "referencias_sin_anio": []
+  },
+  "citas": [
+    {
+      "parrafo": 73,
+      "cita": "IPCC (2019)",
+      "autor": "IPCC",
+      "anio": "2019",
+      "contexto": "Elaboración propia con base en IPCC (2019).",
+      "forma": "narrativa",
+      "referencia": "Panel Intergubernamental sobre Cambio Climático [IPCC]. (2019). 2019 Refinement "
+    },
+    {
+      "parrafo": 78,
+      "cita": "IPCC (2021)",
+      "autor": "IPCC",
+      "anio": "2021",
+      "contexto": "…nelada de CO₂, en un plazo de cien años. Según el IPCC (2021), el metano tiene un PCG de aproximadamente 27 a 3…",
+      "forma": "narrativa",
+      "referencia": "Panel Intergubernamental sobre Cambio Climático [IPCC]. (2019). 2019 Refinement "
+    },
+    {
+      "parrafo": 83,
+      "cita": "IPCC, 2021",
+      "autor": "IPCC",
+      "anio": "2021",
+      "contexto": "Cuántas veces \"calienta\" más que el CO₂ (IPCC, 2021)",
+      "forma": "parentética",
+      "referencia": "Panel Intergubernamental sobre Cambio Climático [IPCC]. (2019). 2019 Refinement "
+    },
+    {
+      "parrafo": 94,
+      "cita": "del IPCC (2021)",
+      "autor": "IPCC",
+      "anio": "2021",
+      "contexto": "Elaboración propia con datos del IPCC (2021).",
+      "forma": "narrativa",
+      "referencia": "Panel Intergubernamental sobre Cambio Climático [IPCC]. (2019). 2019 Refinement "
+    },
+    {
+      "parrafo": 95,
+      "cita": "IPCC (2021)",
+      "autor": "IPCC",
+      "anio": "2021",
+      "contexto": "…a 2. Potencial de calentamiento global (PCG-100), IPCC (2021)",
+      "forma": "narrativa",
+      "referencia": "Panel Intergubernamental sobre Cambio Climático [IPCC]. (2019). 2019 Refinement "
+    },
+    {
+      "parrafo": 96,
+      "cita": "Sexto Informe de Evaluación (2021)",
+      "autor": "IPCC",
+      "anio": "2021",
+      "contexto": "Elaboración propia con datos del IPCC, Sexto Informe de Evaluación (2021).",
+      "forma": "narrativa",
+      "referencia": "Panel Intergubernamental sobre Cambio Climático [IPCC]. (2021). Climate Change 2"
+    },
+    {
+      "parrafo": 98,
+      "cita": "IPCC, 2019",
+      "autor": "IPCC",
+      "anio": "2019",
+      "contexto": "…mbustión incompleta, que es la que libera más CH₄ (IPCC, 2019).",
+      "forma": "parentética",
+      "referencia": "Panel Intergubernamental sobre Cambio Climático [IPCC]. (2019). 2019 Refinement "
+    },
+    {
+      "parrafo": 99,
+      "cita": "IPCC, 2019",
+      "autor": "IPCC",
+      "anio": "2019",
+      "contexto": "… más tiempo y se genera proporcionalmente más CH₄ (IPCC, 2019).",
+      "forma": "parentética",
+      "referencia": "Panel Intergubernamental sobre Cambio Climático [IPCC]. (2019). 2019 Refinement "
+    },
+    {
+      "parrafo": 100,
+      "cita": "Los Tiempos, 2024",
+      "autor": "Los Tiempos",
+      "anio": "2024",
+      "contexto": "…e quemas en zonas fronterizas de Brasil y de Perú (Los Tiempos, 2024).",
+      "forma": "parentética",
+      "referencia": "Los Tiempos. (2024, 5 de septiembre). Cobija declara emergencia sanitaria y el f"
+    },
+    {
+      "parrafo": 101,
+      "cita": "del IBIF (2025)",
+      "autor": "IBIF",
+      "anio": "2025",
+      "contexto": "…solo con lo que leía, busqué en el propio informe del IBIF (2025) —uno de mis fuentes citadas— los mapas que usaron…",
+      "forma": "narrativa",
+      "referencia": "Instituto Boliviano de Investigación Forestal [IBIF]. (2025). Determinación de á"
+    },
+    {
+      "parrafo": 103,
+      "cita": "IBIF (2025)",
+      "autor": "IBIF",
+      "anio": "2025",
+      "contexto": "IBIF (2025), \"Mapa 1\" (p. 7) y \"Mapa 3\" (p. 10). Composición …",
+      "forma": "narrativa",
+      "referencia": "Instituto Boliviano de Investigación Forestal [IBIF]. (2025). Determinación de á"
+    },
+    {
+      "parrafo": 104,
+      "cita": "SDSN Bolivia, 2024",
+      "autor": "SDSN Bolivia",
+      "anio": "2024",
+      "contexto": "…el 9,1 % de las de CH₄ y del 26,3 % de las de N₂O (SDSN Bolivia, 2024). Son datos de todo el país, no solo de Pando, y h…",
+      "forma": "parentética",
+      "referencia": "SDSN Bolivia. (2024). Emisiones de CO2 por deforestación e incendios en Bolivia."
+    },
+    {
+      "parrafo": 104,
+      "cita": "Mongabay Latam, 2024",
+      "autor": "Mongabay Latam",
+      "anio": "2024",
+      "contexto": "…quemadas, de las cuales 7,16 millones eran bosque (Mongabay Latam, 2024).",
+      "forma": "parentética",
+      "referencia": "Mongabay Latam. (2024, diciembre). Balance ambiental de Bolivia en 2024: fuego d"
+    },
+    {
+      "parrafo": 105,
+      "cita": "Los Tiempos, 2024",
+      "autor": "Los Tiempos",
+      "anio": "2024",
+      "contexto": "… eso se declaró emergencia sanitaria en la ciudad (Los Tiempos, 2024). No hace falta ser médico para darse cuenta: cual…",
+      "forma": "parentética",
+      "referencia": "Los Tiempos. (2024, 5 de septiembre). Cobija declara emergencia sanitaria y el f"
+    },
+    {
+      "parrafo": 125,
+      "cita": "Mongabay Latam, 2024",
+      "autor": "Mongabay Latam",
+      "anio": "2024",
+      "contexto": "…ones, de las cuales más de 7 millones eran bosque (Mongabay Latam, 2024). En Pando, esto se sintió directamente: en septie…",
+      "forma": "parentética",
+      "referencia": "Mongabay Latam. (2024, diciembre). Balance ambiental de Bolivia en 2024: fuego d"
+    },
+    {
+      "parrafo": 125,
+      "cita": "Los Tiempos, 2024",
+      "autor": "Los Tiempos",
+      "anio": "2024",
+      "contexto": "…comendado por la Organización Mundial de la Salud (Los Tiempos, 2024). La Figura 5 resume la secuencia de estos hechos.",
+      "forma": "parentética",
+      "referencia": "Los Tiempos. (2024, 5 de septiembre). Cobija declara emergencia sanitaria y el f"
+    },
+    {
+      "parrafo": 127,
+      "cita": "de Mongabay Latam (2024)",
+      "autor": "Mongabay Latam",
+      "anio": "2024",
+      "contexto": "Elaboración propia con datos de Mongabay Latam (2024) y Los Tiempos (2024).",
+      "forma": "narrativa",
+      "referencia": "Mongabay Latam. (2024, diciembre). Balance ambiental de Bolivia en 2024: fuego d"
+    },
+    {
+      "parrafo": 127,
+      "cita": "Los Tiempos (2024)",
+      "autor": "Los Tiempos",
+      "anio": "2024",
+      "contexto": "…ación propia con datos de Mongabay Latam (2024) y Los Tiempos (2024).",
+      "forma": "narrativa",
+      "referencia": "Los Tiempos. (2024, 5 de septiembre). Cobija declara emergencia sanitaria y el f"
+    },
+    {
+      "parrafo": 128,
+      "cita": "las Directrices del IPCC (2019)",
+      "autor": "IPCC",
+      "anio": "2019",
+      "contexto": "…ica, es que ese humo no es \"una sola cosa\": según las Directrices del IPCC (2019) para inventarios de gases de efecto invernadero, …",
+      "forma": "narrativa",
+      "referencia": "Panel Intergubernamental sobre Cambio Climático [IPCC]. (2019). 2019 Refinement "
+    },
+    {
+      "parrafo": 129,
+      "cita": "SDSN Bolivia, 2024",
+      "autor": "SDSN Bolivia",
+      "anio": "2024",
+      "contexto": "…o y del 26,3 % de las de óxido nitroso de Bolivia (SDSN Bolivia, 2024), como se observa en la Figura 4. Como en 2024 se …",
+      "forma": "parentética",
+      "referencia": "SDSN Bolivia. (2024). Emisiones de CO2 por deforestación e incendios en Bolivia."
+    },
+    {
+      "parrafo": 129,
+      "cita": "IBIF, 2025",
+      "autor": "IBIF",
+      "anio": "2025",
+      "contexto": "…ís, incluyendo áreas de bosque amazónico en Pando (IBIF, 2025).",
+      "forma": "parentética",
+      "referencia": "Instituto Boliviano de Investigación Forestal [IBIF]. (2025). Determinación de á"
+    },
+    {
+      "parrafo": 131,
+      "cita": "de SDSN Bolivia (2024)",
+      "autor": "SDSN Bolivia",
+      "anio": "2024",
+      "contexto": "Elaboración propia con datos de SDSN Bolivia (2024).",
+      "forma": "narrativa",
+      "referencia": "SDSN Bolivia. (2024). Emisiones de CO2 por deforestación e incendios en Bolivia."
+    },
+    {
+      "parrafo": 132,
+      "cita": "Estado Plurinacional de Bolivia, 2024",
+      "autor": "Estado Plurinacional de Bolivia",
+      "anio": "2024",
+      "contexto": "…arte de sus compromisos para el periodo 2026-2035 (Estado Plurinacional de Bolivia, 2024). Eso me hizo pensar que este no es solo un proble…",
+      "forma": "parentética",
+      "referencia": "Estado Plurinacional de Bolivia. (2024). Tercera Contribución Nacionalmente Dete"
+    },
+    {
+      "parrafo": 138,
+      "cita": "IPCC (2021)",
+      "autor": "IPCC",
+      "anio": "2021",
+      "contexto": "…n se complete. Esto es relevante porque, según el IPCC (2021), una tonelada de metano retiene aproximadamente l…",
+      "forma": "narrativa",
+      "referencia": "Panel Intergubernamental sobre Cambio Climático [IPCC]. (2019). 2019 Refinement "
+    },
+    {
+      "parrafo": 139,
+      "cita": "Los Tiempos, 2024",
+      "autor": "Los Tiempos",
+      "anio": "2024",
+      "contexto": "…ligó a declarar emergencia sanitaria en la ciudad (Los Tiempos, 2024). Esa cifra no es un dato abstracto: corresponde a…",
+      "forma": "parentética",
+      "referencia": "Los Tiempos. (2024, 5 de septiembre). Cobija declara emergencia sanitaria y el f"
+    },
+    {
+      "parrafo": 144,
+      "cita": "Mongabay Latam, 2024",
+      "autor": "Mongabay Latam",
+      "anio": "2024",
+      "contexto": "…táreas quemadas, la cifra más alta de su historia (Mongabay Latam, 2024), frente a 3,3 millones en 2023, como se ve en la …",
+      "forma": "parentética",
+      "referencia": "Mongabay Latam. (2024, diciembre). Balance ambiental de Bolivia en 2024: fuego d"
+    },
+    {
+      "parrafo": 145,
+      "cita": "SDSN Bolivia, 2024",
+      "autor": "SDSN Bolivia",
+      "anio": "2024",
+      "contexto": "…tano y del 26,3 % de las de óxido nitroso en 2022 (SDSN Bolivia, 2024).",
+      "forma": "parentética",
+      "referencia": "SDSN Bolivia. (2024). Emisiones de CO2 por deforestación e incendios en Bolivia."
+    },
+    {
+      "parrafo": 146,
+      "cita": "Los Tiempos, 2024",
+      "autor": "Los Tiempos",
+      "anio": "2024",
+      "contexto": "… para la salud, a causa del humo de los incendios (Los Tiempos, 2024).",
+      "forma": "parentética",
+      "referencia": "Los Tiempos. (2024, 5 de septiembre). Cobija declara emergencia sanitaria y el f"
+    },
+    {
+      "parrafo": 148,
+      "cita": "de Mongabay Latam (2024)",
+      "autor": "Mongabay Latam",
+      "anio": "2024",
+      "contexto": "Elaboración propia con datos de Mongabay Latam (2024).",
+      "forma": "narrativa",
+      "referencia": "Mongabay Latam. (2024, diciembre). Balance ambiental de Bolivia en 2024: fuego d"
+    },
+    {
+      "parrafo": 156,
+      "cita": "IPCC, 2021",
+      "autor": "IPCC",
+      "anio": "2021",
+      "contexto": "…enen un potencial de calentamiento mucho más alto (27-30 veces y 273 veces el del CO₂, según IPCC, 2021), lo que los hace especialmente relevantes en el p…",
+      "forma": "parentética",
+      "referencia": "Panel Intergubernamental sobre Cambio Climático [IPCC]. (2019). 2019 Refinement "
+    }
+  ],
+  "analisis_referencias": [
+    {
+      "referencia": "Estado Plurinacional de Bolivia. (2024). Tercera Contribución Nacionalmente Determinada (NDC 3.0) 2026-2035. Naciones Unidas, Convención Marco sobre el Cambio Climático (UNFCCC). https://unfccc.int/sites/default/files/2025-09/Bolivia_NDC3.0_2026-2035%20final%2029.09.2024.pdf",
+      "primer_autor": "Estado Plurinacional de Bolivia",
+      "sigla": null,
+      "n_autores": 1,
+      "anio": "2024"
+    },
+    {
+      "referencia": "Instituto Boliviano de Investigación Forestal [IBIF]. (2025). Determinación de áreas afectadas por incendios forestales en Bolivia. IBIF Bolivia. https://ibifbolivia.org.bo/wp-content/uploads/2025/01/DETERMINACION-DE-AREAS-AFECTADAS-POR-INCENDIOS-FORESTALES-EN-BOLIVIA.pdf",
+      "primer_autor": "Instituto Boliviano de Investigación Forestal",
+      "sigla": "IBIF",
+      "n_autores": 1,
+      "anio": "2025"
+    },
+    {
+      "referencia": "Panel Intergubernamental sobre Cambio Climático [IPCC]. (2019). 2019 Refinement to the 2006 IPCC Guidelines for National Greenhouse Gas Inventories. Ginebra, Suiza: IPCC.",
+      "primer_autor": "Panel Intergubernamental sobre Cambio Climático",
+      "sigla": "IPCC",
+      "n_autores": 1,
+      "anio": "2019"
+    },
+    {
+      "referencia": "Panel Intergubernamental sobre Cambio Climático [IPCC]. (2021). Climate Change 2021: The Physical Science Basis. Sexto Informe de Evaluación, Grupo de Trabajo I, Capítulo 7. Ginebra, Suiza: IPCC.",
+      "primer_autor": "Panel Intergubernamental sobre Cambio Climático",
+      "sigla": "IPCC",
+      "n_autores": 1,
+      "anio": "2021"
+    },
+    {
+      "referencia": "Los Tiempos. (2024, 5 de septiembre). Cobija declara emergencia sanitaria y el fuego llega a tres parques nacionales. https://www.lostiempos.com/actualidad/pais/20240905/cobija-declara-emergencia-sanitaria-fuego-llega-tres-parques-nacionales",
+      "primer_autor": "Los Tiempos",
+      "sigla": null,
+      "n_autores": 1,
+      "anio": "2024"
+    },
+    {
+      "referencia": "Mongabay Latam. (2024, diciembre). Balance ambiental de Bolivia en 2024: fuego devasta más de 10 millones de hectáreas de bosque, deforestación no se detiene y minería ilegal sigue dañando ríos. https://es.mongabay.com/2024/12/balance-ambiental-bolivia-2024-deforestacion-mineria-ilegal/",
+      "primer_autor": "Mongabay Latam",
+      "sigla": null,
+      "n_autores": 1,
+      "anio": "2024"
+    },
+    {
+      "referencia": "Organización Panamericana de la Salud [OPS/OMS]. (2024). Informe de situación 2: Incendios forestales, Bolivia, septiembre 2024. https://www.paho.org/es/documentos/informe-situacion-2-incendios-forestales-bolivia-septiembre-2024",
+      "primer_autor": "Organización Panamericana de la Salud",
+      "sigla": "OPS/OMS",
+      "n_autores": 1,
+      "anio": "2024"
+    },
+    {
+      "referencia": "SDSN Bolivia. (2024). Emisiones de CO2 por deforestación e incendios en Bolivia. https://sdsnbolivia.org/emisiones-de-co2-por-deforestacion-e-incendios-en-bolivia/",
+      "primer_autor": "SDSN Bolivia",
+      "sigla": null,
+      "n_autores": 1,
+      "anio": "2024"
+    }
+  ]
+}

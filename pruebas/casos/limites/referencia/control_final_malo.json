@@ -1,0 +1,66 @@
+{
+  "archivo": "ensayo.docx",
+  "sha256": "738ed2f89ffcf34fa09476ea1e06f06863dcd77346824c90db2e83568f5285fd",
+  "fecha": "2026-11-14T04:32:12+00:00",
+  "aprobado_mecanico": false,
+  "controles": {
+    "citas": {
+      "codigo": 1,
+      "estado": "bloquea",
+      "resumen": "11 citas, 5 referencias; sin referencia 1, no citadas 0, discordantes 0; lista (orden/duplicadas) 0"
+    },
+    "similitud": {
+      "codigo": 1,
+      "estado": "bloquea",
+      "resumen": "5 fuentes comparadas; copia 1, casi idéntica 0, entre comillas 0"
+    },
+    "formato": {
+      "codigo": 1,
+      "estado": "bloquea",
+      "resumen": "1 errores, 0 avisos; páginas: 4 (pedido: 4)"
+    },
+    "referencias": {
+      "codigo": -1,
+      "estado": "no ejecutado",
+      "resumen": "se pidió --sin-red: la existencia de las referencias no se comprobó en Crossref ni OpenAlex"
+    },
+    "fuentes": {
+      "codigo": 0,
+      "estado": "aviso",
+      "resumen": "5 referencias: con archivo 0, con ficha 1"
+    }
+  },
+  "pendientes_verificador": [
+    {
+      "referencia": "Carr, N. (2010). The shallows: What the Internet is doing to our brains. W. W. Norton & Company.",
+      "motivos": [
+        "fuente en carpeta: sin archivo en fuentes/ ni ficha en fichas.md"
+      ]
+    },
+    {
+      "referencia": "Cervantes Saavedra, M. de (2004). Don Quijote de la Mancha (Edición del IV Centenario). Real Academia Española; Alfaguara. (Obra original publicada en 1605)",
+      "motivos": [
+        "fuente en carpeta: sin archivo en fuentes/ ni ficha en fichas.md"
+      ]
+    },
+    {
+      "referencia": "Eisenstein, E. L. (1979). The printing press as an agent of change: Communications and cultural transformations in early-modern Europe. Cambridge University Press.",
+      "motivos": [
+        "fuente en carpeta: sin archivo en fuentes/ ni ficha en fichas.md"
+      ]
+    },
+    {
+      "referencia": "Ong, W. J. (1982). Orality and literacy: The technologizing of the word. Methuen.",
+      "motivos": [
+        "fuente en carpeta: tiene ficha pero no se localizó su archivo en fuentes/ (ni en indice.json ni por nombre)"
+      ]
+    },
+    {
+      "referencia": "Wolf, M. (2007). Proust and the squid: The story and science of the reading brain. HarperCollins.",
+      "motivos": [
+        "fuente en carpeta: sin archivo en fuentes/ ni ficha en fichas.md"
+      ]
+    }
+  ],
+  "avisos": []
+}

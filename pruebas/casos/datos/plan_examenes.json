@@ -21,8 +21,8 @@
     {"id": "t3", "tipo": "cruzada", "filas": "Gender", "columnas": "GRADING_BASIS_ENRL",
      "porcentajes": ["fila", "columna"], "prueba": "chi2", "titulo": "Género según modalidad de calificación", "figura": true},
     {"id": "t4", "tipo": "resumen", "variables": ["Exams_percent", "COMP_ACT_SCORE", "AGE"],
-     "titulo": "Resumen numérico global"},
+     "titulo": "Resumen numérico global", "redondeo": {"estadistico": 3}},
     {"id": "t5", "tipo": "resumen", "variables": ["Exams_percent", "NonExam_percent"], "por": "Gender",
-     "prueba": "t", "titulo": "Rendimiento en exámenes y en otras evaluaciones según género", "figura": true}
+     "prueba": "t", "mostrar_por_100": true, "titulo": "Rendimiento en exámenes y en otras evaluaciones según género", "figura": true}
   ]
 }

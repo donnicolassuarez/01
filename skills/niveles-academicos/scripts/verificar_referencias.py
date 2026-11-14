@@ -81,7 +81,7 @@ class SinRespuesta(Exception):
     """El servicio no respondió (límite de uso, red, host bloqueado)."""
 
 
-def pedir_bytes(url, cabeceras=None, intentos=3, pausa=3.0):
+def pedir_bytes(url, cabeceras=None, intentos=3, pausa=3.0, limite=25):
     """GET con reintentos ante 429 y 5xx. Devuelve (bytes, url_final).
     404 o 410 -> DoiInexistente; sin respuesta útil -> SinRespuesta."""
     cab = {"User-Agent": AGENTE}
@@ -90,7 +90,7 @@ def pedir_bytes(url, cabeceras=None, intentos=3, pausa=3.0):
     for intento in range(intentos):
         try:
             with urllib.request.urlopen(urllib.request.Request(url, headers=cab),
-                                        timeout=25) as respuesta:
+                                        timeout=limite) as respuesta:
                 return respuesta.read(), respuesta.geturl()
         except urllib.error.HTTPError as error:
             if error.code in (404, 410):
@@ -112,10 +112,29 @@ ATOM = "{http://www.w3.org/2005/Atom}"
 
 
 def en_arxiv(identificador):
-    """[(título, año, doi, "arXiv")] para un identificador de arXiv."""
+    """[(título, año, doi, "arXiv")] para un identificador de arXiv: primero la
+    API Atom de export.arxiv.org; si limita (429) o no responde, la página
+    arxiv.org/abs/<id> y sus metadatos citation_title y citation_date."""
+    try:
+        return en_arxiv_api(identificador)
+    except SinRespuesta as error_api:
+        try:
+            datos, _ = pedir_bytes("https://arxiv.org/abs/" + urllib.parse.quote(identificador),
+                                   intentos=2, limite=30)
+        except SinRespuesta as error_abs:
+            raise SinRespuesta(f"{error_api}; {error_abs}")
+        texto = datos.decode("utf-8", "replace")
+        titulo = meta_html(texto, "citation_title")
+        if not titulo:
+            raise SinRespuesta(f"{error_api}; arxiv.org/abs sin citation_title")
+        return [(titulo, anio_texto(meta_html(texto, "citation_date", "citation_online_date")),
+                 "10.48550/arXiv." + identificador, "arXiv (página)")]
+
+
+def en_arxiv_api(identificador):
     import xml.etree.ElementTree as ET
     url = "https://export.arxiv.org/api/query?id_list=" + urllib.parse.quote(identificador)
-    datos, _ = pedir_bytes(url, intentos=4, pausa=5.0)
+    datos, _ = pedir_bytes(url, intentos=3, pausa=4.0, limite=20)
     try:
         raiz = ET.fromstring(datos)
     except ET.ParseError:
@@ -268,10 +287,9 @@ def evaluar(ref):
     anio = anio_de(ref)
     dudosa, errores = None, []
     registro = None  # resultado de arXiv / doi.org: "inexistente" o "sin respuesta"
+    crossref_404 = False
     for buscar in (en_crossref, en_registro, en_openalex):
-        if buscar is en_registro and not (doi_de(ref) and errores and
-                                          errores[-1].startswith("en_crossref") and
-                                          " 404" in errores[-1]):
+        if buscar is en_registro and not (doi_de(ref) and crossref_404):
             continue  # solo para DOI que Crossref no tiene
         try:
             candidatos = buscar(ref)
@@ -284,6 +302,8 @@ def evaluar(ref):
             errores.append(f"{buscar.__name__}: {error}")
             continue
         except Exception as error:  # red caída, DOI inexistente, etc.
+            if buscar is en_crossref and getattr(error, "code", None) == 404:
+                crossref_404 = True
             nota = ""
             if buscar is en_openalex and "401" in str(error) and not os.environ.get("OPENALEX_API_KEY"):
                 nota = " (falta la variable OPENALEX_API_KEY)"

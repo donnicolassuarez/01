@@ -1,0 +1,231 @@
+{
+  "archivo": "pruebas/aceptacion/ensayo_incendios/entrega/Los_incendios_en_Pando_y_su_costo_climatico.docx",
+  "total_citas": 18,
+  "citas_unicas": 7,
+  "referencias": 7,
+  "a_citas_sin_referencia": [],
+  "b_referencias_no_citadas": [],
+  "c_autor_o_anio_discordante": [],
+  "d_lista_de_referencias": [],
+  "observaciones": {
+    "localizadores": [],
+    "siglas_sin_presentar": [],
+    "descartados_lugar_o_periodo": [],
+    "referencias_sin_anio": []
+  },
+  "citas": [
+    {
+      "parrafo": 7,
+      "cita": "Ferreira et al., 2023",
+      "autor": "Ferreira",
+      "anio": "2023",
+      "contexto": "…den adelantarse a junio y alargarse hasta octubre (Ferreira et al., 2023). Las emisiones de los incendios siguen ese mismo …",
+      "forma": "parentética",
+      "referencia": "Ferreira, I. J. M., Campanharo, W. A., Barbosa, M. L. F., Silva, S. S. da, Selay"
+    },
+    {
+      "parrafo": 7,
+      "cita": "Zhou et al., 2021",
+      "autor": "Zhou",
+      "anio": "2021",
+      "contexto": "… septiembre, cuando llueve menos y hace más calor (Zhou et al., 2021).",
+      "forma": "parentética",
+      "referencia": "Zhou, Y., Yan, H., & Luo, J.-J. (2021). Impacts of Amazon fire aerosols on the s"
+    },
+    {
+      "parrafo": 8,
+      "cita": "Ferreira et al. (2023)",
+      "autor": "Ferreira",
+      "anio": "2023",
+      "contexto": "…no natural, pero la evidencia apunta a otra cosa. Ferreira et al. (2023) modelaron dónde es más probable que aparezca fueg…",
+      "forma": "narrativa",
+      "referencia": "Ferreira, I. J. M., Campanharo, W. A., Barbosa, M. L. F., Silva, S. S. da, Selay"
+    },
+    {
+      "parrafo": 9,
+      "cita": "Kruid et al., 2021",
+      "autor": "Kruid",
+      "anio": "2021",
+      "contexto": "…entó los fuegos intencionales y los de sotobosque (Kruid et al., 2021). Además, los fuegos de deforestación disminuyen r…",
+      "forma": "parentética",
+      "referencia": "Kruid, S., Macedo, M. N., Gorelik, S. R., Walker, W., Moutinho, P., Brando, P. M"
+    },
+    {
+      "parrafo": 9,
+      "cita": "Adeney et al., 2009",
+      "autor": "Adeney",
+      "anio": "2009",
+      "contexto": "…minos y son más frecuentes en los años de El Niño (Adeney et al., 2009). Son datos de Brasil; para Pando, Ferreira et al.…",
+      "forma": "parentética",
+      "referencia": "Adeney, J. M., Christensen, N. L., Jr., & Pimm, S. L. (2009). Reserves protect a"
+    },
+    {
+      "parrafo": 9,
+      "cita": "Ferreira et al. (2023)",
+      "autor": "Ferreira",
+      "anio": "2023",
+      "contexto": "…y et al., 2009). Son datos de Brasil; para Pando, Ferreira et al. (2023) registran una baja de la deforestación y los bord…",
+      "forma": "narrativa",
+      "referencia": "Ferreira, I. J. M., Campanharo, W. A., Barbosa, M. L. F., Silva, S. S. da, Selay"
+    },
+    {
+      "parrafo": 11,
+      "cita": "Ferreira et al. (2023)",
+      "autor": "Ferreira",
+      "anio": "2023",
+      "contexto": "Dentro de la región que estudian Ferreira et al. (2023), Acre reúne la gran mayoría de los focos de calor…",
+      "forma": "narrativa",
+      "referencia": "Ferreira, I. J. M., Campanharo, W. A., Barbosa, M. L. F., Silva, S. S. da, Selay"
+    },
+    {
+      "parrafo": 12,
+      "cita": "Ferreira et al., 2023",
+      "autor": "Ferreira",
+      "anio": "2023",
+      "contexto": "… incendios y deforestación la afecta directamente (Ferreira et al., 2023).",
+      "forma": "parentética",
+      "referencia": "Ferreira, I. J. M., Campanharo, W. A., Barbosa, M. L. F., Silva, S. S. da, Selay"
+    },
+    {
+      "parrafo": 13,
+      "cita": "Song et al. (2015)",
+      "autor": "Song",
+      "anio": "2015",
+      "contexto": "… que el desmonte avance hacia el norte boliviano. Song et al. (2015) advierten, como posibilidad y no como algo medido…",
+      "forma": "narrativa",
+      "referencia": "Song, X.-P., Huang, C., Saatchi, S. S., Hansen, M. C., & Townshend, J. R. (2015)"
+    },
+    {
+      "parrafo": 13,
+      "cita": "Ferreira et al. (2023)",
+      "autor": "Ferreira",
+      "anio": "2023",
+      "contexto": "…a tras la apertura de la carretera interoceánica. Ferreira et al. (2023), por su parte, señalan que desde que se pavimentó…",
+      "forma": "narrativa",
+      "referencia": "Ferreira, I. J. M., Campanharo, W. A., Barbosa, M. L. F., Silva, S. S. da, Selay"
+    },
+    {
+      "parrafo": 14,
+      "cita": "Según Ferreira et al. (2023)",
+      "autor": "Ferreira",
+      "anio": "2023",
+      "contexto": "El marco legal tampoco ayuda. Según Ferreira et al. (2023), desde 2013 Bolivia aprobó ocho leyes que ampliar…",
+      "forma": "narrativa",
+      "referencia": "Ferreira, I. J. M., Campanharo, W. A., Barbosa, M. L. F., Silva, S. S. da, Selay"
+    },
+    {
+      "parrafo": 16,
+      "cita": "Nelson y Chomitz (2011)",
+      "autor": "Nelson",
+      "anio": "2011",
+      "contexto": "…uego y clima pasa por el cambio de uso del suelo. Nelson y Chomitz (2011) recuerdan que la pérdida de bosques tropicales ex…",
+      "forma": "narrativa",
+      "referencia": "Nelson, A., & Chomitz, K. M. (2011). Effectiveness of strict vs. multiple use pr"
+    },
+    {
+      "parrafo": 16,
+      "cita": "Song et al. (2015)",
+      "autor": "Song",
+      "anio": "2015",
+      "contexto": "…es de efecto invernadero. En la cuenca amazónica, Song et al. (2015) estimaron que entre 2000 y 2010 Bolivia fue el se…",
+      "forma": "narrativa",
+      "referencia": "Song, X.-P., Huang, C., Saatchi, S. S., Hansen, M. C., & Townshend, J. R. (2015)"
+    },
+    {
+      "parrafo": 17,
+      "cita": "Zhou et al. (2021)",
+      "autor": "Zhou",
+      "anio": "2021",
+      "contexto": "…en sí. Para el fuego solo tengo una cifra global: Zhou et al. (2021), apoyándose en estudios anteriores, señalan que e…",
+      "forma": "narrativa",
+      "referencia": "Zhou, Y., Yan, H., & Luo, J.-J. (2021). Impacts of Amazon fire aerosols on the s"
+    },
+    {
+      "parrafo": 17,
+      "cita": "Kruid et al., 2021",
+      "autor": "Kruid",
+      "anio": "2021",
+      "contexto": "…restal en la Amazonía brasileña entre 2003 y 2019 (Kruid et al., 2021). Si en Bolivia pasa algo parecido, mirar solo el …",
+      "forma": "parentética",
+      "referencia": "Kruid, S., Macedo, M. N., Gorelik, S. R., Walker, W., Moutinho, P., Brando, P. M"
+    },
+    {
+      "parrafo": 18,
+      "cita": "Ke et al., 2024",
+      "autor": "Ke",
+      "anio": "2024",
+      "contexto": "…el sumidero terrestre fue el más débil desde 2003 (Ke et al., 2024). Es un estudio aún no publicado en revista, de es…",
+      "forma": "parentética",
+      "referencia": "Ke, P., Ciais, P., Sitch, S., Li, W., Bastos, A., Liu, Z., Xu, Y., Gui, X., Bian"
+    },
+    {
+      "parrafo": 21,
+      "cita": "Adeney et al., 2009",
+      "autor": "Adeney",
+      "anio": "2009",
+      "contexto": "…n que su entorno, sobre todo cerca de los caminos (Adeney et al., 2009). A escala mundial, Nelson y Chomitz (2011) encont…",
+      "forma": "parentética",
+      "referencia": "Adeney, J. M., Christensen, N. L., Jr., & Pimm, S. L. (2009). Reserves protect a"
+    },
+    {
+      "parrafo": 21,
+      "cita": "Nelson y Chomitz (2011)",
+      "autor": "Nelson",
+      "anio": "2011",
+      "contexto": "… caminos (Adeney et al., 2009). A escala mundial, Nelson y Chomitz (2011) encontraron que en América Latina los territorios…",
+      "forma": "narrativa",
+      "referencia": "Nelson, A., & Chomitz, K. M. (2011). Effectiveness of strict vs. multiple use pr"
+    }
+  ],
+  "analisis_referencias": [
+    {
+      "referencia": "Adeney, J. M., Christensen, N. L., Jr., & Pimm, S. L. (2009). Reserves protect against deforestation fires in the Amazon. PLoS ONE, 4(4), Artículo e5014. https://doi.org/10.1371/journal.pone.0005014",
+      "primer_autor": "Adeney",
+      "sigla": null,
+      "n_autores": 3,
+      "anio": "2009"
+    },
+    {
+      "referencia": "Ferreira, I. J. M., Campanharo, W. A., Barbosa, M. L. F., Silva, S. S. da, Selaya, G., Aragão, L. E. O. C., & Anderson, L. O. (2023). Assessment of fire hazard in Southwestern Amazon. Frontiers in Forests and Global Change, 6, Artículo 1107417. https://doi.org/10.3389/ffgc.2023.1107417",
+      "primer_autor": "Ferreira",
+      "sigla": null,
+      "n_autores": 7,
+      "anio": "2023"
+    },
+    {
+      "referencia": "Ke, P., Ciais, P., Sitch, S., Li, W., Bastos, A., Liu, Z., Xu, Y., Gui, X., Bian, J., Goll, D. S., Xi, Y., Li, W., O'Sullivan, M., Souza, J. G. de, Friedlingstein, P., & Chevallier, F. (2024). Low latency carbon budget analysis reveals a large decline of the land carbon sink in 2023 [Preprint]. arXiv. https://doi.org/10.48550/arXiv.2407.12447",
+      "primer_autor": "Ke",
+      "sigla": null,
+      "n_autores": 12,
+      "anio": "2024"
+    },
+    {
+      "referencia": "Kruid, S., Macedo, M. N., Gorelik, S. R., Walker, W., Moutinho, P., Brando, P. M., Castanho, A., Alencar, A., Baccini, A., & Coe, M. T. (2021). Beyond deforestation: Carbon emissions from land grabbing and forest degradation in the Brazilian Amazon. Frontiers in Forests and Global Change, 4, Artículo 645282. https://doi.org/10.3389/ffgc.2021.645282",
+      "primer_autor": "Kruid",
+      "sigla": null,
+      "n_autores": 10,
+      "anio": "2021"
+    },
+    {
+      "referencia": "Nelson, A., & Chomitz, K. M. (2011). Effectiveness of strict vs. multiple use protected areas in reducing tropical forest fires: A global analysis using matching methods. PLoS ONE, 6(8), Artículo e22722. https://doi.org/10.1371/journal.pone.0022722",
+      "primer_autor": "Nelson",
+      "sigla": null,
+      "n_autores": 2,
+      "anio": "2011"
+    },
+    {
+      "referencia": "Song, X.-P., Huang, C., Saatchi, S. S., Hansen, M. C., & Townshend, J. R. (2015). Annual carbon emissions from deforestation in the Amazon Basin between 2000 and 2010. PLOS ONE, 10(5), Artículo e0126754. https://doi.org/10.1371/journal.pone.0126754",
+      "primer_autor": "Song",
+      "sigla": null,
+      "n_autores": 5,
+      "anio": "2015"
+    },
+    {
+      "referencia": "Zhou, Y., Yan, H., & Luo, J.-J. (2021). Impacts of Amazon fire aerosols on the subseasonal circulations of the mid-high latitudes. Frontiers in Earth Science, 8, Artículo 609554. https://doi.org/10.3389/feart.2020.609554",
+      "primer_autor": "Zhou",
+      "sigla": null,
+      "n_autores": 3,
+      "anio": "2021"
+    }
+  ]
+}

@@ -3,7 +3,7 @@ name: productor
 description: Convierte el texto aprobado en el archivo final (docx, xlsx) por código, hace el análisis de datos reproducible y escribe el prompt de diapositivas para Claude Design. Usar después del redactor.
 tools: Read, Write, Edit, Bash, Glob, Grep
 model: sonnet
-skills: verificar-docx-generado
+skills: verificar-docx-generado, tipos-de-trabajo
 ---
 
 Eres el productor. Fabricas los archivos finales. No cambias el
@@ -12,9 +12,11 @@ director.
 
 ## Documentos Word
 - Genera el docx con el constructor único:
-  `python "C:\Users\Usuario\.claude\skills\niveles-academicos\scripts\construir_docx.py" <carpeta del trabajo>/borrador/texto.md --salida <carpeta del trabajo>/entrega/<nombre>.docx --tipo ensayo|monografia|informe|articulo|otro --min-paginas N --max-paginas N`
+  `python "C:\Users\Usuario\.claude\skills\niveles-academicos\scripts\construir_docx.py" <carpeta del trabajo>/borrador/texto.md --salida <carpeta del trabajo>/entrega/<nombre>.docx --tipo ensayo|monografia|informe|articulo|perfil|tesis|otro --min-paginas N --max-paginas N`
   (metadatos de portada en un bloque `---` al inicio del Markdown;
-  `--portada blanca|datos|ninguna` si el tipo no basta). Guarda en
+  `--portada blanca|datos|ninguna` si el tipo no basta; `--variante`
+  solo si el encargo la indica). Portada y secciones de cada tipo: skill
+  tipos-de-trabajo. Guarda en
   temporal y copia; si el destino está abierto en Word, guarda con
   otro nombre y lo avisa. No uses `--conservar-pdf` hacia `entrega/`:
   un PDF ahí cuenta como otro entregable.

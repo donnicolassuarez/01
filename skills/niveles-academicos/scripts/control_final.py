@@ -22,9 +22,26 @@ El nivel fija el límite de la lista de referencias: página y media en
 pregrado; sin límite de páginas desde maestría.
 
 Entregable: --archivo (relativo a la carpeta del encargo o absoluto,
-siempre dentro de entrega/) o, si no se indica, el único .docx de
-entrega/ o de una subcarpeta suya (se ignoran "~$*" y "*.bak"). Si hay
-varios, sale con 2 y pide --archivo.
+siempre dentro de entrega/; .docx o .xlsx) o, si no se indica, el único
+.docx de entrega/ o de una subcarpeta suya (se ignoran "~$*" y "*.bak").
+Si hay varios, sale con 2 y pide --archivo. Si no hay ningún .docx y hay
+un único .xlsx, ese es el entregable. Con un .docx y un .xlsx, el
+principal es el .docx (salvo --archivo) y el otro va a avisos.
+
+Entregable .xlsx (hoja de cálculo): corre un solo control, "hoja", sin
+dependencias nuevas (zipfile + ElementTree):
+  - zip íntegro, con [Content_Types].xml y xl/workbook.xml;
+  - todas las partes XML legibles;
+  - ninguna celda con error almacenado (#REF!, #DIV/0!, #N/A, #NAME?,
+    #VALUE!, #NULL!, #NUM!: tipo "e" o valor guardado) ni fórmula con
+    #REF!; solo se ven los valores guardados en el archivo: una fórmula
+    que nunca se calculó (escrita por openpyxl sin abrir en Excel o
+    LibreOffice) no tiene valor que revisar;
+  - ningún marcador prohibido («por verificar», «pendiente:», «TODO»,
+    «XXX», «[cita]») en las cadenas compartidas o en línea;
+  - hojas sin ninguna celda con valor: aviso, no bloquea.
+Bloquean los cuatro primeros. Los controles citas, similitud,
+formato, referencias y fuentes quedan "no aplica" (no bloquean).
 
 Controles y política (aprobado_mecanico = ningún control bloquea):
   citas       cruzar_citas.py: bloquea si hay citas sin referencia,
@@ -54,7 +71,8 @@ Contrato de entrega/controles.json (escritura atómica):
   {"archivo": "<ruta relativa a entrega/>", "sha256": "...",
    "fecha": "<ISO 8601>", "aprobado_mecanico": bool,
    "controles": {"<nombre>": {"codigo": int,
-                 "estado": "ok|bloquea|aviso|no ejecutado", "resumen": "..."}},
+                 "estado": "ok|bloquea|aviso|no ejecutado|no aplica",
+                 "resumen": "..."}},
    "pendientes_verificador": [{"referencia": "...", "motivos": [...]}],
    "avisos": ["..."]}
 "codigo" es el código de salida del script (-1 si no llegó a correr).
@@ -238,6 +256,10 @@ def es_docx(nombre):
     return bajo.endswith(".docx") and not nombre.startswith("~$")
 
 
+def es_xlsx(nombre):
+    return nombre.lower().endswith(".xlsx") and not nombre.startswith("~$")
+
+
 def buscar_entregable(carpeta, archivo):
     """Devuelve (ruta, None) o (None, mensaje de error)."""
     entrega = carpeta / "entrega"
@@ -252,22 +274,27 @@ def buscar_entregable(carpeta, archivo):
             ruta.relative_to(entrega.resolve())
         except ValueError:
             return None, f"el entregable debe estar dentro de {entrega}"
-        if ruta.suffix.lower() != ".docx":
-            return None, "control_final.py solo controla entregables .docx"
+        if ruta.suffix.lower() not in (".docx", ".xlsx"):
+            return None, "control_final.py solo controla entregables .docx y .xlsx"
         return ruta, None
     if not entrega.is_dir():
         return None, f"no existe la carpeta {entrega}"
-    candidatos = []
-    for hijo in sorted(entrega.iterdir()):
-        if hijo.is_file() and es_docx(hijo.name):
-            candidatos.append(hijo)
-        elif hijo.is_dir():
-            candidatos.extend(n for n in sorted(hijo.iterdir()) if n.is_file() and es_docx(n.name))
+    def listar(prueba):
+        hallados = []
+        for hijo in sorted(entrega.iterdir()):
+            if hijo.is_file() and prueba(hijo.name):
+                hallados.append(hijo)
+            elif hijo.is_dir():
+                hallados.extend(n for n in sorted(hijo.iterdir()) if n.is_file() and prueba(n.name))
+        return hallados
+    candidatos, tipo = listar(es_docx), ".docx"
+    if not candidatos:  # sin .docx: un único .xlsx es el entregable principal
+        candidatos, tipo = listar(es_xlsx), ".xlsx"
     if not candidatos:
-        return None, f"no hay ningún .docx en {entrega}"
+        return None, f"no hay ningún .docx ni .xlsx en {entrega}"
     if len(candidatos) > 1:
         nombres = ", ".join(str(c.relative_to(entrega)) for c in candidatos)
-        return None, f"hay varios .docx en entrega/ ({nombres}): indique cuál con --archivo"
+        return None, f"hay varios {tipo} en entrega/ ({nombres}): indique cuál con --archivo"
     return candidatos[0].resolve(), None
 
 
@@ -282,6 +309,116 @@ def otros_entregables(entrega, principal):
                     and n.resolve() != principal:
                 otros.append(str(n.relative_to(entrega)))
     return sorted(otros)
+
+
+# ----------------------------------------------------------------- hoja de cálculo
+
+ERRORES_EXCEL = ("#REF!", "#DIV/0!", "#N/A", "#NAME?", "#VALUE!", "#NULL!", "#NUM!")
+PATRON_MARCADOR = re.compile(r"por\s+verificar|pendiente\s*:|\[\s*cita\s*\]|\bTODO\b|\bXXX\b",
+                             re.I)
+NS_HOJA = "{http://schemas.openxmlformats.org/spreadsheetml/2006/main}"
+NS_REL = "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}"
+
+
+def marcador_en(texto):
+    """Marcador prohibido en un texto; TODO y XXX solo en mayúsculas."""
+    for m in PATRON_MARCADOR.finditer(texto or ""):
+        if m.group(0).upper() in ("TODO", "XXX") and m.group(0) not in ("TODO", "XXX"):
+            continue
+        return m.group(0)
+    return None
+
+
+def texto_si(elemento):
+    """Texto de un <si> o <is> (con o sin formato enriquecido)."""
+    return "".join(t.text or "" for t in elemento.iter(NS_HOJA + "t"))
+
+
+def control_hoja(ruta, detalle, avisos):
+    """Control "hoja" de un .xlsx. Devuelve el dict del control."""
+    import xml.etree.ElementTree as ET
+    import zipfile
+    try:
+        paquete = zipfile.ZipFile(ruta)
+    except (zipfile.BadZipFile, OSError) as error:
+        detalle["bloqueos"].append(("hoja", f"el .xlsx no es un zip válido: {error}"))
+        return control(1, "bloquea", "BLOQUEA: el archivo no es un .xlsx legible (zip roto)")
+    problemas, avisos_hoja = [], []
+    with paquete:
+        dañado = paquete.testzip()
+        nombres = set(paquete.namelist())
+        if dañado:
+            problemas.append(f"zip dañado: la parte {dañado} no supera la suma de control")
+        for obligatoria in ("[Content_Types].xml", "xl/workbook.xml"):
+            if obligatoria not in nombres:
+                problemas.append(f"falta la parte {obligatoria}")
+        arboles = {}
+        for nombre in sorted(nombres):
+            if not nombre.lower().endswith((".xml", ".rels")) or nombre == dañado:
+                continue
+            try:
+                arboles[nombre] = ET.fromstring(paquete.read(nombre))
+            except (ET.ParseError, zipfile.BadZipFile, OSError) as error:
+                problemas.append(f"XML ilegible en {nombre}: {error}")
+        # Cadenas compartidas: marcadores prohibidos.
+        compartidas = []
+        if "xl/sharedStrings.xml" in arboles:
+            compartidas = [texto_si(si) for si in arboles["xl/sharedStrings.xml"].iter(NS_HOJA + "si")]
+        for texto in compartidas:
+            marca = marcador_en(texto)
+            if marca:
+                problemas.append(f"marcador prohibido «{marca}» en el texto «{recortar(texto, 80)}»")
+        # Nombres de hojas: workbook.xml + relaciones.
+        hojas = {}
+        libro, rels = arboles.get("xl/workbook.xml"), arboles.get("xl/_rels/workbook.xml.rels")
+        if libro is not None and rels is not None:
+            destinos = {r.get("Id"): r.get("Target", "") for r in rels}
+            for hoja in libro.iter(NS_HOJA + "sheet"):
+                destino = destinos.get(hoja.get(NS_REL + "id"), "")
+                destino = destino.lstrip("/")
+                destino = destino if destino.startswith("xl/") else "xl/" + destino
+                hojas[destino] = hoja.get("name")
+        for parte in sorted(n for n in arboles if re.match(r"xl/worksheets/[^/]+\.xml$", n)):
+            nombre_hoja = hojas.get(parte, parte)
+            con_valor = 0
+            for celda in arboles[parte].iter(NS_HOJA + "c"):
+                ref, tipo = celda.get("r", "?"), celda.get("t")
+                valor = celda.findtext(NS_HOJA + "v")
+                formula = celda.findtext(NS_HOJA + "f")
+                en_linea = celda.find(NS_HOJA + "is")
+                texto = texto_si(en_linea) if en_linea is not None else None
+                if valor not in (None, "") or texto:
+                    con_valor += 1
+                if tipo == "s" and valor and valor.isdigit() and int(valor) < len(compartidas):
+                    texto = compartidas[int(valor)]
+                elif tipo == "str":
+                    texto = valor
+                if tipo == "e" or (valor or "").strip() in ERRORES_EXCEL or \
+                        (texto or "").strip() in ERRORES_EXCEL:
+                    problemas.append(f"hoja «{nombre_hoja}», celda {ref}: error "
+                                     f"{(valor or texto or '').strip() or '(tipo error)'}")
+                elif formula and "#REF!" in formula:
+                    problemas.append(f"hoja «{nombre_hoja}», celda {ref}: fórmula con #REF! "
+                                     f"(={recortar(formula, 60)})")
+                if en_linea is not None and tipo == "inlineStr":
+                    marca = marcador_en(texto)
+                    if marca:
+                        problemas.append(f"hoja «{nombre_hoja}», celda {ref}: marcador prohibido "
+                                         f"«{marca}»")
+            if not con_valor:
+                avisos_hoja.append(f"la hoja «{nombre_hoja}» está vacía")
+    avisos.extend(avisos_hoja)
+    if problemas:
+        detalle["bloqueos"].extend(("hoja", p) for p in problemas[:MAX_LISTA * 4])
+        return control(1, "bloquea", f"BLOQUEA: {len(problemas)} problema(s) en la hoja de cálculo: "
+                                     + "; ".join(recortar(p, 90) for p in problemas[:3]))
+    if avisos_hoja:
+        return control(0, "aviso", f"sin errores ni marcadores; {len(avisos_hoja)} hoja(s) vacía(s)")
+    return control(0, "ok", f"{len(hojas) or 'las'} hoja(s) sin errores almacenados ni marcadores")
+
+
+def no_aplica(motivo):
+    return control(-1, "no aplica", motivo)
 
 
 # ----------------------------------------------------------------- controles
@@ -554,11 +691,11 @@ def informe_md(r, encargo, detalle):
          "están en regla para este archivo exacto. Si el archivo cambia, hay que volver a "
          "correr control_final.py.", "",
          "| Control | Estado | Resumen |", "|---|---|---|"]
-    for nombre in ORDEN:
+    for nombre in r["controles"]:
         c = r["controles"][nombre]
         l.append(f"| {nombre} | {c['estado']} | {c['resumen'].replace('|', '/')} |")
     l += ["", "## Qué bloquea", ""]
-    bloqueos = detalle["bloqueos"] + [(n, r["controles"][n]["resumen"]) for n in ORDEN
+    bloqueos = detalle["bloqueos"] + [(n, r["controles"][n]["resumen"]) for n in r["controles"]
                                       if r["controles"][n]["resumen"].startswith("BLOQUEA")]
     l += [f"- **{n}**: {t}" for n, t in bloqueos] or ["- Nada."]
     l += ["", "## Pendientes para el verificador (comprobar a mano)", ""]
@@ -585,7 +722,7 @@ def informe_md(r, encargo, detalle):
 def imprimir_tabla(r):
     print(f"Archivo: entrega/{r['archivo']}")
     print(f"{'Control':<12} {'Estado':<13} Resumen")
-    for nombre in ORDEN:
+    for nombre in r["controles"]:
         c = r["controles"][nombre]
         print(f"{nombre:<12} {c['estado']:<13} {c['resumen']}")
     if r["pendientes_verificador"]:
@@ -630,12 +767,17 @@ def main(argv=None):
     detalle = {"bloqueos": []}
     pendientes = []
     controles = {}
-    controles["citas"], datos_citas = control_citas(docx, detalle, avisos)
-    controles["similitud"] = control_similitud(docx, fuentes, detalle, avisos)
-    controles["formato"] = control_formato(docx, encargo, detalle, avisos)
-    controles["referencias"] = control_referencias(docx, args.sin_red, pendientes)
-    controles["fuentes"] = control_fuentes(datos_citas, fuentes, pendientes, avisos) \
-        if fuentes.is_dir() else no_ejecutado(-1, "no existe la carpeta fuentes/", False)
+    if docx.suffix.lower() == ".xlsx":
+        controles["hoja"] = control_hoja(docx, detalle, avisos)
+        for nombre in ORDEN:
+            controles[nombre] = no_aplica("no aplica a una hoja de cálculo (.xlsx)")
+    else:
+        controles["citas"], datos_citas = control_citas(docx, detalle, avisos)
+        controles["similitud"] = control_similitud(docx, fuentes, detalle, avisos)
+        controles["formato"] = control_formato(docx, encargo, detalle, avisos)
+        controles["referencias"] = control_referencias(docx, args.sin_red, pendientes)
+        controles["fuentes"] = control_fuentes(datos_citas, fuentes, pendientes, avisos) \
+            if fuentes.is_dir() else no_ejecutado(-1, "no existe la carpeta fuentes/", False)
 
     if sha256_de(docx) != huella:
         print("No se pudo ejecutar: el entregable cambió mientras corrían los controles; "

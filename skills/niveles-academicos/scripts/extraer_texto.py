@@ -156,25 +156,57 @@ def textos_disponibles(objetivo):
     return []
 
 
+class Fichas(list):
+    """Lista de fichas con el texto original de cada página (para el fragmento)."""
+    textos = ()
+
+
 def fichas_de(ruta_txt):
-    """Lista de (token_normalizado, palabra_original, página) del documento entero."""
-    fichas = []
-    for pagina, texto in comun.leer_texto_paginado(ruta_txt):
-        for palabra in texto.split():
+    """Lista de (token_normalizado, palabra_original, página, (k, inicio, fin)) del
+    documento entero; (k, inicio, fin) sitúa la palabra en el texto original
+    de la página k. Las palabras que no dan token ("±", "—") no entran en la
+    lista pero sí en el fragmento, que se corta del texto original."""
+    fichas = Fichas()
+    textos = []
+    for k, (pagina, texto) in enumerate(comun.leer_texto_paginado(ruta_txt)):
+        textos.append(texto)
+        for m in re.finditer(r"\S+", texto):
+            palabra = m.group(0)
             for token in comun.normalizar(palabra).split():
-                fichas.append((token, palabra, pagina))
+                fichas.append((token, palabra, pagina, (k, m.start(), m.end())))
+    fichas.textos = textos
     return fichas
 
 
 def fragmento(fichas, inicio, fin):
+    """Fragmento con contexto, tal como está en el texto original (con «±»,
+    ligaduras y signos); solo se reducen los saltos de línea a espacios."""
     desde = max(0, inicio - CONTEXTO_PALABRAS)
     hasta = min(len(fichas), fin + CONTEXTO_PALABRAS)
-    palabras, previa = [], None
-    for i in range(desde, hasta):
-        if fichas[i][1] is not previa:  # una palabra puede dar varios tokens
-            palabras.append(("»" if i == inicio else "") + fichas[i][1])
-            previa = fichas[i][1]
-    texto = " ".join(palabras)
+    textos = getattr(fichas, "textos", ())
+    if not textos or len(fichas[desde]) < 4:  # fichas sin posiciones: palabras sueltas
+        palabras, previa = [], None
+        for i in range(desde, hasta):
+            if fichas[i][1] is not previa:  # una palabra puede dar varios tokens
+                palabras.append(("»" if i == inicio else "") + fichas[i][1])
+                previa = fichas[i][1]
+        texto = " ".join(palabras)
+    else:
+        def corte(a, b):
+            """Texto original desde la ficha a hasta el final de la ficha b."""
+            (ka, ia, _), (kb, _, fb) = fichas[a][3], fichas[b][3]
+            if ka == kb:
+                return textos[ka][ia:fb]
+            trozos = [textos[ka][ia:]] + list(textos[ka + 1:kb]) + [textos[kb][:fb]]
+            return "\n".join(trozos)
+        primera = inicio  # la palabra entera donde empieza el pasaje
+        while primera > desde and fichas[primera - 1][3] == fichas[inicio][3]:
+            primera -= 1
+        texto = (corte(desde, primera - 1) + " " if primera > desde else "") + "»" + \
+            corte(primera, hasta - 1)
+        # "»" va pegado a la palabra donde empieza el pasaje, aunque el token no
+        # sea el primero de esa palabra.
+        texto = " ".join(texto.split())
     return ("… " if desde else "") + texto + (" …" if hasta < len(fichas) else "")
 
 
