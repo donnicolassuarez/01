@@ -1,0 +1,132 @@
+[
+ {
+  "doi": "10.48550/arxiv.2407.12447",
+  "titulo": "Low latency carbon budget analysis reveals a large decline of the land carbon sink in 2023",
+  "autores": [
+   "Ke, P.",
+   "Ciais, P.",
+   "Sitch, S.",
+   "Li, W.",
+   "Bastos, A.",
+   "Liu, Z.",
+   "Xu, Y.",
+   "Gui, X.",
+   "Bian, J.",
+   "Goll, D. S.",
+   "Xi, Y.",
+   "Li, W.",
+   "O'Sullivan, M.",
+   "Souza, J. G. d.",
+   "Friedlingstein, P.",
+   "Chevallier, F."
+  ],
+  "anio": 2024,
+  "archivo": "ke_2024_low-latency-carbon-budget-analysis-reveals-a-large-decline-of-the-land-c.pdf",
+  "url_origen": "https://arxiv.org/pdf/2407.12447",
+  "origen": "arXiv",
+  "sha256": "9b93cb2480bf42bd43b0510b51b703de4fc4f25cb00087d77314012ec48ab807",
+  "fecha": "2026-11-11T06:46:24+00:00"
+ },
+ {
+  "doi": "10.1371/journal.pone.0005014",
+  "titulo": "Reserves Protect against Deforestation Fires in the Amazon",
+  "autores": [
+   "Adeney, J. M.",
+   "Christensen, N. L.",
+   "Pimm, S. L."
+  ],
+  "anio": 2009,
+  "archivo": "adeney_2009_reserves-protect-against-deforestation-fires-in-the-amazon.pdf",
+  "url_origen": "https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0005014&type=printable",
+  "origen": "enlace conocido",
+  "sha256": "10bb7a76a31eae5e6af8378594f60f9908b2ebc6932e84bc154dad00fd48cc25",
+  "fecha": "2026-11-11T06:48:05+00:00"
+ },
+ {
+  "doi": "10.3389/feart.2020.609554",
+  "titulo": "Impacts of Amazon Fire Aerosols on the Subseasonal Circulations of the Mid-High Latitudes",
+  "autores": [
+   "Zhou, Y.",
+   "Yan, H.",
+   "Luo, J."
+  ],
+  "anio": 2021,
+  "archivo": "zhou_2021_impacts-of-amazon-fire-aerosols-on-the-subseasonal-circulations-of-the.pdf",
+  "url_origen": "https://www.frontiersin.org/journals/earth-science/articles/10.3389/feart.2020.609554/pdf",
+  "origen": "Crossref",
+  "sha256": "2c0e1fdd41b9afdd63272cbd5efea87be2047c568258ab300b3cefe0acc68174",
+  "fecha": "2026-11-11T06:52:22+00:00"
+ },
+ {
+  "doi": "10.3389/ffgc.2021.645282",
+  "titulo": "Beyond Deforestation: Carbon Emissions From Land Grabbing and Forest Degradation in the Brazilian Amazon",
+  "autores": [
+   "Kruid, S.",
+   "Macedo, M. N.",
+   "Gorelik, S. R.",
+   "Walker, W.",
+   "Moutinho, P.",
+   "Brando, P. M.",
+   "Castanho, A.",
+   "Alencar, A.",
+   "Baccini, A.",
+   "Coe, M. T."
+  ],
+  "anio": 2021,
+  "archivo": "kruid_2021_beyond-deforestation-carbon-emissions-from-land-grabbing-and-forest-d.pdf",
+  "url_origen": "https://www.frontiersin.org/journals/forests-and-global-change/articles/10.3389/ffgc.2021.645282/pdf",
+  "origen": "Crossref",
+  "sha256": "eaa9b8610c3518574910bc9807c6645dd6bb69bfef79c51bf5a5d88aac59ebd7",
+  "fecha": "2026-11-14T03:52:37+00:00"
+ },
+ {
+  "doi": "10.3389/ffgc.2023.1107417",
+  "titulo": "Assessment of fire hazard in Southwestern Amazon",
+  "autores": [
+   "Ferreira, I. J. M.",
+   "Campanharo, W. A.",
+   "Barbosa, M. L. F.",
+   "Silva, S. S. d.",
+   "Selaya, G.",
+   "Aragão, L. E. O. C.",
+   "Anderson, L. O."
+  ],
+  "anio": 2023,
+  "archivo": "ferreira_2023_assessment-of-fire-hazard-in-southwestern-amazon.pdf",
+  "url_origen": "https://www.frontiersin.org/journals/forests-and-global-change/articles/10.3389/ffgc.2023.1107417/pdf",
+  "origen": "Crossref",
+  "sha256": "3f95ed078b2991664273ec70e667432675f024358f5814af2f133324dc853d99",
+  "fecha": "2026-11-14T03:52:43+00:00"
+ },
+ {
+  "doi": "10.1371/journal.pone.0126754",
+  "titulo": "Annual Carbon Emissions from Deforestation in the Amazon Basin between 2000 and 2010",
+  "autores": [
+   "Song, X.-P.",
+   "Huang, C.",
+   "Saatchi, S. S.",
+   "Hansen, M. C.",
+   "Townshend, J. R."
+  ],
+  "anio": 2015,
+  "archivo": "song_2015_annual-carbon-emissions-from-deforestation-in-the-amazon-basin.pdf",
+  "url_origen": "https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0126754&type=printable",
+  "origen": "enlace manual (journals.plos.org)",
+  "sha256": "dc76a347f3d365cbbb707df396d8c60eaf4aebc8be9a0fd7321c28321485609d",
+  "fecha": "2026-11-14T03:53:22+00:00"
+ },
+ {
+  "doi": "10.1371/journal.pone.0022722",
+  "titulo": "Effectiveness of Strict vs. Multiple Use Protected Areas in Reducing Tropical Forest Fires: A Global Analysis Using Matching Methods",
+  "autores": [
+   "Nelson, A.",
+   "Chomitz, K. M."
+  ],
+  "anio": 2011,
+  "archivo": "nelson_2011_effectiveness-of-strict-vs-multiple-use-protected-areas.pdf",
+  "url_origen": "https://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0022722&type=printable",
+  "origen": "enlace manual (journals.plos.org)",
+  "sha256": "0dacab8e9340daa3651589b1f0cbf4ca05d8124fb163c14bed31d434491fadff",
+  "fecha": "2026-11-14T03:53:22+00:00"
+ }
+]

@@ -46,8 +46,10 @@ python skills/niveles-academicos/scripts/cruzar_citas.py pruebas/casos/citas_pru
 - **Hook en una sesión real de Claude Code** y la fusión del
   fragmento en `settings.json`.
 - **Los cinco agentes actualizados**, con un encargo real.
-- **Prueba de aceptación** del plan: encargo de pregrado de punta a
-  punta.
+- **Prueba de aceptación en el equipo del usuario:** se corrió en la
+  nube el 2026-11-14 (resultado en `PROYECTO.md`), con agentes
+  genéricos que siguieron las definiciones de `agents/`, no con los
+  agentes instalados.
 
 ## Límites conocidos
 

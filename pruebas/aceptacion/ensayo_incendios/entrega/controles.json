@@ -1,0 +1,48 @@
+{
+  "archivo": "Los_incendios_en_Pando_y_su_costo_climatico.docx",
+  "sha256": "7a345917c7e589cc46c73f47b047dbdd920f5b81bb9aaa1306321e9884b2eda9",
+  "fecha": "2026-11-14T04:04:53+00:00",
+  "aprobado_mecanico": true,
+  "controles": {
+    "citas": {
+      "codigo": 0,
+      "estado": "ok",
+      "resumen": "18 citas, 7 referencias; sin referencia 0, no citadas 0, discordantes 0; lista (orden/duplicadas) 0"
+    },
+    "similitud": {
+      "codigo": 0,
+      "estado": "ok",
+      "resumen": "7 fuentes comparadas; copia 0, casi idéntica 0, entre comillas 0"
+    },
+    "formato": {
+      "codigo": 0,
+      "estado": "ok",
+      "resumen": "0 errores, 0 avisos; páginas: 5 (pedido: 5)"
+    },
+    "referencias": {
+      "codigo": 1,
+      "estado": "aviso",
+      "resumen": "encontrada 5, dudosa 0, no encontrada 2"
+    },
+    "fuentes": {
+      "codigo": 0,
+      "estado": "ok",
+      "resumen": "7 referencias: con archivo 7, con ficha 7"
+    }
+  },
+  "pendientes_verificador": [
+    {
+      "referencia": "Ke, P., Ciais, P., Sitch, S., Li, W., Bastos, A., Liu, Z., Xu, Y., Gui, X., Bian, J., Goll, D. S., Xi, Y., Li, W., O'Sullivan, M., Souza, J. G. de, Friedlingstein, P., & Chevallier, F. (2024). Low latency carbon budget analysis reveals a large decline of the land carbon sink in 2023 [Preprint]. arXiv. https://doi.org/10.48550/arXiv.2407.12447",
+      "motivos": [
+        "verificar_referencias: NO ENCONTRADA (en_crossref: HTTP Error 404: Not Found; en_openalex: HTTP Error 401: Unauthorized (falta la variable OPENALEX_API_KEY)); comprobar contra el archivo de fuentes/"
+      ]
+    },
+    {
+      "referencia": "Zhou, Y., Yan, H., & Luo, J.-J. (2021). Impacts of Amazon fire aerosols on the subseasonal circulations of the mid-high latitudes. Frontiers in Earth Science, 8, Artículo 609554. https://doi.org/10.3389/feart.2020.609554",
+      "motivos": [
+        "verificar_referencias: NO ENCONTRADA (en_crossref: HTTP Error 429: Too Many Requests; en_openalex: HTTP Error 401: Unauthorized (falta la variable OPENALEX_A…); comprobar contra el archivo de fuentes/"
+      ]
+    }
+  ],
+  "avisos": []
+}

@@ -123,3 +123,6 @@ salida legible por máquina y código de salida 0 (sin problemas),
 ## Prueba de aceptación de las capas 1 y 2
 Correr un encargo real de pregrado de punta a punta y revisar el
 `informe_verificacion.md`. Registrar el resultado en `PROYECTO.md`.
+
+Corrida en la nube el 2026-11-14 y aprobada en la segunda vuelta
+(ver `PROYECTO.md`). Falta repetirla en el equipo del usuario.

@@ -6,7 +6,7 @@ prompts de diapositivas) que complete cada encargo de principio a fin,
 no entregue nada sin verificar y se ajuste de pregrado a
 postdoctorado.
 
-## Estado al 2026-11-11
+## Estado al 2026-11-14
 | Pieza | Estado |
 |---|---|
 | Reglas consolidadas (`reglas/CLAUDE.md`) | Instaladas en `~/.claude`; falta reinstalar por el cambio en la sección 9 |
@@ -16,11 +16,35 @@ postdoctorado.
 | Capa 1: `zotero_apa.py` | Probado solo con biblioteca sintética; falta la biblioteca real |
 | Capa 2: cruce de citas, similitud, constructor, verificador de formato y control final | Probados en Linux con casos reales y defectos sembrados |
 | Capa 2: hook de bloqueo | Probado en Linux (24 casos); no está activo: falta fusionar `hooks/settings_hook.json` en `settings.json` |
-| Prueba de aceptación de las capas 1 y 2 | Pendiente: encargo real de pregrado en el equipo del usuario |
+| Prueba de aceptación de las capas 1 y 2 | Corrida en la nube el 2026-11-14: aprobada en la segunda vuelta. Falta repetirla en el equipo del usuario con los agentes instalados |
 | Capas 3 y 4 (skills por tipo y método, banco de pruebas) | Por construir; requieren insumos del usuario |
 
 El detalle de cada prueba, lo que quedó sin probar y los límites
 conocidos están en `docs/pruebas_capas_1_2.md`.
+
+## Prueba de aceptación (2026-11-14)
+Ensayo de pregrado de 5 páginas, "Los incendios en Pando y su costo
+climático". Cadena investigador → redactor → productor → verificador,
+con el director coordinando. Archivos en
+`pruebas/aceptacion/ensayo_incendios/` (sin los PDF de las fuentes).
+
+- Investigador: 7 artículos arbitrados leídos y fichados; fuentes
+  bolivianas y oficiales no alcanzables desde el contenedor,
+  registradas como vacío.
+- Productor: docx de 5 páginas exactas; control mecánico aprobado.
+- Verificador, vuelta 1: NO APROBADO por una afirmación sobre Pando
+  que la fuente respaldaba solo en parte. El control mecánico no
+  podía verla; la encontró la comprobación de cita contra pasaje.
+- Vuelta 2, tras corregir el redactor: APROBADO, 18 de 18 citas
+  respaldadas. El hook bloqueó mientras el informe era anterior al
+  archivo y dejó pasar al final.
+- Límite de la corrida: las 7 fuentes están en inglés y ninguna es
+  norma o dato oficial boliviano; el perfil de pregrado pide mayoría
+  en español.
+- Fallos de herramientas hallados y corregidos: descarga de PLOS,
+  nombre de archivo con autor equivocado, motivo de descarte tapado
+  por la falta de clave, y referencias marcadas "no encontrada"
+  cuando Crossref solo había limitado las peticiones.
 
 ## Pasos pendientes en el equipo del usuario
 1. Traer la rama y ejecutar `instalar.ps1`.
@@ -55,6 +79,10 @@ conocidos están en `docs/pruebas_capas_1_2.md`.
   en `docs/pruebas_capas_1_2.md`, a falta de norma UAP escrita.
 
 ## Sin resolver
+- La comprobación de espaciado de la skill verificar-docx-generado
+  no encuentra nada en los docx del constructor, porque el espaciado
+  va en los estilos. `verificar_formato.py` ya lo cubre; decidir si
+  se actualiza la skill.
 - Confirmar márgenes y espaciados del formato UAP.
 - ¿La regla de portada en blanco e Introducción, Desarrollo y
   Conclusiones vale para monografías con capítulos?
