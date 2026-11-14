@@ -106,6 +106,31 @@ salida legible por máquina y código de salida 0 (sin problemas),
       herramientas y reinstalar con `instalar.ps1`. Agentes
       actualizados; falta reinstalar en el equipo del usuario.
 
+## Orden de trabajo vigente (2026-11-14)
+
+Lo que se puede construir sin insumos del usuario, en este orden.
+Cada bloque se prueba con un caso real antes de marcarse.
+
+1. **Ítem 13, comando de inicio de encargo.** Primero porque el hook
+   y el control final dependen de `encargo.md`.
+2. **Ítem 10, skills por tipo de trabajo.** Una definición única de
+   cada tipo (secciones obligatorias, portada, extensión habitual
+   por nivel) que leen el redactor, el constructor y el verificador
+   de formato, para que la regla no viva en tres sitios.
+3. **Límites conocidos de las capas 1 y 2**, anotados en
+   `docs/pruebas_capas_1_2.md`: citas con localizador separado del
+   año, apellidos compuestos, preprints de arXiv en la verificación
+   de referencias y entregables `.xlsx` en el control final.
+4. **Ítem 12, plantillas de análisis de datos**, con un conjunto de
+   datos abierto real.
+5. Cierre: regresión completa, `PROYECTO.md` y registro de pruebas.
+
+Quedan fuera hasta tener insumos: ítem 11 (libros de metodología),
+ítem 14 (trabajos calificados) y las tres decisiones abiertas de
+`PROYECTO.md` (márgenes UAP, monografías con capítulos, insistencia
+del hook). Ninguna pieza nueva debe decidirlas por su cuenta: se
+dejan configurables y con el comportamiento actual por defecto.
+
 ## Capa 3 — profundidad académica
 - [ ] 10. Skills por tipo de trabajo: ensayo, monografía, perfil de
        tesis, tesis, artículo, informe.
