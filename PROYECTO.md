@@ -75,14 +75,13 @@ con el director coordinando. Archivos en
 - 2026-11-11: no se fuerzan los controles antibots de ningún sitio
   (buscador de SciELO, MDPI, SciELO Brasil); esas fuentes se informan
   al usuario.
+- 2026-11-14: la skill verificar-docx-generado empieza por
+  `verificar_formato.py`; el chequeo manual del XML queda como
+  respaldo, porque no ve el espaciado definido en los estilos.
 - 2026-11-11: márgenes, sangrías y espaciados del constructor fijados
   en `docs/pruebas_capas_1_2.md`, a falta de norma UAP escrita.
 
 ## Sin resolver
-- La comprobación de espaciado de la skill verificar-docx-generado
-  no encuentra nada en los docx del constructor, porque el espaciado
-  va en los estilos. `verificar_formato.py` ya lo cubre; decidir si
-  se actualiza la skill.
 - Confirmar márgenes y espaciados del formato UAP.
 - ¿La regla de portada en blanco e Introducción, Desarrollo y
   Conclusiones vale para monografías con capítulos?

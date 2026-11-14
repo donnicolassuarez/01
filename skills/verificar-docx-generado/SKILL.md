@@ -1,6 +1,6 @@
 ---
 name: verificar-docx-generado
-description: Usar SIEMPRE antes de entregar cualquier archivo .docx generado o editado con docx (npm) o manipulación directa de XML. Verifica saltos de página forzados y espaciado de títulos/subtítulos en el XML real antes de decir que algo está corregido.
+description: Usar SIEMPRE antes de entregar cualquier archivo .docx generado o editado con construir_docx.py, python-docx, docx (npm) o manipulación directa de XML. Verifica saltos de página forzados y espaciado de títulos/subtítulos en el XML real antes de decir que algo está corregido.
 ---
 
 # Verificar .docx antes de entregar
@@ -28,8 +28,25 @@ por separado, siempre.
 
 ## Checklist obligatorio antes de decir "está corregido" o entregar un .docx
 
-Ejecutar esto sobre el archivo `.docx` REAL que se va a entregar (no
-sobre el script, no de memoria):
+Primero, sobre el archivo `.docx` REAL que se va a entregar (no sobre
+el script, no de memoria), correr el verificador de formato:
+
+```bash
+python "C:\Users\Usuario\.claude\skills\niveles-academicos\scripts\verificar_formato.py" ARCHIVO.docx
+```
+
+Sus comprobaciones g) y h) son las de esta skill: espaciado de títulos
+uniforme por nivel y saltos de página, incluidos los escondidos dentro
+de un párrafo con texto. Resuelve el espaciado tanto si está escrito
+en cada párrafo como si viene del estilo. Un ERROR en g) o h) significa
+que el archivo NO está corregido.
+
+El chequeo manual que sigue sirve para mirar el XML directamente o
+cuando el verificador no está instalado. Solo ve el espaciado escrito
+párrafo por párrafo (docx de npm o XML manipulado). En los docx de
+`construir_docx.py` el espaciado está en `word/styles.xml`, así que el
+conjunto del punto 2 sale vacío: eso no es un fallo ni una
+confirmación, y hay que usar el verificador.
 
 ```bash
 python -c "
@@ -53,6 +70,9 @@ print('zip ok:', z.testzip() is None)
 Si `set(h1)` muestra **más de un valor distinto**, o un valor que no es
 el acordado con el usuario, el archivo NO está corregido, sin importar
 qué diga el script fuente.
+
+Si `set(h1)` sale **vacío**, el chequeo manual no comprobó nada: correr
+`verificar_formato.py`.
 
 ## Regla para saltos de página forzados
 
